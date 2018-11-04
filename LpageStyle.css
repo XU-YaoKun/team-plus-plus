@@ -1,0 +1,58 @@
+.intro {
+    padding: 80px;
+    text-align: center;
+    background: #1abc9c;
+    color: white;
+}
+
+.login {
+    padding: 5px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.side {
+    flex: 60%;
+    background-color: #f1f1f1;
+    padding: 20px;
+}
+
+.main {
+    flex: 40%;
+    background-color: white;
+    padding: 20px;
+}
+
+.imgcontainer {
+    text-align: center;
+}
+
+input[type=text], input[type=password] {
+    width: 80%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.remember {
+    float: right;
+    padding-top: 16px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 20%;
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+}

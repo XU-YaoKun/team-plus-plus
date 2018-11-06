@@ -16,6 +16,10 @@ body {
     background-size: cover;
 }
 
+.in {
+	padding: 20px;
+}
+
 .logo {
 	text-align: center;
 }
@@ -24,14 +28,14 @@ body {
 	padding-left: 20px;
 	color: #f5f5f5;
 	font-family: "Times New Roman", Times, serif;
-	font-size: 50px;
+	font-size: 40px;
 	float: left
 }
 
 .ti {
 	color: #f5f5f5;
 	font-family: "Times New Roman", Times, serif;
-	font-size: 50px;
+	font-size: 70px;
 	float: left;
 }
 
@@ -48,7 +52,8 @@ body {
 
 .tag {
 	float: left;
-	padding: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	width: 100%;
 	position: relative;
 }
@@ -75,3 +80,14 @@ body {
   z-index: 2;
 }
 
+.forget {
+	float: left;
+	padding-top: 10px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+}
+
+.signup {
+	float: left;
+	padding: 5px;
+}

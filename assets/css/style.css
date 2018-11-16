@@ -1096,6 +1096,10 @@ header .form-inline {
   padding-right: 0;
   position: relative;
   padding-left: 20px; }
+
+.user-area .logout {
+  padding-top: 5px;
+}
   .user-area .user-menu {
     background: #fff;
     border: none;

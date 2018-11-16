@@ -563,7 +563,7 @@ aside.left-panel {
   height: 100vh;
   padding: 0;
   vertical-align: top;
-  width: 280px;
+  width: 230px;
   -webkit-box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08);
           box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08);
   position: fixed;
@@ -826,7 +826,9 @@ aside.left-panel {
   margin-top: 55px; }
   .right-panel .top-left {
     width: 350px;
-    float: left; }
+    float: left; 
+    padding-top: 12px;
+  }
   .right-panel .top-rigth {
     float: left; }
   .right-panel .breadcrumbs {
@@ -2444,7 +2446,8 @@ footer.site-footer {
   .right-panel .menutoggle {
     float: right; }
   .right-panel .navbar-header {
-    padding: 0; }
+    padding-top: 10px;
+   }
   .right-panel header.header {
     position: static; }
     .right-panel header.header .top-left {

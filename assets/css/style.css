@@ -821,7 +821,7 @@ aside.left-panel {
 
 /* Right panel */
 .right-panel {
-  background: #f1f2f7;
+  background: #747477;
   margin-left: 280px;
   margin-top: 55px; }
   .right-panel .top-left {
@@ -1203,11 +1203,14 @@ header .form-inline {
 .content {
   float: left;
   padding: 1.875em;
-  width: 100%; }
+  width: 100%; 
+}
 
 .card {
   margin-bottom: 1.875em;
   border-radius: 5px;
+  border-style: dotted;
+  border-color: #343a40;
   padding: 0;
   border: 0px solid transparent;
   -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);

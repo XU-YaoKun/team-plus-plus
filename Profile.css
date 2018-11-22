@@ -1,0 +1,32 @@
+body{
+    background: aliceblue;
+}
+h1{
+    text-align: center;
+    margin: 30px;
+    padding: 10px;
+}
+table{
+    border-spacing: 50px;
+    border-collapse: separate;
+}
+
+input{
+    border: none;
+    background: transparent;
+}
+
+
+.container img{
+    margin: 25px;
+    background: transparent;
+}
+
+.container .btn{
+    position: absolute;
+    transform: translate(-185%, 160%);
+    -ms-transform: translate(-50%, -50%);
+    cursor: pointer;
+
+    background: transparent;
+}

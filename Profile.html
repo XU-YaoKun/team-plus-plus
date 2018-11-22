@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
 
+    <script src = "Profile.js"></script>
+    <link rel="stylesheet"  href="Profile.css">
+
 </head>
 <body>
     
@@ -66,12 +69,78 @@
             </div>
         </header><!-- /header -->
         <!-- Header-->
-        <div class="content">
+        <div class="content" id="User Profile">
                 <!--add your code here:) feel free to add your own .css file-->
+
+                    <h1>User Profile</h1>
+                    <div class= "container">
+                        <img src="img/sample.png" style="width:80px; height: 80px;" onmouseenter="picOnHover()" onmouseout="picOffHover()" m>
+                        <button id="editPicture" class = "btn" style="display: none" >Edit</button>
+
+                    </div>
+                    <table style="width:100%" >
+                        <tr>
+                            <td>Name:</td>
+                            <td id="NameText"></td>
+                            <td>
+                                <button id="nameEdit" onclick="nameChange()">Edit</button>
+                                <button id="nameSave" onclick="nameSave()" type="submit">Save</button>
+                                <button id="nameCancel" onclick="nameCancel()">Cancel</button>
+                            </td>
+                        </tr>
+                        <tr id="PasswordRow">
+                            <td>Password:</td>
+                            <td id="Password"></td>
+                            <td>
+                                <button id="passwordEdit" onclick="passwordChange()">Change Password</button>
+                            </td>
+
+                        </tr>
+                        <tr id="curPassword" style="display: none">
+                            <td>Current Password</td>
+                            <td>
+                                <input id="currentPW" type="password" placeholder="Enter Here" >
+                            </td>
+
+                        </tr>
+                        <tr id="newPassword" style="display: none">
+                            <td>New Password</td>
+                            <td>
+                                <input id="newPW" type="password" placeholder="Enter Here">
+                            </td>
+                        </tr>
+                        <tr id="re-enterPW" style="display: none">
+                            <td>Re-Enter New Password</td>
+                            <td>
+                                <input id="reenterPW" type="password" placeholder="Enter Here">
+                            </td>
+                            <td>
+                                <button id="passwordSave" onclick="passwordSave()" type="submit">Submit</button>
+                                <button id="passwordCancel" onclick="passwordCancel()">Cancel</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Email Address:</td>
+                            <td id="Email"></td>
+                            <td>
+                                <button id="emailEdit" onclick="emailChange()">Edit</button>
+                                <button id="emailSave" onclick="emailSave()" type="submit">Save</button>
+                                <button id="emailCancel" onclick="emailCancel()">Cancel</button>
+                            </td>
+                        </tr>
+                        <tr >
+                            <td>Phone Number</td>
+                            <td id="Phone"></td>
+                            <td>
+                                <button id="phoneEdit" onclick="phoneChange()">Edit</button>
+                                <button id="phoneSave" onclick="phoneSave()" type="submit">Save</button>
+                                <button id="phoneCancel" onclick="phoneCancel()">Cancel</button>
+                            </td>
+                        </tr>
+                    </table>
+
         </div>
     </div>
-
-
-    
 </body>
+
 </html>

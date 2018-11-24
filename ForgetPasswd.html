@@ -29,9 +29,14 @@
   <script>
     function sendPassReset() {
       var userEmail = document.getElementById('inputEmail').value;
+      var ifSent = false;
       firebase.auth().sendPasswordResetEmail(userEmail).then(function () {
         // Send user
         alert('Password Reset Email Sent!');
+        ifSent = true;
+        if (ifSent) {
+          window.location.href = 'Login.html';
+        }
       }).catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;

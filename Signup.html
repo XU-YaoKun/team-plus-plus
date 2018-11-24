@@ -28,9 +28,22 @@
   </script>
   <script>
     function signUp() {
+      var database = firebase.database();
       var userEmail = document.getElementById("inputEmail").value;
       var userPass = document.getElementById("inputPassword").value;
-      firebase.auth().createUserWithEmailAndPassword(userEmail, userPass).catch(function (error) {
+      var signedUp = false;
+      firebase.auth().createUserWithEmailAndPassword(userEmail, userPass).then(function () {
+        // If user signs up successfully, moves user back to login
+        alert("You have successfully registered for an account!");
+        signedUp = true;
+        if (signedUp) {
+          function writeUserData(userEmail, userPass) {
+            
+          }
+          window.location.href = 'Login.html';
+        }
+      }
+      ).catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -41,15 +54,6 @@
           alert(errorMessage);
         }
         console.log(error);
-
-        firebase.auth().onAuthStateChanged(function (user) {
-          // Moves user back to login page.
-          if (user) {
-            alert("You have successfully registered for an account!");
-            firebase.auth().signOut();
-            window.location.href = "Login.html";
-          }
-        });
       });
     }
   </script>

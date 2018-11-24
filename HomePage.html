@@ -24,9 +24,17 @@
         };
         firebase.initializeApp(config);
     </script>
+    <script>
+        var user = firebase.auth().currentUser;
+
+        function loadUserData() {
+            var userId = user.uid;
+            
+        }
+    </script>
 </head>
 
-<body>
+<body onload="loadUserData()">
 
     <!-- Left Panel -->
     <aside id="left-panel" class="left-panel">

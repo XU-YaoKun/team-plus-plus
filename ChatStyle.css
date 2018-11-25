@@ -1,0 +1,106 @@
+body {
+  font-family: Calibri;
+  overflow-x: hidden;
+  margin: 0;
+  height: 100vh;
+}
+
+h1 {
+  position: relative;
+  top: 0;
+  color: black;
+  font-size: 2em;
+  margin: 10px;
+  width: 100%;
+  font-weight: 500;
+
+}
+
+li {
+  position:relative;
+  width: 100%;
+  height: auto;
+  height: 50px;
+  margin-top: 10px;
+}
+
+.mainApp {
+  position:relative;
+  width: 80%;
+  height: 90%;
+  margin: 0;
+  padding: 0px 20px;
+}
+
+.mainApp2 {
+  position:absolute;
+  width: 80%;
+  height: 90%;
+  margin: 0;
+  padding: 0px 20px;
+}
+
+.bottomChat{
+  position:absolute;
+  bottom: 20px;
+  width: 90%;
+  float: left;
+}
+
+.chatMessage{
+  position:absolute;
+  bottom: 20px;
+  width: 90%;
+  margin: 5px;
+  font-size: 16px;
+  height: 50px;
+  box-sizing: border-box;
+  padding: 0 10px;
+  margin-top: 12px;
+  border: solid 2px #929292;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.chatMessage2{
+  width: 100%;
+  margin: 5px;
+  font-size: 16px;
+  height: 50px;
+  box-sizing: border-box;
+  padding: 0 10px;
+  margin-top: 12px;
+  border: solid 2px #929292;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.messages {
+  max-height: 80%;
+  overflow-y: scroll;
+  list-style-type: none;
+}
+
+.messageInstance {
+  width: fit-content;
+  width: -moz-fit-content;
+  height:40px;
+  font-size: 18px;
+  line-height: 40px;
+  padding: 5px 30px 6px;
+  border-radius: 25px;
+  position: relative;
+}
+
+.client {
+  background-color: #9b9b9b;
+  color: white;
+  text-align: right;
+  float: right;
+  margin-right: 10px;
+}
+
+.server {
+  background: #f0f0f0;
+  color: black;
+}

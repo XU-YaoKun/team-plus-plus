@@ -9,6 +9,20 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
 
+    <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCDwFS1dxv0WWEbgehMdtsIQ3F_WQlKDnE",
+            authDomain: "team-plus-plus.firebaseapp.com",
+            databaseURL: "https://team-plus-plus.firebaseio.com",
+            projectId: "team-plus-plus",
+            storageBucket: "team-plus-plus.appspot.com",
+            messagingSenderId: "836611996730"
+        };
+        firebase.initializeApp(config);
+    </script>
+
 </head>
 <body>
     
@@ -305,6 +319,18 @@
                                                     <!-- change color of each box when click on Your Availability-->
                                                     <script>
                                                         function f(e) {
+
+                                                            var userId = firebase.auth().currentUser.uid;
+                                                            window.alert(userId);
+
+                                                            //var firebaseRef = firebase.database().ref('Team/' + teamId + '/Schedule/eventList/' + eventId + '/' + userId + '/availability');
+
+                                                            //var firebaseRef = firebase.database().ref('Team/Team1/Schedule/eventList/eventId/' + userId + '/availability');
+
+                                                            //firebaseRef.child("0:").set(e.data-col);
+                                                            //window.alert("TEST");
+                                                            //window.alert(e.data-col);
+
                                                             if(e.style.background=='rgb(255, 222, 222)')
                                                             {
                                                                 e.style.background = "rgb(51, 153, 0)";

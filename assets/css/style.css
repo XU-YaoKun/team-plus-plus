@@ -563,7 +563,7 @@ aside.left-panel {
   height: 100vh;
   padding: 0;
   vertical-align: top;
-  width: 230px;
+  width: 300px;
   -webkit-box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08);
           box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08);
   position: fixed;
@@ -825,7 +825,7 @@ aside.left-panel {
   margin-left: 280px;
   margin-top: 55px; }
   .right-panel .top-left {
-    width: 350px;
+    width: 450px;
     float: left; 
     padding-top: 12px;
   }

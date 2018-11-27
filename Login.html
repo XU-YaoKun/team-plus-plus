@@ -24,9 +24,9 @@
     </script>
     <script>
         function checkIfSignedIn() {
-            firebase.auth.onAuthStateChanged(function (user) {
+            firebase.auth().onAuthStateChanged(function (user) {
                 if (user) {
-                    window.location.href = "HomePage.html"
+                    window.location.href = "HomePage.html";
                 }
             })
         }
@@ -66,7 +66,7 @@
         <h1 class="ti"><b>Welcome to Team++!</b>
             <h1>
                 <p class="text-left intro">Built for collaboration,<br />
-                    Team++ is a platorm that will help maximize your team productivity.</p>
+                    Team++ is a platform that will help maximize your team productivity.</p>
     </div>
     <form class="login">
         <img class="mb-3" src="img/login_T.png" alt="Team++ Logo" width="72" height="72" />

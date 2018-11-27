@@ -27,6 +27,13 @@
     firebase.initializeApp(config);
   </script>
   <script>
+    function checkIfSignedIn() {
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          window.location.href = "HomePage.html";
+        }
+      })
+    }
     function sendPassReset() {
       var userEmail = document.getElementById('inputEmail').value;
       var ifSent = false;
@@ -53,7 +60,7 @@
   </script>
 </head>
 
-<body class="text-center">
+<body class="text-center" onload="checkIfSignedIn()">
   <form class="form-signin">
     <img class="mb-4" src="./img/login_T.png" alt="Team++ Logo" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Enter Registered Email Here</h1>

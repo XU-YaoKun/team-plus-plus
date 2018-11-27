@@ -9,13 +9,6 @@ var config = {
 };
 firebase.initializeApp(config);
 
-function checklogin(){
-   var userID = firebase.auth().currentUser;
-   window.alert(userID);
-   if(userID == null){
-       window.alert("is null");
-   }
-}
 
 function createTeam() {
     var teamName = prompt("Please enter the team name", "Team++");

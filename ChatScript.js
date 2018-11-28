@@ -3,8 +3,6 @@ var contacts = document.querySelector('#contacts').children[0];
 var messages = document.querySelector('.messages').children[0];
 var socket = io.connect('http://localhost:3000');
 
-var rootRef = firebase.database().ref();
-
 var userId;
 var teamId;
 
@@ -53,7 +51,8 @@ setTimeout(function() {
     announcementsRef.on("child_added", snapshot => {
 
     	// Fetch latest message on announcements
-    	var latestMsg = snapshot.val()[0];		// FIXME: Make function to get latest msg !!!!!!!!!!!!!!
+    	//var latestMsg = snapshot.val()[0];		// FIXME: Make function to get latest msg !!!!!!!!!!!!!!
+    	var latestMsg = snapshot.val()[0];
 
     	// Create elements of contact
 		var li = document.createElement("li");
@@ -211,28 +210,19 @@ function createHTMLMessage(msg, source){
 
 	// Add to HTML
 	messages.appendChild(li);
-	
-
-	// Get Id's to access database
-	//var userId = firebase.auth().currentUser.uid;
-	//console.log(userId);
-
-	/*
-	var teamId;
-	var tempRef = firebase.database().ref('/Users/'+userId+'/currTeam');		// FIXME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	tempRef.on('value', function(snapshot) {
-		console.log(snapshot.val());
-		teamId = snapshot.val();
-	});
-	*/
-
-	//window.alert(teamId);
-	console.log("outside: "+teamId);
 
 	// Write to database
-	//var chatRef = rootRef.child('teams').child(teamName);
-	//var chatRef = rootRef.child('teams').child(teamID).child(chatrooms).child;
-	//rootRef.child("Messages").set(msg);
+	var chatRef = firebase.database().ref('/Team/'+teamId+'/Chatroom/directMessages/userId/msgArray');  	//FIXME: ID's should not be static !!!!!!!!!!!!!!!!!!
+	//chatRef.append(msg);
+
+
+	// Create a new post reference with an auto-generated id
+	var newPostRef = chatRef.push();
+	newPostRef.set({
+	    sender: userId,
+	    message: msg
+	});
+
 }
 
 inputElem.addEventListener('keypress', function (e) {

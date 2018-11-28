@@ -1,4 +1,4 @@
-<!DOCTYPE <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -9,6 +9,20 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/themify-icons.css">
     <link rel="stylesheet" href="assets/css/style.css">
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCDwFS1dxv0WWEbgehMdtsIQ3F_WQlKDnE",
+            authDomain: "team-plus-plus.firebaseapp.com",
+            databaseURL: "https://team-plus-plus.firebaseio.com",
+            projectId: "team-plus-plus",
+            storageBucket: "team-plus-plus.appspot.com",
+            messagingSenderId: "836611996730"
+        };
+        firebase.initializeApp(config);
+    </script>
 
 </head>
 <body>
@@ -39,6 +53,9 @@
                         </li>
                     <li>
                         <a href="Profile.html">Profile</a>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="team.html">change team</a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -155,19 +172,20 @@
                                 <p>manage your team and team member here</p>
                             </div>
                             <div class="row"> 
-                                <div class="col-lg-3">
-                                    <div class="card-body"> 
-                                        <button style="width: 100%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button">create team</button>
-                                        <button style="width: 100%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button">join team</button>
-                                        <button style="width: 100%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button">manage members</button>
-                                        <button style="width: 100%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button">leave</button>
+                                <div class="col-lg-4">
+                                    <div class="card-body">
+                                        <button style="width: 100%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="modifyAdmin()">Modify Admin</button>
+                                        <button style="width: 100%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="addMember()">Add Member</button>
+                                        <button style="width: 100%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button">Delete Member</button>
+                                        <button style="width: 100%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="leaveTeam()">Leave Team</button>
                                     </div>
                                 </div>
-                                <div class="col-lg-9">
+                                <div class="col-lg-8">
                                     <div class="card-body">
                                         <p>here is some brief introduction about your team, including the number of team member, what is your goal and some other infomation that can help you to get an impression of what's your team gonna do.</p>
                                         <p>Apart from that, there should be some plan you would like to remind yourself.</p>
                                         <p>In fact, I just do not know what to push here. Let's leave this part to our software engineer.</p>
+                                        <textarea name="Team Members" id="members"></textarea>
                                     </div> <!-- /.card-body -->
                                 </div>
                             </div> <!-- /.row --> 
@@ -238,4 +256,5 @@
    
     
 </body>
+<script src="team.js"></script>
 </html>

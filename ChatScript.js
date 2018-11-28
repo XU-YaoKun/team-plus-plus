@@ -222,7 +222,6 @@ function createHTMLMessage(msg, source){
 	    sender: userId,
 	    message: msg
 	});
-
 }
 
 inputElem.addEventListener('keypress', function (e) {
@@ -240,5 +239,6 @@ socket.on('connect', function(data) {
 
 socket.on('chat msg', function(msg) {
 	createHTMLMessage(msg, 'server');
+
 });
 

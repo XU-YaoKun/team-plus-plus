@@ -1,4 +1,5 @@
-<!DOCTYPE <!DOCTYPE html>
+<!DOCTYPE html>
+
 <html>
 <head>
     <meta charset="utf-8" />
@@ -9,6 +10,21 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/themify-icons.css">
     <link rel="stylesheet" href="assets/css/style.css">
+
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCDwFS1dxv0WWEbgehMdtsIQ3F_WQlKDnE",
+            authDomain: "team-plus-plus.firebaseapp.com",
+            databaseURL: "https://team-plus-plus.firebaseio.com",
+            projectId: "team-plus-plus",
+            storageBucket: "team-plus-plus.appspot.com",
+            messagingSenderId: "836611996730"
+        };
+        firebase.initializeApp(config);
+    </script>
 
 </head>
 <body>
@@ -50,6 +66,14 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h4 class="card-title box-title">For Team</h4>    
+
+                                        <p>Create or Join Existing Teams Here</p>
+                                    </div>
+                                    <div class="card-body"> 
+                                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="createTeam()">Create Team</button>
+                                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="joinTeam()">Join Team</button>
+                                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="getTeamAdmin()">check</button>
+<!--
                                         <p>choose team here</p>
                                     </div>
                                     <div class="card-body"> 
@@ -71,6 +95,7 @@
                                             <p>Create a brandly new team</p>
                                             <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button">Join Team</button>
                                             <p>Join a team</p>
+-->
                                     </div>
                                 </div>
                         </div>
@@ -91,11 +116,20 @@
                                                 <th>Theme</th>
                                                 <th>Member</th>
                                                 <th>Status</th>
+
                                             </tr>
                                         </thead>
                                         <tbody> 
                                             <tr>
                                                 <td class="serial">1.</td>
+
+                                                <td>  <span class="name">Team++</span> </td>
+                                                <td>
+                                                    <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button"
+                                                            onclick="window.location.href='Homepage.html'">Go</button>
+                                                </td> 
+                                            </tr>
+<!--
                                                 <td class="avatar">
                                                     <div class="round-img">
                                                         <a href="#"><img class="rounded-circle" src="img/admin_1.png" alt=""></a>
@@ -154,6 +188,7 @@
                                                     <span class="badge badge-pending">Pending</span>
                                                 </td>
                                             </tr> 
+-->
                                         </tbody>
                                     </table>
                                 </div> <!-- /.table-stats -->
@@ -162,11 +197,30 @@
         <div class="row">
                 <div class="card" style="padding-top: 20px">
                         <div class="card-header">
+
                             <strong class="card-title">You are member of</strong>
+
                         </div>
                         <div class="table-stats order-table ov-h">
                             <table class="table ">
                                 <thead>
+
+                                <tr>
+                                    <th class="serial">#</th>
+                                    <th>Name</th>
+                                    <th>Navigate to Team</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td class="serial">1.</td>
+                                    <td>  <span class="name">Team++</span> </td>
+                                    <td>
+                                        <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button"
+                                                onclick="window.location.href='Homepage.html'">Go</button>
+                                    </td>
+                                </tr>
+<!--
                                     <tr>
                                         <th class="serial">#</th>
                                         <th class="avatar">Photo</th>
@@ -238,6 +292,7 @@
                                             <span class="badge badge-pending">Pending</span>
                                         </td>
                                     </tr> 
+-->
                                 </tbody>
                             </table>
                         </div> <!-- /.table-stats -->
@@ -253,4 +308,6 @@
    
     
 </body>
+<script src="team.js"></script>
+
 </html>

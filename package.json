@@ -12,6 +12,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "firebase": "^5.5.9",
+
     "socket.io": "^2.1.1"
   }
 }

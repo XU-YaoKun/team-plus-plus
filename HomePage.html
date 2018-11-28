@@ -32,6 +32,16 @@
         <nav class="navbar navbar-default"> 
             <div id="main-menu" class="main-menu">
                 <ul class="nav navbar-nav">
+
+                    <li class="menu-title">Current team</li><!-- /.menu-title -->
+
+                    <li class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">[TEAM NAME HERE]  <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="team.html">Change Teams</a></li>
+                        </ul>
+                    </li>
+
                     <li class="menu-title">For team</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
                         <a href="OverView.html" >Overview</a>
@@ -177,7 +187,19 @@
                                         <button style="width: 100%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="modifyAdmin()">Modify Admin</button>
                                         <button style="width: 100%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="addMember()">Add Member</button>
                                         <button style="width: 100%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button">Delete Member</button>
+
+                                        <div class="dropdown-content">
+                                            <a href="#">Member 1</a>
+                                            <a href="#">Member 2</a>
+                                            <a href="#">Member 3</a>
+                                        </div>
                                         <button style="width: 100%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="leaveTeam()">Leave Team</button>
+                                        <button style="width: 100%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button">Navigate to</button>
+                                        <div class="dropdown-content">
+                                            <a href="#">Team 1</a>
+                                            <a href="#">Team 2</a>
+                                            <a href="#">Team 3</a>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-8">

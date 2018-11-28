@@ -1,12 +1,9 @@
 body{
     background: aliceblue;
 }
-h1{
-    text-align: center;
-    margin: 30px;
-    padding: 10px;
-}
+
 table{
+    padding: 30px;
     border-spacing: 50px;
     border-collapse: separate;
 }
@@ -16,17 +13,21 @@ input{
     background: transparent;
 }
 
-
 .container img{
     margin: 25px;
     background: transparent;
+    display: block;
 }
 
-.container .btn{
-    position: absolute;
-    transform: translate(-185%, 160%);
-    -ms-transform: translate(-50%, -50%);
-    cursor: pointer;
+.addBtn{
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
 
-    background: transparent;
+.addBtn input[type=file]{
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
 }

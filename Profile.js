@@ -1,23 +1,30 @@
-var myName ='John Doe';
-var myEmail ='XXX@UCSD.EDU';
-var myPhone ='###-###-####';
 var myPassword = '********';
+var myPicture =  'img/sample.png'
+var root = firebase.database().ref();
+
 
 window.onload = function () {
+    var databaseName = root.child('Temporary Profile').child('User 1').child('Name');
+    var databaseEmail = root.child('Temporary Profile').child('User 1').child('Email');
+    var databasePhone = root.child('Temporary Profile').child('User 1').child('Phone');
 
-    document.getElementById('NameText').innerHTML= myName.toString();
-    document.getElementById('Email').innerHTML= myEmail.toString();
-    document.getElementById('Phone').innerHTML= myPhone.toString();
-    document.getElementById('Password').innerHTML = myPassword.toString();
+    document.getElementById('Password').innerHTML= myPassword;
+    document.getElementById('Pic').src= myPicture;
 
-    document.getElementById('nameSave').hidden=true;
-    document.getElementById('nameCancel').hidden=true;
-    document.getElementById('emailSave').hidden=true;
-    document.getElementById('emailCancel').hidden=true;
-    document.getElementById('phoneSave').hidden=true;
-    document.getElementById('phoneCancel').hidden=true;
-    document.getElementById('passwordSave').hidden=true;
-    document.getElementById('passwordCancel').hidden=true;
+    databaseName.once('value', function(snapshot){
+       var temp = snapshot.val();
+       document.getElementById('NameText').innerHTML = temp.toString();
+    });
+    databaseEmail.once('value', function(snapshot){
+        var temp = snapshot.val();
+        document.getElementById('Email').innerHTML = temp.toString();
+    });
+    databasePhone.once('value', function(snapshot){
+        var temp = snapshot.val();
+        document.getElementById('Phone').innerHTML = temp.toString();
+    });
+
+
 }
 
 function nameChange(){
@@ -30,7 +37,7 @@ function nameChange(){
 
 function passwordChange(){
     var temp = document.getElementById('PasswordRow');
-    temp.style = "display : none";
+    temp.style = "display: none";
     document.getElementById('curPassword').style = '';
     document.getElementById('newPassword').style = '';
     document.getElementById('re-enterPW').style = '';
@@ -39,8 +46,6 @@ function passwordChange(){
     document.getElementById('currentPW').value = '';
     document.getElementById('newPW').value = '';
     document.getElementById('reenterPW').value = '';
-
-
 }
 
 function emailChange(){
@@ -53,7 +58,7 @@ function emailChange(){
 
 function phoneChange(){
     document.getElementById('Phone').innerHTML=
-        '<input id="newPhone" type = "tel", placeholder="Insert Your Phone">';
+        '<input id="newPhone" type="tel" , placeholder="Insert Your Phone">';
     document.getElementById('phoneEdit').hidden=true;
     document.getElementById('phoneSave').hidden=false;
     document.getElementById('phoneCancel').hidden=false;
@@ -62,16 +67,22 @@ function phoneChange(){
 function nameSave(){
     var otherName = document.getElementById('newName').value;
     if(/^\s+$/.test(otherName) || otherName==''){
-        alert("Invalid Input!! Please Try Again")
+        alert("Name Field Is Missing !!")
     }
     else {
         document.getElementById('NameText').innerHTML = otherName.toString();
         doneNameEdit();
+        root.child("Temporary Profile").child('User 1').child('Name').set(otherName.toString());
+
     }
 }
 
 function nameCancel(){
-    document.getElementById('NameText').innerHTML= myName.toString();
+    var databaseName = root.child('Temporary Profile').child('User 1').child('Name');
+    databaseName.once('value', function(snapshot){
+        var temp = snapshot.val();
+        document.getElementById('NameText').innerHTML = temp.toString();
+    });
     doneNameEdit();
 }
 
@@ -79,17 +90,26 @@ function passwordSave(){
     var curPassword = document.getElementById('currentPW').value;
     var newPassword1 = document.getElementById('newPW').value;
     var newPassword2 = document.getElementById('reenterPW').value;
+    var databasePassword =  root.child("Temporary Profile").child('User 1').child('Password');
+    databasePassword.once('value', function (snapshot) {
+        databasePassword = snapshot.val();
+        if(databasePassword !== curPassword){
+            alert('Your current password is incorrect. Please Try Again');
+        }
+        else if(newPassword2 !== newPassword1){
+            alert('The confirm password does not match the new password. Please try again');
+        }
+        else{
+            alert('You have successfully changed your password');
+            root.child("Temporary Profile").child('User 1').child('Password').set(newPassword1.toString());
+            donePasswordEdit();
+        }
+    });
     if(curPassword == '' || newPassword1 == '' || newPassword1 == '' ){
-        alert("Invalid Input!! Please Try Again");
+        alert("Password Field Is Missing !!");
+        return false;
     }
-    else if(newPassword1 == newPassword2){
-        donePasswordEdit();
-        alert("You have successfully changed your password");
-        document.getElementById('Password').innerHTML= myPassword.toString();
-    }
-    else{
-        alert("You have re-entered your password incorrectly");
-    }
+
 }
 
 function passwordCancel(){
@@ -101,32 +121,42 @@ function passwordCancel(){
 function emailSave() {
     var otherEmail = document.getElementById('newEmail').value;
     if(otherEmail == ''){
-        alert("Invalid Input!! Please Try Again");
+        alert("Name Field Is Missing !!");
     }
     else {
         document.getElementById('Email').innerHTML = otherEmail.toString();
         doneEmailEdit();
+        root.child("Temporary Profile").child('User 1').child('Email').set(otherEmail.toString());
     }
 }
 
 function emailCancel(){
-    document.getElementById('Email').innerHTML= myEmail.toString();
+    var databaseEmail = root.child('Temporary Profile').child('User 1').child('Email');
+    databaseEmail.once('value', function(snapshot){
+        var temp = snapshot.val();
+        document.getElementById('Email').innerHTML = temp.toString();
+    });
     doneEmailEdit();
 }
 
 function phoneSave(){
     var otherPhone = document.getElementById('newPhone').value;
     if(otherPhone == ''){
-        alert("Invalid Input!! Please Try Again");
+        alert("Phone Field Is Missing !!");
     }
     else{
         document.getElementById('Phone').innerHTML = otherPhone.toString();
         donePhoneEdit();
+        root.child("Temporary Profile").child('User 1').child('Phone').set(otherPhone.toString());
     }
 }
 
 function phoneCancel(){
-    document.getElementById('Phone').innerHTML= myPhone.toString();
+    var databasePhone = root.child('Temporary Profile').child('User 1').child('Phone');
+    databasePhone.once('value', function(snapshot){
+        var temp = snapshot.val();
+        document.getElementById('Phone').innerHTML = temp.toString();
+    });
     donePhoneEdit();
 }
 
@@ -159,16 +189,10 @@ function donePasswordEdit(){
     document.getElementById('PasswordRow').style = '';
 }
 
-function picOnHover(){
-    document.getElementById('editPicture').style = '';
-
+function picChange(){
+    var newProfile = document.getElementById('addProfilePic').value;
+    document.getElementById('Pic').src = newProfile.toString();
 }
 
-function picOffHover(){
-   if(document.getElementById('editPicture').onmouseover == ''){
-       document.getElementById('editPicture').style = 'display: none';
-   }
-
-}
 
 

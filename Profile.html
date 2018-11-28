@@ -1,4 +1,4 @@
-<!DOCTYPE <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
 
-    <script src = "Profile.js"></script>
     <link rel="stylesheet"  href="Profile.css">
 
 </head>
@@ -71,12 +70,21 @@
         <!-- Header-->
         <div class="content" id="User Profile">
                 <!--add your code here:) feel free to add your own .css file-->
-
-                    <h1>User Profile</h1>
                     <div class= "container">
-                        <img src="img/sample.png" style="width:80px; height: 80px;" onmouseenter="picOnHover()" onmouseout="picOffHover()" m>
-                        <button id="editPicture" class = "btn" style="display: none" >Edit</button>
-
+                        <div class="Profile-Picture">
+                             <div class="Default Image" id="defaultPic">
+                                     <img id="Pic" style="width:80px; height: 80px;">
+                             </div>
+                             <div class="addBtn">
+                                    <form>
+                                    <button class="btn">Add Profile Picture</button>
+                                    <input type="file" id="addProfilePic" accept="image/png, image/jpeg" onchange="picChange()">
+                                    </form>
+                             </div>
+                            <div>
+                            <button>Change Profile Picture</button>
+                             </div>
+                        </div>
                     </div>
                     <table style="width:100%" >
                         <tr>
@@ -84,8 +92,8 @@
                             <td id="NameText"></td>
                             <td>
                                 <button id="nameEdit" onclick="nameChange()">Edit</button>
-                                <button id="nameSave" onclick="nameSave()" type="submit">Save</button>
-                                <button id="nameCancel" onclick="nameCancel()">Cancel</button>
+                                <button id="nameSave" onclick="nameSave()" type="submit"hidden="true" >Save</button>
+                                <button id="nameCancel" onclick="nameCancel()" hidden="true">Cancel</button>
                             </td>
                         </tr>
                         <tr id="PasswordRow">
@@ -115,8 +123,8 @@
                                 <input id="reenterPW" type="password" placeholder="Enter Here">
                             </td>
                             <td>
-                                <button id="passwordSave" onclick="passwordSave()" type="submit">Submit</button>
-                                <button id="passwordCancel" onclick="passwordCancel()">Cancel</button>
+                                <button id="passwordSave" onclick="passwordSave()" type="submit" hidden="true">Submit</button>
+                                <button id="passwordCancel" onclick="passwordCancel()"hidden="true">Cancel</button>
                             </td>
                         </tr>
                         <tr>
@@ -124,8 +132,8 @@
                             <td id="Email"></td>
                             <td>
                                 <button id="emailEdit" onclick="emailChange()">Edit</button>
-                                <button id="emailSave" onclick="emailSave()" type="submit">Save</button>
-                                <button id="emailCancel" onclick="emailCancel()">Cancel</button>
+                                <button id="emailSave" onclick="emailSave()" type="submit" hidden="true" >Save</button>
+                                <button id="emailCancel" onclick="emailCancel()" hidden="true">Cancel</button>
                             </td>
                         </tr>
                         <tr >
@@ -133,14 +141,31 @@
                             <td id="Phone"></td>
                             <td>
                                 <button id="phoneEdit" onclick="phoneChange()">Edit</button>
-                                <button id="phoneSave" onclick="phoneSave()" type="submit">Save</button>
-                                <button id="phoneCancel" onclick="phoneCancel()">Cancel</button>
+                                <button id="phoneSave" onclick="phoneSave()" type="submit" hidden="true">Save</button>
+                                <button id="phoneCancel" onclick="phoneCancel()" hidden="true" >Cancel</button>
                             </td>
                         </tr>
                     </table>
 
         </div>
     </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCDwFS1dxv0WWEbgehMdtsIQ3F_WQlKDnE",
+            authDomain: "team-plus-plus.firebaseapp.com",
+            databaseURL: "https://team-plus-plus.firebaseio.com",
+            projectId: "team-plus-plus",
+            storageBucket: "team-plus-plus.appspot.com",
+            messagingSenderId: "836611996730"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <script src = "Profile.js"></script>
+
 </body>
 
 </html>

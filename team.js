@@ -175,7 +175,7 @@ async function modifyAdmin(uid) {
         firebase.database().ref('Users/' + uid + '/Teams/memberOf').child(cuTeam).remove();
         alert("The admin of " + cuTeam + " has been changed to " + username + ".");
     }
-    else alert("Cancelled");
+    else alert("Canceled");
 }
 
 async function addMember() {
@@ -288,6 +288,10 @@ function addDescription(){
     var info = prompt("Please enter a brief description of your team below.");
     //TODO write to html
 /*
+<<<<<<< HEAD
+=======
+
+>>>>>>> d675809b4f215903ee2a10a1f0ca47e9d306fb28
 function createTeam() {
     var teamName = prompt("Please enter the team name", "Team++");
     var valid = true;

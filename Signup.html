@@ -32,17 +32,20 @@
         if (user) {
           window.location.href = "HomePage.html";
         }
-      })
+      });
     }
+
     function signUp() {
       var database = firebase.database();
+      var userName = document.getElementById("userName").value;
       var userEmail = document.getElementById("inputEmail").value;
       var userPass = document.getElementById("inputPassword").value;
+      var userPhone = document.getElementById("phoneNum").value;
       var signedUp = false;
       firebase.auth().createUserWithEmailAndPassword(userEmail, userPass).then(function () {
         // If user signs up successfully, moves user back to login
         alert("You have successfully registered for an account!");
-        alert(firebase.auth().currentUser.uid)
+        registerUser(userEmail, userPass, userName, userPhone);
         signedUp = true;
         if (signedUp) {
           firebase.auth().signOut();
@@ -61,13 +64,28 @@
         console.log(error);
       });
     }
+
+    function registerUser(userEmail, userPass, userName, userPhone) {
+      var userId = firebase.auth().currentUser.uid;
+      var userRef = firebase.database().ref("Users");
+      var userIdRef = userRef.child(userId).set({
+        Email: userEmail,
+        Password: userPass,
+        Name: userName,
+        Phone: userPhone
+      });
+    }
   </script>
 </head>
 
-<body class="text-center" onload="checkifSignedIn()">
+<body class="text-center" onload="checkIfSignedIn()">
   <form class="form-signin">
     <img class="mb-4" src="./img/login_T.png" alt="Team++ Logo" width="72" height="72" />
     <h1 class="h3 mb-3 font-weight-normal">Create Your Team++ Account</h1>
+    <label for="First name" class="sr-only">First name</label>
+    <input type="text" id="userName" class="form-control" placeholder="Name" required autofocus />
+    <label for="Phone number" class="sr-only">Phone number (optional)</label>
+    <input type="text" id="phoneNum" class="form-control" placeholder="Phone number (optional)" autofocus />
     <label for="inputEmail" class="sr-only">Email address</label>
     <input type="text" id="inputEmail" class="form-control" placeholder="Enter a valid email address" required
       autofocus />

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/themify-icons.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="img/logo.png">
 
     <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
     <script>
@@ -29,43 +30,48 @@
     
     <!-- Left Panel --> 
     <aside id="left-panel" class="left-panel">
-        <nav class="navbar navbar-default"> 
-            <div id="main-menu" class="main-menu">
+        <nav class="navbar navbar-expand-sm navbar-default"> 
+            <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
 
                     <li class="menu-title">Current team</li><!-- /.menu-title -->
+                    <li class="menu-item-has-children dropdown">
+                            <div class="dropdown">
+                                    <button class="dropbtn">[TEAM NAME HERE]</button>
+                                    <div class="dropdown-content">
+                                      <a href="#">Change Teams</a>
+                                      <a href="#">Team++</a>
+                                      <a href="#">Egg banana</a>
+                                    </div>
+                                  </div> 
+                        </li>
 
-                    <li class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">[TEAM NAME HERE]  <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                            <li><a href="team.html">Change Teams</a></li>
-                        </ul>
-                    </li>
+                   
 
                     <li class="menu-title">For team</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
-                        <a href="OverView.html" >Overview</a>
+                        <a href="OverView.html"><span class="ti-menu-alt flat-color-1" style="padding-right: 30px"></span>Overview</a>
                     </li>
                     <li class="menu-item-has-children dropdown">
-                        <a href="Chatroom.html">Chatroom</a>
+                        <a href="Chatroom.html"><span class="ti-comments flat-color-2" style="padding-right: 30px"></span>Chatroom</a>
                     </li>
                     <li class="menu-item-has-children dropdown">
-                        <a href="Schedule.html">Schedule</a>
+                        <a href="Schedule.html"><span class="ti-time flat-color-3" style="padding-right: 30px"></span>Schedule</a>
                     </li>
 
                     <li class="menu-title">For you</li><!-- /.menu-title -->
 
                     <li class="menu-item-has-children dropdown">
-                        <a href="HomePage.html">HomePage</a>
+                        <a href="HomePage.html"><span class="ti-home flat-color-4" style="padding-right: 30px"></span>HomePage</a>
                     </li>
                     <li class="menu-item-has-children dropdown">
-                            <a href="Task.html">Tasks</a>
+                            <a href="Task.html"><span class="ti-agenda flat-color-5" style="padding-right: 30px"></span>Tasks</a>
                         </li>
                     <li>
-                        <a href="Profile.html">Profile</a>
+                        <a href="Profile.html"><span class="ti-crown flat-color-6" style="padding-right: 30px"></span>Profile</a>
                     </li>
                     <li class="menu-item-has-children dropdown">
-                        <a href="team.html">change team</a>
+                        <a href="team.html"><span class="ti-menu-alt flat-color-7" style="padding-right: 30px"></span>Change team</a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -207,7 +213,7 @@
                                         <p>here is some brief introduction about your team, including the number of team member, what is your goal and some other infomation that can help you to get an impression of what's your team gonna do.</p>
                                         <p>Apart from that, there should be some plan you would like to remind yourself.</p>
                                         <p>In fact, I just do not know what to push here. Let's leave this part to our software engineer.</p>
-                                        <textarea name="Team Members" id="members"></textarea>
+                                        <textarea style="width: 100%" name="Team Members" id="members"></textarea>
                                     </div> <!-- /.card-body -->
                                 </div>
                             </div> <!-- /.row --> 

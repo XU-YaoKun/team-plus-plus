@@ -65,7 +65,7 @@ setTimeout(function() {
 		// Edit attributes
 		li.className += "contact";
 		div1.className += "wrap";
-		img.src += "img/eggperson.jpeg";
+		img.src += "img/koala.png";
 		div2.className += "meta";
 		p1.className += "name";
 
@@ -112,7 +112,7 @@ setTimeout(function() {
 		// Edit attributes
 		li.className += "contact";
 		div1.className += "wrap";
-		img.src += "img/eggperson.jpeg";
+		img.src += "img/mouse.png";
 		div2.className += "meta";
 		p1.className += "name";
 
@@ -160,7 +160,7 @@ setTimeout(function() {
 		// Edit attributes
 		li.className += "contact";
 		div1.className += "wrap";
-		img.src += "img/eggperson.jpeg";
+		img.src += "img/cow.png";
 		div2.className += "meta";
 		p1.className += "name";
 

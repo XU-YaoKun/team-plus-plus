@@ -310,6 +310,7 @@
   height: calc(100% - 177px);
   overflow-y: scroll;
   overflow-x: hidden;
+  padding-top: 0px;
 }
 @media screen and (max-width: 735px) {
   #frame #sidepanel #contacts {
@@ -333,7 +334,7 @@
 }
 #frame #sidepanel #contacts ul li.contact {
   position: relative;
-  padding: 10px 0 15px 0;
+  padding: 35px 0 35px 0;
   font-size: 0.9em;
   cursor: pointer;
 }
@@ -355,6 +356,7 @@
 #frame #sidepanel #contacts ul li.contact .wrap {
   width: 88%;
   margin: 0 auto;
+  padding: 0px, 5px, 0px, 0px;
   position: relative;
 }
 @media screen and (max-width: 735px) {

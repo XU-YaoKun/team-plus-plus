@@ -42,7 +42,9 @@ input{
 }
 
 .push {
+
     border-radius: 5px;
+
     background-color: #00c292;
     color: #ffffff;
 }

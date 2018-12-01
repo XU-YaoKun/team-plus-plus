@@ -1,27 +1,28 @@
-var myPassword = '********';
-var myPicture =  'img/sample.png'
-var root = firebase.database().ref();
-
+var myPassword = '*******';
+var storage = firebase.storage().ref();
+var root = firebase.database().ref('Users');
+var userId;
 
 window.onload = function () {
-    var databaseName = root.child('Temporary Profile').child('User 1').child('Name');
-    var databaseEmail = root.child('Temporary Profile').child('User 1').child('Email');
-    var databasePhone = root.child('Temporary Profile').child('User 1').child('Phone');
 
-    document.getElementById('Password').innerHTML= myPassword;
-    document.getElementById('Pic').src= myPicture;
+    firebase.auth().onAuthStateChanged(function(user){
+        // User is signed in: set userId and teamId
+        if (user){
+            userId = user.uid;
 
-    databaseName.once('value', function(snapshot){
-       var temp = snapshot.val();
-       document.getElementById('NameText').innerHTML = temp.toString();
-    });
-    databaseEmail.once('value', function(snapshot){
-        var temp = snapshot.val();
-        document.getElementById('Email').innerHTML = temp.toString();
-    });
-    databasePhone.once('value', function(snapshot){
-        var temp = snapshot.val();
-        document.getElementById('Phone').innerHTML = temp.toString();
+            // Check values
+            console.log("userId has been set: "+ userId);
+
+            updateName();
+            updatePhone();
+            updateEmail();
+            updatePicture();
+            document.getElementById('Password').innerHTML = myPassword.toString();
+        }
+        // No user is signed in.
+        else{
+            console.log('User is not logged in. !!')
+        }
     });
 
 
@@ -72,13 +73,13 @@ function nameSave(){
     else {
         document.getElementById('NameText').innerHTML = otherName.toString();
         doneNameEdit();
-        root.child("Temporary Profile").child('User 1').child('Name').set(otherName.toString());
+        root.child(userId).child('Name').set(otherName.toString())
 
     }
 }
 
 function nameCancel(){
-    var databaseName = root.child('Temporary Profile').child('User 1').child('Name');
+    var databaseName = root.child(userId).child('Name');
     databaseName.once('value', function(snapshot){
         var temp = snapshot.val();
         document.getElementById('NameText').innerHTML = temp.toString();
@@ -90,7 +91,16 @@ function passwordSave(){
     var curPassword = document.getElementById('currentPW').value;
     var newPassword1 = document.getElementById('newPW').value;
     var newPassword2 = document.getElementById('reenterPW').value;
-    var databasePassword =  root.child("Temporary Profile").child('User 1').child('Password');
+    var databasePassword =  root.child(userId).child('Password');
+
+    if(curPassword == '' || newPassword1 == '' || newPassword1 == '' ){
+        alert("Password Field Is Missing !!");
+        return false;
+    }
+    else if(newPassword1.length < '4'){
+        alert('Your new password is not long enough! Please enter a new password !')
+        return false;
+    }
     databasePassword.once('value', function (snapshot) {
         databasePassword = snapshot.val();
         if(databasePassword !== curPassword){
@@ -101,14 +111,10 @@ function passwordSave(){
         }
         else{
             alert('You have successfully changed your password');
-            root.child("Temporary Profile").child('User 1').child('Password').set(newPassword1.toString());
+            root.child(userId).child('Password').set(newPassword1.toString());
             donePasswordEdit();
         }
     });
-    if(curPassword == '' || newPassword1 == '' || newPassword1 == '' ){
-        alert("Password Field Is Missing !!");
-        return false;
-    }
 
 }
 
@@ -119,19 +125,24 @@ function passwordCancel(){
 
 
 function emailSave() {
+
     var otherEmail = document.getElementById('newEmail').value;
-    if(otherEmail == ''){
+    if(otherEmail == '' || /^\s+$/.test(otherEmail)){
         alert("Name Field Is Missing !!");
+    }
+    else if(!(otherEmail.includes('@') && otherEmail.includes('.'))){
+        alert('Your email is invalid !!')
     }
     else {
         document.getElementById('Email').innerHTML = otherEmail.toString();
         doneEmailEdit();
-        root.child("Temporary Profile").child('User 1').child('Email').set(otherEmail.toString());
+        root.child(userId).child('Email').set(otherEmail.toString());
     }
 }
 
 function emailCancel(){
-    var databaseEmail = root.child('Temporary Profile').child('User 1').child('Email');
+
+    var databaseEmail = root.child(userId).child('Email');
     databaseEmail.once('value', function(snapshot){
         var temp = snapshot.val();
         document.getElementById('Email').innerHTML = temp.toString();
@@ -141,18 +152,21 @@ function emailCancel(){
 
 function phoneSave(){
     var otherPhone = document.getElementById('newPhone').value;
-    if(otherPhone == ''){
+    if(otherPhone == '' || /^\s+$/.test(otherPhone)){
         alert("Phone Field Is Missing !!");
+    }
+    else if(!(/^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/.test(otherPhone))){
+        alert("The phone number is invalid !!")
     }
     else{
         document.getElementById('Phone').innerHTML = otherPhone.toString();
         donePhoneEdit();
-        root.child("Temporary Profile").child('User 1').child('Phone').set(otherPhone.toString());
+        root.child(userId).child('Phone').set(otherPhone.toString())
     }
 }
 
 function phoneCancel(){
-    var databasePhone = root.child('Temporary Profile').child('User 1').child('Phone');
+    var databasePhone = root.child(userId).child('Phone');
     databasePhone.once('value', function(snapshot){
         var temp = snapshot.val();
         document.getElementById('Phone').innerHTML = temp.toString();
@@ -189,10 +203,78 @@ function donePasswordEdit(){
     document.getElementById('PasswordRow').style = '';
 }
 
-function picChange(){
-    var newProfile = document.getElementById('addProfilePic').value;
-    document.getElementById('Pic').src = newProfile.toString();
+var fileUpload = document.getElementById('upload');
+
+fileUpload.addEventListener('change', function(e){
+    var file = e.target.files[0];
+    var databaseStorage = firebase.storage().ref().child(userId);
+    databaseStorage.put(file);
+    var reader = new FileReader();
+    reader.onload = function(){
+        var image = reader.result;
+        document.getElementById('Pic').src = image;
+        document.getElementById('icon').src = image;
+    }
+    reader.readAsDataURL(file);
+})
+
+async function updatePicture() {
+    var databaseStorage = firebase.storage().ref().child(userId);
+    databaseStorage.getDownloadURL().then(function(url){
+        document.getElementById('Pic').src = url;
+        document.getElementById('icon').src = url;
+    }).catch(function(error){
+        document.getElementById('Pic').src = 'img/sample.png'
+    });
 }
 
+async function updateName(){
+    var databaseName = root.child(userId);
+    databaseName.once('value', function (snapshot) {
+        if(!snapshot.hasChild('Name')){
+            databaseName.child('Name').set('')
+        }
+        else{
+            databaseName.child('Name').once('value', function (snapshot) {
+                var temp = snapshot.val();
+                document.getElementById('NameText').innerHTML = temp.toString();
+            })
+        }
+    })
+
+}
+
+async function updatePhone() {
+    console.log('TEST PASSED')
+    var databasePhone = root.child(userId);
+    databasePhone.once('value', function (snapshot) {
+        if(!snapshot.hasChild('Phone')){
+            databasePhone.child('Phone').set('')
+        }
+        else{
+            databasePhone.child('Phone').once('value', function (snapshot) {
+                var temp = snapshot.val();
+                document.getElementById('Phone').innerHTML = temp.toString();
+            })
+        }
+    })
+
+}
+
+async function updateEmail() {
+    console.log('TEST PASSED')
+    var databaseEmail = root.child(userId);
+    databaseEmail.once('value', function (snapshot) {
+        if(!snapshot.hasChild('Email')){
+            databaseEmail.child('Email').set('')
+        }
+        else{
+            databaseEmail.child('Email').once('value', function (snapshot) {
+                var temp = snapshot.val();
+                document.getElementById('Email').innerHTML = temp.toString();
+            })
+        }
+    })
+}
 
 

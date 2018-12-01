@@ -11,6 +11,11 @@ li {
   height: 50px;
 }
 
+.contact li {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
 .mainApp {
   position:relative;
   width: 80%;

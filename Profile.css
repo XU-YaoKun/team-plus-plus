@@ -1,4 +1,4 @@
-body{
+.profile{
     background: aliceblue;
 }
 
@@ -13,6 +13,12 @@ input{
     background: transparent;
 }
 
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+}
+
 .container img{
     margin: 25px;
     background: transparent;
@@ -22,7 +28,10 @@ input{
 .addBtn{
     position: relative;
     overflow: hidden;
-    display: inline-block;
+    display: block;
+    float: right;
+    width: 20%;
+    height: 50px;
 }
 
 .addBtn input[type=file]{
@@ -30,4 +39,10 @@ input{
     left: 0;
     top: 0;
     opacity: 0;
+}
+
+.push {
+    border-radius: 5px;
+    background-color: #00c292;
+    color: #ffffff;
 }

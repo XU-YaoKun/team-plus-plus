@@ -29,18 +29,23 @@
     
     <!-- Left Panel --> 
     <aside id="left-panel" class="left-panel">
-        <nav class="navbar navbar-default"> 
-            <div id="main-menu" class="main-menu">
+        <nav class="navbar navbar-expand-sm navbar-default"> 
+            <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
 
                     <li class="menu-title">Current team</li><!-- /.menu-title -->
+                    <li class="menu-item-has-children dropdown">
+                            <div class="dropdown">
+                                    <button class="dropbtn">[TEAM NAME HERE]</button>
+                                    <div class="dropdown-content">
+                                      <a href="#">Change Teams</a>
+                                      <a href="#">Team++</a>
+                                      <a href="#">Egg banana</a>
+                                    </div>
+                                  </div> 
+                        </li>
 
-                    <li class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">[TEAM NAME HERE]  <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                            <li><a href="team.html">Change Teams</a></li>
-                        </ul>
-                    </li>
+                   
 
                     <li class="menu-title">For team</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
@@ -207,7 +212,7 @@
                                         <p>here is some brief introduction about your team, including the number of team member, what is your goal and some other infomation that can help you to get an impression of what's your team gonna do.</p>
                                         <p>Apart from that, there should be some plan you would like to remind yourself.</p>
                                         <p>In fact, I just do not know what to push here. Let's leave this part to our software engineer.</p>
-                                        <textarea name="Team Members" id="members"></textarea>
+                                        <textarea style="width: 100%" name="Team Members" id="members"></textarea>
                                     </div> <!-- /.card-body -->
                                 </div>
                             </div> <!-- /.row --> 

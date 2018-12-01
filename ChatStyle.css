@@ -4,23 +4,11 @@ body {
   height: 100vh;
 }
 
-h1 {
-  position: relative;
-  top: 0;
-  color: black;
-  font-size: 2em;
-  margin: 10px;
-  width: 100%;
-  font-weight: 500;
-
-}
-
 li {
   position:relative;
   width: 100%;
   height: auto;
   height: 50px;
-  margin-top: 10px;
 }
 
 .mainApp {

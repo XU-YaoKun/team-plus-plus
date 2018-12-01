@@ -11,6 +11,11 @@ li {
   height: 50px;
 }
 
+.contact li {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
 .mainApp {
   position:relative;
   width: 80%;
@@ -64,6 +69,7 @@ li {
 
 .messages {
   max-height: 80%;
+  font-size: 20px;
   overflow-y: scroll;
   list-style-type: none;
 }
@@ -90,4 +96,8 @@ li {
 .server {
   background: #f0f0f0;
   color: black;
+}
+
+.meta .name p {
+  font-size: 25px; 
 }

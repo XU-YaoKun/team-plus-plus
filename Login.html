@@ -25,7 +25,7 @@
     </script>
     <script>
         function checkIfSignedIn() {
-            firebase.auth.onAuthStateChanged(function (user) {
+            firebase.auth().onAuthStateChanged(function (user) {
                 if (user) {
                     window.location.href = "team.html"
                 }

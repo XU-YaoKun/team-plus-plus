@@ -24,25 +24,34 @@
         };
         firebase.initializeApp(config);
     </script>
-    <script>
+    <script src="team.js">
 
         window.onload = function () {
 
-            firebase.auth().onAuthStateChanged(function(user){
+            firebase.auth().onAuthStateChanged(function (user) {
                 // User is signed in: set userId and teamId
-                if (user){
+                if (user) {
                     userID = user.uid;
                     updateAdminList();
                     updateMemList();
                 }
                 // No user is signed in.
-                else{
+                else {
 
                     console.log('User is not logged in. !!')
                 }
             });
         };
     </script>
+    <script>
+        function signOut() {
+            firebase.auth().onAuthStateChanged(function (user) {
+                if (user) {
+                    console.log("Signing out");
+                    firebase.auth().signOut();
+                }
+            });
+        }</script>
 
 </head>
 
@@ -108,76 +117,80 @@
 
         <div class="content">
 
-                <!--add your code here:) feel free to add your own .css file-->
+            <!--add your code here:) feel free to add your own .css file-->
 
-                <!--overall info-->
-                <div class="row">
-                        <div class="col-lg-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title box-title">For Team</h4>    
-                                        <p>Create or Join Existing Teams Here</p>
-                                    </div>
-                                    <div class="card-body">
-                                        <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="createTeam()">Create Team</button>
-                                        <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="joinTeam()">Join Team</button>
+            <!--overall info-->
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title box-title">For Team</h4>
+                            <p>Create or Join Existing Teams Here</p>
+                        </div>
+                        <div class="card-body">
+                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button"
+                                onclick="createTeam()">Create Team</button>
+                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button"
+                                onclick="joinTeam()">Join Team</button>
 
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="row">
-                        <div class="card" style="padding-top: 20px">
-                                <div class="card-header">
-                                    <strong class="card-title">You are the admin of</strong>
-                                </div>
-                                <div class="table-stats order-table ov-h admin">
-                                    <table class="table ">
-                                        <thead>
-                                            <tr>
-                                                <th class="serial">#</th>
-                                                <th>Name</th>
-                                                <th>Navigate to Team</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="admin">
-
-                                        </tbody>
-                                    </table>
-                                </div> <!-- /.table-stats -->
-                            </div>
-                        </div>
-        <div class="row">
-                <div class="card" style="padding-top: 20px">
-                        <div class="card-header">
-                            <strong class="card-title">You are a member of</strong>
-                        </div>
-                        <div class="table-stats order-table ov-h">
-                            <table class="table ">
-                                <thead>
-                                <tr>
-                                    <th class="serial">#</th>
-                                    <th>Name</th>
-                                    <th>Navigate to Team</th>
-                                </tr>
-                                </thead>
-                                <tbody id="member">
-
-                                </tbody>
-                            </table>
-                        </div> <!-- /.table-stats -->
-                </div>
+            </div>
         </div>
-                 
+    </div>
+
+    <div class="row">
+        <div class="card" style="padding-top: 20px">
+            <div class="card-header">
+                <strong class="card-title">You are the admin of</strong>
+            </div>
+            <div class="table-stats order-table ov-h admin">
+                <table class="table ">
+                    <thead>
+                        <tr>
+                            <th class="serial">#</th>
+                            <th>Name</th>
+                            <th>Navigate to Team</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin">
+
+                    </tbody>
+                </table>
+            </div> <!-- /.table-stats -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="card" style="padding-top: 20px">
+            <div class="card-header">
+                <strong class="card-title">You are a member of</strong>
+            </div>
+            <div class="table-stats order-table ov-h">
+                <table class="table ">
+                    <thead>
+                        <tr>
+                            <th class="serial">#</th>
+                            <th>Name</th>
+                            <th>Navigate to Team</th>
+                        </tr>
+                    </thead>
+                    <tbody id="member">
+
+                    </tbody>
+                </table>
+            </div> <!-- /.table-stats -->
+        </div>
+    </div>
 
 
-        </div><!--content End-->
-    </div><!--Right panel end-->
-    
+
+    </div>
+    <!--content End-->
+    </div>
+    <!--Right panel end-->
+
 </body>
 <script src="team.js"></script>
-</html>
 
+</html>

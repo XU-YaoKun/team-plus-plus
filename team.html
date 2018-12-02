@@ -1,17 +1,17 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
-
 <html>
 
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Choose Team</title>
+    <title>HomePage</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/themify-icons.css">
     <link rel="stylesheet" href="assets/css/style.css">
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
     <script>
         // Initialize Firebase
         var config = {
@@ -24,13 +24,70 @@
         };
         firebase.initializeApp(config);
     </script>
+    <script>
+        function signOut() {
+            firebase.auth().onAuthStateChanged(function (user) {
+                if (user) {
+                    console.log("Signing out");
+                    firebase.auth().signOut();
+                }
+            });
+        }
+    </script>
+    <script>
+        window.onload = function () {
+
+            firebase.auth().onAuthStateChanged(function (user) {
+                // User is signed in: set userId and teamId
+                if (user) {
+                    userID = user.uid;
+                    updateView();
+                }
+                // No user is signed in.
+                else {
+                    console.log('User is not logged in. !!')
+                }
+            });
+        };
+    </script>
+
 </head>
 
 <body>
 
     <!-- Left Panel -->
     <aside id="left-panel" class="left-panel">
+        <nav class="navbar navbar-default">
+            <div id="main-menu" class="main-menu">
+                <ul class="nav navbar-nav">
+                    <li class="menu-title">For team</li><!-- /.menu-title -->
+                    <li class="menu-item-has-children dropdown">
+                        <a href="OverView.html">Overview</a>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="Chatroom.html">Chatroom</a>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="Schedule.html">Schedule</a>
+                    </li>
 
+                    <li class="menu-title">For you</li><!-- /.menu-title -->
+
+                    <li class="menu-item-has-children dropdown">
+                        <a href="HomePage.html">HomePage</a>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="Task.html">Tasks</a>
+                    </li>
+                    <li>
+                        <a href="Profile.html">Profile</a>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="team.html">change team</a>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
     </aside><!-- /#left-panel -->
     <!-- Left Panel -->
 
@@ -47,7 +104,7 @@
             <div class="top-right">
                 <div class="header-menu">
                     <div class="user-area float-right">
-                        <a onclick="signOut()" class="dropdown-toggle active">
+                        <a href="Login.html" onclick="signOut()" class="dropdown-toggle active">
                             <img class="user-avatar rounded-circle" src="img/sample.png" alt="User Avatar">
                         </a>
                     </div>
@@ -61,555 +118,117 @@
 
             <!--overall info-->
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-3 col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title box-title">For Team</h4>
-
-                            <p>Create or Join Existing Teams Here</p>
-                        </div>
-                        <div class="card-body">
-                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button"
-                                onclick="createTeam()">Create Team</button>
-                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button"
-                                onclick="joinTeam()">Join Team</button>
-                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button"
-                                onclick="getTeamAdmin()">check</button>
-                            <!--
-                                        <p>choose team here</p>
-                                    </div>
-                                    <div class="card-body"> 
-                                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button">Create Team</button>
-                                            <p>Create a brandly new team</p>
-                                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button">Join Team</button>
-                                            <p>Join a team</p>
+                            <div class="stat-widget-five">
+                                <div class="stat-icon dib flat-color-1">
+                                    <span class="ti-user"></span>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="text-left dib">
+                                        <div class="stat-text"><span class="count">36</span></div>
+                                        <div class="stat-heading">teammates</div>
                                     </div>
                                 </div>
-                        </div>
-                        <div class="col-lg-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title box-title">For Team</h4>    
-                                        <p>choose team here</p>
-                                    </div>
-                                    <div class="card-body"> 
-                                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button">Create Team</button>
-                                            <p>Create a brandly new team</p>
-                                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button">Join Team</button>
-                                            <p>Join a team</p>
--->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="card" style="padding-top: 20px">
-                    <div class="card-header">
-                        <strong class="card-title">You are the admin of</strong>
-                    </div>
-                    <div class="table-stats order-table ov-h">
-                        <table class="table ">
-                            <thead>
-                                <tr>
-                                    <th class="serial">#</th>
-                                    <th class="avatar">Photo</th>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Theme</th>
-                                    <th>Member</th>
-                                    <th>Status</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="serial">1.</td>
-
-                                    <td> <span class="name">Team++</span> </td>
-                                    <td>
-                                        <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block"
-                                            type="button" onclick="window.location.href='Homepage.html'">Go</button>
-                                    </td>
-                                </tr>
-                                <!--
-                                                <td class="avatar">
-                                                    <div class="round-img">
-                                                        <a href="#"><img class="rounded-circle" src="img/admin_1.png" alt=""></a>
-                                                    </div>
-                                                </td>
-                                                <td> #5469 </td>
-                                                <td>  <span class="name">Team++</span> </td> 
-                                                <td> <span class="product">build a web</span> </td>
-                                                <td><span class="count">10</span></td>
-                                                <td> 
-                                                    <span class="badge badge-complete">Pending</span>
-                                                </td> 
-                                            </tr>
-                                            <tr>
-                                                <td class="serial">2.</td>
-                                                <td class="avatar">
-                                                    <div class="round-img">
-                                                        <a href="#"><img class="rounded-circle" src="img/admin_2.JPG" alt=""></a> 
-                                                    </div>
-                                                </td> 
-                                                <td> #5468 </td>
-                                                <td>  <span class="name">Gregory Dixon</span> </td> 
-                                                <td> <span class="product">Mobile develop</span> </td>
-                                                <td><span class="count">23</span></td>
-                                                <td> 
-                                                    <span class="badge badge-complete">Complete</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="serial">3.</td>
-                                                <td class="avatar">
-                                                    <div class="round-img">
-                                                        <a href="#"><img class="rounded-circle" src="img/admin_2.JPG" alt=""></a> 
-                                                    </div>
-                                                </td>
-                                                <td> #5467 </td>
-                                                <td>  <span class="name">Hey its me</span> </td> 
-                                                <td> <span class="product">SSD</span> </td>
-                                                <td><span class="count">31</span></td>
-                                                <td> 
-                                                    <span class="badge badge-complete">Complete</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="serial">4.</td>
-                                                <td class="avatar">
-                                                    <div class="round-img">
-                                                        <a href="#"><img class="rounded-circle" src="img/Admin.png" alt=""></a> 
-                                                    </div>
-                                                </td>
-                                                <td> #5466 </td>
-                                                <td>  <span class="name">I dont know</span> </td> 
-                                                <td> <span class="product">Magic</span> </td>
-                                                <td><span class="count">5</span></td>
-                                                <td> 
-                                                    <span class="badge badge-pending">Pending</span>
-                                                </td>
-                                            </tr> 
--->
-                            </tbody>
-                        </table>
-                    </div> <!-- /.table-stats -->
-                </div>
-            </div>
-            <div class="row">
-                <div class="card" style="padding-top: 20px">
-                    <div class="card-header">
-
-                        <strong class="card-title">You are member of</strong>
-
-                    </div>
-                    <div class="table-stats order-table ov-h">
-                        <table class="table ">
-                            <thead>
-
-                                <tr>
-                                    <th class="serial">#</th>
-                                    <th>Name</th>
-                                    <th>Navigate to Team</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="serial">1.</td>
-                                    <td> <span class="name">Team++</span> </td>
-                                    <td>
-                                        <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block"
-                                            type="button" onclick="window.location.href='Homepage.html'">Go</button>
-                                    </td>
-                                </tr>
-                                <!--
-                                    <tr>
-                                        <th class="serial">#</th>
-                                        <th class="avatar">Photo</th>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Theme</th>
-                                        <th>Member</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody> 
-                                    <tr>
-                                        <td class="serial">1.</td>
-                                        <td class="avatar">
-                                            <div class="round-img">
-                                                <a href="#"><img class="rounded-circle" src="img/admin_1.png" alt=""></a>
-                                            </div>
-                                        </td>
-                                        <td> #5469 </td>
-                                        <td>  <span class="name">Team++</span> </td> 
-                                        <td> <span class="product">build a web</span> </td>
-                                        <td><span class="count">10</span></td>
-                                        <td> 
-                                            <span class="badge badge-complete">Pending</span>
-                                        </td> 
-                                    </tr>
-                                    <tr>
-                                        <td class="serial">2.</td>
-                                        <td class="avatar">
-                                            <div class="round-img">
-                                                <a href="#"><img class="rounded-circle" src="img/admin_2.JPG" alt=""></a> 
-                                            </div>
-                                        </td> 
-                                        <td> #5468 </td>
-                                        <td>  <span class="name">Gregory Dixon</span> </td> 
-                                        <td> <span class="product">Mobile develop</span> </td>
-                                        <td><span class="count">23</span></td>
-                                        <td> 
-                                            <span class="badge badge-complete">Complete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="serial">3.</td>
-                                        <td class="avatar">
-                                            <div class="round-img">
-                                                <a href="#"><img class="rounded-circle" src="img/admin_2.JPG" alt=""></a> 
-                                            </div>
-                                        </td>
-                                        <td> #5467 </td>
-                                        <td>  <span class="name">Hey its me</span> </td> 
-                                        <td> <span class="product">SSD</span> </td>
-                                        <td><span class="count">31</span></td>
-                                        <td> 
-                                            <span class="badge badge-complete">Complete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="serial">4.</td>
-                                        <td class="avatar">
-                                            <div class="round-img">
-                                                <a href="#"><img class="rounded-circle" src="img/Admin.png" alt=""></a> 
-                                            </div>
-                                        </td>
-                                        <td> #5466 </td>
-                                        <td>  <span class="name">I dont know</span> </td> 
-                                        <td> <span class="product">Magic</span> </td>
-                                        <td><span class="count">5</span></td>
-                                        <td> 
-                                            <span class="badge badge-pending">Pending</span>
-                                        </td>
-                                    </tr> 
--->
-                            </tbody>
-                        </table>
-                    </div> <!-- /.table-stats -->
-                </div>
-
-            </div>
-
-
-
-        </div>
-        <!--content End-->
-    </div>
-    <!--Right panel end-->
-
-
-
-</body>
-<script src="team.js"></script>
-
-=======
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Choose Team</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
-    
-    <!-- Left Panel --> 
-    <aside id="left-panel" class="left-panel">
-            
-    </aside><!-- /#left-panel --> 
-    <!-- Left Panel -->
-
-    <!-- right Panel-->
-    <!-- Header-->
-    <div id="right-panel" class="right-panel">
-
-        <header id="header" class="header">  
-            <div class="top-left">
-                <div class="navbar-header"> 
-                    <p>TEAM++</p>
-                </div> 
-            </div>
-            <div class="top-right"> 
-                <div class="header-menu"> 
-                    <div class="user-area float-right">
-                        <a href="Login.html" onclick="signOut()" class="dropdown-toggle active">
-                            <img class="user-avatar rounded-circle" src="img/sample.png" alt="User Avatar">
-                        </a>
-                    </div> 
-                </div>  
-            </div>
-        </header><!-- /header -->
-        <!-- Header-->
-
-        <div class="content">
-                <!--add your code here:) feel free to add your own .css file-->
-
-                <!--overall info-->
-                <div class="row">
-                        <div class="col-lg-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title box-title">For Team</h4>    
-
-                                        <p>Create or Join Existing Teams Here</p>
-                                    </div>
-                                    <div class="card-body"> 
-                                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="createTeam()">Create Team</button>
-                                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="joinTeam()">Join Team</button>
-                                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="getTeamAdmin()">check</button>
-<!--
-                                        <p>choose team here</p>
-                                    </div>
-                                    <div class="card-body"> 
-                                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button">Create Team</button>
-                                            <p>Create a brandly new team</p>
-                                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button">Join Team</button>
-                                            <p>Join a team</p>
-                                    </div>
-                                </div>
-                        </div>
-                        <div class="col-lg-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title box-title">For Team</h4>    
-                                        <p>choose team here</p>
-                                    </div>
-                                    <div class="card-body"> 
-                                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button">Create Team</button>
-                                            <p>Create a brandly new team</p>
-                                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button">Join Team</button>
-                                            <p>Join a team</p>
--->
-                                    </div>
-                                </div>
-                        </div>
-                </div>
-                <div class="row">
-                        <div class="card" style="padding-top: 20px">
-                                <div class="card-header">
-                                    <strong class="card-title">You are the admin of</strong>
-                                </div>
-                                <div class="table-stats order-table ov-h">
-                                    <table class="table ">
-                                        <thead>
-                                            <tr>
-                                                <th class="serial">#</th>
-                                                <th class="avatar">Photo</th>
-                                                <th>ID</th>
-                                                <th>Name</th>
-                                                <th>Theme</th>
-                                                <th>Member</th>
-                                                <th>Status</th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody> 
-                                            <tr>
-                                                <td class="serial">1.</td>
-
-                                                <td>  <span class="name">Team++</span> </td>
-                                                <td>
-                                                    <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button"
-                                                            onclick="window.location.href='Homepage.html'">Go</button>
-                                                </td> 
-                                            </tr>
-<!--
-                                                <td class="avatar">
-                                                    <div class="round-img">
-                                                        <a href="#"><img class="rounded-circle" src="img/admin_1.png" alt=""></a>
-                                                    </div>
-                                                </td>
-                                                <td> #5469 </td>
-                                                <td>  <span class="name">Team++</span> </td> 
-                                                <td> <span class="product">build a web</span> </td>
-                                                <td><span class="count">10</span></td>
-                                                <td> 
-                                                    <span class="badge badge-complete">Pending</span>
-                                                </td> 
-                                            </tr>
-                                            <tr>
-                                                <td class="serial">2.</td>
-                                                <td class="avatar">
-                                                    <div class="round-img">
-                                                        <a href="#"><img class="rounded-circle" src="img/admin_2.JPG" alt=""></a> 
-                                                    </div>
-                                                </td> 
-                                                <td> #5468 </td>
-                                                <td>  <span class="name">Gregory Dixon</span> </td> 
-                                                <td> <span class="product">Mobile develop</span> </td>
-                                                <td><span class="count">23</span></td>
-                                                <td> 
-                                                    <span class="badge badge-complete">Complete</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="serial">3.</td>
-                                                <td class="avatar">
-                                                    <div class="round-img">
-                                                        <a href="#"><img class="rounded-circle" src="img/admin_2.JPG" alt=""></a> 
-                                                    </div>
-                                                </td>
-                                                <td> #5467 </td>
-                                                <td>  <span class="name">Hey its me</span> </td> 
-                                                <td> <span class="product">SSD</span> </td>
-                                                <td><span class="count">31</span></td>
-                                                <td> 
-                                                    <span class="badge badge-complete">Complete</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="serial">4.</td>
-                                                <td class="avatar">
-                                                    <div class="round-img">
-                                                        <a href="#"><img class="rounded-circle" src="img/Admin.png" alt=""></a> 
-                                                    </div>
-                                                </td>
-                                                <td> #5466 </td>
-                                                <td>  <span class="name">I dont know</span> </td> 
-                                                <td> <span class="product">Magic</span> </td>
-                                                <td><span class="count">5</span></td>
-                                                <td> 
-                                                    <span class="badge badge-pending">Pending</span>
-                                                </td>
-                                            </tr> 
--->
-                                        </tbody>
-                                    </table>
-                                </div> <!-- /.table-stats -->
                             </div>
                         </div>
-        <div class="row">
-                <div class="card" style="padding-top: 20px">
-                        <div class="card-header">
-
-                            <strong class="card-title">You are member of</strong>
-
-                        </div>
-                        <div class="table-stats order-table ov-h">
-                            <table class="table ">
-                                <thead>
-
-                                <tr>
-                                    <th class="serial">#</th>
-                                    <th>Name</th>
-                                    <th>Navigate to Team</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td class="serial">1.</td>
-                                    <td>  <span class="name">Team++</span> </td>
-                                    <td>
-                                        <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button"
-                                                onclick="window.location.href='Homepage.html'">Go</button>
-                                    </td>
-                                </tr>
-<!--
-                                    <tr>
-                                        <th class="serial">#</th>
-                                        <th class="avatar">Photo</th>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Theme</th>
-                                        <th>Member</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody> 
-                                    <tr>
-                                        <td class="serial">1.</td>
-                                        <td class="avatar">
-                                            <div class="round-img">
-                                                <a href="#"><img class="rounded-circle" src="img/admin_1.png" alt=""></a>
-                                            </div>
-                                        </td>
-                                        <td> #5469 </td>
-                                        <td>  <span class="name">Team++</span> </td> 
-                                        <td> <span class="product">build a web</span> </td>
-                                        <td><span class="count">10</span></td>
-                                        <td> 
-                                            <span class="badge badge-complete">Pending</span>
-                                        </td> 
-                                    </tr>
-                                    <tr>
-                                        <td class="serial">2.</td>
-                                        <td class="avatar">
-                                            <div class="round-img">
-                                                <a href="#"><img class="rounded-circle" src="img/admin_2.JPG" alt=""></a> 
-                                            </div>
-                                        </td> 
-                                        <td> #5468 </td>
-                                        <td>  <span class="name">Gregory Dixon</span> </td> 
-                                        <td> <span class="product">Mobile develop</span> </td>
-                                        <td><span class="count">23</span></td>
-                                        <td> 
-                                            <span class="badge badge-complete">Complete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="serial">3.</td>
-                                        <td class="avatar">
-                                            <div class="round-img">
-                                                <a href="#"><img class="rounded-circle" src="img/admin_2.JPG" alt=""></a> 
-                                            </div>
-                                        </td>
-                                        <td> #5467 </td>
-                                        <td>  <span class="name">Hey its me</span> </td> 
-                                        <td> <span class="product">SSD</span> </td>
-                                        <td><span class="count">31</span></td>
-                                        <td> 
-                                            <span class="badge badge-complete">Complete</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="serial">4.</td>
-                                        <td class="avatar">
-                                            <div class="round-img">
-                                                <a href="#"><img class="rounded-circle" src="img/Admin.png" alt=""></a> 
-                                            </div>
-                                        </td>
-                                        <td> #5466 </td>
-                                        <td>  <span class="name">I dont know</span> </td> 
-                                        <td> <span class="product">Magic</span> </td>
-                                        <td><span class="count">5</span></td>
-                                        <td> 
-                                            <span class="badge badge-pending">Pending</span>
-                                        </td>
-                                    </tr> 
--->
-                                </tbody>
-                            </table>
-                        </div> <!-- /.table-stats -->
                     </div>
+                </div>
 
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-five">
+                                <div class="stat-icon dib flat-color-2">
+                                    <span class="ti-hummer"></span>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="text-left dib">
+                                        <div class="stat-text"><span class="count">15</span></div>
+                                        <div class="stat-heading">undo tasks</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                 
+                    </div>
+                </div>
 
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-five">
+                                <div class="stat-icon dib flat-color-3">
+                                    <span class="ti-timer"></span>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="text-left dib">
+                                        <div class="stat-text"><span class="count">2</span></div>
+                                        <div class="stat-heading">dues tomorrow</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        </div><!--content End-->
-    </div><!--Right panel end-->
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-five">
+                                <div class="stat-icon dib flat-color-4">
+                                    <span class="ti-alarm-clock"></span>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="text-left dib">
+                                        <div class="stat-text"><span class="count">72</span></div>
+                                        <div class="stat-heading">before overall deadline</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-   
-    
-</body>
-<script src="team.js"></script>
+            <!--  Team Management  -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="box-title">Team Management </h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="card-body">
+                                    <button style="width: 100%; padding: 5px" class="btn btn-success btn-lg btn-block add"
+                                        type="button" onclick="addMember()">Add Member</button>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <table class="table ">
+                                    <thead id="status">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Role</th>
+                                            <th>Change Role</th>
+                                            <th>Modify</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="allMem">
 
->>>>>>> 377ce428b097ddf887cca37f6e6c569c88c7bd38
-</html>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /# column -->
+            </div>
+            <!--  Team Management  End -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="box-title">Post Announcement </h4>
+                            <p>convey important info here:)&...

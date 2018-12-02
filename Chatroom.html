@@ -70,84 +70,108 @@
                     <p>TEAM++</p>
                 </div>
             </div>
-            <div class="top-right">
-                <div class="header-menu">
-                    <div class="user-area float-right">
-                        <a href="index.html" onclick="signOut()" class="dropdown-toggle active">
-                            <img class="user-avatar rounded-circle" src="img/sample.png" alt="User Avatar">
-                        </a>
-                    </div>
-                </div>
-            </div>
 
-        </header><!-- /header -->
-        <!-- Header-->
+			<div class="top-right"> 
+				<div class="header-menu"> 
+					<div class="user-area float-right">
+						<a href="Login.html" class="dropdown-toggle active">
+							<img class="user-avatar rounded-circle" src="img/sample.png" alt="User Avatar">
+						</a>
+					</div> 
+				</div>  
+			</div>
+		</header><!-- /header -->
+		<!-- Header-->
+		
+		<div class="content">
 
-        <div class="content">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-header">
-                                <strong class="card-title">Chatroom</strong>
-                            </div>
-                            <div id="frame">
-                                <div id="sidepanel">
-                                    <div id="profile">
-                                        <div class="wrap">
-                                            <img id="profile-img" src="img/admin_2.JPG" class="online" alt="" />
-                                            <p>Mike Ross</p>
-                                            <i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                                    <button style="width: 100%;"><span class="ti-plus flat-color-1" style="padding-right: 30px" onclick="window.open('newChatroom.html','create new chatroom','height=500,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=no');"></span>add new chatroom</button>
-                                    <div id="contacts">
-                                        <ul>
-                                        </ul>
-                                    </div>
-                                    <div class="content">
-                                        <div class="messages">
-                                            <ul>
-                                            </ul>
-                                        </div>
-                                        <div class="message-input">
-                                            <div class="wrap">
-                                                <input class="chatMessage" type="text" placeholder="Write your message..." />
-                                                <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
-                                                <button class="submit"><i class="ti-angle-double-up" aria-hidden="true"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="card">
+						<div class="card-body">
+								<div class="card-header">
+										<strong class="card-title">Chatroom</strong>
+									</div>
+					<div id="frame">
+						<div id="sidepanel">
+							<div id="profile">
+								<div class="wrap">
+									<img id="profile-img" src="img/chat.jpg" class="online" alt="" />
+									<p id="userDisplayName"></p>
+									<i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
+									<div id="status-options">
+										<ul>
+											<li id="status-online" class="active"><span class="status-circle"></span> <p>Online</p></li>
+											<li id="status-away"><span class="status-circle"></span> <p>Away</p></li>
+											<li id="status-busy"><span class="status-circle"></span> <p>Busy</p></li>
+											<li id="status-offline"><span class="status-circle"></span> <p>Offline</p></li>
+										</ul>
+									</div>
+									<div id="expanded">
+										<label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true"></i></label>
+										<input name="twitter" type="text" value="mikeross" />
+										<label for="twitter"><i class="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
+										<input name="twitter" type="text" value="ross81" />
+										<label for="twitter"><i class="fa fa-instagram fa-fw" aria-hidden="true"></i></label>
+										<input name="twitter" type="text" value="mike.ross" />
+									</div>
+								</div>
+							</div>
+							<div id="contacts">
+								<ul>
+									
+								</ul>
+							</div>
+						</div>
+						<div class="content">
 
 
-    <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
-    <script>
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyCDwFS1dxv0WWEbgehMdtsIQ3F_WQlKDnE",
-            authDomain: "team-plus-plus.firebaseapp.com",
-            databaseURL: "https://team-plus-plus.firebaseio.com",
-            projectId: "team-plus-plus",
-            storageBucket: "team-plus-plus.appspot.com",
-            messagingSenderId: "836611996730"
-        };
-        firebase.initializeApp(config);
-    </script>
+								<div class="messages">
+									<ul>
+
+									</ul>
+								</div>
+
+								<div class="message-input">
+									<div class="wrap">
+										<input class="chatMessage" type="text" placeholder="Write your message..." />
+										<i class="fa fa-paperclip attachment" aria-hidden="true"></i>
+										<button class="submit"><i class="ti-angle-double-up" aria-hidden="true"></i></button>
+									</div>
+								</div>
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js">
-    </script>
-    <script src="ChatScript.js"></script>
 
+						</div>
+					</div>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    
+	<script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+	<script>
+	  // Initialize Firebase
+	  var config = {
+		apiKey: "AIzaSyCDwFS1dxv0WWEbgehMdtsIQ3F_WQlKDnE",
+		authDomain: "team-plus-plus.firebaseapp.com",
+		databaseURL: "https://team-plus-plus.firebaseio.com",
+		projectId: "team-plus-plus",
+		storageBucket: "team-plus-plus.appspot.com",
+		messagingSenderId: "836611996730"
+	  };
+	  firebase.initializeApp(config);
+	</script>
+	
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js">
+	</script>
+	<script src="ChatScript.js"></script>
+	
 
 </body>
 

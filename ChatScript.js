@@ -8,7 +8,6 @@ var userId;
 var teamId;
 var chatRef;
 
-
 firebase.auth().onAuthStateChanged(async function(user){
 	// User is signed in: set userId and teamId
 	if (user){
@@ -35,6 +34,14 @@ async function loadTeamId(ref){
     });
 }
 
+function signOut() {
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      console.log("Signing out");
+      firebase.auth().signOut();
+    }
+  });
+}
 
 // Wait for log in to work so we don't get a null uid
 
@@ -345,14 +352,14 @@ inputElem.addEventListener('keypress', function (e) {
 		socket.emit('chat', inputElem.value);
 		inputElem.value = "";
 	}
+
 });
 
-socket.on('connect', function(data) {
-	socket.emit('join', 'Hello server from client');
+socket.on("connect", function(data) {
+  socket.emit("join", "Hello server from client");
 });
 
-socket.on('chat msg', function(msg) {
-	createHTMLMessage(msg, 'server');
-
+socket.on("chat msg", function(msg) {
+  createHTMLMessage(msg, "server");
 });
 

@@ -23,6 +23,22 @@
         };
         firebase.initializeApp(config);
     </script>
+    <script>
+        window.onload = function () {
+
+            firebase.auth().onAuthStateChanged(function(user){
+                // User is signed in: set userId and teamId
+                if (user){
+                    userID = user.uid;
+                    updateView();
+                }
+                // No user is signed in.
+                else{
+                    console.log('User is not logged in. !!')
+                }
+            });
+        };
+    </script>
 
 </head>
 <body>
@@ -32,16 +48,6 @@
         <nav class="navbar navbar-default"> 
             <div id="main-menu" class="main-menu">
                 <ul class="nav navbar-nav">
-
-                    <li class="menu-title">Current team</li><!-- /.menu-title -->
-
-                    <li class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">[TEAM NAME HERE]  <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                            <li><a href="team.html">Change Teams</a></li>
-                        </ul>
-                    </li>
-
                     <li class="menu-title">For team</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
                         <a href="OverView.html" >Overview</a>
@@ -171,47 +177,57 @@
                                 </div>
                             </div>
                         </div>
-                    </div> 
+                    </div>
 
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h10 class="box-title">Team Description</h10>
+                        </div>
+                        <table>
+                            <tr>
+                                <td id="descriptionBox" style="width: 1000px; text-align: center">
+                                    Enter Your Team Description Here
+                                </td>
+                                <td>
+                                    <button style="width: 100%; padding: 5px" class="btn btn-success btn-lg btn-block add" id="descriptionButton" onclick="addDescription()">Edit</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
                     <!--  Team Management  -->
             <div class="row">
                     <div class="col-lg-12">
                         <div class="card">  
                             <div class="card-body">
-                                <h4 class="box-title">Team Management </h4>
-                                <p>manage your team and team member here</p>
+                                <h4 id = "teamName" class="box-title">Team Management </h4>
                             </div>
                             <div class="row"> 
                                 <div class="col-lg-4">
                                     <div class="card-body">
-                                        <button style="width: 100%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="modifyAdmin()">Modify Admin</button>
-                                        <button style="width: 100%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="addMember()">Add Member</button>
-                                        <button style="width: 100%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button">Delete Member</button>
-
-                                        <div class="dropdown-content">
-                                            <a href="#">Member 1</a>
-                                            <a href="#">Member 2</a>
-                                            <a href="#">Member 3</a>
-                                        </div>
-                                        <button style="width: 100%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="leaveTeam()">Leave Team</button>
-                                        <button style="width: 100%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button">Navigate to</button>
-                                        <div class="dropdown-content">
-                                            <a href="#">Team 1</a>
-                                            <a href="#">Team 2</a>
-                                            <a href="#">Team 3</a>
-                                        </div>
+                                        <button style="width: 100%; padding: 5px" class="btn btn-success btn-lg btn-block add" type="button" onclick="addMember()">Add Member</button>
                                     </div>
                                 </div>
                                 <div class="col-lg-8">
-                                    <div class="card-body">
-                                        <p>here is some brief introduction about your team, including the number of team member, what is your goal and some other infomation that can help you to get an impression of what's your team gonna do.</p>
-                                        <p>Apart from that, there should be some plan you would like to remind yourself.</p>
-                                        <p>In fact, I just do not know what to push here. Let's leave this part to our software engineer.</p>
-                                        <textarea name="Team Members" id="members"></textarea>
-                                    </div> <!-- /.card-body -->
+                                    <table class="table ">
+                                        <thead id="status">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Role</th>
+                                            <th>Change Role</th>
+                                            <th>Modify</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="allMem">
+
+                                        </tbody>
+                                    </table>
                                 </div>
-                            </div> <!-- /.row --> 
-                            <div class="card-body"></div>
+                            </div>
                         </div> 
                     </div><!-- /# column -->
                 </div>

@@ -7,13 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="ChatStyle.css">
 
-
-	  <link rel="stylesheet" href="assets/css/themify-icons.css">
-	  <link rel="stylesheet" href="chatroom.css">
 </head>
 <body>
     
@@ -72,62 +68,48 @@
 		<!-- Header-->
 		
 		<div class="content">
-			<div class="row">
-				<div class="col-lg-12">
-					<div id="frame">
-						<div id="sidepanel">
-							<div id="profile">
-								<div class="wrap">
-									<img id="profile-img" src="img/chat.jpg" class="online" alt="" />
-									<p>Mike Ross</p>
-									<i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
-									<div id="status-options">
-										<ul>
-											<li id="status-online" class="active"><span class="status-circle"></span> <p>Online</p></li>
-											<li id="status-away"><span class="status-circle"></span> <p>Away</p></li>
-											<li id="status-busy"><span class="status-circle"></span> <p>Busy</p></li>
-											<li id="status-offline"><span class="status-circle"></span> <p>Offline</p></li>
-										</ul>
-									</div>
-									<div id="expanded">
-										<label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true"></i></label>
-										<input name="twitter" type="text" value="mikeross" />
-										<label for="twitter"><i class="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
-										<input name="twitter" type="text" value="ross81" />
-										<label for="twitter"><i class="fa fa-instagram fa-fw" aria-hidden="true"></i></label>
-										<input name="twitter" type="text" value="mike.ross" />
-									</div>
-								</div>
-							</div>
-							<div id="contacts">
-								<ul>
-									
-								</ul>
-							</div>
+			<div class="row"> 
+				<div class="col-lg-3">
+					<nav class="navbar navbar-default"> 
+						<div id="main-menu" class="main-menu">
+							<ul class="nav navbar-nav">
+								<li class="menu-item-has-children dropdown">
+									<a href="Chatroom.html" >Announcements</a>
+								</li>
+								
+								<li class="menu-title">Chatrooms</li>
+								<li class="menu-item-has-children dropdown">
+									<a href="Chatroom.html">Software Team</a>
+								</li>
+								<li class="menu-item-has-children dropdown">
+									<a href="Chatroom.html">General</a>
+								</li>
+
+								<li class="menu-title">People</li>
+
+								<li class="menu-item-has-children dropdown">
+									<a href="Chatroom.html">David Katz</a>
+								</li>
+								<li class="menu-item-has-children dropdown">
+										<a href="Chatroom.html">Phat Ly</a>
+								</li>
+								<li class="menu-item-has-children dropdown">
+										<a href="Chatroom.html">Eric Trinh</a>
+								</li>
+							</ul>
 						</div>
-						<div class="content">
-
-
-								<div class="messages">
-									<ul>
-
-									</ul>
-								</div>
-
-								<div class="message-input">
-									<div class="wrap">
-										<input class="chatMessage" type="text" placeholder="Write your message..." />
-										<i class="fa fa-paperclip attachment" aria-hidden="true"></i>
-										<button class="submit"><i class="ti-angle-double-up" aria-hidden="true"></i></button>
-									</div>
-								</div>
-
-
-
-						</div>
+					</nav>
+				</div>
+				<div class="col-lg-9">
+					<div class="mainApp" style="height: 550px;">
+						<!--Make this display the person receiving the message-->
+						<h1>Bob</h1>
+						<ul class="messages">
+						</ul>
+						<input class="chatMessage"/>
 					</div>
 				</div>
-			</div>
+			</div> <!-- /.row --> 
 		</div>
 	</div>
     
@@ -145,8 +127,6 @@
 	  firebase.initializeApp(config);
 	</script>
 	
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script
 	src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js">
 	</script>

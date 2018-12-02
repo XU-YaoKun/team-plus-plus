@@ -26,7 +26,7 @@
         function checkIfSignedIn() {
             firebase.auth.onAuthStateChanged(function (user) {
                 if (user) {
-                    window.location.href = "HomePage.html"
+                    window.location.href = "team.html"
                 }
             })
         }
@@ -53,7 +53,7 @@
                 firebase.auth().onAuthStateChanged(function (user) {
                     // Moves user to home page once signed in.
                     if (user) {
-                        window.location.href = "HomePage.html";
+                        window.location.href = "team.html";
                     }
                 })
             }

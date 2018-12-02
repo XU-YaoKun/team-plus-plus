@@ -7,34 +7,34 @@ var currentUser;
 
 window.onload = function () {
 
-    firebase.auth().onAuthStateChanged(function(user){
-        // User is signed in: set userId and teamId
-        if (user){
-            userId = user.uid;
-            currentUser = user;
+  firebase.auth().onAuthStateChanged(function (user) {
+    // User is signed in: set userId and teamId
+    if (user) {
+      userId = user.uid;
+      currentUser = user;
 
-            // Check values
-            console.log("userId has been set: "+ userId);
+      // Check values
+      console.log("userId has been set: " + userId);
 
-            updateName();
-            updatePhone();
-            updateEmail();
-            updatePicture();
-            document.getElementById('Password').innerHTML = myPassword.toString();
-        }
-        // No user is signed in.
-        else{
-            console.log('User is not logged in. !!')
-        }
-    });
+      updateName();
+      updatePhone();
+      updateEmail();
+      updatePicture();
+      document.getElementById('Password').innerHTML = myPassword.toString();
+    }
+    // No user is signed in.
+    else {
+      console.log('User is not logged in. !!')
+    }
+  });
 }
 
-function nameChange(){
-    document.getElementById('NameText').innerHTML=
-        '<input id="newName" type="text" placeholder="Insert Your Name" >';
-    document.getElementById('nameEdit').hidden=true;
-    document.getElementById('nameSave').hidden=false;
-    document.getElementById('nameCancel').hidden=false;
+function nameChange() {
+  document.getElementById('NameText').innerHTML =
+    '<input id="newName" type="text" placeholder="Insert Your Name" >';
+  document.getElementById('nameEdit').hidden = true;
+  document.getElementById('nameSave').hidden = false;
+  document.getElementById('nameCancel').hidden = false;
 
 
 }
@@ -112,15 +112,15 @@ function passwordSave() {
         "The confirm password does not match the new password. Please try again"
       );
     } else {
-        currentUser.updatePassword(newPassword1).then(function () {
-            alert('You have successfully changed your password');
-            root.child(userId).child('Password').set(newPassword1.toString());
-            donePasswordEdit();
-        }).catch(function (error) {
-            alert('An error has occurred. Please try again')
-        })
-     }
-    });
+      currentUser.updatePassword(newPassword1).then(function () {
+        alert('You have successfully changed your password');
+        root.child(userId).child('Password').set(newPassword1.toString());
+        donePasswordEdit();
+      }).catch(function (error) {
+        alert('An error has occurred. Please try again')
+      })
+    }
+  });
 }
 
 function passwordCancel() {
@@ -212,28 +212,28 @@ function donePasswordEdit() {
 
 var fileUpload = document.getElementById('upload');
 
-fileUpload.addEventListener('change', function(e){
-    var file = e.target.files[0];
-    var databaseStorage = firebase.storage().ref().child(userId);
-    databaseStorage.put(file);
-    var reader = new FileReader();
-    reader.onload = function(){
-        var image = reader.result;
-        document.getElementById('Pic').src = image;
-        //document.getElementById('icon').src = image;
-    }
-    reader.readAsDataURL(file);
+fileUpload.addEventListener('change', function (e) {
+  var file = e.target.files[0];
+  var databaseStorage = firebase.storage().ref().child(userId);
+  databaseStorage.put(file);
+  var reader = new FileReader();
+  reader.onload = function () {
+    var image = reader.result;
+    document.getElementById('Pic').src = image;
+    //document.getElementById('icon').src = image;
+  }
+  reader.readAsDataURL(file);
 })
 
 async function updatePicture() {
-    var databaseStorage = firebase.storage().ref().child(userId);
-    databaseStorage.getDownloadURL().then(function(url){
-        document.getElementById('Pic').src = url;
-       // document.getElementById('icon').src = url;
-    }).catch(function(error){
-        document.getElementById('Pic').src = 'img/sample.png'
+  var databaseStorage = firebase.storage().ref().child(userId);
+  databaseStorage.getDownloadURL().then(function (url) {
+    document.getElementById('Pic').src = url;
+    // document.getElementById('icon').src = url;
+  }).catch(function (error) {
+    document.getElementById('Pic').src = 'img/sample.png'
 
-    });
+  });
 }
 
 async function updateName() {

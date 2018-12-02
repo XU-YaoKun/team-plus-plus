@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -26,10 +25,11 @@
     <script>
         function checkIfSignedIn() {
             firebase.auth().onAuthStateChanged(function (user) {
+                // If user is logged in then redirect user to their teams page.
                 if (user) {
-                    window.location.href = "team.html"
+                    window.location.href = "team.html";
                 }
-            })
+            });
         }
         function signIn() {
             if (firebase.auth().currentUser) {

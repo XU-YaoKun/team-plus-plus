@@ -30,6 +30,7 @@
   <script>
     function checkIfSignedIn() {
       firebase.auth().onAuthStateChanged(function (user) {
+        // If user is logged in then redirect user to their teams page.
         if (user) {
           window.location.href = "team.html";
         }
@@ -66,6 +67,7 @@
       });
     }
 
+    //Registers important user information to Firebase for future reference.
     function registerUser(userEmail, userPass, userName, userPhone) {
       var userId = firebase.auth().currentUser.uid;
       var userRef = firebase.database().ref("Users");

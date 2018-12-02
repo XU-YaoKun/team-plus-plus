@@ -30,6 +30,7 @@
   <script>
     function checkIfSignedIn() {
       firebase.auth().onAuthStateChanged(function (user) {
+        // If user is logged in then redirect user to their teams page.
         if (user) {
           window.location.href = "team.html";
         }
@@ -39,7 +40,7 @@
       var userEmail = document.getElementById('inputEmail').value;
       var ifSent = false;
       firebase.auth().sendPasswordResetEmail(userEmail).then(function () {
-        // Send user
+        // Redirects user back to login page if email sent successfully.
         alert('Password Reset Email Sent!');
         ifSent = true;
         if (ifSent) {

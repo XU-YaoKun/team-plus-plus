@@ -26,6 +26,7 @@
     </script>
     <script>
         function signOut() {
+            // Signs the user out
             firebase.auth().onAuthStateChanged(function (user) {
                 if (user) {
                     console.log("Signing out");
@@ -43,10 +44,10 @@
                     updateAdminList();
                     updateMemList();
                 }
-                // No user is signed in.
-
+                // No user is signed in. Redirect user back to login page.
                 else {
                     console.log('User is not logged in. !!')
+                    window.location.href="index.html";
 
                 }
             });
@@ -58,7 +59,8 @@
     <!-- Left Panel -->
     <!--<aside id="left-panel" class="left-panel">
 
-    </aside>--><!-- /#left-panel -->
+    </aside>-->
+    <!-- /#left-panel -->
     <!-- Left Panel -->
 
     <!-- right Panel-->

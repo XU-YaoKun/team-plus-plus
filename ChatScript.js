@@ -1,3 +1,4 @@
+
 var inputElem = document.querySelector(".chatMessage");
 var contacts = document.querySelector("#contacts").children[0];
 var messages = document.querySelector(".messages").children[0];
@@ -239,3 +240,4 @@ socket.on("connect", function(data) {
 socket.on("chat msg", function(msg) {
   createHTMLMessage(msg, "server");
 });
+

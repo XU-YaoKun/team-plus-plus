@@ -1,82 +1,84 @@
 <!DOCTYPE <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Chatroom</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="ChatStyle.css">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Chatroom</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="ChatStyle.css">
 
 </head>
+
 <body>
-    
-    <!-- Left Panel --> 
-    <aside id="left-panel" class="left-panel">
-        <nav class="navbar navbar-default"> 
-            <div id="main-menu" class="main-menu">
-                <ul class="nav navbar-nav">
-                    <li class="menu-title">For team</li><!-- /.menu-title -->
-                    <li class="menu-item-has-children dropdown">
-                        <a href="OverView.html" >Overview</a>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="Chatroom.html">Chatroom</a>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="Schedule.html">Schedule</a>
-                    </li>
 
-                    <li class="menu-title">For you</li><!-- /.menu-title -->
+	<!-- Left Panel -->
+	<aside id="left-panel" class="left-panel">
+		<nav class="navbar navbar-default">
+			<div id="main-menu" class="main-menu">
+				<ul class="nav navbar-nav">
+					<li class="menu-title">For team</li><!-- /.menu-title -->
+					<li class="menu-item-has-children dropdown">
+						<a href="OverView.html">Overview</a>
+					</li>
+					<li class="menu-item-has-children dropdown">
+						<a href="Chatroom.html">Chatroom</a>
+					</li>
+					<li class="menu-item-has-children dropdown">
+						<a href="Schedule.html">Schedule</a>
+					</li>
 
-                    <li class="menu-item-has-children dropdown">
-                        <a href="HomePage.html">HomePage</a>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                            <a href="Task.html">Tasks</a>
-                        </li>
-                    <li>
-                        <a href="Profile.html">Profile</a>
-                    </li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </nav>
-    </aside><!-- /#left-panel --> 
-    <!-- Left Panel -->
+					<li class="menu-title">For you</li><!-- /.menu-title -->
 
-    <!-- right Panel-->
-    <!-- Header-->
-    <div id="right-panel" class="right-panel">
-        <header id="header" class="header">  
-            <div class="top-left">
-                <div class="navbar-header"> 
-                    <p>TEAM++</p>
-                </div> 
-            </div>
-			<div class="top-right"> 
-				<div class="header-menu"> 
+					<li class="menu-item-has-children dropdown">
+						<a href="HomePage.html">HomePage</a>
+					</li>
+					<li class="menu-item-has-children dropdown">
+						<a href="Task.html">Tasks</a>
+					</li>
+					<li>
+						<a href="Profile.html">Profile</a>
+					</li>
+				</ul>
+			</div><!-- /.navbar-collapse -->
+		</nav>
+	</aside><!-- /#left-panel -->
+	<!-- Left Panel -->
+
+	<!-- right Panel-->
+	<!-- Header-->
+	<div id="right-panel" class="right-panel">
+		<header id="header" class="header">
+			<div class="top-left">
+				<div class="navbar-header">
+					<p>TEAM++</p>
+				</div>
+			</div>
+			<div class="top-right">
+				<div class="header-menu">
 					<div class="user-area float-right">
 						<a href="Login.html" class="dropdown-toggle active">
 							<img class="user-avatar rounded-circle" src="img/sample.png" alt="User Avatar">
 						</a>
-					</div> 
-				</div>  
+					</div>
+				</div>
 			</div>
 		</header><!-- /header -->
 		<!-- Header-->
-		
+
 		<div class="content">
-			<div class="row"> 
+			<div class="row">
 				<div class="col-lg-3">
-					<nav class="navbar navbar-default"> 
+					<nav class="navbar navbar-default">
 						<div id="main-menu" class="main-menu">
 							<ul class="nav navbar-nav">
 								<li class="menu-item-has-children dropdown">
-									<a href="OverView.html" >Announcements</a>
+									<a href="OverView.html">Announcements</a>
 								</li>
-								
+
 								<li class="menu-title">Chatrooms</li>
 								<li class="menu-item-has-children dropdown">
 									<a href="Chatroom.html">Software Team</a>
@@ -91,10 +93,10 @@
 									<a href="HomePage.html">David Katz</a>
 								</li>
 								<li class="menu-item-has-children dropdown">
-										<a href="Task.html">Phat Ly</a>
+									<a href="Task.html">Phat Ly</a>
 								</li>
 								<li class="menu-item-has-children dropdown">
-										<a href="Profile.html">Eric Trinh</a>
+									<a href="Profile.html">Eric Trinh</a>
 								</li>
 							</ul>
 						</div>
@@ -106,32 +108,31 @@
 						<h1>Bob</h1>
 						<ul class="messages">
 						</ul>
-						<input class="chatMessage"/>
+						<input class="chatMessage" />
 					</div>
 				</div>
-			</div> <!-- /.row --> 
+			</div> <!-- /.row -->
 		</div>
 	</div>
-    
+
 	<script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
 	<script>
-	  // Initialize Firebase
-	  var config = {
-		apiKey: "AIzaSyCDwFS1dxv0WWEbgehMdtsIQ3F_WQlKDnE",
-		authDomain: "team-plus-plus.firebaseapp.com",
-		databaseURL: "https://team-plus-plus.firebaseio.com",
-		projectId: "team-plus-plus",
-		storageBucket: "team-plus-plus.appspot.com",
-		messagingSenderId: "836611996730"
-	  };
-	  firebase.initializeApp(config);
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyCDwFS1dxv0WWEbgehMdtsIQ3F_WQlKDnE",
+			authDomain: "team-plus-plus.firebaseapp.com",
+			databaseURL: "https://team-plus-plus.firebaseio.com",
+			projectId: "team-plus-plus",
+			storageBucket: "team-plus-plus.appspot.com",
+			messagingSenderId: "836611996730"
+		};
+		firebase.initializeApp(config);
 	</script>
-	
-	<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js">
 	</script>
 	<script src="ChatScript.js"></script>
-	
+
 </body>
 
 </html>

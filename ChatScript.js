@@ -2,7 +2,6 @@ var inputElem = document.querySelector('.chatMessage');
 var contacts = document.querySelector('#contacts').children[0];
 var messages = document.querySelector('.messages').children[0];
 var userDisplayName = document.querySelector('#userDisplayName');
-var socket = io.connect('http://localhost:3000');
 
 var userId;
 var teamId;
@@ -476,19 +475,9 @@ inputElem.addEventListener('keypress', function (e) {
 		// Checked if the user entered anything
 		if(inputElem.value != ""){
 			updateMessageDatabase(inputElem.value);
-			socket.emit('chat', inputElem.value);
 			inputElem.value = "";
 		}
 
 	}
 
 });
-
-socket.on("connect", function(data) {
-  socket.emit("join", "Hello server from client");
-});
-
-socket.on("chat msg", function(msg) {
-  createHTMLMessage(msg, "server");
-});
-

@@ -75,10 +75,7 @@ function nameSave() {
   } else {
     document.getElementById("NameText").innerHTML = otherName.toString();
     doneNameEdit();
-    root
-      .child(userId)
-      .child("Name")
-      .set(otherName.toString());
+    root.child(userId).child("Name").set(otherName.toString());
   }
 }
 
@@ -115,34 +112,15 @@ function passwordSave() {
         "The confirm password does not match the new password. Please try again"
       );
     } else {
-      alert("You have successfully changed your password");
-      root
-        .child(userId)
-        .child("Password")
-        .set(newPassword1.toString());
-      donePasswordEdit();
-    }
-
-    databasePassword.once('value', function (snapshot) {
-        databasePassword = snapshot.val();
-        if(databasePassword !== curPassword){
-            alert('Your current password is incorrect. Please Try Again');
-        }
-        else if(newPassword2 !== newPassword1){
-            alert('The confirm password does not match the new password. Please try again');
-        }
-        else{
-            currentUser.updatePassword(newPassword1).then(function () {
-                alert('You have successfully changed your password');
-                root.child(userId).child('Password').set(newPassword1.toString());
-                donePasswordEdit();
-            }).catch(function (error) {
-                alert('An error has occurred. Please try again')
-            })
-        }
+        currentUser.updatePassword(newPassword1).then(function () {
+            alert('You have successfully changed your password');
+            root.child(userId).child('Password').set(newPassword1.toString());
+            donePasswordEdit();
+        }).catch(function (error) {
+            alert('An error has occurred. Please try again')
+        })
+     }
     });
-
-
 }
 
 function passwordCancel() {
@@ -232,6 +210,7 @@ function donePasswordEdit() {
   document.getElementById("PasswordRow").style = "";
 }
 
+var fileUpload = document.getElementById('upload');
 
 fileUpload.addEventListener('change', function(e){
     var file = e.target.files[0];

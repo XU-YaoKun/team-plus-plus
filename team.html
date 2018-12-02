@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,34 +24,6 @@
         };
         firebase.initializeApp(config);
     </script>
-<<<<<<< HEAD
-    <script src="team.js">
-
-=======
-    <script>
->>>>>>> 19e22baed32e781b5cbbe50a24990f1285897c92
-        window.onload = function () {
-
-            firebase.auth().onAuthStateChanged(function (user) {
-                // User is signed in: set userId and teamId
-                if (user) {
-                    userID = user.uid;
-                    updateAdminList();
-                    updateMemList();
-                }
-                // No user is signed in.
-<<<<<<< HEAD
-                else {
-
-=======
-                else{
->>>>>>> 19e22baed32e781b5cbbe50a24990f1285897c92
-                    console.log('User is not logged in. !!')
-                }
-            });
-        };
-    </script>
-<<<<<<< HEAD
     <script>
         function signOut() {
             firebase.auth().onAuthStateChanged(function (user) {
@@ -59,48 +32,57 @@
                     firebase.auth().signOut();
                 }
             });
-        }</script>
-
-=======
->>>>>>> 19e22baed32e781b5cbbe50a24990f1285897c92
+        }
+    </script>
+    <script>
+        window.onload = function () {
+            firebase.auth().onAuthStateChanged(function (user) {
+                // User is signed in: set userId and teamId
+                if (user) {
+                    userID = user.uid;
+                    updateAdminList();
+                    updateMemList();
+                }
+                // No user is signed in.
+                else {
+                    console.log('User is not logged in. !!')
+                }
+            });
+        };
+    </script>
 </head>
+
 <body>
-    
-    <!-- Left Panel --> 
+
+    <!-- Left Panel -->
     <aside id="left-panel" class="left-panel">
-            
-    </aside><!-- /#left-panel --> 
+
+    </aside><!-- /#left-panel -->
     <!-- Left Panel -->
 
     <!-- right Panel-->
     <!-- Header-->
     <div id="right-panel" class="right-panel">
 
-        <header id="header" class="header">  
+        <header id="header" class="header">
             <div class="top-left">
-                <div class="navbar-header"> 
+                <div class="navbar-header">
                     <p>TEAM++</p>
-                </div> 
+                </div>
             </div>
-            <div class="top-right"> 
-                <div class="header-menu"> 
+            <div class="top-right">
+                <div class="header-menu">
                     <div class="user-area float-right">
-<<<<<<< HEAD
                         <a href="index.html" onclick="signOut()" class="dropdown-toggle active">
-=======
-                        <a href="Login.html" class="dropdown-toggle active">
->>>>>>> 19e22baed32e781b5cbbe50a24990f1285897c92
                             <img class="user-avatar rounded-circle" src="img/sample.png" alt="User Avatar">
                         </a>
-                    </div> 
-                </div>  
+                    </div>
+                </div>
             </div>
         </header><!-- /header -->
         <!-- Header-->
 
         <div class="content">
-<<<<<<< HEAD
-
             <!--add your code here:) feel free to add your own .css file-->
 
             <!--overall info-->
@@ -110,106 +92,63 @@
                         <div class="card-body">
                             <h4 class="card-title box-title">For Team</h4>
                             <p>Create or Join Existing Teams Here</p>
-=======
-                <!--add your code here:) feel free to add your own .css file-->
-
-                <!--overall info-->
-                <div class="row">
-                        <div class="col-lg-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title box-title">For Team</h4>    
-                                        <p>Create or Join Existing Teams Here</p>
-                                    </div>
-                                    <div class="card-body">
-                                        <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="createTeam()">Create Team</button>
-                                        <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="joinTeam()">Join Team</button>
-                                    </div>
-                                </div>
-                        </div>
-                </div>
-                <div class="row">
-                        <div class="card" style="padding-top: 20px">
-                                <div class="card-header">
-                                    <strong class="card-title">You are the admin of</strong>
-                                </div>
-                                <div class="table-stats order-table ov-h admin">
-                                    <table class="table ">
-                                        <thead>
-                                            <tr>
-                                                <th class="serial">#</th>
-                                                <th>Name</th>
-                                                <th>Navigate to Team</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="admin">
-
-                                        </tbody>
-                                    </table>
-                                </div> <!-- /.table-stats -->
-                            </div>
->>>>>>> 19e22baed32e781b5cbbe50a24990f1285897c92
                         </div>
                         <div class="card-body">
                             <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button"
                                 onclick="createTeam()">Create Team</button>
                             <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button"
                                 onclick="joinTeam()">Join Team</button>
-
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+            <div class="row">
+                <div class="card" style="padding-top: 20px">
+                    <div class="card-header">
+                        <strong class="card-title">You are the admin of</strong>
+                    </div>
+                    <div class="table-stats order-table ov-h admin">
+                        <table class="table ">
+                            <thead>
+                                <tr>
+                                    <th class="serial">#</th>
+                                    <th>Name</th>
+                                    <th>Navigate to Team</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin">
 
-    <div class="row">
-        <div class="card" style="padding-top: 20px">
-            <div class="card-header">
-                <strong class="card-title">You are the admin of</strong>
+                            </tbody>
+                        </table>
+                    </div> <!-- /.table-stats -->
+                </div>
             </div>
-            <div class="table-stats order-table ov-h admin">
-                <table class="table ">
-                    <thead>
-                        <tr>
-                            <th class="serial">#</th>
-                            <th>Name</th>
-                            <th>Navigate to Team</th>
-                        </tr>
-                    </thead>
-                    <tbody id="admin">
+            <div class="row">
+                <div class="card" style="padding-top: 20px">
+                    <div class="card-header">
+                        <strong class="card-title">You are a member of</strong>
+                    </div>
+                    <div class="table-stats order-table ov-h">
+                        <table class="table ">
+                            <thead>
+                                <tr>
+                                    <th class="serial">#</th>
+                                    <th>Name</th>
+                                    <th>Navigate to Team</th>
+                                </tr>
+                            </thead>
+                            <tbody id="member">
 
-                    </tbody>
-                </table>
-            </div> <!-- /.table-stats -->
-        </div>
-    </div>
-    <div class="row">
-        <div class="card" style="padding-top: 20px">
-            <div class="card-header">
-                <strong class="card-title">You are a member of</strong>
+                            </tbody>
+                        </table>
+                    </div> <!-- /.table-stats -->
+                </div>
             </div>
-            <div class="table-stats order-table ov-h">
-                <table class="table ">
-                    <thead>
-                        <tr>
-                            <th class="serial">#</th>
-                            <th>Name</th>
-                            <th>Navigate to Team</th>
-                        </tr>
-                    </thead>
-                    <tbody id="member">
 
-                    </tbody>
-                </table>
-            </div> <!-- /.table-stats -->
+
+
         </div>
-    </div>
-
-
-
-    </div>
-    <!--content End-->
+        <!--content End-->
     </div>
     <!--Right panel end-->
 

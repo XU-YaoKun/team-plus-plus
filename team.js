@@ -8,69 +8,70 @@ var username = null;
 var userID = null;
 var description = "Not defined";
 
-async function teamExistInRef(ref, data){
-    return ref.child(data).once('value', function(snapshot) {
-        if (snapshot.exists()) {
-            existTeam = true;
-        }
-        else{
-            existTeam = false;
-        }
-    });
+async function teamExistInRef(ref, data) {
+  return ref.child(data).once('value', function (snapshot) {
+    if (snapshot.exists()) {
+      existTeam = true;
+    }
+    else {
+      existTeam = false;
+    }
+  });
 }
 
-async function isInTeam(ref, data){
-    return ref.child(data).once('value', function(snapshot) {
-        if (snapshot.exists()) {
-            inTeam = true;
-        }
-        else{
-            inTeam = false;
-        }
-    });
+async function isInTeam(ref, data) {
+  return ref.child(data).once('value', function (snapshot) {
+    if (snapshot.exists()) {
+      inTeam = true;
+    }
+    else {
+      inTeam = false;
+    }
+  });
 }
 
-async function isUser(ref, field, data){
-    return ref.orderByChild(field).equalTo(data).once("value", function(snapshot) {
-        if (snapshot.exists()) {
-            console.log("valid user");
-            validUser = true;
-            snapshot.forEach(function(data) {
-                person = data.key;
-            });
-        }
-        else{
-            console.log("not valid user");
-            validUser = false;
-        }
-    });
+async function isUser(ref, field, data) {
+  return ref.orderByChild(field).equalTo(data).once("value", function (snapshot) {
+    if (snapshot.exists()) {
+      console.log("valid user");
+      validUser = true;
+      snapshot.forEach(function (data) {
+        person = data.key;
+      });
+    }
+    else {
+      console.log("not valid user");
+      validUser = false;
+    }
+  });
 }
 
-async function getTeamSize(ref){
-    return ref.once('value').then(function(snapshot){
-        tSize = snapshot.val();
-    });
+async function getTeamSize(ref) {
+  return ref.once('value').then(function (snapshot) {
+    tSize = snapshot.val();
+  });
 }
 
-async function getCurrTeam(ref){
-    return ref.once('value').then(function(snapshot){
-        cuTeam = snapshot.val();
-    });
+async function getCurrTeam(ref) {
+  return ref.once('value').then(function (snapshot) {
+    cuTeam = snapshot.val();
+  });
 }
 
-async function getUserName(ref){
-    return ref.once('value').then(function(snapshot){
-        username = snapshot.val();
-    });
+async function getUserName(ref) {
+  return ref.once('value').then(function (snapshot) {
+    username = snapshot.val();
+  });
 }
 
-async function getTeamDes(ref){
-    return ref.once('value').then(function(snapshot){
-        description = snapshot.val();
-    });
+async function getTeamDes(ref) {
+  return ref.once('value').then(function (snapshot) {
+    description = snapshot.val();
+  });
 }
 
 async function createTeam() {
+
     var teamName = prompt("Please enter the team name.");
     var done = false;
     var rootref = firebase.database().ref("Team");
@@ -97,23 +98,45 @@ async function createTeam() {
                 teamsref.child("admin").set(userID);
                 teamsref.child("TeamName").set(teamName);
                 firebase.database().ref('Users/' + userID + '/Teams/adminOf').child(teamName).set(teamName);
+
+                teamsref.child('Chatroom').child('Announcements').set("");
+                var chatref = teamsref.child('Chatroom');
+                chatref.child('Chatrooms').child('general').child('chatroomName').set("general");
+                chatref.child('Chatrooms').child('general').child('memberList').child(userID)
+                    .set([userID, username]);
+
                 alert("You have created " + teamName + ".");
                 done = true;
                 location.reload();
             }
         }
+
     }
+  }
 }
 
 async function joinTeam() {
-    var teamName = prompt("Please enter the team name that you want to join.");
-    var done = false;
-    var rootref = firebase.database().ref("Team");
+  var teamName = prompt("Please enter the team name that you want to join.");
+  var done = false;
+  var rootref = firebase.database().ref("Team");
 
-    while(!done){
-        if (teamName == null || teamName == ""){
-            alert("Cancelled");
-            done = true;
+  while (!done) {
+    if (teamName == null || teamName == "") {
+      alert("Cancelled");
+      done = true;
+    }
+    else {
+      //check if team name exist in database
+      await teamExistInRef(rootref, teamName);
+
+      if (!existTeam) {
+        teamName = prompt("Team does not exist, please enter another team name.");
+      }
+      else {
+        await isInTeam(firebase.database().ref("Team/" + teamName + "/Members/"), userID);
+        if (inTeam) {
+          alert("You are already in " + teamName + ".");
+          done = true;
         }
         else{
             //check if team name exist in database
@@ -138,29 +161,45 @@ async function joinTeam() {
                     await getUserName(userref);
                     teamsref.child("Members").child(userID).set([username, ""]);
                     firebase.database().ref('Users/' + userID + '/Teams/memberOf').child(teamName).set(teamName);
+
+                    var chatref = teamsref.child('Chatroom').child('general').child('memberList');
+                    chatref.child(userID).set([userID, username]);
+
+                    
+
                     alert("You have joined " + teamName + ".");
                     done = true;
                     location.reload();
                 }
             }
+
         }
+      }
     }
+  }
 }
 
 async function modifyAdmin(uid) {
-    //get team name
-    var ref = firebase.database().ref("Users/" + userID + "/currTeam");
-    await getCurrTeam(ref);
-    //get the name of user of next admin
-    var userref = firebase.database().ref("Users/" + uid + "/Name");
+  //get team name
+  var ref = firebase.database().ref("Users/" + userID + "/currTeam");
+  await getCurrTeam(ref);
+  //get the name of user of next admin
+  var userref = firebase.database().ref("Users/" + uid + "/Name");
+  await getUserName(userref);
+  var con = confirm("Are you sure to change admin of " + cuTeam + " to be " + username + "?");
+  if (con) {
+    firebase.database().ref("Team/" + cuTeam + "/admin").set(uid);
+    firebase.database().ref("Team/" + cuTeam + "/Members/" + uid).set([username, "admin"]);
+    userref = firebase.database().ref("Users/" + userID + "/Name");
     await getUserName(userref);
+
     var con = confirm("Are you sure to change admin of " + cuTeam + " to be " + username + "?");
     if(con) {
         firebase.database().ref("Team/" + cuTeam + "/admin").set(uid);
         firebase.database().ref("Team/" + cuTeam + "/Members/" + uid).set([username, "admin"]);
         userref = firebase.database().ref("Users/" + userID + "/Name");
         await getUserName(userref);
-        firebase.database().ref("Team/" + cuTeam + "/Members/" + userID).set([username, ""]);
+        firebase.database().ref("Team/" + cuTeam + "/Members/" + userID).set([username, "member"]);
         firebase.database().ref('Users/' + userID + '/Teams/adminOf').child(cuTeam).remove();
         firebase.database().ref('Users/' + userID + '/Teams/memberOf').child(cuTeam).set(cuTeam);
         firebase.database().ref('Users/' + uid + '/Teams/adminOf').child(cuTeam).set(cuTeam);
@@ -169,18 +208,37 @@ async function modifyAdmin(uid) {
         window.location="team.html";
     }
     else alert("Canceled");
+
 }
 
 async function addMember() {
-    var email = prompt("Please enter the email of the user that you want to add.");
-    var rootref = firebase.database().ref("Users");
-    var done = false;
+  var email = prompt("Please enter the email of the user that you want to add.");
+  var rootref = firebase.database().ref("Users");
+  var done = false;
 
-    while(!done){
-        if (email == null || email == ""){
-            alert("Cancelled");
-            done = true;
+  while (!done) {
+    if (email == null || email == "") {
+      alert("Cancelled");
+      done = true;
+    }
+    else {
+      //check if team name exist in database
+      await isUser(rootref, "Email", email);
+
+      if (!validUser) {
+        email = prompt("User does not exist, please enter another user email.");
+      }
+      else {
+        //get the current team of admin
+        var ref = firebase.database().ref("Users/" + userID + "/currTeam");
+        await getCurrTeam(ref);
+        //check if is already in team
+        await isInTeam(firebase.database().ref("Team/" + cuTeam + "/Members/"), person);
+        if (inTeam) {
+          alert("The user you want to add is already in " + cuTeam + ".");
+          done = true;
         }
+
         else{
             //check if team name exist in database
             await isUser(rootref, "Email", email);
@@ -203,7 +261,7 @@ async function addMember() {
                     //update members field
                     var userref = firebase.database().ref("Users/" + person + "/Name");
                     await getUserName(userref);
-                    teamref.child("Members").child(person).set([username, ""]);
+                    teamref.child("Members").child(person).set([username, "member"]);
                     //update team size
                     await getTeamSize(teamref.child("teamSize"));
                     tSize = tSize + 1;
@@ -215,60 +273,63 @@ async function addMember() {
                     location.reload();
                 }
             }
+
         }
+      }
     }
+  }
 }
 
 async function removeMember(uid) {
-    //get team name
-    var ref = firebase.database().ref("Users/" + userID + "/currTeam");
-    await getCurrTeam(ref);
-    //get the name of user need to be removed
-    var userref = firebase.database().ref("Users/" + uid + "/Name");
-    await getUserName(userref);
-    var con = confirm("Are you sure to remove " + username + " from " + cuTeam + "?");
-    if(con) {
-        firebase.database().ref("Team/" + cuTeam + "/Members/" + uid).remove();
-        firebase.database().ref("Users/" + uid + "/Teams/memberOf/" + cuTeam).remove();
-        var tref = firebase.database().ref("Team/" + cuTeam + "/teamSize");
-        await getTeamSize(tref);
-        tSize = tSize - 1;
-        tref.set(tSize);
-        alert("You have removed " + username + " from " + cuTeam + ".");
-        location.reload();
-    }
-    else alert("Cancelled");
+  //get team name
+  var ref = firebase.database().ref("Users/" + userID + "/currTeam");
+  await getCurrTeam(ref);
+  //get the name of user need to be removed
+  var userref = firebase.database().ref("Users/" + uid + "/Name");
+  await getUserName(userref);
+  var con = confirm("Are you sure to remove " + username + " from " + cuTeam + "?");
+  if (con) {
+    firebase.database().ref("Team/" + cuTeam + "/Members/" + uid).remove();
+    firebase.database().ref("Users/" + uid + "/Teams/memberOf/" + cuTeam).remove();
+    var tref = firebase.database().ref("Team/" + cuTeam + "/teamSize");
+    await getTeamSize(tref);
+    tSize = tSize - 1;
+    tref.set(tSize);
+    alert("You have removed " + username + " from " + cuTeam + ".");
+    location.reload();
+  }
+  else alert("Cancelled");
 }
 
 async function leaveTeam() {
-    var ref = firebase.database().ref("Users/" + userID + "/currTeam");
-    await getCurrTeam(ref);
-    var con = confirm("Are you sure you do not want to be a member of " + cuTeam + "?");
-    if(con) {
-        console.log(cuTeam);
-        firebase.database().ref("Users/" + userID + "/currTeam").set("");
-        firebase.database().ref("Team/" + cuTeam + "/Members/" + userID).remove();
-        firebase.database().ref("Users/" + userID + "/Teams/memberOf/" + cuTeam).remove();
-        var tref = firebase.database().ref("Team/" + cuTeam + "/teamSize");
-        await getTeamSize(tref);
-        tSize = tSize - 1;
-        tref.set(tSize);
-        alert("You are no longer a member of " + cuTeam + ".");
-        window.location="team.html";
-    }
-    else alert("Cancelled");
+  var ref = firebase.database().ref("Users/" + userID + "/currTeam");
+  await getCurrTeam(ref);
+  var con = confirm("Are you sure you do not want to be a member of " + cuTeam + "?");
+  if (con) {
+    console.log(cuTeam);
+    firebase.database().ref("Users/" + userID + "/currTeam").set("");
+    firebase.database().ref("Team/" + cuTeam + "/Members/" + userID).remove();
+    firebase.database().ref("Users/" + userID + "/Teams/memberOf/" + cuTeam).remove();
+    var tref = firebase.database().ref("Team/" + cuTeam + "/teamSize");
+    await getTeamSize(tref);
+    tSize = tSize - 1;
+    tref.set(tSize);
+    alert("You are no longer a member of " + cuTeam + ".");
+    window.location = "team.html";
+  }
+  else alert("Cancelled");
 }
 
 
-async function assignRole(uid){
-    //get the user name
-    var userref = firebase.database().ref("Users/" + uid + "/Name");
-    await getUserName(userref);
-    var ref = firebase.database().ref("Users/" + userID + "/currTeam");
-    await getCurrTeam(ref);
-    var role = prompt("Please enter the role of " + username + ".");
-    firebase.database().ref("Team/" + cuTeam + "/Members/" + uid).set([username, role]);
-    location.reload();
+async function assignRole(uid) {
+  //get the user name
+  var userref = firebase.database().ref("Users/" + uid + "/Name");
+  await getUserName(userref);
+  var ref = firebase.database().ref("Users/" + userID + "/currTeam");
+  await getCurrTeam(ref);
+  var role = prompt("Please enter the role of " + username + ".");
+  firebase.database().ref("Team/" + cuTeam + "/Members/" + uid).set([username, role]);
+  location.reload();
 }
 
 async function addDescription(){
@@ -277,10 +338,13 @@ async function addDescription(){
     await getCurrTeam(ref);
     firebase.database().ref("Team/" + cuTeam + "/description").set(info);
     document.getElementById('descriptionBox').innerHTML = info.toString();
+    location.reload();
+
 }
 
 
 async function updateView() {
+
     var ref = firebase.database().ref("Users/" + userID + "/currTeam");
     await getCurrTeam(ref);
     document.getElementById('teamName').innerText = "You are in: " + cuTeam;
@@ -288,6 +352,10 @@ async function updateView() {
     var nref = firebase.database().ref("Team/" + cuTeam + "/teamSize");
     await getTeamSize(nref);
     document.getElementById('number').innerText = tSize;
+
+    var dref = firebase.database().ref("Team/" + cuTeam + "/description");
+    await getTeamDes(dref);
+    document.getElementById('descriptionBox').innerText = description;
 
     var tref = firebase.database().ref("Team/" + cuTeam + "/Members");
     var members = document.getElementById('allMem');
@@ -354,125 +422,127 @@ async function updateView() {
         }
         members.appendChild(tr);
     });
+
 }
 
 async function updateViewMem() {
-    var ref = firebase.database().ref("Users/" + userID + "/currTeam");
-    await getCurrTeam(ref);
-    document.getElementById('teamName').innerText = "You are in: " + cuTeam;
+  var ref = firebase.database().ref("Users/" + userID + "/currTeam");
+  await getCurrTeam(ref);
+  document.getElementById('teamName').innerText = "You are in: " + cuTeam;
 
-    var dref = firebase.database().ref("Team/" + cuTeam + "/description");
-    await getTeamDes(dref);
-    document.getElementById('teamDes').innerText = "Team Description: " + description;
+  var dref = firebase.database().ref("Team/" + cuTeam + "/description");
+  await getTeamDes(dref);
+  document.getElementById('teamDes').innerText = "Team Description: " + description;
 
-    var nref = firebase.database().ref("Team/" + cuTeam + "/teamSize");
-    await getTeamSize(nref);
-    document.getElementById('number').innerText = tSize;
+  var nref = firebase.database().ref("Team/" + cuTeam + "/teamSize");
+  await getTeamSize(nref);
+  document.getElementById('number').innerText = tSize;
 
-    var tref = firebase.database().ref("Team/" + cuTeam + "/Members");
-    var members = document.getElementById('allMem');
+  var tref = firebase.database().ref("Team/" + cuTeam + "/Members");
+  var members = document.getElementById('allMem');
 
-    tref.on("child_added", snapshot => {
-        var name = snapshot.val()[0];
-        var role = snapshot.val()[1];
+  tref.on("child_added", snapshot => {
+    var name = snapshot.val()[0];
+    var role = snapshot.val()[1];
 
-        var tr = document.createElement("tr");
-        tr.className = name;
-        var td1 = document.createElement("td");
-        td1.innerText = name;
-        var td2 = document.createElement("td");
-        td2.innerText = role;
+    var tr = document.createElement("tr");
+    tr.className = name;
+    var td1 = document.createElement("td");
+    td1.innerText = name;
+    var td2 = document.createElement("td");
+    td2.innerText = role;
 
-        // Nest elements
-        tr.appendChild(td1);
-        tr.appendChild(td2);
+    // Nest elements
+    tr.appendChild(td1);
+    tr.appendChild(td2);
 
-        members.appendChild(tr);
-    });
+    members.appendChild(tr);
+  });
 }
 
 async function updateAdminList() {
-    var adminRef = firebase.database().ref("Users/" + userID + "/Teams/adminOf");
-    await getCurrTeam(adminRef);
-    var adminT = document.getElementById('admin');
-    var count = 1;
-    adminRef.on("child_added", snapshot => {
-        var teamName = snapshot.val();
+  var adminRef = firebase.database().ref("Users/" + userID + "/Teams/adminOf");
+  await getCurrTeam(adminRef);
+  var adminT = document.getElementById('admin');
+  var count = 1;
+  adminRef.on("child_added", snapshot => {
+    var teamName = snapshot.val();
 
-        var tr = document.createElement("tr");
-        tr.className = teamName;
-        var td1 = document.createElement("td");
-        td1.className = "serial";
-        td1.innerText = count.toString() + ".";
-        var td2 = document.createElement("td");
-        var td3 = document.createElement("td");
-        var span = document.createElement("span");
-        span.className = "teamName";
-        span.innerText = teamName;
-        var button = document.createElement("button");
-        button.className = "btn btn-success btn-lg btn-block";
-        button.type = "button";
-        button.addEventListener("click", function () {
-            redirectAdmin(teamName)
-        });
-        button.innerText = "Go";
-
-        // Nest elements
-        td2.appendChild(span);
-        td3.appendChild(button);
-        tr.appendChild(td1);
-        tr.appendChild(td2);
-        tr.appendChild(td3);
-        adminT.appendChild(tr);
-        count += 1;
+    var tr = document.createElement("tr");
+    tr.className = teamName;
+    var td1 = document.createElement("td");
+    td1.className = "serial";
+    td1.innerText = count.toString() + ".";
+    var td2 = document.createElement("td");
+    var td3 = document.createElement("td");
+    var span = document.createElement("span");
+    span.className = "teamName";
+    span.innerText = teamName;
+    var button = document.createElement("button");
+    button.className = "btn btn-success btn-lg btn-block";
+    button.type = "button";
+    button.addEventListener("click", function () {
+      redirectAdmin(teamName)
     });
+    button.innerText = "Go";
+
+    // Nest elements
+    td2.appendChild(span);
+    td3.appendChild(button);
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    tr.appendChild(td3);
+    adminT.appendChild(tr);
+    count += 1;
+  });
 }
 
-async function updateMemList(){
-    var memRef = firebase.database().ref("Users/" + userID + "/Teams/memberOf");
-    await getCurrTeam(memRef);
-    var memT = document.getElementById('member');
-    var count = 1;
-    memRef.on("child_added", snapshot => {
-        var teamName = snapshot.val();
+async function updateMemList() {
+  var memRef = firebase.database().ref("Users/" + userID + "/Teams/memberOf");
+  await getCurrTeam(memRef);
+  var memT = document.getElementById('member');
+  var count = 1;
+  memRef.on("child_added", snapshot => {
+    var teamName = snapshot.val();
 
-        var tr = document.createElement("tr");
-        tr.className = teamName;
-        var td1 = document.createElement("td");
-        td1.className = "serial";
-        td1.innerText = count.toString() + ".";
-        var td2 = document.createElement("td");
-        var td3 = document.createElement("td");
-        var span = document.createElement("span");
-        span.className = "teamName";
-        span.innerText = teamName;
-        var button = document.createElement("button");
-        button.className = "btn btn-success btn-lg btn-block";
-        button.type = "button";
-        button.addEventListener("click", function () {
-            redirectMem(teamName)
-        });
-        button.innerText = "Go";
-
-        // Nest elements
-        td2.appendChild(span);
-        td3.appendChild(button);
-        tr.appendChild(td1);
-        tr.appendChild(td2);
-        tr.appendChild(td3);
-        memT.appendChild(tr);
-        count += 1;
+    var tr = document.createElement("tr");
+    tr.className = teamName;
+    var td1 = document.createElement("td");
+    td1.className = "serial";
+    td1.innerText = count.toString() + ".";
+    var td2 = document.createElement("td");
+    var td3 = document.createElement("td");
+    var span = document.createElement("span");
+    span.className = "teamName";
+    span.innerText = teamName;
+    var button = document.createElement("button");
+    button.className = "btn btn-success btn-lg btn-block";
+    button.type = "button";
+    button.addEventListener("click", function () {
+      redirectMem(teamName)
     });
+    button.innerText = "Go";
+
+    // Nest elements
+    td2.appendChild(span);
+    td3.appendChild(button);
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    tr.appendChild(td3);
+    memT.appendChild(tr);
+    count += 1;
+  });
 }
 
-function redirectAdmin(currentTeam){
-    var userID = firebase.auth().currentUser.uid;
-    firebase.database().ref("Users/" + userID + "/currTeam").set(currentTeam);
-    window.location="HomePage.html";
+function redirectAdmin(currentTeam) {
+  var userID = firebase.auth().currentUser.uid;
+  firebase.database().ref("Users/" + userID + "/currTeam").set(currentTeam);
+  window.location = "HomePage.html";
 }
 
 function redirectMem(currentTeam){
     var userID = firebase.auth().currentUser.uid;
     firebase.database().ref("Users/" + userID + "/currTeam").set(currentTeam);
     window.location="HomePageMem.html";
+
 }

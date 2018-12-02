@@ -185,13 +185,14 @@
                     <div class="card">
                         <div class="card-body">
                             <h10 class="box-title">Team Description</h10>
+                            <td>
+                                <button style="width: 100px; padding: 5px" class="btn btn-success btn-lg btn-block add ti-pencil"
+                                        id="descriptionButton" onclick="addDescription()">Edit</button>
+                            </td>
                         </div>
                         <table>
                             <tr>
                                 <td id="descriptionBox" style="width: 1000px; text-align: center">
-                                </td>
-                                <td>
-                                    <button style="width: 100%; padding: 5px" class="btn btn-success btn-lg btn-block add" id="descriptionButton" onclick="addDescription()">Edit</button>
                                 </td>
                             </tr>
                         </table>
@@ -208,24 +209,26 @@
                             <div class="row"> 
                                 <div class="col-lg-4">
                                     <div class="card-body">
-                                        <button style="width: 100%; padding: 5px" class="btn btn-success btn-lg btn-block add" type="button" onclick="addMember()">Add Member</button>
+                                        <button style="width: 100%; padding: 5px" class="btn btn-success btn-lg btn-block add ti-plus" type="button" onclick="addMember()">Add Member</button>
                                     </div>
                                 </div>
-                                <div class="col-lg-8">
-                                    <table class="table ">
+                                <div class="row">
+                                <div class="col-lg-11" style="margin-left: 30px">
+                                    <table class="table">
                                         <thead id="status">
                                         <tr>
                                             <th>Name</th>
                                             <th>Role</th>
                                             <th>Change Role</th>
-                                            <th>Modify</th>
-                                            <th>Delete</th>
+                                            <th>Change to Admin</th>
+                                            <th>Delete This Member</th>
                                         </tr>
                                         </thead>
                                         <tbody id="allMem">
 
                                         </tbody>
                                     </table>
+                                </div>
                                 </div>
                             </div>
                         </div> 

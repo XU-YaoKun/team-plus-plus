@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/teamstyle.css">
 
     <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
     <script>
@@ -42,14 +42,9 @@
     </script>
 </head>
 <body>
-    <!-- Left Panel -->
-    <aside id="left-panel" class="left-panel">
-
-    </aside><!-- /#left-panel -->
-    <!-- Left Panel -->
-
-    <!-- right Panel-->
-    <!-- Header-->
+    <!-- Left Panel
+    <aside id="left-panel" class="left-panel"></aside>
+    -->
     <div id="right-panel" class="right-panel">
 
         <header id="header" class="header">
@@ -74,43 +69,44 @@
                 <!--add your code here:) feel free to add your own .css file-->
 
                 <!--overall info-->
-                <div class="row">
-                        <div class="col-lg-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title box-title">For Team</h4>    
-                                        <p>Create or Join Existing Teams Here</p>
-                                    </div>
-                                    <div class="card-body">
-                                        <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="createTeam()">Create Team</button>
-                                        <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="joinTeam()">Join Team</button>
-                                    </div>
-                                </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title box-title">For Team</h4>
+                            <p>Create or Join Existing Teams Here</p>
                         </div>
+                        <div class="card-body">
+                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="createTeam()">Create Team</button>
+                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="joinTeam()">Join Team</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="row">
-                        <div class="card" style="padding-top: 20px">
-                                <div class="card-header">
-                                    <strong class="card-title">You are the admin of</strong>
-                                </div>
-                                <div class="table-stats order-table ov-h admin">
-                                    <table class="table ">
-                                        <thead>
-                                            <tr>
-                                                <th class="serial">#</th>
-                                                <th>Name</th>
-                                                <th>Navigate to Team</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="admin">
-
-                                        </tbody>
-                                    </table>
-                                </div> <!-- /.table-stats -->
-                            </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card" style="padding-top: 20px">
+                        <div class="card-header">
+                            <strong class="card-title">You are the admin of</strong>
                         </div>
-        <div class="row">
-                <div class="card" style="padding-top: 20px">
+                        <div class="table-stats order-table ov-h admin">
+                            <table class="table ">
+                                <thead>
+                                <tr>
+                                    <th class="serial">#</th>
+                                    <th>Name</th>
+                                    <th>Navigate to Team</th>
+                                </tr>
+                                </thead>
+                                <tbody id="admin">
+
+                                </tbody>
+                            </table>
+                        </div> <!-- /.table-stats -->
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card" style="padding-top: 20px">
                         <div class="card-header">
                             <strong class="card-title">You are a member of</strong>
                         </div>
@@ -128,8 +124,11 @@
                                 </tbody>
                             </table>
                         </div> <!-- /.table-stats -->
+                    </div>
                 </div>
-        </div>
+
+            </div>
+
                  
 
 

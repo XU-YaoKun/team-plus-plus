@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 html,
 body {
   height: 100%;
@@ -74,3 +75,80 @@ body {
   padding-right: 20px;
   float: right;
 }
+=======
+html, body {
+	height: 100%;
+}
+
+.header {
+    padding: 80px;
+    text-align: center;
+    background-image: url(img/world-map.jpg);
+    background-size: cover;
+    background-position: center; 
+    color: white;
+}
+
+.header h1 {
+    font-size: 40px;
+}
+ 
+.navbar {
+    background-color: #333;
+}
+
+.navbar ul {
+    list-style-type: none;
+    overflow: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar li {
+    float: left;
+}
+
+.navbar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.side {
+    flex: 30%;
+    background-color: #f1f1f1;
+    padding: 20px;
+}
+
+.main {
+    flex: 70%;
+    background-color: white;
+    padding: 20px;
+}
+
+@media screen and (max-width: 700px) {
+    .row {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .navbar a {
+        float: none;
+        width: 100%;
+    }
+}
+
+.cl {
+    padding-right: 20px;
+    float: right;
+}
+>>>>>>> 377ce428b097ddf887cca37f6e6c569c88c7bd38

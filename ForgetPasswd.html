@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,4 +73,80 @@
   </form>
 </body>
 
+=======
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Password Reset</title>
+  <link rel="icon" href="img/logo.png">
+
+  <!-- Bootstrap core CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="Signup.css" rel="stylesheet">
+
+  <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCDwFS1dxv0WWEbgehMdtsIQ3F_WQlKDnE",
+      authDomain: "team-plus-plus.firebaseapp.com",
+      databaseURL: "https://team-plus-plus.firebaseio.com",
+      projectId: "team-plus-plus",
+      storageBucket: "team-plus-plus.appspot.com",
+      messagingSenderId: "836611996730"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <script>
+    function checkIfSignedIn() {
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          window.location.href = "team.html";
+        }
+      })
+    }
+    function sendPassReset() {
+      var userEmail = document.getElementById('inputEmail').value;
+      var ifSent = false;
+      firebase.auth().sendPasswordResetEmail(userEmail).then(function () {
+        // Send user
+        alert('Password Reset Email Sent!');
+        ifSent = true;
+        if (ifSent) {
+          window.location.href = 'Login.html';
+        }
+      }).catch(function (error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // Alerts user if incorrect email or unregistered email
+        if (errorCode == 'auth/invalid-email') {
+          alert(errorMessage);
+        } else if (errorCode == 'auth/user-not-found') {
+          alert(errorMessage);
+        }
+        console.log(error);
+      });
+    }
+  </script>
+</head>
+
+<body class="text-center" onload="checkIfSignedIn()">
+  <form class="form-signin">
+    <img class="mb-4" src="./img/login_T.png" alt="Team++ Logo" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Enter Registered Email Here</h1>
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input type="text" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+    <button class="signup btn btn-lg btn-primary btn-block" type="button" onclick="sendPassReset()">reset password</button>
+    <p class="mt-5 mb-3 text-muted">&copy; Team++</p>
+  </form>
+</body>
+
+>>>>>>> 377ce428b097ddf887cca37f6e6c569c88c7bd38
 </html>

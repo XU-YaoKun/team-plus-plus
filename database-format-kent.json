@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "teams": {
     "*teamId*": {
@@ -69,3 +70,84 @@
     }
   }
 }
+=======
+{
+  "teams": {
+    "*teamId*": {
+      "teamName": "",
+      "admin": "",
+      "description": "",
+      "teamSize": "",
+      "comms": {
+        "announcements": {
+          "*msgId*": ""
+        },
+        "chatrooms": {
+          "*chatroomId*": {
+            "*msgId*": ""
+          }
+        },
+        "directMessages": {
+          "*userId*": {
+            "msgArray": [
+              "*msg*",
+              "*msg*",
+              "..."
+            ],
+            "name": "",
+            "userId": ""
+          }
+        }
+      },
+      "members": {
+        "*userId*": {
+          "name": "",
+          "role": ""
+        }
+      },
+      "schedule": {
+        "eventList": {
+          "*eventId*": {
+            "description": "",
+            "startDay": "",
+            "endDay": "",
+            "*userId*": {
+              "availability": [
+                "(startTime endTime)",
+                "(startTime endTime)",
+                "..."
+              ]
+            }
+          }
+        }
+      },
+      "tasks": {
+        "*taskId*": {
+          "taskName": "",
+          "deadline": "",
+          "participants": [
+            "*userID*",
+            "*userID*",
+            "..."
+          ]
+        }
+      }
+    }
+  },
+  "users": {
+    "*userId*": {
+      "name": "",
+      "email": "",
+      "currTeam": "",
+      "teams": {
+        "adminOf": {
+          "*teamId*": ""
+        },
+        "memberOf": {
+          "*teamId*": ""
+        }
+      }
+    }
+  }
+}
+>>>>>>> 377ce428b097ddf887cca37f6e6c569c88c7bd38

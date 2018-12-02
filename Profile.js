@@ -2,6 +2,8 @@ var myPassword = '*******';
 var storage = firebase.storage().ref();
 var root = firebase.database().ref('Users');
 var userId;
+var currentUser;
+
 
 window.onload = function () {
 
@@ -9,6 +11,7 @@ window.onload = function () {
         // User is signed in: set userId and teamId
         if (user){
             userId = user.uid;
+            currentUser = user;
 
             // Check values
             console.log("userId has been set: "+ userId);
@@ -24,8 +27,6 @@ window.onload = function () {
             console.log('User is not logged in. !!')
         }
     });
-
-
 }
 
 function nameChange(){
@@ -110,9 +111,13 @@ function passwordSave(){
             alert('The confirm password does not match the new password. Please try again');
         }
         else{
-            alert('You have successfully changed your password');
-            root.child(userId).child('Password').set(newPassword1.toString());
-            donePasswordEdit();
+            currentUser.updatePassword(newPassword1).then(function () {
+                alert('You have successfully changed your password');
+                root.child(userId).child('Password').set(newPassword1.toString());
+                donePasswordEdit();
+            }).catch(function (error) {
+                alert('An error has occurred. Please try again')
+            })
         }
     });
 
@@ -213,7 +218,7 @@ fileUpload.addEventListener('change', function(e){
     reader.onload = function(){
         var image = reader.result;
         document.getElementById('Pic').src = image;
-        document.getElementById('icon').src = image;
+        //document.getElementById('icon').src = image;
     }
     reader.readAsDataURL(file);
 })
@@ -222,7 +227,7 @@ async function updatePicture() {
     var databaseStorage = firebase.storage().ref().child(userId);
     databaseStorage.getDownloadURL().then(function(url){
         document.getElementById('Pic').src = url;
-        document.getElementById('icon').src = url;
+       // document.getElementById('icon').src = url;
     }).catch(function(error){
         document.getElementById('Pic').src = 'img/sample.png'
     });

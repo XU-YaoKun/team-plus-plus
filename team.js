@@ -97,6 +97,13 @@ async function createTeam() {
                 teamsref.child("admin").set(userID);
                 teamsref.child("TeamName").set(teamName);
                 firebase.database().ref('Users/' + userID + '/Teams/adminOf').child(teamName).set(teamName);
+
+                teamsref.child('Chatroom').child('Announcements').set("");
+                var chatref = teamsref.child('Chatroom');
+                chatref.child('Chatrooms').child('general').child('chatroomName').set("general");
+                chatref.child('Chatrooms').child('general').child('memberList').child(userID)
+                    .set([userID, username]);
+
                 alert("You have created " + teamName + ".");
                 done = true;
                 location.reload();
@@ -138,6 +145,12 @@ async function joinTeam() {
                     await getUserName(userref);
                     teamsref.child("Members").child(userID).set([username, ""]);
                     firebase.database().ref('Users/' + userID + '/Teams/memberOf').child(teamName).set(teamName);
+
+                    var chatref = teamsref.child('Chatroom').child('general').child('memberList');
+                    chatref.child(userID).set([userID, username]);
+
+                    
+
                     alert("You have joined " + teamName + ".");
                     done = true;
                     location.reload();
@@ -160,7 +173,7 @@ async function modifyAdmin(uid) {
         firebase.database().ref("Team/" + cuTeam + "/Members/" + uid).set([username, "admin"]);
         userref = firebase.database().ref("Users/" + userID + "/Name");
         await getUserName(userref);
-        firebase.database().ref("Team/" + cuTeam + "/Members/" + userID).set([username, ""]);
+        firebase.database().ref("Team/" + cuTeam + "/Members/" + userID).set([username, "member"]);
         firebase.database().ref('Users/' + userID + '/Teams/adminOf').child(cuTeam).remove();
         firebase.database().ref('Users/' + userID + '/Teams/memberOf').child(cuTeam).set(cuTeam);
         firebase.database().ref('Users/' + uid + '/Teams/adminOf').child(cuTeam).set(cuTeam);
@@ -203,7 +216,7 @@ async function addMember() {
                     //update members field
                     var userref = firebase.database().ref("Users/" + person + "/Name");
                     await getUserName(userref);
-                    teamref.child("Members").child(person).set([username, ""]);
+                    teamref.child("Members").child(person).set([username, "member"]);
                     //update team size
                     await getTeamSize(teamref.child("teamSize"));
                     tSize = tSize + 1;
@@ -277,6 +290,7 @@ async function addDescription(){
     await getCurrTeam(ref);
     firebase.database().ref("Team/" + cuTeam + "/description").set(info);
     document.getElementById('descriptionBox').innerHTML = info.toString();
+    location.reload();
 }
 
 
@@ -288,6 +302,10 @@ async function updateView() {
     var nref = firebase.database().ref("Team/" + cuTeam + "/teamSize");
     await getTeamSize(nref);
     document.getElementById('number').innerText = tSize;
+
+    var dref = firebase.database().ref("Team/" + cuTeam + "/description");
+    await getTeamDes(dref);
+    document.getElementById('descriptionBox').innerText = description;
 
     var tref = firebase.database().ref("Team/" + cuTeam + "/Members");
     var members = document.getElementById('allMem');

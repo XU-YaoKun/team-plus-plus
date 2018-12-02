@@ -1,6 +1,5 @@
 <!DOCTYPE <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,12 +9,14 @@
     <link rel="stylesheet" href="assets/css/themify-icons.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="icon" href="img/logo.png">
+
 </head>
-
+<script>
+	
+</script>
 <body>
-
-    <!-- Left Panel -->
+    
+    <!-- Left Panel --> 
     <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-default">
             <div id="main-menu" class="main-menu">
@@ -48,134 +49,84 @@
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
-        </nav>
-    </aside><!-- /#left-panel -->
+        </nav> 
+    </aside><!-- /#left-panel --> 
     <!-- Left Panel -->
 
     <!-- right Panel-->
     <!-- Header-->
     <div id="right-panel" class="right-panel">
 
-        <header id="header" class="header">
+        <header id="header" class="header">  
             <div class="top-left">
-                <div class="navbar-header">
+                <div class="navbar-header"> 
                     <p>TEAM++</p>
-                </div>
+                </div> 
             </div>
-            <div class="top-right">
-                <div class="header-menu">
+            <div class="top-right"> 
+                <div class="header-menu"> 
                     <div class="user-area float-right">
-                        <a href="Login.html" class="dropdown-toggle active">
+                        <a href="index.html" class="dropdown-toggle active">
                             <img class="user-avatar rounded-circle" src="img/sample.png" alt="User Avatar">
                         </a>
-                    </div>
-                </div>
+                    </div> 
+                </div>  
             </div>
         </header><!-- /header -->
         <!-- Header-->
+        <style>
+	        	#tasks{text-align: center; font-weight: bold }
+	        	#tasks p{color:black; font-weight: bold; background-color: #ebebeb}
+	    	    #tasks li {border-radius: 25px; border:1px solid black; padding: 10px; overflow: hidden;}
+	    	    #tasks ul {list-style-type: none;}
+	    	    #todo li {background-color: #ffaaaa}
+	    	    #ip li {background-color: #ffff91}
+	    	    #fin li {background-color: #90ff90}
+	    	    .left {position:relative; width: 35px; bottom:15px; left:15%;  font-size: xx-large;}
+	    	    .right {position:relative; width: 35px; bottom:61px; left:73%;font-size: xx-large;}
+	    	    .add {position:absolute; right: 10%; color: gray}
+	    	    .arrows{margin:-40px}
+	    	    dialog{border-radius: 25px; text-align: center; width:400px;}
+	    	    dialog input{width:100%}
+	    </style>
         <div class="content">
-            <!--add your code here:) feel free to add your own .css file-->
-
-            <div class="row">
-                <div class="col-lg-10">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title box-title">Quick access</h4>
-                            <p>manage your task here</p>
-                            <div class="card-content">
-                                <div class="col-lg-4">
-                                    <p>for yourself</p>
-                                    <button style="width: 100%; padding: 5px" class="btn btn-warning btn-lg btn-block"
-                                        type="button">new event</button>
-                                    <p style="width: 100%">add new event to remind yourself:)</p>
-                                    <p><br /></p>
-                                    <button style="width: 100%; padding: 5px" class="btn btn-warning btn-lg btn-block"
-                                        type="button">edit event</button>
-                                    <p style="width: 100%">changed your mind? edit here</p>
-                                </div>
-
-                                <div class="col-lg-4">
-                                    <p>for the team</p>
-                                    <button style="width: 100%; padding: 5px" class="btn btn-warning btn-lg btn-block"
-                                        type="button">new task</button>
-                                    <p style="width: 100%">create a new task for your team</p>
-                                    <p><br /></p>
-                                    <button style="width: 100%; padding: 5px" class="btn btn-warning btn-lg btn-block"
-                                        type="button">edit task</button>
-                                    <p style="width: 100%">edit content or deadline of tasks!</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title box-title">Task status distribution</h4>
-                            <p>see how many jobs undo here:D</p>
-                            <div class="card-content">
-                                <canvas id="taskbar"></canvas>
-                                <script src="barChart.js"></script>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title box-title">To Do List</h4>
-                            <div class="card-content">
-                                <div class="todo-list">
-                                    <div class="tdl-holder">
-                                        <div class="tdl-content">
-                                            <ul>
-                                                <li>
-                                                    <label>
-                                                        <input type="checkbox"><i class="check-box"></i><span>Conveniently
-                                                            fabricate interactive technology for ....</span>
-                                                    </label>
-                                                </li>
-                                                <li>
-                                                    <label>
-                                                        <input type="checkbox"><i class="check-box"></i><span>Creating
-                                                            component page</span>
-                                                    </label>
-                                                </li>
-                                                <li>
-                                                    <label>
-                                                        <input type="checkbox" checked><i class="check-box"></i><span>Follow
-                                                            back those who follow you</span>
-                                                    </label>
-                                                </li>
-                                                <li>
-                                                    <label>
-                                                        <input type="checkbox" checked><i class="check-box"></i><span>Design
-                                                            One page theme</span>
-                                                    </label>
-                                                </li>
-
-                                                <li>
-                                                    <label>
-                                                        <input type="checkbox" checked><i class="check-box"></i><span>Creating
-                                                            component page</span>
-                                                    </label>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div> <!-- /.todo-list -->
-                            </div>
-                        </div> <!-- /.card-body -->
-                    </div><!-- /.card -->
-                </div>
-            </div>
-        </div>
-
+                <!--add your code here:) feel free to add your own .css file-->
+                <div id="tasks">
+	                <div id="todo" class="col-sm-4">
+		                <p>Todo<a class="add">+</a></p>
+						<ul id="todolist">
+						</ul>
+	                </div>
+	                <div id="ip" class="col-sm-4" >
+		                <p>In-Progress<b class="add">+</b></p>
+						<ul id="iplist">
+						</ul>
+	                </div>
+	                <div id="fin" class="col-sm-4">
+		                <p>Finished<b class="add">+</b></p>
+						<ul id="finlist">
+						</ul>
+	                </div>
+				</div>
+		</div>
+    </div>
+    <dialog id="dialog">
+	  <form method="dialog">
+		<p style="color: black; font-weight: bold; font-size: large">Add Task</p>
+		<pre><b>Task Title:</b> <input id="title0" type="text" placeholder="Task Title" class="title" style="width:70%"></input></pre>
+	    <pre><b>Task Handler:</b> <select id="handler0" class="members" name="handler" style="width:65%"></select></pre>
+		<button id="save" style="color: black">Save</button>&nbsp&nbsp&nbsp&nbsp&nbsp<button class="cancel" style="color: black">Cancel</button>
+	  </form>
+	</dialog>
+	<dialog id="editDialog">
+	  <form method="dialog">
+		<p style="color: black; font-weight: bold; font-size: large">Edit Task</p>
+	    <pre><b>Task Title:</b> <input id="title1" class="members" type="text" placeholder="Task Title" class="title" style="width:70%"></input></pre>
+	    <pre><b>Task Handler:</b> <select id="handler1" name="handler" style="width:65%"></select></pre>
+		<button id="update" style="color: black">Update</button>&nbsp&nbsp&nbsp&nbsp&nbsp<button id="delete" style="color: black">Delete</button>&nbsp&nbsp&nbsp&nbsp&nbsp<button class="cancel" style="color: black">Cancel</button>
+	  </form>
+	</dialog>
 </body>
-
+<script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+<script src="Task.js"></script>
 </html>

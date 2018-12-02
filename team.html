@@ -10,23 +10,6 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/themify-icons.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    
-
-
-    <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
-    <script>
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyCDwFS1dxv0WWEbgehMdtsIQ3F_WQlKDnE",
-            authDomain: "team-plus-plus.firebaseapp.com",
-            databaseURL: "https://team-plus-plus.firebaseio.com",
-            projectId: "team-plus-plus",
-            storageBucket: "team-plus-plus.appspot.com",
-            messagingSenderId: "836611996730"
-        };
-        firebase.initializeApp(config);
-    </script>
-
 </head>
 <body>
     
@@ -49,7 +32,7 @@
             <div class="top-right"> 
                 <div class="header-menu"> 
                     <div class="user-area float-right">
-                        <a href="Login.html" class="dropdown-toggle active">
+                        <a href="Login.html" onclick="signOut()" class="dropdown-toggle active">
                             <img class="user-avatar rounded-circle" src="img/sample.png" alt="User Avatar">
                         </a>
                     </div> 

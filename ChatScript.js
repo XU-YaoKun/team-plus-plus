@@ -2,6 +2,7 @@ var inputElem = document.querySelector('.chatMessage');
 var contacts = document.querySelector('#contacts').children[0];
 var messages = document.querySelector('.messages').children[0];
 var userDisplayName = document.querySelector('#userDisplayName');
+var chatroomDisplayName = document.querySelector('#chatroomDisplayName');
 
 var userId;
 var teamId;
@@ -61,6 +62,9 @@ function checkAdmin(ref){
 
 // Sets up HTML elements on announcements page
 function setUpAnnounce(){
+
+	// Display name of the chatroom
+	chatroomDisplayName.innerHTML = "Announcements";
 
 	// Set type of chatroom
 	inDM = false;
@@ -193,6 +197,9 @@ setTimeout(function() {
 		// Add ability to switch between chats
 		div1.onclick = function(){
 			
+			// Display name of the chatroom
+			chatroomDisplayName.innerHTML = chatroomName;
+
 
 	    	// Set type of chatroom
     		inDM = false;
@@ -291,6 +298,8 @@ setTimeout(function() {
 		// Add ability to switch between chats
 		div1.onclick = function(){
 
+			// Display name of the chatroom
+			chatroomDisplayName.innerHTML = friendName;
 
 	    	// Variable to determine if we are in DMs
     		inDM = true;

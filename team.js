@@ -384,3 +384,9 @@ function leaveTeam() {
     else alert("Canceled");
 */
 }
+
+function signOut() {
+    alert("We are now in signOut()!");
+    setTimeout(function(){ alert("Hold"); }, 3000);
+    firebase.auth().signOut();
+}

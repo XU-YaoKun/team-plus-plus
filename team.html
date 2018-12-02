@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>HomePage</title>
+    <title>Choose Team</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -24,7 +24,6 @@
         firebase.initializeApp(config);
     </script>
     <script>
-
         window.onload = function () {
 
             firebase.auth().onAuthStateChanged(function(user){
@@ -36,39 +35,43 @@
                 }
                 // No user is signed in.
                 else{
-
                     console.log('User is not logged in. !!')
                 }
             });
         };
     </script>
-
 </head>
-
 <body>
+    
+    <!-- Left Panel --> 
+    <aside id="left-panel" class="left-panel">
+            
+    </aside><!-- /#left-panel --> 
+    <!-- Left Panel -->
+
+    <!-- right Panel-->
     <!-- Header-->
     <div id="right-panel" class="right-panel">
 
-        <header id="header" class="header">
+        <header id="header" class="header">  
             <div class="top-left">
-                <div class="navbar-header">
+                <div class="navbar-header"> 
                     <p>TEAM++</p>
-                </div>
+                </div> 
             </div>
-            <div class="top-right">
-                <div class="header-menu">
+            <div class="top-right"> 
+                <div class="header-menu"> 
                     <div class="user-area float-right">
-                        <a href="Login.html" onclick="signOut()" class="dropdown-toggle active">
+                        <a href="Login.html" class="dropdown-toggle active">
                             <img class="user-avatar rounded-circle" src="img/sample.png" alt="User Avatar">
                         </a>
-                    </div>
-                </div>
+                    </div> 
+                </div>  
             </div>
         </header><!-- /header -->
         <!-- Header-->
 
         <div class="content">
-
                 <!--add your code here:) feel free to add your own .css file-->
 
                 <!--overall info-->
@@ -82,14 +85,10 @@
                                     <div class="card-body">
                                         <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="createTeam()">Create Team</button>
                                         <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="joinTeam()">Join Team</button>
-
                                     </div>
                                 </div>
-                            </div>
                         </div>
-                    </div>
                 </div>
-
                 <div class="row">
                         <div class="card" style="padding-top: 20px">
                                 <div class="card-header">

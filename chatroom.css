@@ -5,7 +5,7 @@
   height: 92vh;
   min-height: 280px;
   max-height: 720px;
-  background: #E6EAEA;
+  background: #e6eaea;
 }
 @media screen and (max-width: 360px) {
   #frame {
@@ -154,7 +154,7 @@
   }
 }
 #frame #sidepanel #profile .wrap #status-options:before {
-  content: '';
+  content: "";
   position: absolute;
   width: 0;
   height: 0;
@@ -198,8 +198,15 @@
     height: 14px;
   }
 }
-#frame #sidepanel #profile .wrap #status-options ul li span.status-circle:before {
-  content: '';
+#frame
+  #sidepanel
+  #profile
+  .wrap
+  #status-options
+  ul
+  li
+  span.status-circle:before {
+  content: "";
   position: absolute;
   width: 14px;
   height: 14px;
@@ -209,7 +216,14 @@
   z-index: 0;
 }
 @media screen and (max-width: 735px) {
-  #frame #sidepanel #profile .wrap #status-options ul li span.status-circle:before {
+  #frame
+    #sidepanel
+    #profile
+    .wrap
+    #status-options
+    ul
+    li
+    span.status-circle:before {
     height: 18px;
     width: 18px;
   }
@@ -222,28 +236,84 @@
     display: none;
   }
 }
-#frame #sidepanel #profile .wrap #status-options ul li#status-online span.status-circle {
+#frame
+  #sidepanel
+  #profile
+  .wrap
+  #status-options
+  ul
+  li#status-online
+  span.status-circle {
   background: #2ecc71;
 }
-#frame #sidepanel #profile .wrap #status-options ul li#status-online.active span.status-circle:before {
+#frame
+  #sidepanel
+  #profile
+  .wrap
+  #status-options
+  ul
+  li#status-online.active
+  span.status-circle:before {
   border: 1px solid #2ecc71;
 }
-#frame #sidepanel #profile .wrap #status-options ul li#status-away span.status-circle {
+#frame
+  #sidepanel
+  #profile
+  .wrap
+  #status-options
+  ul
+  li#status-away
+  span.status-circle {
   background: #f1c40f;
 }
-#frame #sidepanel #profile .wrap #status-options ul li#status-away.active span.status-circle:before {
+#frame
+  #sidepanel
+  #profile
+  .wrap
+  #status-options
+  ul
+  li#status-away.active
+  span.status-circle:before {
   border: 1px solid #f1c40f;
 }
-#frame #sidepanel #profile .wrap #status-options ul li#status-busy span.status-circle {
+#frame
+  #sidepanel
+  #profile
+  .wrap
+  #status-options
+  ul
+  li#status-busy
+  span.status-circle {
   background: #e74c3c;
 }
-#frame #sidepanel #profile .wrap #status-options ul li#status-busy.active span.status-circle:before {
+#frame
+  #sidepanel
+  #profile
+  .wrap
+  #status-options
+  ul
+  li#status-busy.active
+  span.status-circle:before {
   border: 1px solid #e74c3c;
 }
-#frame #sidepanel #profile .wrap #status-options ul li#status-offline span.status-circle {
+#frame
+  #sidepanel
+  #profile
+  .wrap
+  #status-options
+  ul
+  li#status-offline
+  span.status-circle {
   background: #95a5a6;
 }
-#frame #sidepanel #profile .wrap #status-options ul li#status-offline.active span.status-circle:before {
+#frame
+  #sidepanel
+  #profile
+  .wrap
+  #status-options
+  ul
+  li#status-offline.active
+  span.status-circle:before {
   border: 1px solid #95a5a6;
 }
 #frame #sidepanel #profile .wrap #expanded {
@@ -424,7 +494,7 @@
   border: none;
   padding: 0 2px 0 0;
   margin: 0 0 0 1px;
-  opacity: .5;
+  opacity: 0.5;
 }
 #frame #sidepanel #bottom-bar {
   position: absolute;
@@ -587,7 +657,7 @@
 }
 #frame .content .message-input {
   padding-top: 20px;
-  position: relative;;
+  position: relative;
   bottom: 0;
   width: 100%;
   z-index: 99;
@@ -618,7 +688,7 @@
   margin-top: 10px;
   font-size: 1.1em;
   color: #435f7a;
-  opacity: .5;
+  opacity: 0.5;
   cursor: pointer;
 }
 @media screen and (max-width: 735px) {

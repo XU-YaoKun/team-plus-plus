@@ -1,50 +1,49 @@
-.profile{
-    background: aliceblue;
+.profile {
+  background: aliceblue;
 }
 
-table{
-    padding: 30px;
-    border-spacing: 50px;
-    border-collapse: separate;
+table {
+  padding: 30px;
+  border-spacing: 50px;
+  border-collapse: separate;
 }
 
-input{
-    border: none;
-    background: transparent;
+input {
+  border: none;
+  background: transparent;
 }
 
 .container {
-    margin-left: auto;
-    margin-right: auto;
-    width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
 }
 
-.container img{
-    margin: 25px;
-    background: transparent;
-    display: block;
+.container img {
+  margin: 25px;
+  background: transparent;
+  display: block;
 }
 
-.addBtn{
-    position: relative;
-    overflow: hidden;
-    display: block;
-    float: right;
-    width: 20%;
-    height: 50px;
+.addBtn {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  float: right;
+  width: 20%;
+  height: 50px;
 }
 
-.addBtn input[type=file]{
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
+.addBtn input[type="file"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
 }
 
 .push {
+  border-radius: 5px;
 
-    border-radius: 5px;
-
-    background-color: #00c292;
-    color: #ffffff;
+  background-color: #00c292;
+  color: #ffffff;
 }

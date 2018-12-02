@@ -12,6 +12,7 @@
 
   <!-- Custom styles for this template -->
   <link href="Signup.css" rel="stylesheet" />
+  <link rel="icon" href="img/logo.png">
 
   <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
   <script>
@@ -27,23 +28,31 @@
     firebase.initializeApp(config);
   </script>
   <script>
+    function checkIfSignedIn() {
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          window.location.href = "team.html";
+        }
+      });
+    }
+
     function signUp() {
       var database = firebase.database();
+      var userName = document.getElementById("userName").value;
       var userEmail = document.getElementById("inputEmail").value;
       var userPass = document.getElementById("inputPassword").value;
-      var signedUp = false;
+      var userPhone = document.getElementById("phoneNum").value;
       firebase.auth().createUserWithEmailAndPassword(userEmail, userPass).then(function () {
         // If user signs up successfully, moves user back to login
         alert("You have successfully registered for an account!");
-        signedUp = true;
-        if (signedUp) {
-          function writeUserData(userEmail, userPass) {
-            
+        registerUser(userEmail, userPass, userName, userPhone);
+        firebase.auth().onAuthStateChanged(function (user) {
+          if (user) {
+            firebase.auth().signOut();
+            window.location.href = 'Login.html';
           }
-          window.location.href = 'Login.html';
-        }
-      }
-      ).catch(function (error) {
+        });
+      }).catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -56,13 +65,28 @@
         console.log(error);
       });
     }
+
+    function registerUser(userEmail, userPass, userName, userPhone) {
+      var userId = firebase.auth().currentUser.uid;
+      var userRef = firebase.database().ref("Users");
+      var userIdRef = userRef.child(userId).set({
+        Email: userEmail,
+        Password: userPass,
+        Name: userName,
+        Phone: userPhone
+      });
+    }
   </script>
 </head>
 
-<body class="text-center">
+<body class="text-center" onload="checkIfSignedIn()">
   <form class="form-signin">
     <img class="mb-4" src="./img/login_T.png" alt="Team++ Logo" width="72" height="72" />
     <h1 class="h3 mb-3 font-weight-normal">Create Your Team++ Account</h1>
+    <label for="First name" class="sr-only">First name</label>
+    <input type="text" id="userName" class="form-control" placeholder="Name" required autofocus />
+    <label for="Phone number" class="sr-only">Phone number (optional)</label>
+    <input type="text" id="phoneNum" class="form-control" placeholder="Phone number (optional)" autofocus />
     <label for="inputEmail" class="sr-only">Email address</label>
     <input type="text" id="inputEmail" class="form-control" placeholder="Enter a valid email address" required
       autofocus />

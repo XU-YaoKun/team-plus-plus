@@ -1,32 +1,49 @@
-body{
-    background: aliceblue;
-}
-h1{
-    text-align: center;
-    margin: 30px;
-    padding: 10px;
-}
-table{
-    border-spacing: 50px;
-    border-collapse: separate;
+.profile {
+  background: aliceblue;
 }
 
-input{
-    border: none;
-    background: transparent;
+table {
+  padding: 30px;
+  border-spacing: 50px;
+  border-collapse: separate;
 }
 
-
-.container img{
-    margin: 25px;
-    background: transparent;
+input {
+  border: none;
+  background: transparent;
 }
 
-.container .btn{
-    position: absolute;
-    transform: translate(-185%, 160%);
-    -ms-transform: translate(-50%, -50%);
-    cursor: pointer;
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+}
 
-    background: transparent;
+.container img {
+  margin: 25px;
+  background: transparent;
+  display: block;
+}
+
+.addBtn {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  float: right;
+  width: 20%;
+  height: 50px;
+}
+
+.addBtn input[type="file"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.push {
+  border-radius: 5px;
+
+  background-color: #00c292;
+  color: #ffffff;
 }

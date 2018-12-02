@@ -1,5 +1,6 @@
-<!DOCTYPE <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,20 +10,20 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
 
-    <script src = "Profile.js"></script>
-    <link rel="stylesheet"  href="Profile.css">
+    <link rel="stylesheet" href="Profile.css">
 
 </head>
+
 <body>
-    
-    <!-- Left Panel --> 
+
+    <!-- Left Panel -->
     <aside id="left-panel" class="left-panel">
-        <nav class="navbar navbar-default"> 
+        <nav class="navbar navbar-default">
             <div id="main-menu" class="main-menu">
                 <ul class="nav navbar-nav">
                     <li class="menu-title">For team</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
-                        <a href="OverView.html" >Overview</a>
+                        <a href="OverView.html">Overview</a>
                     </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="Chatroom.html">Chatroom</a>
@@ -37,110 +38,155 @@
                         <a href="HomePage.html">HomePage</a>
                     </li>
                     <li class="menu-item-has-children dropdown">
-                            <a href="Task.html">Tasks</a>
-                        </li>
+                        <a href="Task.html">Tasks</a>
+                    </li>
                     <li>
                         <a href="Profile.html">Profile</a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
-    </aside><!-- /#left-panel --> 
+    </aside><!-- /#left-panel -->
     <!-- Left Panel -->
 
     <!-- right Panel-->
     <!-- Header-->
     <div id="right-panel" class="right-panel">
 
-        <header id="header" class="header">  
+        <header id="header" class="header">
             <div class="top-left">
-                <div class="navbar-header"> 
+                <div class="navbar-header">
                     <p>TEAM++</p>
-                </div> 
+                </div>
             </div>
-            <div class="top-right"> 
-                <div class="header-menu"> 
+            <div class="top-right">
+                <div class="header-menu">
                     <div class="user-area float-right">
-                        <a href="Login.html" class="dropdown-toggle active">
-                            <img class="user-avatar rounded-circle" src="img/sample.png" alt="User Avatar">
+                        <a href="Login.html" onclick="signOut()" class="dropdown-toggle active">
+                            <img id="icon" class="user-avatar rounded-circle" src="img/sample.png" alt="User Avatar">
                         </a>
-                    </div> 
-                </div>  
+                    </div>
+                </div>
             </div>
         </header><!-- /header -->
         <!-- Header-->
-        <div class="content" id="User Profile">
-                <!--add your code here:) feel free to add your own .css file-->
-
-                    <h1>User Profile</h1>
-                    <div class= "container">
-                        <img src="img/sample.png" style="width:80px; height: 80px;" onmouseenter="picOnHover()" onmouseout="picOffHover()" m>
-                        <button id="editPicture" class = "btn" style="display: none" >Edit</button>
-
+        <div class="content">
+            <!--add your code here:) feel free to add your own .css file-->
+            <div class="row">
+                <div class="card">
+                    <div class="card-body">
                     </div>
-                    <table style="width:100%" >
-                        <tr>
-                            <td>Name:</td>
-                            <td id="NameText"></td>
-                            <td>
-                                <button id="nameEdit" onclick="nameChange()">Edit</button>
-                                <button id="nameSave" onclick="nameSave()" type="submit">Save</button>
-                                <button id="nameCancel" onclick="nameCancel()">Cancel</button>
-                            </td>
-                        </tr>
-                        <tr id="PasswordRow">
-                            <td>Password:</td>
-                            <td id="Password"></td>
-                            <td>
-                                <button id="passwordEdit" onclick="passwordChange()">Change Password</button>
-                            </td>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 profile">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-header">
+                                <strong class="card-title">Your Profile</strong>
+                            </div>
+                            <div class="container">
+                                <div class="Profile-Picture">
+                                    <div class="Default Image" id="defaultPic">
+                                        <img id="Pic" class="rounded-circle" style="width:80px; height: 80px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <table style="width:100%">
+                                <tr>
+                                    <td>Name:</td>
+                                    <td id="NameText"></td>
+                                    <td>
+                                        <button id="nameEdit" class="push" onclick="nameChange()">Edit</button>
+                                        <button id="nameSave" class="push" onclick="nameSave()" type="submit" hidden="true">Save</button>
+                                        <button id="nameCancel" class="push" onclick="nameCancel()" hidden="true">Cancel</button>
+                                    </td>
+                                </tr>
+                                <tr id="PasswordRow">
+                                    <td>Password:</td>
+                                    <td id="Password"></td>
+                                    <td>
+                                        <button id="passwordEdit" class="push" onclick="passwordChange()">Change
+                                            Password</button>
+                                    </td>
 
-                        </tr>
-                        <tr id="curPassword" style="display: none">
-                            <td>Current Password</td>
-                            <td>
-                                <input id="currentPW" type="password" placeholder="Enter Here" >
-                            </td>
+                                </tr>
+                                <tr id="curPassword" style="display: none">
+                                    <td>Current Password</td>
+                                    <td>
+                                        <input id="currentPW" type="password" placeholder="Enter Here">
+                                    </td>
 
-                        </tr>
-                        <tr id="newPassword" style="display: none">
-                            <td>New Password</td>
-                            <td>
-                                <input id="newPW" type="password" placeholder="Enter Here">
-                            </td>
-                        </tr>
-                        <tr id="re-enterPW" style="display: none">
-                            <td>Re-Enter New Password</td>
-                            <td>
-                                <input id="reenterPW" type="password" placeholder="Enter Here">
-                            </td>
-                            <td>
-                                <button id="passwordSave" onclick="passwordSave()" type="submit">Submit</button>
-                                <button id="passwordCancel" onclick="passwordCancel()">Cancel</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Email Address:</td>
-                            <td id="Email"></td>
-                            <td>
-                                <button id="emailEdit" onclick="emailChange()">Edit</button>
-                                <button id="emailSave" onclick="emailSave()" type="submit">Save</button>
-                                <button id="emailCancel" onclick="emailCancel()">Cancel</button>
-                            </td>
-                        </tr>
-                        <tr >
-                            <td>Phone Number</td>
-                            <td id="Phone"></td>
-                            <td>
-                                <button id="phoneEdit" onclick="phoneChange()">Edit</button>
-                                <button id="phoneSave" onclick="phoneSave()" type="submit">Save</button>
-                                <button id="phoneCancel" onclick="phoneCancel()">Cancel</button>
-                            </td>
-                        </tr>
-                    </table>
+                                </tr>
+                                <tr id="newPassword" style="display: none">
+                                    <td>New Password</td>
+                                    <td>
+                                        <input id="newPW" type="password" placeholder="Enter Here">
+                                    </td>
+                                    <td>
+                                        Password must be at least 4 characters.
+                                    </td>
+                                </tr>
+                                <tr id="re-enterPW" style="display: none">
+                                    <td>Re-Enter New Password</td>
+                                    <td>
+                                        <input id="reenterPW" type="password" placeholder="Enter Here">
+                                    </td>
+                                    <td>
+                                        <button id="passwordSave" class="push" onclick="passwordSave()" type="submit"
+                                            hidden="true">Submit</button>
+                                        <button id="passwordCancel" class="push" onclick="passwordCancel()" hidden="true">Cancel</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Email Address:</td>
+                                    <td id="Email"></td>
+                                    <td>
+                                        <button id="emailEdit" class="push" onclick="emailChange()">Edit</button>
+                                        <button id="emailSave" class="push" onclick="emailSave()" type="submit" hidden="true">Save</button>
+                                        <button id="emailCancel" class="push" onclick="emailCancel()" hidden="true">Cancel</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Phone Number</td>
+                                    <td id="Phone"></td>
+                                    <td>
+                                        <button id="phoneEdit" class="push" onclick="phoneChange()">Edit</button>
+                                        <button id="phoneSave" class="push" onclick="phoneSave()" type="submit" hidden="true">Save</button>
+                                        <button id="phoneCancel" class="push" onclick="phoneCancel()" hidden="true">Cancel</button>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="addBtn">
 
+                                <button class="push" style="float: right; width:100%; height: 40px">Change Profile
+                                    Picture</button>
+                                <input type="file" id="upload" accept="image/png, image/jpeg" style="width: 100%; float: right">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCDwFS1dxv0WWEbgehMdtsIQ3F_WQlKDnE",
+            authDomain: "team-plus-plus.firebaseapp.com",
+            databaseURL: "https://team-plus-plus.firebaseio.com",
+            projectId: "team-plus-plus",
+            storageBucket: "team-plus-plus.appspot.com",
+            messagingSenderId: "836611996730"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <script src="Profile.js"></script>
+
 </body>
 
 </html>

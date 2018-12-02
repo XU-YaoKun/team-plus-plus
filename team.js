@@ -1,3 +1,4 @@
+
 var existTeam = false;
 var tSize = 0;
 var person = null;
@@ -5,6 +6,7 @@ var inTeam = false;
 var cuTeam = null;
 var validUser = false;
 var username = null;
+
 var userID = null;
 var description = "Not defined";
 
@@ -17,51 +19,53 @@ async function teamExistInRef(ref, data){
             existTeam = false;
         }
     });
+
 }
 
-async function isInTeam(ref, data){
-    return ref.child(data).once('value', function(snapshot) {
-        if (snapshot.exists()) {
-            inTeam = true;
-        }
-        else{
-            inTeam = false;
-        }
+async function isInTeam(ref, data) {
+  return ref.child(data).once("value", function (snapshot) {
+    if (snapshot.exists()) {
+      inTeam = true;
+    } else {
+      inTeam = false;
+    }
+  });
+}
+
+async function isUser(ref, field, data) {
+  return ref
+    .orderByChild(field)
+    .equalTo(data)
+    .once("value", function (snapshot) {
+      if (snapshot.exists()) {
+        console.log("valid user");
+        validUser = true;
+        snapshot.forEach(function (data) {
+          person = data.key;
+        });
+      } else {
+        console.log("not valid user");
+        validUser = false;
+      }
     });
 }
 
-async function isUser(ref, field, data){
-    return ref.orderByChild(field).equalTo(data).once("value", function(snapshot) {
-        if (snapshot.exists()) {
-            console.log("valid user");
-            validUser = true;
-            snapshot.forEach(function(data) {
-                person = data.key;
-            });
-        }
-        else{
-            console.log("not valid user");
-            validUser = false;
-        }
-    });
+async function getTeamSize(ref) {
+  return ref.once("value").then(function (snapshot) {
+    tSize = snapshot.val();
+  });
 }
 
-async function getTeamSize(ref){
-    return ref.once('value').then(function(snapshot){
-        tSize = snapshot.val();
-    });
+async function getCurrTeam(ref) {
+  return ref.once("value").then(function (snapshot) {
+    cuTeam = snapshot.val();
+  });
 }
 
-async function getCurrTeam(ref){
-    return ref.once('value').then(function(snapshot){
-        cuTeam = snapshot.val();
-    });
-}
-
-async function getUserName(ref){
-    return ref.once('value').then(function(snapshot){
-        username = snapshot.val();
-    });
+async function getUserName(ref) {
+  return ref.once("value").then(function (snapshot) {
+    username = snapshot.val();
+  });
 }
 
 async function getTeamDes(ref){
@@ -71,6 +75,7 @@ async function getTeamDes(ref){
 }
 
 async function createTeam() {
+
     var teamName = prompt("Please enter the team name.");
     var done = false;
     var rootref = firebase.database().ref("Team");
@@ -103,9 +108,11 @@ async function createTeam() {
             }
         }
     }
+  }
 }
 
 async function joinTeam() {
+
     var teamName = prompt("Please enter the team name that you want to join.");
     var done = false;
     var rootref = firebase.database().ref("Team");
@@ -143,11 +150,15 @@ async function joinTeam() {
                     location.reload();
                 }
             }
+
         }
+      }
     }
+  }
 }
 
 async function modifyAdmin(uid) {
+
     //get team name
     var ref = firebase.database().ref("Users/" + userID + "/currTeam");
     await getCurrTeam(ref);
@@ -215,11 +226,15 @@ async function addMember() {
                     location.reload();
                 }
             }
+
         }
+      }
     }
+  }
 }
 
 async function removeMember(uid) {
+
     //get team name
     var ref = firebase.database().ref("Users/" + userID + "/currTeam");
     await getCurrTeam(ref);
@@ -465,3 +480,4 @@ function redirectMem(currentTeam){
     firebase.database().ref("Users/" + userID + "/currTeam").set(currentTeam);
     window.location="HomePageMem.html";
 }
+

@@ -97,6 +97,13 @@ async function createTeam() {
                 teamsref.child("admin").set(userID);
                 teamsref.child("TeamName").set(teamName);
                 firebase.database().ref('Users/' + userID + '/Teams/adminOf').child(teamName).set(teamName);
+
+                teamsref.child('Chatroom').child('Announcements').set("");
+                var chatref = teamsref.child('Chatroom');
+                chatref.child('Chatrooms').child('general').child('chatroomName').set("general");
+                chatref.child('Chatrooms').child('general').child('memberList').child(userID)
+                    .set([userID, username]);
+
                 alert("You have created " + teamName + ".");
                 done = true;
                 location.reload();
@@ -104,6 +111,7 @@ async function createTeam() {
         }
     }
 }
+
 
 async function joinTeam() {
     var teamName = prompt("Please enter the team name that you want to join.");
@@ -138,6 +146,10 @@ async function joinTeam() {
                     await getUserName(userref);
                     teamsref.child("Members").child(userID).set([username, ""]);
                     firebase.database().ref('Users/' + userID + '/Teams/memberOf').child(teamName).set(teamName);
+
+                    var chatref = teamsref.child('Chatroom').child('Chatrooms').child('general').child('memberList');
+                    chatref.child(userID).set([userID, username]);
+
                     alert("You have joined " + teamName + ".");
                     done = true;
                     location.reload();
@@ -154,18 +166,20 @@ async function modifyAdmin(uid) {
     //get the name of user of next admin
     var userref = firebase.database().ref("Users/" + uid + "/Name");
     await getUserName(userref);
+    var newAdminname = username;
     var con = confirm("Are you sure to change admin of " + cuTeam + " to be " + username + "?");
     if(con) {
         firebase.database().ref("Team/" + cuTeam + "/admin").set(uid);
         firebase.database().ref("Team/" + cuTeam + "/Members/" + uid).set([username, "admin"]);
         userref = firebase.database().ref("Users/" + userID + "/Name");
         await getUserName(userref);
-        firebase.database().ref("Team/" + cuTeam + "/Members/" + userID).set([username, ""]);
+        firebase.database().ref("Team/" + cuTeam + "/Members/" + userID).set([username, "member"]);
         firebase.database().ref('Users/' + userID + '/Teams/adminOf').child(cuTeam).remove();
         firebase.database().ref('Users/' + userID + '/Teams/memberOf').child(cuTeam).set(cuTeam);
         firebase.database().ref('Users/' + uid + '/Teams/adminOf').child(cuTeam).set(cuTeam);
         firebase.database().ref('Users/' + uid + '/Teams/memberOf').child(cuTeam).remove();
-        alert("The admin of " + cuTeam + " has been changed to " + username + ".");
+
+        alert("The admin of " + cuTeam + " has been changed to " + newAdminname + ".");
         window.location="team.html";
     }
     else alert("Canceled");
@@ -203,13 +217,17 @@ async function addMember() {
                     //update members field
                     var userref = firebase.database().ref("Users/" + person + "/Name");
                     await getUserName(userref);
-                    teamref.child("Members").child(person).set([username, ""]);
+                    teamref.child("Members").child(person).set([username, "member"]);
                     //update team size
                     await getTeamSize(teamref.child("teamSize"));
                     tSize = tSize + 1;
                     teamref.child("teamSize").set(tSize);
                     //update added person's account
                     firebase.database().ref('Users/' + person + '/Teams/memberOf').child(cuTeam).set(cuTeam);
+
+                    var chatref = teamref.child('Chatroom').child('Chatrooms').child('general').child('memberList');
+                    chatref.child(person).set([person, username]);
+
                     alert("You have added " + username + " to " + cuTeam + ".");
                     done = true;
                     location.reload();
@@ -277,6 +295,7 @@ async function addDescription(){
     await getCurrTeam(ref);
     firebase.database().ref("Team/" + cuTeam + "/description").set(info);
     document.getElementById('descriptionBox').innerHTML = info.toString();
+    location.reload();
 }
 
 
@@ -288,6 +307,10 @@ async function updateView() {
     var nref = firebase.database().ref("Team/" + cuTeam + "/teamSize");
     await getTeamSize(nref);
     document.getElementById('number').innerText = tSize;
+
+    var dref = firebase.database().ref("Team/" + cuTeam + "/description");
+    await getTeamDes(dref);
+    document.getElementById('descriptionBox').innerText = description;
 
     var tref = firebase.database().ref("Team/" + cuTeam + "/Members");
     var members = document.getElementById('allMem');
@@ -309,7 +332,7 @@ async function updateView() {
         if(id != userID){
             var td3 = document.createElement("td");
             var button1 = document.createElement("button");
-            button1.className = "btn btn-success btn-lg btn-block";
+            button1.className = "btn btn-success btn-lg btn-block ti-hand-drag";
             button1.type = "button";
             button1.addEventListener("click", function () {
                 assignRole(id);
@@ -318,7 +341,7 @@ async function updateView() {
 
             var td4 = document.createElement("td");
             var button2 = document.createElement("button");
-            button2.className = "btn btn-success btn-lg btn-block";
+            button2.className = "btn btn-success btn-lg btn-block ti-user";
             button2.type = "button";
             button2.addEventListener("click", function () {
                 modifyAdmin(id);
@@ -327,7 +350,7 @@ async function updateView() {
 
             var td5 = document.createElement("td");
             var button3 = document.createElement("button");
-            button3.className = "btn btn-success btn-lg btn-block";
+            button3.className = "btn btn-success btn-lg btn-block ti-eraser";
             button3.type = "button";
             button3.addEventListener("click", function () {
                 removeMember(id);

@@ -2,6 +2,7 @@ var inputElem = document.querySelector('.chatMessage');
 var contacts = document.querySelector('#contacts').children[0];
 var messages = document.querySelector('.messages').children[0];
 var userDisplayName = document.querySelector('#userDisplayName');
+var chatroomDisplayName = document.querySelector('#chatroomDisplayName');
 
 var userId;
 var teamId;
@@ -61,6 +62,9 @@ function checkAdmin(ref) {
 
 // Sets up HTML elements on announcements page
 function setUpAnnounce() {
+
+	// Display name of the chatroom
+	chatroomDisplayName.innerHTML = "Announcements";
 
 	// Set type of chatroom
 	inDM = false;
@@ -191,7 +195,14 @@ setTimeout(function () {
 		p1.className += "name";
 
 		// Add ability to switch between chats
+<<<<<<< HEAD
 		div1.onclick = function () {
+=======
+		div1.onclick = function(){
+			
+			// Display name of the chatroom
+			chatroomDisplayName.innerHTML = chatroomName;
+>>>>>>> 3ca523bfd8c32b2ece2df3f38ee42d3540f95ac3
 
 
 			// Set type of chatroom
@@ -292,9 +303,14 @@ setTimeout(function () {
 		div1.onclick = function () {
 
 
+<<<<<<< HEAD
 			// Variable to determine if we are in DMs
 			inDM = true;
 			inAnnounce = false;
+=======
+			// Display name of the chatroom
+			chatroomDisplayName.innerHTML = friendName;
+>>>>>>> 3ca523bfd8c32b2ece2df3f38ee42d3540f95ac3
 
 			// Set references for saving messages in both user's messages
 			chatRef = firebase.database().ref("/Team/" + teamId + "/Chatroom/directMessages/" + userId + "/" + friendId);

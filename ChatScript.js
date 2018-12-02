@@ -6,55 +6,55 @@ var socket = io.connect('http://localhost:3000');
 var userId;
 var teamId;
 
-firebase.auth().onAuthStateChanged(function(user){
+firebase.auth().onAuthStateChanged(function (user) {
 	// User is signed in: set userId and teamId
-	if (user){
+	if (user) {
 		userId = user.uid;
 		loadTeamId();
 
 		// Check values
-		console.log("userId has been set: "+ userId);
+		console.log("userId has been set: " + userId);
 		console.log("teamId has been set: " + teamId);
-	} 
+	}
 	// No user is signed in.
-	else{
+	else {
 	}
 });
 
 // Returns teamId of a user
-function getTeamId(userId){
+function getTeamId(userId) {
 
-	var tempRef = firebase.database().ref('/Users/'+userId+'/currTeam');		// FIXME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	var tempRef = firebase.database().ref('/Users/' + userId + '/currTeam');		// FIXME !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	return tempRef.once("value");
 };
-function loadTeamId(){
+function loadTeamId() {
 	getTeamId(userId).then(setTeamId, showError);
 }
-function setTeamId(snapshot){
+function setTeamId(snapshot) {
 	teamId = snapshot.val();
 }
-function showError(error){
-	console.log("The read failed: "+error);
+function showError(error) {
+	console.log("The read failed: " + error);
 }
 
 
 // Wait for log in to work so we don't get a null uid
-setTimeout(function() {
-    console.log( "Ready to fill contacts!" );
+setTimeout(function () {
+	console.log("Ready to fill contacts!");
 
-    console.log("userID: "+userId);
-	console.log("teamId: "+teamId);
+	console.log("userID: " + userId);
+	console.log("teamId: " + teamId);
 
 	/** Announcements **/
 	var announcementsRef = firebase.database().ref('/Team/Team1/Chatroom/Announcements'); 			//FIXME!!!!!!!!!!!!!!!!!!
-    announcementsRef.on("child_added", snapshot => {
+	announcementsRef.on("child_added", snapshot => {
 
-    	// Fetch latest message on announcements
-    	//var latestMsg = snapshot.val()[0];		// FIXME: Make function to get latest msg !!!!!!!!!!!!!!
-    	var latestMsg = snapshot.val()[0];
+		// Fetch latest message on announcements
+		//var latestMsg = snapshot.val()[0];		// FIXME: Make function to get latest msg !!!!!!!!!!!!!!
+		var latestMsg = snapshot.val()[0];
 
-    	// Create elements of contact
+		// Create elements of contact
 		var li = document.createElement("li");
 		var div1 = document.createElement("div");
 		var img = document.createElement("img");
@@ -85,23 +85,23 @@ setTimeout(function() {
 		// Add to HTML
 		contacts.appendChild(li);
 
-    });
+	});
 	/** Announcements **/
 
 
 
 	/** Chatrooms **/
 	var chatroomsRef = firebase.database().ref('/Team/Team1/Chatroom/Chatrooms'); 			//FIXME!!!!!!!!!!!!!!!!!!
-    chatroomsRef.on("child_added", snapshot => {
+	chatroomsRef.on("child_added", snapshot => {
 
 		// Fetch from database
-    	var chatroomName = snapshot.val().chatroomName;
-    	var latestMsg = snapshot.val().msgArray[0];		// FIXME: Make function to get latest msg
+		var chatroomName = snapshot.val().chatroomName;
+		var latestMsg = snapshot.val().msgArray[0];		// FIXME: Make function to get latest msg
 
-    	// Check values
-    	console.log("chatroomName = " + chatroomName);
+		// Check values
+		console.log("chatroomName = " + chatroomName);
 
-    	// Create elements of contact
+		// Create elements of contact
 		var li = document.createElement("li");
 		var div1 = document.createElement("div");
 		var img = document.createElement("img");
@@ -132,24 +132,24 @@ setTimeout(function() {
 		// Add to HTML
 		contacts.appendChild(li);
 
-    });
+	});
 	/** Chatrooms **/
 
 
 	/** Direct Messages **/
-    var friendsRef = firebase.database().ref('/Team/Team1/Chatroom/directMessages'); 			//FIXME!!!!!!!!!!!!!!!!!!
-    friendsRef.on("child_added", snapshot => {
+	var friendsRef = firebase.database().ref('/Team/Team1/Chatroom/directMessages'); 			//FIXME!!!!!!!!!!!!!!!!!!
+	friendsRef.on("child_added", snapshot => {
 
-    	// Fetch from database
-    	var friendName = snapshot.val().name;
-    	var friendId = snapshot.val().userId;
-    	var latestMsg = snapshot.val().msgArray[0];		// FIXME: Make function to get latest msg
+		// Fetch from database
+		var friendName = snapshot.val().name;
+		var friendId = snapshot.val().userId;
+		var latestMsg = snapshot.val().msgArray[0];		// FIXME: Make function to get latest msg
 
-    	// Check values
-    	console.log("friendName = " + friendName);
-    	console.log("friendId = " + friendId);
+		// Check values
+		console.log("friendName = " + friendName);
+		console.log("friendId = " + friendId);
 
-    	// Create elements of contact
+		// Create elements of contact
 		var li = document.createElement("li");
 		var div1 = document.createElement("div");
 		var img = document.createElement("img");
@@ -180,13 +180,13 @@ setTimeout(function() {
 		// Add to HTML
 		contacts.appendChild(li);
 
-    });
-    /** Direct Messages **/
+	});
+	/** Direct Messages **/
 
 }, 1500);
 
 
-function createHTMLMessage(msg, source){
+function createHTMLMessage(msg, source) {
 
 	// Create elements of message box
 	var li = document.createElement("li");
@@ -195,15 +195,15 @@ function createHTMLMessage(msg, source){
 	p.innerHTML += msg;
 
 	// Determine the class attribute and image to append
-	if(source == 'server'){
+	if (source == 'server') {
 		li.className += "sent";
 		img.src = "img/eggperson.jpeg";
 	}
-	else{
+	else {
 		li.className += "replies";
 		img.src = "img/chat.jpg";
 	}
-	
+
 	// Add img and message to li
 	li.appendChild(img);
 	li.appendChild(p);
@@ -212,15 +212,15 @@ function createHTMLMessage(msg, source){
 	messages.appendChild(li);
 
 	// Write to database
-	var chatRef = firebase.database().ref('/Team/'+teamId+'/Chatroom/directMessages/userId/msgArray');  	//FIXME: ID's should not be static !!!!!!!!!!!!!!!!!!
+	var chatRef = firebase.database().ref('/Team/' + teamId + '/Chatroom/directMessages/userId/msgArray');  	//FIXME: ID's should not be static !!!!!!!!!!!!!!!!!!
 	//chatRef.append(msg);
 
 
 	// Create a new post reference with an auto-generated id
 	var newPostRef = chatRef.push();
 	newPostRef.set({
-	    sender: userId,
-	    message: msg
+		sender: userId,
+		message: msg
 	});
 }
 
@@ -233,11 +233,11 @@ inputElem.addEventListener('keypress', function (e) {
 	}
 });
 
-socket.on('connect', function(data) {
+socket.on('connect', function (data) {
 	socket.emit('join', 'Hello server from client');
 });
 
-socket.on('chat msg', function(msg) {
+socket.on('chat msg', function (msg) {
 	createHTMLMessage(msg, 'server');
 
 });

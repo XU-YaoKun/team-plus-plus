@@ -6,7 +6,11 @@ var socket = io.connect('http://localhost:3000');
 
 var userId;
 var teamId;
+
 var chatRef;
+var othersRef;
+
+var inDM = false;
 
 firebase.auth().onAuthStateChanged(async function(user){
 	// User is signed in: set userId and teamId
@@ -62,6 +66,9 @@ setTimeout(function() {
 	/** Announcements **/
 	var announcementsRef = firebase.database().ref('/Team/'+teamId+'/Chatroom/Announcements'); 			//FIXME!!!!!!!!!!!!!!!!!!
     announcementsRef.on("child_added", snapshot => {
+
+    	// Set type of chatroom
+    	inDM = false;
 
     	// Fetch latest message on announcements
     	//var latestMsg = snapshot.val()[0];		// FIXME: Make function to get latest msg !!!!!!!!!!!!!!
@@ -129,6 +136,9 @@ setTimeout(function() {
 	/** Chatrooms **/
 	var chatroomsRef = firebase.database().ref('/Team/'+teamId+'/Chatroom/Chatrooms'); 			//FIXME!!!!!!!!!!!!!!!!!!
     chatroomsRef.on("child_added", snapshot => {
+
+    	// Set type of chatroom
+    	inDM = false;
 
 		// Fetch from database
     	var chatroomName = snapshot.val().chatroomName;
@@ -214,6 +224,9 @@ setTimeout(function() {
     var friendsRef = firebase.database().ref('/Team/'+teamId+'/Chatroom/directMessages/'+userId); 			
     friendsRef.on("child_added", snapshot => {
 
+    	// Variable to determine if we are in DMs
+    	inDM = true;
+
     	// Fetch from database
     	var friendName = snapshot.val().name;
     	var friendId = snapshot.val().userId;
@@ -241,7 +254,9 @@ setTimeout(function() {
 		// Add ability to switch between chats
 		div1.onclick = function(){
 			
+			// Set references for saving messages in both user's messages
 			chatRef = firebase.database().ref("/Team/"+teamId+"/Chatroom/directMessages/"+userId+"/"+friendId);
+			othersRef = firebase.database().ref("/Team/"+teamId+"/Chatroom/directMessages/"+friendId+"/"+userId);
 
 			// Removes all messages in the message window
 			while(messages.firstChild){
@@ -315,6 +330,21 @@ function updateMessageDatabase(msg){
 	chatRef.update({
 		mostRecent: msg
 	});
+
+	// If calling from directMessages then update other's too
+	if(inDM){
+		// Update other member's database info
+		var newPostRef = othersRef.child("msgArray").push();
+		newPostRef.set({
+		    sender: userId,
+		    message: msg
+		});
+
+		// Update the most recent message
+		othersRef.update({
+			mostRecent: msg
+		});		
+	}
 
 }
 

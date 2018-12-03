@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,21 +27,22 @@
     <script>
         window.onload = function () {
 
-            firebase.auth().onAuthStateChanged(function(user){
+            firebase.auth().onAuthStateChanged(function (user) {
                 // User is signed in: set userId and teamId
-                if (user){
+                if (user) {
                     userID = user.uid;
                     updateAdminList();
                     updateMemList();
                 }
                 // No user is signed in.
-                else{
+                else {
                     console.log('User is not logged in.')
                 }
             });
         };
     </script>
 </head>
+
 <body>
     <!-- Left Panel
     <aside id="left-panel" class="left-panel"></aside>
@@ -64,7 +66,7 @@
                                 <a href="Profile.html">Profile</a>
                                 <a href="index.html" onclick="signOut()">Log out</a>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -72,9 +74,9 @@
         <!-- Header-->
 
         <div class="content">
-                <!--add your code here:) feel free to add your own .css file-->
+            <!--add your code here:) feel free to add your own .css file-->
 
-                <!--overall info-->
+            <!--overall info-->
             <div class="row">
                 <div class="col-lg-6">
                     <div class="card">
@@ -83,8 +85,10 @@
                             <p>Create or Join Existing Teams Here</p>
                         </div>
                         <div class="card-body">
-                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="createTeam()">Create Team</button>
-                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="joinTeam()">Join Team</button>
+                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button"
+                                onclick="createTeam()">Create Team</button>
+                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button"
+                                onclick="joinTeam()">Join Team</button>
                         </div>
                     </div>
                 </div>
@@ -98,11 +102,11 @@
                         <div class="table-stats order-table ov-h admin">
                             <table class="table ">
                                 <thead>
-                                <tr>
-                                    <th class="serial">#</th>
-                                    <th>Name</th>
-                                    <th>Navigate to Team</th>
-                                </tr>
+                                    <tr>
+                                        <th class="serial">#</th>
+                                        <th>Name</th>
+                                        <th>Navigate to Team</th>
+                                    </tr>
                                 </thead>
                                 <tbody id="admin">
 
@@ -119,11 +123,11 @@
                         <div class="table-stats order-table ov-h">
                             <table class="table ">
                                 <thead>
-                                <tr>
-                                    <th class="serial">#</th>
-                                    <th>Name</th>
-                                    <th>Navigate to Team</th>
-                                </tr>
+                                    <tr>
+                                        <th class="serial">#</th>
+                                        <th>Name</th>
+                                        <th>Navigate to Team</th>
+                                    </tr>
                                 </thead>
                                 <tbody id="member">
 
@@ -135,12 +139,15 @@
 
             </div>
 
-                 
 
 
-        </div><!--content End-->
-    </div><!--Right panel end-->
-    
+
+        </div>
+        <!--content End-->
+    </div>
+    <!--Right panel end-->
+
 </body>
 <script src="team.js"></script>
+
 </html>

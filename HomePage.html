@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,14 +27,14 @@
     <script>
         window.onload = function () {
 
-            firebase.auth().onAuthStateChanged(function(user){
+            firebase.auth().onAuthStateChanged(function (user) {
                 // User is signed in: set userId and teamId
-                if (user){
+                if (user) {
                     userID = user.uid;
                     updateView();
                 }
                 // No user is signed in.
-                else{
+                else {
                     console.log('User is not logged in. !!')
                 }
             });
@@ -41,9 +42,10 @@
     </script>
 
 </head>
+
 <body>
-    
-    <!-- Left Panel --> 
+
+    <!-- Left Panel -->
     <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-default">
             <div id="main-menu" class="main-menu">
@@ -76,22 +78,22 @@
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
-        </nav> 
-    </aside><!-- /#left-panel --> 
+        </nav>
+    </aside><!-- /#left-panel -->
     <!-- Left Panel -->
 
     <!-- right Panel-->
     <!-- Header-->
     <div id="right-panel" class="right-panel">
 
-        <header id="header" class="header">  
+        <header id="header" class="header">
             <div class="top-left">
-                <div class="navbar-header"> 
+                <div class="navbar-header">
                     <p>TEAM++</p>
-                </div> 
+                </div>
             </div>
-            <div class="top-right"> 
-                <div class="header-menu"> 
+            <div class="top-right">
+                <div class="header-menu">
                     <div class="user-area float-right">
                         <div class="dropdown">
                             <button class="dropbtn" style="background-color: #ffffff; margin-right: 30px">
@@ -102,89 +104,89 @@
                                 <a href="index.html" onclick="signOut()">Log out</a>
                             </div>
                         </div>
-                    </div> 
-                </div>  
+                    </div>
+                </div>
             </div>
         </header><!-- /header -->
         <!-- Header-->
 
         <div class="content">
-                <!--add your code here:) feel free to add your own .css file-->
+            <!--add your code here:) feel free to add your own .css file-->
 
-                <!--overall info-->
-                <div class="row">
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="stat-widget-five">
-                                        <div class="stat-icon dib flat-color-1">
-                                            <span class="ti-user"></span>
-                                        </div>
-                                        <div class="stat-content">
-                                            <div class="text-left dib"> 
-                                                <div class="stat-text"><span id="number" class="count"></span></div>
-                                                <div class="stat-heading">teammates</div>
-                                            </div>
-                                        </div>
-                                    </div>
+            <!--overall info-->
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-five">
+                                <div class="stat-icon dib flat-color-1">
+                                    <span class="ti-user"></span>
                                 </div>
-                            </div>
-                        </div>
-        
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="stat-widget-five">
-                                        <div class="stat-icon dib flat-color-2">
-                                            <span class="ti-hummer"></span>
-                                        </div>
-                                        <div class="stat-content">
-                                            <div class="text-left dib">
-                                                <div class="stat-text"><span class="count">15</span></div>
-                                                <div class="stat-heading">undo tasks</div> 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-        
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="stat-widget-five">
-                                        <div class="stat-icon dib flat-color-3">
-                                            <span class="ti-timer"></span>
-                                        </div>
-                                        <div class="stat-content">
-                                            <div class="text-left dib"> 
-                                                <div class="stat-text"><span class="count">2</span></div>
-                                                <div class="stat-heading">dues tomorrow</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-        
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="stat-widget-five">
-                                        <div class="stat-icon dib flat-color-4">
-                                            <span class="ti-alarm-clock"></span>
-                                        </div>
-                                        <div class="stat-content">
-                                            <div class="text-left dib"> 
-                                                <div class="stat-text"><span class="count">72</span></div>
-                                                <div class="stat-heading">before overall deadline</div>
-                                            </div>
-                                        </div>
+                                <div class="stat-content">
+                                    <div class="text-left dib">
+                                        <div class="stat-text"><span id="number" class="count"></span></div>
+                                        <div class="stat-heading">teammates</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-five">
+                                <div class="stat-icon dib flat-color-2">
+                                    <span class="ti-hummer"></span>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="text-left dib">
+                                        <div class="stat-text"><span class="count">15</span></div>
+                                        <div class="stat-heading">undo tasks</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-five">
+                                <div class="stat-icon dib flat-color-3">
+                                    <span class="ti-timer"></span>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="text-left dib">
+                                        <div class="stat-text"><span class="count">2</span></div>
+                                        <div class="stat-heading">dues tomorrow</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-five">
+                                <div class="stat-icon dib flat-color-4">
+                                    <span class="ti-alarm-clock"></span>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="text-left dib">
+                                        <div class="stat-text"><span class="count">72</span></div>
+                                        <div class="stat-heading">before overall deadline</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-lg-12">
@@ -193,7 +195,7 @@
                             <h10 class="box-title">Team Description</h10>
                             <td>
                                 <button style="width: 100px; padding: 5px" class="btn btn-success btn-lg btn-block add ti-pencil"
-                                        id="descriptionButton" onclick="addDescription()">Edit</button>
+                                    id="descriptionButton" onclick="addDescription()">Edit</button>
                             </td>
                         </div>
                         <table>
@@ -205,103 +207,109 @@
                     </div>
                 </div>
             </div>
-                    <!--  Team Management  -->
+            <!--  Team Management  -->
             <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card">  
-                            <div class="card-body">
-                                <h4 id = "teamName" class="box-title">Team Management </h4>
-                            </div>
-                            <div class="row"> 
-                                <div class="col-lg-4">
-                                    <div class="card-body">
-                                        <button style="width: 100%; padding: 5px" class="btn btn-success btn-lg btn-block add ti-plus" type="button" onclick="addMember()">Add Member</button>
-                                    </div>
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 id="teamName" class="box-title">Team Management </h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="card-body">
+                                    <button style="width: 100%; padding: 5px" class="btn btn-success btn-lg btn-block add ti-plus"
+                                        type="button" onclick="addMember()">Add Member</button>
                                 </div>
-                                <div class="row">
+                            </div>
+                            <div class="row">
                                 <div class="col-lg-11" style="margin-left: 30px">
                                     <table class="table">
                                         <thead id="status">
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Role</th>
-                                            <th>Change Role</th>
-                                            <th>Change to Admin</th>
-                                            <th>Delete This Member</th>
-                                        </tr>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Role</th>
+                                                <th>Change Role</th>
+                                                <th>Change to Admin</th>
+                                                <th>Delete This Member</th>
+                                            </tr>
                                         </thead>
                                         <tbody id="allMem">
 
                                         </tbody>
                                     </table>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /# column -->
+            </div>
+            <!--  Team Management  End -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="box-title">Post Announcement </h4>
+                            <p>convey important info here:)</p>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card-body">
+                                    <button style="width: 20%; padding: 5px" class="btn btn-success btn-lg btn-block"
+                                        type="button">Post</button>
                                 </div>
                             </div>
-                        </div> 
-                    </div><!-- /# column -->
+                            <div class="col-lg-9">
+                                <div class="card-body">
+                                    <p>here is announcement in the past.</p>
+                                </div> <!-- /.card-body -->
+                            </div>
+                        </div> <!-- /.row -->
+                        <div class="card-body"></div>
+                    </div>
                 </div>
-                <!--  Team Management  End -->
-                <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card">  
-                                <div class="card-body">
-                                    <h4 class="box-title">Post Announcement </h4>
-                                    <p>convey important info here:)</p>
-                                </div>
-                                <div class="row"> 
-                                    <div class="col-lg-12">
-                                        <div class="card-body"> 
-                                            <button style="width: 20%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button">Post</button>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="card-body">
-                                            <p>here is announcement in the past.</p>
-                                        </div> <!-- /.card-body -->
-                                    </div>
-                                </div> <!-- /.row --> 
-                                <div class="card-body"></div>
-                            </div> 
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="box-title">Poll </h4>
+                            <p>let us vote for decision!</p>
                         </div>
-                 </div>
-
-                 <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card">  
+                        <div class="row">
+                            <div class="col-lg-12">
                                 <div class="card-body">
-                                    <h4 class="box-title">Poll </h4>
-                                    <p>let us vote for decision!</p>
+                                    <button style="width: 20%; padding: 5px" class="btn btn-success btn-lg btn-block"
+                                        type="button">create poll</button>
                                 </div>
-                                <div class="row"> 
-                                    <div class="col-lg-12">
-                                        <div class="card-body"> 
-                                            <button style="width: 20%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button">create poll</button>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="card-body">
-                                            <p>pollint ongoing.</p>
-                                        </div> <!-- /.card-body -->
-                                    </div>
-                                    <div class="col-lg-9">
-                                            <div class="card-body">
-                                                <p>pollint in the past.</p>
-                                            </div> <!-- /.card-body -->
-                                        </div>
-                                </div> <!-- /.row --> 
-                                <div class="card-body"></div>
-                            </div> 
-                        </div>
-                 </div>
-
-                 
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="card-body">
+                                    <p>pollint ongoing.</p>
+                                </div> <!-- /.card-body -->
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="card-body">
+                                    <p>pollint in the past.</p>
+                                </div> <!-- /.card-body -->
+                            </div>
+                        </div> <!-- /.row -->
+                        <div class="card-body"></div>
+                    </div>
+                </div>
+            </div>
 
 
-             </div><!--content End-->
-    </div><!--Right panel end-->
 
-   
-    
+
+        </div>
+        <!--content End-->
+    </div>
+    <!--Right panel end-->
+
+
+
 </body>
 <script src="team.js"></script>
+
 </html>

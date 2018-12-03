@@ -35,13 +35,13 @@ var myVinyls = {
   "not plan": 12
 };
 
-var Barchart = function(options) {
+var Barchart = function (options) {
   this.options = options;
   this.canvas = options.canvas;
   this.ctx = this.canvas.getContext("2d");
   this.colors = options.colors;
 
-  this.draw = function() {
+  this.draw = function () {
     var maxValue = 0;
     for (var categ in this.options.data) {
       maxValue = Math.max(maxValue, this.options.data[categ]);

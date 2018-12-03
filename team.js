@@ -8,64 +8,64 @@ var username = null;
 var userID = null;
 var description = "Not defined";
 
-async function teamExistInRef(ref, data){
-    return ref.child(data).once('value', function(snapshot) {
+async function teamExistInRef(ref, data) {
+    return ref.child(data).once('value', function (snapshot) {
         if (snapshot.exists()) {
             existTeam = true;
         }
-        else{
+        else {
             existTeam = false;
         }
     });
 }
 
-async function isInTeam(ref, data){
-    return ref.child(data).once('value', function(snapshot) {
+async function isInTeam(ref, data) {
+    return ref.child(data).once('value', function (snapshot) {
         if (snapshot.exists()) {
             inTeam = true;
         }
-        else{
+        else {
             inTeam = false;
         }
     });
 }
 
-async function isUser(ref, field, data){
-    return ref.orderByChild(field).equalTo(data).once("value", function(snapshot) {
+async function isUser(ref, field, data) {
+    return ref.orderByChild(field).equalTo(data).once("value", function (snapshot) {
         if (snapshot.exists()) {
             console.log("valid user");
             validUser = true;
-            snapshot.forEach(function(data) {
+            snapshot.forEach(function (data) {
                 person = data.key;
             });
         }
-        else{
+        else {
             console.log("not valid user");
             validUser = false;
         }
     });
 }
 
-async function getTeamSize(ref){
-    return ref.once('value').then(function(snapshot){
+async function getTeamSize(ref) {
+    return ref.once('value').then(function (snapshot) {
         tSize = snapshot.val();
     });
 }
 
-async function getCurrTeam(ref){
-    return ref.once('value').then(function(snapshot){
+async function getCurrTeam(ref) {
+    return ref.once('value').then(function (snapshot) {
         cuTeam = snapshot.val();
     });
 }
 
-async function getUserName(ref){
-    return ref.once('value').then(function(snapshot){
+async function getUserName(ref) {
+    return ref.once('value').then(function (snapshot) {
         username = snapshot.val();
     });
 }
 
-async function getTeamDes(ref){
-    return ref.once('value').then(function(snapshot){
+async function getTeamDes(ref) {
+    return ref.once('value').then(function (snapshot) {
         description = snapshot.val();
     });
 }
@@ -75,19 +75,19 @@ async function createTeam() {
     var done = false;
     var rootref = firebase.database().ref("Team");
 
-    while(!done){
-        if (teamName == null || teamName == ""){
+    while (!done) {
+        if (teamName == null || teamName == "") {
             alert("Cancelled");
             done = true;
         }
-        else{
+        else {
             //check if team name exist in database
             await teamExistInRef(rootref, teamName);
 
-            if(existTeam){
+            if (existTeam) {
                 teamName = prompt("Team name " + teamName + " already taken. Please enter another team name.");
             }
-            else{
+            else {
                 rootref.child(teamName).child('teamSize').set(1);
                 var teamsref = rootref.child(teamName);
                 var userref = firebase.database().ref("Users/" + userID + "/Name");
@@ -118,25 +118,25 @@ async function joinTeam() {
     var done = false;
     var rootref = firebase.database().ref("Team");
 
-    while(!done){
-        if (teamName == null || teamName == ""){
+    while (!done) {
+        if (teamName == null || teamName == "") {
             alert("Cancelled");
             done = true;
         }
-        else{
+        else {
             //check if team name exist in database
             await teamExistInRef(rootref, teamName);
 
-            if(!existTeam){
+            if (!existTeam) {
                 teamName = prompt("Team does not exist, please enter another team name.");
             }
-            else{
+            else {
                 await isInTeam(firebase.database().ref("Team/" + teamName + "/Members/"), userID);
-                if(inTeam){
+                if (inTeam) {
                     alert("You are already in " + teamName + ".");
                     done = true;
                 }
-                else{
+                else {
                     var tref = firebase.database().ref("Team/" + teamName + "/teamSize");
                     await getTeamSize(tref);
                     tSize = tSize + 1;
@@ -168,7 +168,7 @@ async function modifyAdmin(uid) {
     await getUserName(userref);
     var newAdminname = username;
     var con = confirm("Are you sure to change admin of " + cuTeam + " to be " + username + "?");
-    if(con) {
+    if (con) {
         firebase.database().ref("Team/" + cuTeam + "/admin").set(uid);
         firebase.database().ref("Team/" + cuTeam + "/Members/" + uid).set([username, "Admin"]);
         userref = firebase.database().ref("Users/" + userID + "/Name");
@@ -180,7 +180,7 @@ async function modifyAdmin(uid) {
         firebase.database().ref('Users/' + uid + '/Teams/memberOf').child(cuTeam).remove();
 
         alert("The admin of " + cuTeam + " has been changed to " + newAdminname + ".");
-        window.location="team.html";
+        window.location = "team.html";
     }
     else alert("Canceled");
 }
@@ -190,29 +190,29 @@ async function addMember() {
     var rootref = firebase.database().ref("Users");
     var done = false;
 
-    while(!done){
-        if (email == null || email == ""){
+    while (!done) {
+        if (email == null || email == "") {
             alert("Cancelled");
             done = true;
         }
-        else{
+        else {
             //check if team name exist in database
             await isUser(rootref, "Email", email);
 
-            if(!validUser){
+            if (!validUser) {
                 email = prompt("User does not exist, please enter another user email.");
             }
-            else{
+            else {
                 //get the current team of admin
                 var ref = firebase.database().ref("Users/" + userID + "/currTeam");
                 await getCurrTeam(ref);
                 //check if is already in team
                 await isInTeam(firebase.database().ref("Team/" + cuTeam + "/Members/"), person);
-                if(inTeam){
+                if (inTeam) {
                     alert("The user you want to add is already in " + cuTeam + ".");
                     done = true;
                 }
-                else{
+                else {
                     var teamref = firebase.database().ref("Team/" + cuTeam);
                     //update members field
                     var userref = firebase.database().ref("Users/" + person + "/Name");
@@ -245,7 +245,7 @@ async function removeMember(uid) {
     var userref = firebase.database().ref("Users/" + uid + "/Name");
     await getUserName(userref);
     var con = confirm("Are you sure to remove " + username + " from " + cuTeam + "?");
-    if(con) {
+    if (con) {
         firebase.database().ref("Team/" + cuTeam + "/Members/" + uid).remove();
         firebase.database().ref("Users/" + uid + "/Teams/memberOf/" + cuTeam).remove();
         var tref = firebase.database().ref("Team/" + cuTeam + "/teamSize");
@@ -262,7 +262,7 @@ async function leaveTeam() {
     var ref = firebase.database().ref("Users/" + userID + "/currTeam");
     await getCurrTeam(ref);
     var con = confirm("Are you sure you do not want to be a member of " + cuTeam + "?");
-    if(con) {
+    if (con) {
         console.log(cuTeam);
         firebase.database().ref("Users/" + userID + "/currTeam").set("");
         firebase.database().ref("Team/" + cuTeam + "/Members/" + userID).remove();
@@ -272,13 +272,13 @@ async function leaveTeam() {
         tSize = tSize - 1;
         tref.set(tSize);
         alert("You are no longer a member of " + cuTeam + ".");
-        window.location="team.html";
+        window.location = "team.html";
     }
     else alert("Cancelled");
 }
 
 
-async function assignRole(uid){
+async function assignRole(uid) {
     //get the user name
     var userref = firebase.database().ref("Users/" + uid + "/Name");
     await getUserName(userref);
@@ -289,7 +289,7 @@ async function assignRole(uid){
     location.reload();
 }
 
-async function addDescription(){
+async function addDescription() {
     var info = prompt("Please enter a brief description of your team below.");
     var ref = firebase.database().ref("Users/" + userID + "/currTeam");
     await getCurrTeam(ref);
@@ -329,7 +329,7 @@ async function updateView() {
 
         tr.appendChild(td1);
         tr.appendChild(td2);
-        if(id != userID){
+        if (id != userID) {
             var td3 = document.createElement("td");
             var button1 = document.createElement("button");
             button1.className = "btn btn-success btn-lg btn-block ti-hand-drag";
@@ -367,7 +367,7 @@ async function updateView() {
             tr.appendChild(td4);
             tr.appendChild(td5);
         }
-        else{
+        else {
             var td3 = document.createElement("td");
             td3.innerText = "You are the Admin";
             td3.className = "ti-na";
@@ -459,7 +459,7 @@ async function updateAdminList() {
     });
 }
 
-async function updateMemList(){
+async function updateMemList() {
     var memRef = firebase.database().ref("Users/" + userID + "/Teams/memberOf");
     await getCurrTeam(memRef);
     var memT = document.getElementById('member');
@@ -497,14 +497,14 @@ async function updateMemList(){
     });
 }
 
-function redirectAdmin(currentTeam){
+function redirectAdmin(currentTeam) {
     var userID = firebase.auth().currentUser.uid;
     firebase.database().ref("Users/" + userID + "/currTeam").set(currentTeam);
-    window.location="HomePage.html";
+    window.location = "HomePage.html";
 }
 
-function redirectMem(currentTeam){
+function redirectMem(currentTeam) {
     var userID = firebase.auth().currentUser.uid;
     firebase.database().ref("Users/" + userID + "/currTeam").set(currentTeam);
-    window.location="HomePageMem.html";
+    window.location = "HomePageMem.html";
 }

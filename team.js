@@ -507,7 +507,3 @@ function redirectMem(currentTeam) {
   firebase.database().ref("Users/" + userID + "/currTeam").set(currentTeam);
   window.location = "HomePageMem.html";
 }
-
-function checkMemberStatus() {
-  alert("We are in checkMemberStatus()");
-}

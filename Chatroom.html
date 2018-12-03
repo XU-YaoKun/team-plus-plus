@@ -74,11 +74,17 @@
 			<div class="top-right">
 				<div class="header-menu">
 					<div class="user-area float-right">
-						<a href="Index.html" class="dropdown-toggle active">
-							<img class="user-avatar rounded-circle" src="img/sample.png" alt="User Avatar">
-						</a>
-					</div>
-				</div>
+						<div class="dropdown">
+							<button class="dropbtn" style="background-color: #ffffff; margin-right: 30px">
+								<img id="icon" class="user-avatar rounded-circle" src="img/sample.png" alt="User Avatar">
+							</button>
+							<div class="dropdown-content">
+								<a href="Profile.html">Profile</a>
+								<a href="index.html" onclick="signOut()">Log out</a>
+							</div>
+						</div>	
+					</div> 
+				</div>  
 			</div>
 		</header><!-- /header -->
 		<!-- Header-->
@@ -115,6 +121,7 @@
 										</ul>
 									</div>
 								</div>
+<<<<<<< HEAD
 								<div class="content">
 
 
@@ -132,17 +139,36 @@
 											<button class="submit"><i class="ti-angle-double-up" aria-hidden="true"></i></button>
 										</div>
 =======
+=======
+							</div>
+							<button style="width: 100%;"><span class="flat-color-1" style="padding-left: 80px; padding-right: 80px;  font-family: 'Open Sans';" onclick="window.open('newChatroom.html','create new chatroom','height=500,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=no');"> +  Add New Chatroom</span></button>
+							<div id="contacts">
+								<ul>
+									
+								</ul>
+							</div>
+						</div>
+						<div class="content">
+								<div class="messages">
+									<ul>
+									</ul>
+								</div>
+>>>>>>> 30c9ec40be9386f9e1e6f08c9e47f2eba310ec2a
 								<div class="message-input">
 									<div class="wrap">
 										<input class="chatMessage" type="text" placeholder="Write your message..." />
 										<button class="submit"><i class="ti-angle-double-up" aria-hidden="true"></i></button>
 >>>>>>> 2bec989ae60a2a77d7e0de98034ed1219e6ff13d
 									</div>
+<<<<<<< HEAD
 
 
 
 								</div>
 							</div>
+=======
+								</div>
+>>>>>>> 30c9ec40be9386f9e1e6f08c9e47f2eba310ec2a
 						</div>
 					</div>
 				</div>
@@ -163,14 +189,22 @@
 		};
 		firebase.initializeApp(config);
 	</script>
+<<<<<<< HEAD
 
 
+=======
+	
+>>>>>>> 30c9ec40be9386f9e1e6f08c9e47f2eba310ec2a
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js">
 	</script>
 	<script src="ChatScript.js"></script>
+<<<<<<< HEAD
 
 
+=======
+	
+>>>>>>> 30c9ec40be9386f9e1e6f08c9e47f2eba310ec2a
 </body>
 
 </html>

@@ -10,8 +10,8 @@ body {
   align-items: center;
   padding-top: 40px;
   padding-bottom: 40px;
-  background-color: #f5f5f5;
-  background-image: url(img/road.jpg);
+  background-color: #fdfdfd;
+  background-image: url(img/back5.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -19,6 +19,7 @@ body {
 
 .in {
   padding: 20px;
+  margin-bottom: 30px;
 }
 
 .logo {
@@ -27,14 +28,14 @@ body {
 
 .intro {
   padding-left: 20px;
-  color: #f5f5f5;
+  color: #000000;
   font-family: "Times New Roman", Times, serif;
   font-size: 40px;
   float: left;
 }
 
 .ti {
-  color: #f5f5f5;
+  color: #000000;
   font-family: "Times New Roman", Times, serif;
   font-size: 70px;
   float: left;
@@ -57,6 +58,7 @@ body {
   padding-bottom: 10px;
   width: 100%;
   position: relative;
+  border-color: #f5f5f5;
 }
 
 .fp {

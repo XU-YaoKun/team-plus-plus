@@ -13,7 +13,14 @@
 
 </head>
 <script>
-
+    function signOut() {
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                console.log("Signing out");
+                firebase.auth().signOut();
+            }
+        });
+    }
 </script>
 
 <body>

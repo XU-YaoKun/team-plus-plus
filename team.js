@@ -10,24 +10,24 @@ var taskCount = 0;
 var description = "Not defined";
 
 async function getIndividualTask(ref) {
-    var taskDoer;
-    var taskStatus;
-    ref.on('value', function (snapshot) {
-        console.log('HERE');
-        if(snapshot.val() !== null){
-            snapshot.forEach(function (item) {
-                taskDoer = item.val().handler;
-                taskStatus = item.val().status;
-                if(taskDoer == username && taskStatus !== 'fin' ){
-                    taskCount += 1;
-                }
-            });
+  var taskDoer;
+  var taskStatus;
+  ref.on('value', function (snapshot) {
+    console.log('HERE');
+    if (snapshot.val() !== null) {
+      snapshot.forEach(function (item) {
+        taskDoer = item.val().handler;
+        taskStatus = item.val().status;
+        if (taskDoer == username && taskStatus !== 'fin') {
+          taskCount += 1;
         }
-    });
+      });
+    }
+  });
 }
 
 async function teamExistInRef(ref, data) {
-  return ref.child(data).once("value", function(snapshot) {
+  return ref.child(data).once("value", function (snapshot) {
     if (snapshot.exists()) {
       existTeam = true;
     } else {
@@ -37,7 +37,7 @@ async function teamExistInRef(ref, data) {
 }
 
 async function isInTeam(ref, data) {
-  return ref.child(data).once("value", function(snapshot) {
+  return ref.child(data).once("value", function (snapshot) {
     if (snapshot.exists()) {
       inTeam = true;
     } else {
@@ -50,11 +50,11 @@ async function isUser(ref, field, data) {
   return ref
     .orderByChild(field)
     .equalTo(data)
-    .once("value", function(snapshot) {
+    .once("value", function (snapshot) {
       if (snapshot.exists()) {
         console.log("valid user");
         validUser = true;
-        snapshot.forEach(function(data) {
+        snapshot.forEach(function (data) {
           person = data.key;
         });
       } else {
@@ -65,25 +65,25 @@ async function isUser(ref, field, data) {
 }
 
 async function getTeamSize(ref) {
-  return ref.once("value").then(function(snapshot) {
+  return ref.once("value").then(function (snapshot) {
     tSize = snapshot.val();
   });
 }
 
 async function getCurrTeam(ref) {
-  return ref.once("value").then(function(snapshot) {
+  return ref.once("value").then(function (snapshot) {
     cuTeam = snapshot.val();
   });
 }
 
 async function getUserName(ref) {
-  return ref.once("value").then(function(snapshot) {
+  return ref.once("value").then(function (snapshot) {
     username = snapshot.val();
   });
 }
 
 async function getTeamDes(ref) {
-  return ref.once("value").then(function(snapshot) {
+  return ref.once("value").then(function (snapshot) {
     description = snapshot.val();
   });
 }
@@ -104,8 +104,8 @@ async function createTeam() {
       if (existTeam) {
         teamName = prompt(
           "Team name " +
-            teamName +
-            " already taken. Please enter another team name."
+          teamName +
+          " already taken. Please enter another team name."
         );
       } else {
         rootref
@@ -435,8 +435,8 @@ async function updateView() {
   var path = firebase.database().ref("Users/" + userID + '/Name');
   await getUserName(path);
   await getIndividualTask(taskRef);
-  setTimeout( function () {
-      document.getElementById('taskNum').innerText = taskCount;
+  setTimeout(function () {
+    document.getElementById('taskNum').innerText = taskCount;
   }, 50);
 
   tref.on("child_added", snapshot => {
@@ -460,7 +460,7 @@ async function updateView() {
       button1.type = "button";
       button1.style = "width:50px; margin: auto";
       button1.textAlign = "center";
-      button1.addEventListener("click", function() {
+      button1.addEventListener("click", function () {
         assignRole(id);
       });
 
@@ -470,7 +470,7 @@ async function updateView() {
       button2.type = "button";
       button2.style = "width:50px; margin: auto";
       button2.textAlign = "center";
-      button2.addEventListener("click", function() {
+      button2.addEventListener("click", function () {
         modifyAdmin(id);
       });
 
@@ -480,7 +480,7 @@ async function updateView() {
       button3.type = "button";
       button3.style = "width: 50px; margin: auto";
       button3.textAlign = "center";
-      button3.addEventListener("click", function() {
+      button3.addEventListener("click", function () {
         removeMember(id);
       });
 
@@ -531,8 +531,8 @@ async function updateViewMem() {
   var path = firebase.database().ref("Users/" + userID + '/Name');
   await getUserName(path);
   await getIndividualTask(taskRef);
-  setTimeout( function () {
-      document.getElementById('taskNum').innerText = taskCount;
+  setTimeout(function () {
+    document.getElementById('taskNum').innerText = taskCount;
   }, 50);
 
   tref.on("child_added", snapshot => {
@@ -577,7 +577,7 @@ async function updateAdminList() {
     button.className = "btn btn-success btn-lg btn-block";
     button.type = "button";
     button.style = "width:150px";
-    button.addEventListener("click", function() {
+    button.addEventListener("click", function () {
       redirectAdmin(teamName);
     });
     button.innerText = "Go";
@@ -616,7 +616,7 @@ async function updateMemList() {
     button.className = "btn btn-success btn-lg btn-block";
     button.type = "button";
     button.style = "width: 150px";
-    button.addEventListener("click", function() {
+    button.addEventListener("click", function () {
       redirectMem(teamName);
     });
     button.innerText = "Go";

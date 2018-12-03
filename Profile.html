@@ -11,7 +11,16 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/themify-icons.css">
     <link rel="stylesheet" href="Profile.css">
-
+    <script>
+        function signOut() {
+            firebase.auth().onAuthStateChanged(function (user) {
+                if (user) {
+                    console.log("Signing out");
+                    firebase.auth().signOut();
+                }
+            });
+        }
+    </script>
 </head>
 
 <body>

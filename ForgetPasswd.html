@@ -35,6 +35,7 @@
         }
       })
     }
+    
     function sendPassReset() {
       var userEmail = document.getElementById('inputEmail').value;
       var ifSent = false;
@@ -63,11 +64,13 @@
 
 <body class="text-center" onload="checkIfSignedIn()">
   <form class="form-signin">
-    <img class="mb-4" src="./img/login_T.png" alt="Team++ Logo" width="72" height="72">
-    <h1 class="h3 mb-3 font-weight-normal">Enter Registered Email Here</h1>
+    <a href="index.html">
+      <img class="mb-4" src="img/logo.png" alt="Team++ Logo" width="175" height="175">
+    </a>
+    <h1 class="h3 mb-3 font-weight-normal">Enter Your Registered Email Here</h1>
     <label for="inputEmail" class="sr-only">Email address</label>
     <input type="text" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-    <button class="signup btn btn-lg btn-primary btn-block" type="button" onclick="sendPassReset()">reset password</button>
+    <button class="signup btn btn-lg btn-primary btn-block" type="button" onclick="sendPassReset()">Reset password</button>
     <p class="mt-5 mb-3 text-muted">&copy; Team++</p>
   </form>
 </body>

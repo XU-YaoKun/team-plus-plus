@@ -4,10 +4,8 @@ var root = firebase.database().ref("Users");
 var userId;
 var currentUser;
 
-
-window.onload = function () {
-
-  firebase.auth().onAuthStateChanged(function (user) {
+window.onload = function() {
+  firebase.auth().onAuthStateChanged(function(user) {
     // User is signed in: set userId and teamId
     if (user) {
       userId = user.uid;
@@ -20,23 +18,21 @@ window.onload = function () {
       updatePhone();
       updateEmail();
       updatePicture();
-      document.getElementById('Password').innerHTML = myPassword.toString();
+      document.getElementById("Password").innerHTML = myPassword.toString();
     }
     // No user is signed in.
     else {
-      console.log('User is not logged in. !!')
+      console.log("User is not logged in. !!");
     }
   });
-}
+};
 
 function nameChange() {
-  document.getElementById('NameText').innerHTML =
+  document.getElementById("NameText").innerHTML =
     '<input id="newName" type="text" placeholder="Insert Your Name" >';
-  document.getElementById('nameEdit').hidden = true;
-  document.getElementById('nameSave').hidden = false;
-  document.getElementById('nameCancel').hidden = false;
-
-
+  document.getElementById("nameEdit").hidden = true;
+  document.getElementById("nameSave").hidden = false;
+  document.getElementById("nameCancel").hidden = false;
 }
 
 function passwordChange() {
@@ -75,13 +71,16 @@ function nameSave() {
   } else {
     document.getElementById("NameText").innerHTML = otherName.toString();
     doneNameEdit();
-    root.child(userId).child("Name").set(otherName.toString());
+    root
+      .child(userId)
+      .child("Name")
+      .set(otherName.toString());
   }
 }
 
 function nameCancel() {
   var databaseName = root.child(userId).child("Name");
-  databaseName.once("value", function (snapshot) {
+  databaseName.once("value", function(snapshot) {
     var temp = snapshot.val();
     document.getElementById("NameText").innerHTML = temp.toString();
   });
@@ -103,7 +102,7 @@ function passwordSave() {
     );
     return false;
   }
-  databasePassword.once("value", function (snapshot) {
+  databasePassword.once("value", function(snapshot) {
     databasePassword = snapshot.val();
     if (databasePassword !== curPassword) {
       alert("Your current password is incorrect. Please Try Again");
@@ -112,13 +111,19 @@ function passwordSave() {
         "The confirm password does not match the new password. Please try again"
       );
     } else {
-      currentUser.updatePassword(newPassword1).then(function () {
-        alert('You have successfully changed your password');
-        root.child(userId).child('Password').set(newPassword1.toString());
-        donePasswordEdit();
-      }).catch(function (error) {
-        alert('An error has occurred. Please try again')
-      })
+      currentUser
+        .updatePassword(newPassword1)
+        .then(function() {
+          alert("You have successfully changed your password");
+          root
+            .child(userId)
+            .child("Password")
+            .set(newPassword1.toString());
+          donePasswordEdit();
+        })
+        .catch(function(error) {
+          alert("An error has occurred. Please try again");
+        });
     }
   });
 }
@@ -146,7 +151,7 @@ function emailSave() {
 
 function emailCancel() {
   var databaseEmail = root.child(userId).child("Email");
-  databaseEmail.once("value", function (snapshot) {
+  databaseEmail.once("value", function(snapshot) {
     var temp = snapshot.val();
     document.getElementById("Email").innerHTML = temp.toString();
   });
@@ -175,7 +180,7 @@ function phoneSave() {
 
 function phoneCancel() {
   var databasePhone = root.child(userId).child("Phone");
-  databasePhone.once("value", function (snapshot) {
+  databasePhone.once("value", function(snapshot) {
     var temp = snapshot.val();
     document.getElementById("Phone").innerHTML = temp.toString();
   });
@@ -210,39 +215,47 @@ function donePasswordEdit() {
   document.getElementById("PasswordRow").style = "";
 }
 
-var fileUpload = document.getElementById('upload');
+var fileUpload = document.getElementById("upload");
 
-fileUpload.addEventListener('change', function (e) {
+fileUpload.addEventListener("change", function(e) {
   var file = e.target.files[0];
-  var databaseStorage = firebase.storage().ref().child(userId);
+  var databaseStorage = firebase
+    .storage()
+    .ref()
+    .child(userId);
   databaseStorage.put(file);
   var reader = new FileReader();
-  reader.onload = function () {
+  reader.onload = function() {
     var image = reader.result;
-    document.getElementById('Pic').src = image;
+    document.getElementById("Pic").src = image;
     //document.getElementById('icon').src = image;
-  }
+  };
   reader.readAsDataURL(file);
-})
+});
 
 async function updatePicture() {
-  var databaseStorage = firebase.storage().ref().child(userId);
-  databaseStorage.getDownloadURL().then(function (url) {
-    document.getElementById('Pic').src = url;
-    // document.getElementById('icon').src = url;
-  }).catch(function (error) {
-    document.getElementById('Pic').src = 'img/sample.png'
-
-  });
+  var databaseStorage = firebase
+    .storage()
+    .ref()
+    .child(userId);
+  databaseStorage
+    .getDownloadURL()
+    .then(function(url) {
+      document.getElementById("Pic").src = url;
+      // document.getElementById('icon').src = url;
+    })
+    .catch(function(error) {
+      document.getElementById("Pic").src = "img/sample.png";
+    });
 }
 
 async function updateName() {
   var databaseName = root.child(userId);
-  databaseName.once("value", function (snapshot) {
+  databaseName.once("value", function(snapshot) {
     if (!snapshot.hasChild("Name")) {
       databaseName.child("Name").set("");
     } else {
-      databaseName.child("Name").once("value", function (snapshot) {
+      databaseName.child("Name").once("value", function(snapshot) {
         var temp = snapshot.val();
         document.getElementById("NameText").innerHTML = temp.toString();
       });
@@ -253,11 +266,11 @@ async function updateName() {
 async function updatePhone() {
   console.log("TEST PASSED");
   var databasePhone = root.child(userId);
-  databasePhone.once("value", function (snapshot) {
+  databasePhone.once("value", function(snapshot) {
     if (!snapshot.hasChild("Phone")) {
       databasePhone.child("Phone").set("");
     } else {
-      databasePhone.child("Phone").once("value", function (snapshot) {
+      databasePhone.child("Phone").once("value", function(snapshot) {
         var temp = snapshot.val();
         document.getElementById("Phone").innerHTML = temp.toString();
       });
@@ -268,11 +281,11 @@ async function updatePhone() {
 async function updateEmail() {
   console.log("TEST PASSED");
   var databaseEmail = root.child(userId);
-  databaseEmail.once("value", function (snapshot) {
+  databaseEmail.once("value", function(snapshot) {
     if (!snapshot.hasChild("Email")) {
       databaseEmail.child("Email").set("");
     } else {
-      databaseEmail.child("Email").once("value", function (snapshot) {
+      databaseEmail.child("Email").once("value", function(snapshot) {
         var temp = snapshot.val();
         document.getElementById("Email").innerHTML = temp.toString();
       });
@@ -281,7 +294,7 @@ async function updateEmail() {
 }
 
 function signOut() {
-  firebase.auth().onAuthStateChanged(function (user) {
+  firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       console.log("Signing out");
       firebase.auth().signOut();

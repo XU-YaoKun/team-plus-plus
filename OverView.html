@@ -29,6 +29,7 @@
     </script>
     <script>
         function signOut() {
+            // Signs user out
             firebase.auth().onAuthStateChanged(function (user) {
                 if (user) {
                     console.log("Signing out");

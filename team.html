@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,9 +25,8 @@
         firebase.initializeApp(config);
     </script>
     <script>
-<<<<<<< HEAD
         function signOut() {
-            // Signs the user out
+            // Signs user out
             firebase.auth().onAuthStateChanged(function (user) {
                 if (user) {
                     console.log("Signing out");
@@ -36,49 +36,29 @@
         }
     </script>
     <script>
-=======
->>>>>>> 3ca523bfd8c32b2ece2df3f38ee42d3540f95ac3
         window.onload = function () {
 
-            firebase.auth().onAuthStateChanged(function(user){
+            firebase.auth().onAuthStateChanged(function (user) {
                 // User is signed in: set userId and teamId
-                if (user){
+                if (user) {
                     userID = user.uid;
                     updateAdminList();
                     updateMemList();
                 }
-<<<<<<< HEAD
-                // No user is signed in. Redirect user back to login page.
+                // No user is signed in. Redirect user to login.
                 else {
-                    console.log('User is not logged in. !!')
-                    window.location.href="index.html";
-
-=======
-                // No user is signed in.
-                else{
                     console.log('User is not logged in.')
->>>>>>> 3ca523bfd8c32b2ece2df3f38ee42d3540f95ac3
+                    window.location.href = "index.html";
                 }
             });
         };
     </script>
 </head>
+
 <body>
-<<<<<<< HEAD
-    <!-- Left Panel -->
-    <!--<aside id="left-panel" class="left-panel">
-
-    </aside>-->
-    <!-- /#left-panel -->
-    <!-- Left Panel -->
-
-    <!-- right Panel-->
-    <!-- Header-->
-=======
     <!-- Left Panel
     <aside id="left-panel" class="left-panel"></aside>
     -->
->>>>>>> 3ca523bfd8c32b2ece2df3f38ee42d3540f95ac3
     <div id="right-panel" class="right-panel">
 
         <header id="header" class="header">
@@ -90,7 +70,7 @@
             <div class="top-right">
                 <div class="header-menu">
                     <div class="user-area float-right">
-                        <a href="Login.html" class="dropdown-toggle active">
+                        <a href="index.html" onclick="signOut()" class="dropdown-toggle active">
                             <img class="user-avatar rounded-circle" src="img/sample.png" alt="User Avatar">
                         </a>
                     </div>
@@ -100,9 +80,9 @@
         <!-- Header-->
 
         <div class="content">
-                <!--add your code here:) feel free to add your own .css file-->
+            <!--add your code here:) feel free to add your own .css file-->
 
-                <!--overall info-->
+            <!--overall info-->
             <div class="row">
                 <div class="col-lg-6">
                     <div class="card">
@@ -111,8 +91,10 @@
                             <p>Create or Join Existing Teams Here</p>
                         </div>
                         <div class="card-body">
-                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="createTeam()">Create Team</button>
-                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button" onclick="joinTeam()">Join Team</button>
+                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button"
+                                onclick="createTeam()">Create Team</button>
+                            <button style="width: 50%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button"
+                                onclick="joinTeam()">Join Team</button>
                         </div>
                     </div>
                 </div>
@@ -126,11 +108,11 @@
                         <div class="table-stats order-table ov-h admin">
                             <table class="table ">
                                 <thead>
-                                <tr>
-                                    <th class="serial">#</th>
-                                    <th>Name</th>
-                                    <th>Navigate to Team</th>
-                                </tr>
+                                    <tr>
+                                        <th class="serial">#</th>
+                                        <th>Name</th>
+                                        <th>Navigate to Team</th>
+                                    </tr>
                                 </thead>
                                 <tbody id="admin">
 
@@ -147,11 +129,11 @@
                         <div class="table-stats order-table ov-h">
                             <table class="table ">
                                 <thead>
-                                <tr>
-                                    <th class="serial">#</th>
-                                    <th>Name</th>
-                                    <th>Navigate to Team</th>
-                                </tr>
+                                    <tr>
+                                        <th class="serial">#</th>
+                                        <th>Name</th>
+                                        <th>Navigate to Team</th>
+                                    </tr>
                                 </thead>
                                 <tbody id="member">
 
@@ -163,12 +145,15 @@
 
             </div>
 
-                 
 
 
-        </div><!--content End-->
-    </div><!--Right panel end-->
-    
+
+        </div>
+        <!--content End-->
+    </div>
+    <!--Right panel end-->
+
 </body>
 <script src="team.js"></script>
+
 </html>

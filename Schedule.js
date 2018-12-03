@@ -2,7 +2,7 @@ var mainText = document.getElementById("mainText");
 var submitBtn = document.getElementById("submitBtn");
 var root = firebase.database().ref();
 
-window.onload = function () {
+window.onload = function() {
   var Yid = new Array();
   for (var i = 0; i < 7; i++) {
     Yid[i] = new Array(i);
@@ -709,7 +709,7 @@ window.onload = function () {
     .child("availability")
     .child(Yid[6][10]);
 
-  Y00.once("value", function (snapshot) {
+  Y00.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -721,7 +721,7 @@ window.onload = function () {
     }
   });
 
-  Y10.once("value", function (snapshot) {
+  Y10.once("value", function(snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Yid[1][0]).style.background = "rgb(51, 153, 0)";
@@ -732,7 +732,7 @@ window.onload = function () {
     }
   });
 
-  Y20.once("value", function (snapshot) {
+  Y20.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -744,7 +744,7 @@ window.onload = function () {
     }
   });
 
-  Y30.once("value", function (snapshot) {
+  Y30.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -756,7 +756,7 @@ window.onload = function () {
     }
   });
 
-  Y40.once("value", function (snapshot) {
+  Y40.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -768,7 +768,7 @@ window.onload = function () {
     }
   });
 
-  Y50.once("value", function (snapshot) {
+  Y50.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -780,7 +780,7 @@ window.onload = function () {
     }
   });
 
-  Y60.once("value", function (snapshot) {
+  Y60.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -792,7 +792,7 @@ window.onload = function () {
     }
   });
 
-  Y01.once("value", function (snapshot) {
+  Y01.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -804,7 +804,7 @@ window.onload = function () {
     }
   });
 
-  Y11.once("value", function (snapshot) {
+  Y11.once("value", function(snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Yid[1][1]).style.background = "rgb(51, 153, 0)";
@@ -815,7 +815,7 @@ window.onload = function () {
     }
   });
 
-  Y21.once("value", function (snapshot) {
+  Y21.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -827,7 +827,7 @@ window.onload = function () {
     }
   });
 
-  Y31.once("value", function (snapshot) {
+  Y31.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -839,7 +839,7 @@ window.onload = function () {
     }
   });
 
-  Y41.once("value", function (snapshot) {
+  Y41.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -851,7 +851,7 @@ window.onload = function () {
     }
   });
 
-  Y51.once("value", function (snapshot) {
+  Y51.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -863,7 +863,7 @@ window.onload = function () {
     }
   });
 
-  Y61.once("value", function (snapshot) {
+  Y61.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -875,7 +875,7 @@ window.onload = function () {
     }
   });
 
-  Y02.once("value", function (snapshot) {
+  Y02.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -887,7 +887,7 @@ window.onload = function () {
     }
   });
 
-  Y12.once("value", function (snapshot) {
+  Y12.once("value", function(snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Yid[1][2]).style.background = "rgb(51, 153, 0)";
@@ -898,7 +898,7 @@ window.onload = function () {
     }
   });
 
-  Y22.once("value", function (snapshot) {
+  Y22.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -910,7 +910,7 @@ window.onload = function () {
     }
   });
 
-  Y32.once("value", function (snapshot) {
+  Y32.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -922,7 +922,7 @@ window.onload = function () {
     }
   });
 
-  Y42.once("value", function (snapshot) {
+  Y42.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -934,7 +934,7 @@ window.onload = function () {
     }
   });
 
-  Y52.once("value", function (snapshot) {
+  Y52.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -946,7 +946,7 @@ window.onload = function () {
     }
   });
 
-  Y62.once("value", function (snapshot) {
+  Y62.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -958,7 +958,7 @@ window.onload = function () {
     }
   });
 
-  Y03.once("value", function (snapshot) {
+  Y03.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -970,7 +970,7 @@ window.onload = function () {
     }
   });
 
-  Y13.once("value", function (snapshot) {
+  Y13.once("value", function(snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Yid[1][3]).style.background = "rgb(51, 153, 0)";
@@ -981,7 +981,7 @@ window.onload = function () {
     }
   });
 
-  Y23.once("value", function (snapshot) {
+  Y23.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -993,7 +993,7 @@ window.onload = function () {
     }
   });
 
-  Y33.once("value", function (snapshot) {
+  Y33.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1005,7 +1005,7 @@ window.onload = function () {
     }
   });
 
-  Y43.once("value", function (snapshot) {
+  Y43.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1017,7 +1017,7 @@ window.onload = function () {
     }
   });
 
-  Y53.once("value", function (snapshot) {
+  Y53.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1029,7 +1029,7 @@ window.onload = function () {
     }
   });
 
-  Y63.once("value", function (snapshot) {
+  Y63.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1040,7 +1040,7 @@ window.onload = function () {
         "rgb(255, 222, 222)";
     }
   });
-  Y04.once("value", function (snapshot) {
+  Y04.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1052,7 +1052,7 @@ window.onload = function () {
     }
   });
 
-  Y14.once("value", function (snapshot) {
+  Y14.once("value", function(snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Yid[1][4]).style.background = "rgb(51, 153, 0)";
@@ -1063,7 +1063,7 @@ window.onload = function () {
     }
   });
 
-  Y24.once("value", function (snapshot) {
+  Y24.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1075,7 +1075,7 @@ window.onload = function () {
     }
   });
 
-  Y34.once("value", function (snapshot) {
+  Y34.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1087,7 +1087,7 @@ window.onload = function () {
     }
   });
 
-  Y44.once("value", function (snapshot) {
+  Y44.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1099,7 +1099,7 @@ window.onload = function () {
     }
   });
 
-  Y54.once("value", function (snapshot) {
+  Y54.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1111,7 +1111,7 @@ window.onload = function () {
     }
   });
 
-  Y64.once("value", function (snapshot) {
+  Y64.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1123,7 +1123,7 @@ window.onload = function () {
     }
   });
 
-  Y05.once("value", function (snapshot) {
+  Y05.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1135,7 +1135,7 @@ window.onload = function () {
     }
   });
 
-  Y15.once("value", function (snapshot) {
+  Y15.once("value", function(snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Yid[1][5]).style.background = "rgb(51, 153, 0)";
@@ -1146,7 +1146,7 @@ window.onload = function () {
     }
   });
 
-  Y25.once("value", function (snapshot) {
+  Y25.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1158,7 +1158,7 @@ window.onload = function () {
     }
   });
 
-  Y35.once("value", function (snapshot) {
+  Y35.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1170,7 +1170,7 @@ window.onload = function () {
     }
   });
 
-  Y45.once("value", function (snapshot) {
+  Y45.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1182,7 +1182,7 @@ window.onload = function () {
     }
   });
 
-  Y55.once("value", function (snapshot) {
+  Y55.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1194,7 +1194,7 @@ window.onload = function () {
     }
   });
 
-  Y65.once("value", function (snapshot) {
+  Y65.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1206,7 +1206,7 @@ window.onload = function () {
     }
   });
 
-  Y06.once("value", function (snapshot) {
+  Y06.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1218,7 +1218,7 @@ window.onload = function () {
     }
   });
 
-  Y16.once("value", function (snapshot) {
+  Y16.once("value", function(snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Yid[1][6]).style.background = "rgb(51, 153, 0)";
@@ -1229,7 +1229,7 @@ window.onload = function () {
     }
   });
 
-  Y26.once("value", function (snapshot) {
+  Y26.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1241,7 +1241,7 @@ window.onload = function () {
     }
   });
 
-  Y36.once("value", function (snapshot) {
+  Y36.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1253,7 +1253,7 @@ window.onload = function () {
     }
   });
 
-  Y46.once("value", function (snapshot) {
+  Y46.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1265,7 +1265,7 @@ window.onload = function () {
     }
   });
 
-  Y56.once("value", function (snapshot) {
+  Y56.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1277,7 +1277,7 @@ window.onload = function () {
     }
   });
 
-  Y66.once("value", function (snapshot) {
+  Y66.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1289,7 +1289,7 @@ window.onload = function () {
     }
   });
 
-  Y07.once("value", function (snapshot) {
+  Y07.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1301,7 +1301,7 @@ window.onload = function () {
     }
   });
 
-  Y17.once("value", function (snapshot) {
+  Y17.once("value", function(snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Yid[1][7]).style.background = "rgb(51, 153, 0)";
@@ -1312,7 +1312,7 @@ window.onload = function () {
     }
   });
 
-  Y27.once("value", function (snapshot) {
+  Y27.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1324,7 +1324,7 @@ window.onload = function () {
     }
   });
 
-  Y37.once("value", function (snapshot) {
+  Y37.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1336,7 +1336,7 @@ window.onload = function () {
     }
   });
 
-  Y47.once("value", function (snapshot) {
+  Y47.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1348,7 +1348,7 @@ window.onload = function () {
     }
   });
 
-  Y57.once("value", function (snapshot) {
+  Y57.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1360,7 +1360,7 @@ window.onload = function () {
     }
   });
 
-  Y67.once("value", function (snapshot) {
+  Y67.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1372,7 +1372,7 @@ window.onload = function () {
     }
   });
 
-  Y08.once("value", function (snapshot) {
+  Y08.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1384,7 +1384,7 @@ window.onload = function () {
     }
   });
 
-  Y18.once("value", function (snapshot) {
+  Y18.once("value", function(snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Yid[1][8]).style.background = "rgb(51, 153, 0)";
@@ -1395,7 +1395,7 @@ window.onload = function () {
     }
   });
 
-  Y28.once("value", function (snapshot) {
+  Y28.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1407,7 +1407,7 @@ window.onload = function () {
     }
   });
 
-  Y38.once("value", function (snapshot) {
+  Y38.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1419,7 +1419,7 @@ window.onload = function () {
     }
   });
 
-  Y48.once("value", function (snapshot) {
+  Y48.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1431,7 +1431,7 @@ window.onload = function () {
     }
   });
 
-  Y58.once("value", function (snapshot) {
+  Y58.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1443,7 +1443,7 @@ window.onload = function () {
     }
   });
 
-  Y68.once("value", function (snapshot) {
+  Y68.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1455,7 +1455,7 @@ window.onload = function () {
     }
   });
 
-  Y09.once("value", function (snapshot) {
+  Y09.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1467,7 +1467,7 @@ window.onload = function () {
     }
   });
 
-  Y19.once("value", function (snapshot) {
+  Y19.once("value", function(snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Yid[1][9]).style.background = "rgb(51, 153, 0)";
@@ -1478,7 +1478,7 @@ window.onload = function () {
     }
   });
 
-  Y29.once("value", function (snapshot) {
+  Y29.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1490,7 +1490,7 @@ window.onload = function () {
     }
   });
 
-  Y39.once("value", function (snapshot) {
+  Y39.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1502,7 +1502,7 @@ window.onload = function () {
     }
   });
 
-  Y49.once("value", function (snapshot) {
+  Y49.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1514,7 +1514,7 @@ window.onload = function () {
     }
   });
 
-  Y59.once("value", function (snapshot) {
+  Y59.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1526,7 +1526,7 @@ window.onload = function () {
     }
   });
 
-  Y69.once("value", function (snapshot) {
+  Y69.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1538,7 +1538,7 @@ window.onload = function () {
     }
   });
 
-  Y0X.once("value", function (snapshot) {
+  Y0X.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1550,7 +1550,7 @@ window.onload = function () {
     }
   });
 
-  Y1X.once("value", function (snapshot) {
+  Y1X.once("value", function(snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Yid[1][10]).style.background = "rgb(51, 153, 0)";
@@ -1561,7 +1561,7 @@ window.onload = function () {
     }
   });
 
-  Y2X.once("value", function (snapshot) {
+  Y2X.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1573,7 +1573,7 @@ window.onload = function () {
     }
   });
 
-  Y3X.once("value", function (snapshot) {
+  Y3X.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1585,7 +1585,7 @@ window.onload = function () {
     }
   });
 
-  Y4X.once("value", function (snapshot) {
+  Y4X.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1597,7 +1597,7 @@ window.onload = function () {
     }
   });
 
-  Y5X.once("value", function (snapshot) {
+  Y5X.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1609,7 +1609,7 @@ window.onload = function () {
     }
   });
 
-  Y6X.once("value", function (snapshot) {
+  Y6X.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2327,7 +2327,7 @@ window.onload = function () {
     .child("availability")
     .child(Tid[6][10]);
 
-  Y00.once("value", function (snapshot) {
+  Y00.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2339,7 +2339,7 @@ window.onload = function () {
     }
   });
 
-  Y10.once("value", function (snapshot) {
+  Y10.once("value", function(snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Tid[1][0]).style.background = "rgb(51, 153, 0)";
@@ -2350,7 +2350,7 @@ window.onload = function () {
     }
   });
 
-  Y20.once("value", function (snapshot) {
+  Y20.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2362,7 +2362,7 @@ window.onload = function () {
     }
   });
 
-  Y30.once("value", function (snapshot) {
+  Y30.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2374,7 +2374,7 @@ window.onload = function () {
     }
   });
 
-  Y40.once("value", function (snapshot) {
+  Y40.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2386,7 +2386,7 @@ window.onload = function () {
     }
   });
 
-  Y50.once("value", function (snapshot) {
+  Y50.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2398,7 +2398,7 @@ window.onload = function () {
     }
   });
 
-  Y60.once("value", function (snapshot) {
+  Y60.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2410,7 +2410,7 @@ window.onload = function () {
     }
   });
 
-  Y01.once("value", function (snapshot) {
+  Y01.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2422,7 +2422,7 @@ window.onload = function () {
     }
   });
 
-  Y11.once("value", function (snapshot) {
+  Y11.once("value", function(snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Tid[1][1]).style.background = "rgb(51, 153, 0)";
@@ -2433,7 +2433,7 @@ window.onload = function () {
     }
   });
 
-  Y21.once("value", function (snapshot) {
+  Y21.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2445,7 +2445,7 @@ window.onload = function () {
     }
   });
 
-  Y31.once("value", function (snapshot) {
+  Y31.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2457,7 +2457,7 @@ window.onload = function () {
     }
   });
 
-  Y41.once("value", function (snapshot) {
+  Y41.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2469,7 +2469,7 @@ window.onload = function () {
     }
   });
 
-  Y51.once("value", function (snapshot) {
+  Y51.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2481,7 +2481,7 @@ window.onload = function () {
     }
   });
 
-  Y61.once("value", function (snapshot) {
+  Y61.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2493,7 +2493,7 @@ window.onload = function () {
     }
   });
 
-  Y02.once("value", function (snapshot) {
+  Y02.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2505,7 +2505,7 @@ window.onload = function () {
     }
   });
 
-  Y12.once("value", function (snapshot) {
+  Y12.once("value", function(snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Tid[1][2]).style.background = "rgb(51, 153, 0)";
@@ -2516,7 +2516,7 @@ window.onload = function () {
     }
   });
 
-  Y22.once("value", function (snapshot) {
+  Y22.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2528,7 +2528,7 @@ window.onload = function () {
     }
   });
 
-  Y32.once("value", function (snapshot) {
+  Y32.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2540,7 +2540,7 @@ window.onload = function () {
     }
   });
 
-  Y42.once("value", function (snapshot) {
+  Y42.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2552,7 +2552,7 @@ window.onload = function () {
     }
   });
 
-  Y52.once("value", function (snapshot) {
+  Y52.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2564,7 +2564,7 @@ window.onload = function () {
     }
   });
 
-  Y62.once("value", function (snapshot) {
+  Y62.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2576,7 +2576,7 @@ window.onload = function () {
     }
   });
 
-  Y03.once("value", function (snapshot) {
+  Y03.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2588,7 +2588,7 @@ window.onload = function () {
     }
   });
 
-  Y13.once("value", function (snapshot) {
+  Y13.once("value", function(snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Tid[1][3]).style.background = "rgb(51, 153, 0)";
@@ -2599,7 +2599,7 @@ window.onload = function () {
     }
   });
 
-  Y23.once("value", function (snapshot) {
+  Y23.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2611,7 +2611,7 @@ window.onload = function () {
     }
   });
 
-  Y33.once("value", function (snapshot) {
+  Y33.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2623,7 +2623,7 @@ window.onload = function () {
     }
   });
 
-  Y43.once("value", function (snapshot) {
+  Y43.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2635,7 +2635,7 @@ window.onload = function () {
     }
   });
 
-  Y53.once("value", function (snapshot) {
+  Y53.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2647,7 +2647,7 @@ window.onload = function () {
     }
   });
 
-  Y63.once("value", function (snapshot) {
+  Y63.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2658,7 +2658,7 @@ window.onload = function () {
         "rgb(255, 222, 222)";
     }
   });
-  Y04.once("value", function (snapshot) {
+  Y04.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2670,7 +2670,7 @@ window.onload = function () {
     }
   });
 
-  Y14.once("value", function (snapshot) {
+  Y14.once("value", function(snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Tid[1][4]).style.background = "rgb(51, 153, 0)";
@@ -2681,7 +2681,7 @@ window.onload = function () {
     }
   });
 
-  Y24.once("value", function (snapshot) {
+  Y24.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2693,7 +2693,7 @@ window.onload = function () {
     }
   });
 
-  Y34.once("value", function (snapshot) {
+  Y34.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2705,7 +2705,7 @@ window.onload = function () {
     }
   });
 
-  Y44.once("value", function (snapshot) {
+  Y44.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2717,7 +2717,7 @@ window.onload = function () {
     }
   });
 
-  Y54.once("value", function (snapshot) {
+  Y54.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2729,7 +2729,7 @@ window.onload = function () {
     }
   });
 
-  Y64.once("value", function (snapshot) {
+  Y64.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2741,7 +2741,7 @@ window.onload = function () {
     }
   });
 
-  Y05.once("value", function (snapshot) {
+  Y05.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2753,7 +2753,7 @@ window.onload = function () {
     }
   });
 
-  Y15.once("value", function (snapshot) {
+  Y15.once("value", function(snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Tid[1][5]).style.background = "rgb(51, 153, 0)";
@@ -2764,7 +2764,7 @@ window.onload = function () {
     }
   });
 
-  Y25.once("value", function (snapshot) {
+  Y25.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2776,7 +2776,7 @@ window.onload = function () {
     }
   });
 
-  Y35.once("value", function (snapshot) {
+  Y35.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2788,7 +2788,7 @@ window.onload = function () {
     }
   });
 
-  Y45.once("value", function (snapshot) {
+  Y45.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2800,7 +2800,7 @@ window.onload = function () {
     }
   });
 
-  Y55.once("value", function (snapshot) {
+  Y55.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2812,7 +2812,7 @@ window.onload = function () {
     }
   });
 
-  Y65.once("value", function (snapshot) {
+  Y65.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2824,7 +2824,7 @@ window.onload = function () {
     }
   });
 
-  Y06.once("value", function (snapshot) {
+  Y06.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2836,7 +2836,7 @@ window.onload = function () {
     }
   });
 
-  Y16.once("value", function (snapshot) {
+  Y16.once("value", function(snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Tid[1][6]).style.background = "rgb(51, 153, 0)";
@@ -2847,7 +2847,7 @@ window.onload = function () {
     }
   });
 
-  Y26.once("value", function (snapshot) {
+  Y26.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2859,7 +2859,7 @@ window.onload = function () {
     }
   });
 
-  Y36.once("value", function (snapshot) {
+  Y36.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2871,7 +2871,7 @@ window.onload = function () {
     }
   });
 
-  Y46.once("value", function (snapshot) {
+  Y46.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2883,7 +2883,7 @@ window.onload = function () {
     }
   });
 
-  Y56.once("value", function (snapshot) {
+  Y56.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2895,7 +2895,7 @@ window.onload = function () {
     }
   });
 
-  Y66.once("value", function (snapshot) {
+  Y66.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2907,7 +2907,7 @@ window.onload = function () {
     }
   });
 
-  Y07.once("value", function (snapshot) {
+  Y07.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2919,7 +2919,7 @@ window.onload = function () {
     }
   });
 
-  Y17.once("value", function (snapshot) {
+  Y17.once("value", function(snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Tid[1][7]).style.background = "rgb(51, 153, 0)";
@@ -2930,7 +2930,7 @@ window.onload = function () {
     }
   });
 
-  Y27.once("value", function (snapshot) {
+  Y27.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2942,7 +2942,7 @@ window.onload = function () {
     }
   });
 
-  Y37.once("value", function (snapshot) {
+  Y37.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2954,7 +2954,7 @@ window.onload = function () {
     }
   });
 
-  Y47.once("value", function (snapshot) {
+  Y47.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2966,7 +2966,7 @@ window.onload = function () {
     }
   });
 
-  Y57.once("value", function (snapshot) {
+  Y57.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2978,7 +2978,7 @@ window.onload = function () {
     }
   });
 
-  Y67.once("value", function (snapshot) {
+  Y67.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -2990,7 +2990,7 @@ window.onload = function () {
     }
   });
 
-  Y08.once("value", function (snapshot) {
+  Y08.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -3002,7 +3002,7 @@ window.onload = function () {
     }
   });
 
-  Y18.once("value", function (snapshot) {
+  Y18.once("value", function(snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Tid[1][8]).style.background = "rgb(51, 153, 0)";
@@ -3013,7 +3013,7 @@ window.onload = function () {
     }
   });
 
-  Y28.once("value", function (snapshot) {
+  Y28.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -3025,7 +3025,7 @@ window.onload = function () {
     }
   });
 
-  Y38.once("value", function (snapshot) {
+  Y38.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -3037,7 +3037,7 @@ window.onload = function () {
     }
   });
 
-  Y48.once("value", function (snapshot) {
+  Y48.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -3049,7 +3049,7 @@ window.onload = function () {
     }
   });
 
-  Y58.once("value", function (snapshot) {
+  Y58.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -3061,7 +3061,7 @@ window.onload = function () {
     }
   });
 
-  Y68.once("value", function (snapshot) {
+  Y68.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -3073,7 +3073,7 @@ window.onload = function () {
     }
   });
 
-  Y09.once("value", function (snapshot) {
+  Y09.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -3085,7 +3085,7 @@ window.onload = function () {
     }
   });
 
-  Y19.once("value", function (snapshot) {
+  Y19.once("value", function(snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Tid[1][9]).style.background = "rgb(51, 153, 0)";
@@ -3096,7 +3096,7 @@ window.onload = function () {
     }
   });
 
-  Y29.once("value", function (snapshot) {
+  Y29.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -3108,7 +3108,7 @@ window.onload = function () {
     }
   });
 
-  Y39.once("value", function (snapshot) {
+  Y39.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -3120,7 +3120,7 @@ window.onload = function () {
     }
   });
 
-  Y49.once("value", function (snapshot) {
+  Y49.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -3132,7 +3132,7 @@ window.onload = function () {
     }
   });
 
-  Y59.once("value", function (snapshot) {
+  Y59.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -3144,7 +3144,7 @@ window.onload = function () {
     }
   });
 
-  Y69.once("value", function (snapshot) {
+  Y69.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -3156,7 +3156,7 @@ window.onload = function () {
     }
   });
 
-  Y0X.once("value", function (snapshot) {
+  Y0X.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -3168,7 +3168,7 @@ window.onload = function () {
     }
   });
 
-  Y1X.once("value", function (snapshot) {
+  Y1X.once("value", function(snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Tid[1][10]).style.background = "rgb(51, 153, 0)";
@@ -3179,7 +3179,7 @@ window.onload = function () {
     }
   });
 
-  Y2X.once("value", function (snapshot) {
+  Y2X.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -3191,7 +3191,7 @@ window.onload = function () {
     }
   });
 
-  Y3X.once("value", function (snapshot) {
+  Y3X.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -3203,7 +3203,7 @@ window.onload = function () {
     }
   });
 
-  Y4X.once("value", function (snapshot) {
+  Y4X.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -3215,7 +3215,7 @@ window.onload = function () {
     }
   });
 
-  Y5X.once("value", function (snapshot) {
+  Y5X.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -3227,7 +3227,7 @@ window.onload = function () {
     }
   });
 
-  Y6X.once("value", function (snapshot) {
+  Y6X.once("value", function(snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {

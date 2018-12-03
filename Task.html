@@ -13,7 +13,15 @@
 
 </head>
 <script>
-
+    function signOut() {
+        // Signs user out
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                console.log("Signing out");
+                firebase.auth().signOut();
+            }
+        });
+    }
 </script>
 
 <body>
@@ -51,13 +59,8 @@
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
-<<<<<<< HEAD
         </nav>
     </aside><!-- /#left-panel -->
-=======
-        </nav> 
-    </aside><!-- /#left-panel --> 
->>>>>>> 3ca523bfd8c32b2ece2df3f38ee42d3540f95ac3
     <!-- Left Panel -->
 
     <!-- right Panel-->
@@ -73,7 +76,7 @@
             <div class="top-right">
                 <div class="header-menu">
                     <div class="user-area float-right">
-                        <a href="index.html" class="dropdown-toggle active">
+                        <a href="index.html" onclick="signOut()" class="dropdown-toggle active">
                             <img class="user-avatar rounded-circle" src="img/sample.png" alt="User Avatar">
                         </a>
                     </div>

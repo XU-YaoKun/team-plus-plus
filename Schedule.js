@@ -3,7 +3,7 @@ var submitBtn = document.getElementById("submitBtn");
 var root = firebase.database().ref();
 var teamId;
 var userId;
-
+var tSize;
 // get userId from database
 firebase.auth().onAuthStateChanged(async function(user){
     // User is signed in: set userId and teamId
@@ -12,11 +12,12 @@ firebase.auth().onAuthStateChanged(async function(user){
         console.log("Hello "+user.uid);
         var ref = firebase.database().ref("Users/" + userId);
         await loadTeamId(ref);
-
+        var ref_tSize = firebase.database().ref("Team/" + teamId);
+        await loadTeamSize(ref_tSize);
         // Check values
         console.log("userId has been set: "+ userId);
         console.log("teamId has been set: " + teamId);
-
+        console.log("teamSize has been set: " + tSize);
     }
     // No user is signed in.
     else{
@@ -31,10 +32,24 @@ async function loadTeamId(ref){
 
     });
 }
+async function loadTeamSize(ref){
+    return ref.once('value').then(function(snapshot){
+        //console.log(snapshot.val())
+        tSize = snapshot.val().teamSize;
 
+    });
+}
 
 window.onload = function () {
     // update Your availability for each grid from database
+    // var r = firebase.database().ref("Team/"+teamId);
+    // r.once('value', function(snapshot){
+    //     tSize = snapshot.val().teamSize;
+    // });
+    //
+    // console.log(tSize);
+
+
     var Yid = new Array();
     for (var i = 0; i < 7; i++) {
         Yid[i] = new Array(i);
@@ -980,14 +995,14 @@ window.onload = function () {
     console.log(Tid);
 
     // We still need to get the size of team!!!!!
-    var teamSize = 1;
+    //var teamSize = 1;
 
     // update Team Availability table based on database
     // calculate the number of people who are available at this time, compare it to the size of team. if all team mambers are available, change color to green.
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[0][0]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[0][0]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -995,7 +1010,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[1][0]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[1][0]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1003,7 +1018,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[2][0]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[2][0]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1011,7 +1026,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[3][0]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[3][0]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1019,7 +1034,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[4][0]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[4][0]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1027,7 +1042,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[5][0]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[5][0]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1035,7 +1050,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[6][0]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[6][0]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1043,7 +1058,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[0][1]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[0][1]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1051,7 +1066,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[1][1]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[1][1]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1059,7 +1074,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[2][1]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[2][1]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1067,7 +1082,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[3][1]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[3][1]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1075,7 +1090,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[4][1]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[4][1]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1083,7 +1098,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[5][1]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[5][1]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1091,7 +1106,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[6][1]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[6][1]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1099,7 +1114,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[0][2]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[0][2]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1107,7 +1122,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[1][2]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[1][2]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1115,7 +1130,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[2][2]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[2][2]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1123,7 +1138,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[3][2]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[3][2]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1131,7 +1146,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[4][2]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[4][2]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1139,7 +1154,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[5][2]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[5][2]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1147,7 +1162,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[6][2]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[6][2]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1155,7 +1170,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[0][2]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[0][2]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1163,7 +1178,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[1][2]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[1][2]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1171,7 +1186,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[2][2]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[2][2]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1179,7 +1194,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[3][2]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[3][2]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1187,7 +1202,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[4][2]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[4][2]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1195,7 +1210,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[5][2]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[5][2]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1203,7 +1218,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[6][2]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[6][2]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1211,7 +1226,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[0][3]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[0][3]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1219,7 +1234,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[1][3]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[1][3]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1227,7 +1242,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[2][3]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[2][3]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1235,7 +1250,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[3][3]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[3][3]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1243,7 +1258,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[4][3]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[4][3]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1251,7 +1266,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[5][3]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[5][3]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1259,7 +1274,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[6][3]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[6][3]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1267,7 +1282,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[0][4]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[0][4]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1275,7 +1290,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[1][4]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[1][4]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1283,7 +1298,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[2][4]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[2][4]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1291,7 +1306,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[3][4]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[3][4]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1299,7 +1314,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[4][4]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[4][4]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1307,7 +1322,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[5][4]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[5][4]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1315,7 +1330,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[6][4]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[6][4]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1323,7 +1338,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[0][5]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[0][5]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1331,7 +1346,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[1][5]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[1][5]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1339,7 +1354,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[2][5]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[2][5]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1347,7 +1362,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[3][5]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[3][5]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1355,7 +1370,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[4][5]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[4][5]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1363,7 +1378,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[5][5]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[5][5]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1371,7 +1386,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[6][5]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[6][5]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1379,7 +1394,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[0][6]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[0][6]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1387,7 +1402,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[1][6]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[1][6]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1395,7 +1410,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[2][6]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[2][6]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1403,7 +1418,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[3][6]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[3][6]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1411,7 +1426,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[4][6]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[4][6]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1419,7 +1434,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[5][6]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[5][6]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1427,7 +1442,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[6][6]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[6][6]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1435,7 +1450,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[0][7]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[0][7]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1443,7 +1458,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[1][7]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[1][7]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1451,7 +1466,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[2][7]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[2][7]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1459,7 +1474,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[3][7]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[3][7]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1467,7 +1482,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[4][7]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[4][7]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1475,7 +1490,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[5][7]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[5][7]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1483,7 +1498,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[6][7]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[6][7]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1491,7 +1506,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[0][8]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[0][8]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1499,7 +1514,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[1][8]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[1][8]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1507,7 +1522,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[2][8]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[2][8]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1515,7 +1530,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[3][8]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[3][8]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1523,7 +1538,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[4][8]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[4][8]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1531,7 +1546,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[5][8]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[5][8]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1539,7 +1554,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[6][8]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[6][8]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1547,7 +1562,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[0][9]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[0][9]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1555,7 +1570,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[1][9]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[1][9]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1563,7 +1578,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[2][9]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[2][9]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1571,7 +1586,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[3][9]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[3][9]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1579,7 +1594,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[4][9]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[4][9]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1587,7 +1602,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[5][9]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[5][9]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1595,7 +1610,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[6][9]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[6][9]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1603,7 +1618,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[0][10]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[0][10]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1611,7 +1626,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[1][10]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[1][10]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1619,7 +1634,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[2][10]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[2][10]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1627,7 +1642,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[3][10]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[3][10]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1635,7 +1650,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[4][10]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[4][10]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1643,7 +1658,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[5][10]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[5][10]).style.background = 'rgb(51, 153, 0)';
         }
     });
@@ -1651,7 +1666,7 @@ window.onload = function () {
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[6][10]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
-        if (temp == teamSize) {
+        if (temp == tSize) {
             document.getElementById(Tid[6][10]).style.background = 'rgb(51, 153, 0)';
         }
     });

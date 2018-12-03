@@ -6,7 +6,25 @@ var cuTeam = null;
 var validUser = false;
 var username = null;
 var userID = null;
+var taskCount = 0;
 var description = "Not defined";
+
+async function getIndividualTask(ref) {
+    var taskDoer;
+    var taskStatus;
+    ref.on('value', function (snapshot) {
+        console.log('HERE');
+        if(snapshot.val() !== null){
+            snapshot.forEach(function (item) {
+                taskDoer = item.val().handler;
+                taskStatus = item.val().status;
+                if(taskDoer == username && taskStatus !== 'fin' ){
+                    taskCount += 1;
+                }
+            });
+        }
+    });
+}
 
 async function teamExistInRef(ref, data) {
   return ref.child(data).once("value", function(snapshot) {
@@ -413,6 +431,14 @@ async function updateView() {
   var tref = firebase.database().ref("Team/" + cuTeam + "/Members");
   var members = document.getElementById("allMem");
 
+  var taskRef = firebase.database().ref("Team/" + cuTeam + "/Tasks");
+  var path = firebase.database().ref("Users/" + userID + '/Name');
+  await getUserName(path);
+  await getIndividualTask(taskRef);
+  setTimeout( function () {
+      document.getElementById('taskNum').innerText = taskCount;
+  }, 50);
+
   tref.on("child_added", snapshot => {
     var name = snapshot.val()[0];
     var role = snapshot.val()[1];
@@ -501,6 +527,14 @@ async function updateViewMem() {
   var tref = firebase.database().ref("Team/" + cuTeam + "/Members");
   var members = document.getElementById("allMem");
 
+  var taskRef = firebase.database().ref("Team/" + cuTeam + "/Tasks");
+  var path = firebase.database().ref("Users/" + userID + '/Name');
+  await getUserName(path);
+  await getIndividualTask(taskRef);
+  setTimeout( function () {
+      document.getElementById('taskNum').innerText = taskCount;
+  }, 50);
+
   tref.on("child_added", snapshot => {
     var name = snapshot.val()[0];
     var role = snapshot.val()[1];
@@ -532,6 +566,7 @@ async function updateAdminList() {
     tr.className = teamName;
     var td1 = document.createElement("td");
     td1.className = "serial";
+    td1.style = "text-align: center";
     td1.innerText = count.toString() + ".";
     var td2 = document.createElement("td");
     var td3 = document.createElement("td");
@@ -570,6 +605,7 @@ async function updateMemList() {
     tr.className = teamName;
     var td1 = document.createElement("td");
     td1.className = "serial";
+    td1.style = "text-align: center";
     td1.innerText = count.toString() + ".";
     var td2 = document.createElement("td");
     var td3 = document.createElement("td");
@@ -579,7 +615,7 @@ async function updateMemList() {
     var button = document.createElement("button");
     button.className = "btn btn-success btn-lg btn-block";
     button.type = "button";
-    button.style = "width:150px";
+    button.style = "width: 150px";
     button.addEventListener("click", function() {
       redirectMem(teamName);
     });

@@ -35,7 +35,8 @@
                 }
                 // No user is signed in.
                 else {
-                    console.log('User is not logged in. !!')
+                    console.log('User is not logged in. !!');
+                    window.location.href = "index.html";
                 }
             });
         };
@@ -89,7 +90,7 @@
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <p>TEAM++</p>
+                    <p>Team++</p>
                 </div>
             </div>
             <div class="top-right">
@@ -142,7 +143,7 @@
                                 </div>
                                 <div class="stat-content">
                                     <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">15</span></div>
+                                        <div class="stat-text"><span class="count" id="taskNum"></span></div>
                                         <div class="stat-heading">to-do tasks</div>
                                     </div>
                                 </div>

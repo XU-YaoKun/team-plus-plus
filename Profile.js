@@ -93,23 +93,24 @@ function passwordSave() {
   var newPassword2 = document.getElementById("reenterPW").value;
   var databasePassword = root.child(userId).child("Password");
 
-  if (curPassword == "" || newPassword1 == "" || newPassword1 == "") {
-    alert("Password Field Is Missing !!");
-    return false;
-  } else if (newPassword1.length < "4") {
-    alert(
-      "Your new password is not long enough! Please enter a new password !"
-    );
-    return false;
-  }
   databasePassword.once("value", function(snapshot) {
     databasePassword = snapshot.val();
-    if (databasePassword !== curPassword) {
-      alert("Your current password is incorrect. Please Try Again");
+    if (curPassword == "" || newPassword1 == "" || newPassword1 == "") {
+      alert("Password field is empty.");
+      return false;
+    } else if (newPassword1.length < "4") {
+      alert(
+        "Your new password is not long enough. Please enter a new password."
+      );
+      return false;
+    } else if (databasePassword !== curPassword) {
+      alert("Your current password is incorrect. Please try again.");
+      return false;
     } else if (newPassword2 !== newPassword1) {
       alert(
-        "The confirm password does not match the new password. Please try again"
+        "The confirmation password does not match the new password. Please try again."
       );
+      return false;
     } else {
       currentUser
         .updatePassword(newPassword1)
@@ -122,7 +123,8 @@ function passwordSave() {
           donePasswordEdit();
         })
         .catch(function(error) {
-          alert("An error has occurred. Please try again");
+          alert("An error has occurred. Please try again.");
+          return false;
         });
     }
   });

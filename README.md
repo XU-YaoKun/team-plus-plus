@@ -1,10 +1,10 @@
 # Team-Plus-Plus
 
-*A web app for team collaboration*
+_A web app for team collaboration_
 
 This application is now deployed to a firebase server. Here is the link [Team++](https://team-plus-plus.firebaseapp.com)
 
-------
+---
 
 _The functionality includes_
 

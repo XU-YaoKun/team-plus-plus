@@ -96,11 +96,11 @@ function passwordSave() {
   databasePassword.once("value", function(snapshot) {
     databasePassword = snapshot.val();
     if (curPassword == "" || newPassword1 == "" || newPassword1 == "") {
-      alert("Password field is empty.");
+      alert("Missing password field(s).");
       return false;
-    } else if (newPassword1.length < "4") {
+    } else if (newPassword1.length < "6") {
       alert(
-        "Your new password is not long enough. Please enter a new password."
+        "Your new password is not long enough. Please re-enter a new password."
       );
       return false;
     } else if (databasePassword !== curPassword) {

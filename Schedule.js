@@ -1,9 +1,33 @@
-var mainText = document.getElementById("mainText");
-var submitBtn = document.getElementById("submitBtn");
 var root = firebase.database().ref();
 var teamId;
 var userId;
 var tSize;
+var Yid = new Array();
+for (var i = 0; i < 7; i++) {
+    Yid[i] = new Array(i);
+    for (var j = 0; j < 11; j++) {
+        if (j == 10) {
+            Yid[i][j] = i.toString() + "X";
+            // root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child('teamAvailability').child(Yid[i][j]).set(0);
+            break;
+        }
+        Yid[i][j] = i.toString() + j.toString();
+        // root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child('teamAvailability').child(Yid[i][j]).set(0);
+    }
+}
+
+var Tid = new Array();
+for (var i = 0; i < 7; i++) {
+    Tid[i] = new Array(i);
+    for (var j = 0; j < 11; j++) {
+        if (j == 10) {
+            Tid[i][j] = "T" + i.toString() + "X";
+            break;
+        }
+        Tid[i][j] = "T" + i.toString() + j.toString();
+    }
+}
+
 // get userId from database
 firebase.auth().onAuthStateChanged(async function(user){
     // User is signed in: set userId and teamId
@@ -18,13 +42,21 @@ firebase.auth().onAuthStateChanged(async function(user){
         console.log("userId has been set: "+ userId);
         console.log("teamId has been set: " + teamId);
         console.log("teamSize has been set: " + tSize);
+
+        // window.onload = function () {
+            // update Your availability for each grid from database
+            updateAvailability();
+
+            updateTeamAvailability();
+
+        // }
     }
     // No user is signed in.
     else{
     }
 });
 
-// get teamId from datgabase
+// get teamId from database
 async function loadTeamId(ref){
     return ref.once('value').then(function(snapshot){
         //console.log(snapshot.val())
@@ -40,108 +72,155 @@ async function loadTeamSize(ref){
     });
 }
 
-window.onload = function () {
-    // update Your availability for each grid from database
-    // var r = firebase.database().ref("Team/"+teamId);
-    // r.once('value', function(snapshot){
-    //     tSize = snapshot.val().teamSize;
-    // });
-    //
-    // console.log(tSize);
+// window.onload = function () {
+//     // update Your availability for each grid from database
+//     updateAvailability();
+//
+//     updateTeamAvailability();
+//
+// }
+// only used for test
+function submitClick(){
+
+    var firebaseRef = firebase.database().ref();
+
+    firebaseRef.child("Text").set("Some value");
+
+}
+
+// onClick function for each grid
+// change color of grid, change Your Availability status in database, add/minus teamAvailability in database
+function f(e) {
+
+    var T = document.getElementById("T" + e.id);
 
 
-    var Yid = new Array();
-    for (var i = 0; i < 7; i++) {
-        Yid[i] = new Array(i);
-        for (var j = 0; j < 11; j++) {
-            if (j == 10) {
-                Yid[i][j] = i.toString() + "X";
-                // root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child('teamAvailability').child(Yid[i][j]).set(0);
-                break;
-            }
-            Yid[i][j] = i.toString() + j.toString();
-            // root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child('teamAvailability').child(Yid[i][j]).set(0);
-        }
+    if(e.style.background=='rgb(255, 222, 222)')
+    {
+        e.style.background = "rgb(51, 153, 0)";
+        root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(e.id).set(true);
+
+        var teamRef = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + e.id);
+        var num;
+
+        //console.log(str);
+
+
+        teamRef.once('value').then(function(snapshot){
+            //console.log(snapshot.val())
+
+            num = snapshot.val();
+            num += 1;
+            console.log(num);
+            teamRef.set(num);
+        });
+
+    }
+    else
+    {
+        e.style.background = "rgb(255, 222, 222)";
+        root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(e.id).set(false);
+        var teamRef = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + e.id);
+        var num;
+
+        //console.log(str);
+
+
+        teamRef.once('value').then(function(snapshot){
+            //console.log(snapshot.val())
+
+            num = snapshot.val();
+            num -= 1;
+            console.log(num);
+            teamRef.set(num);
+        });
+
     }
 
+}
+
+function updateAvailability() {
+
+
     // database reference for each grid (tried to use for loops and a 2-D array to simplify but failed)
-    var Y00 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[0][0]);
-    var Y10 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[1][0]);
-    var Y20 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[2][0]);
-    var Y30 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[3][0]);
-    var Y40 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[4][0]);
-    var Y50 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[5][0]);
-    var Y60 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[6][0]);
-    var Y01 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[0][1]);
-    var Y11 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[1][1]);
-    var Y21 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[2][1]);
-    var Y31 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[3][1]);
-    var Y41 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[4][1]);
-    var Y51 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[5][1]);
-    var Y61 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[6][1]);
-    var Y02 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[0][2]);
-    var Y12 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[1][2]);
-    var Y22 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[2][2]);
-    var Y32 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[3][2]);
-    var Y42 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[4][2]);
-    var Y52 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[5][2]);
-    var Y62 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[6][2]);
-    var Y03 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[0][3]);
-    var Y13 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[1][3]);
-    var Y23 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[2][3]);
-    var Y33 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[3][3]);
-    var Y43 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[4][3]);
-    var Y53 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[5][3]);
-    var Y63 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[6][3]);
-    var Y04 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[0][4]);
-    var Y14 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[1][4]);
-    var Y24 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[2][4]);
-    var Y34 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[3][4]);
-    var Y44 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[4][4]);
-    var Y54 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[5][4]);
-    var Y64 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[6][4]);
-    var Y05 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[0][5]);
-    var Y15 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[1][5]);
-    var Y25 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[2][5]);
-    var Y35 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[3][5]);
-    var Y45 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[4][5]);
-    var Y55 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[5][5]);
-    var Y65 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[6][5]);
-    var Y06 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[0][6]);
-    var Y16 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[1][6]);
-    var Y26 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[2][6]);
-    var Y36 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[3][6]);
-    var Y46 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[4][6]);
-    var Y56 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[5][6]);
-    var Y66 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[6][6]);
-    var Y07 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[0][7]);
-    var Y17 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[1][7]);
-    var Y27 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[2][7]);
-    var Y37 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[3][7]);
-    var Y47 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[4][7]);
-    var Y57 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[5][7]);
-    var Y67 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[6][7]);
-    var Y08 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[0][8]);
-    var Y18 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[1][8]);
-    var Y28 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[2][8]);
-    var Y38 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[3][8]);
-    var Y48 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[4][8]);
-    var Y58 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[5][8]);
-    var Y68 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[6][8]);
-    var Y09 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[0][9]);
-    var Y19 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[1][9]);
-    var Y29 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[2][9]);
-    var Y39 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[3][9]);
-    var Y49 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[4][9]);
-    var Y59 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[5][9]);
-    var Y69 = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[6][9]);
-    var Y0X = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[0][10]);
-    var Y1X = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[1][10]);
-    var Y2X = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[2][10]);
-    var Y3X = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[3][10]);
-    var Y4X = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[4][10]);
-    var Y5X = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[5][10]);
-    var Y6X = root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(Yid[6][10]);
+    var Y00 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[0][0]);
+    var Y10 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[1][0]);
+    var Y20 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[2][0]);
+    var Y30 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[3][0]);
+    var Y40 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[4][0]);
+    var Y50 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[5][0]);
+    var Y60 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[6][0]);
+    var Y01 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[0][1]);
+    var Y11 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[1][1]);
+    var Y21 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[2][1]);
+    var Y31 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[3][1]);
+    var Y41 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[4][1]);
+    var Y51 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[5][1]);
+    var Y61 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[6][1]);
+    var Y02 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[0][2]);
+    var Y12 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[1][2]);
+    var Y22 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[2][2]);
+    var Y32 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[3][2]);
+    var Y42 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[4][2]);
+    var Y52 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[5][2]);
+    var Y62 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[6][2]);
+    var Y03 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[0][3]);
+    var Y13 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[1][3]);
+    var Y23 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[2][3]);
+    var Y33 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[3][3]);
+    var Y43 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[4][3]);
+    var Y53 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[5][3]);
+    var Y63 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[6][3]);
+    var Y04 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[0][4]);
+    var Y14 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[1][4]);
+    var Y24 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[2][4]);
+    var Y34 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[3][4]);
+    var Y44 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[4][4]);
+    var Y54 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[5][4]);
+    var Y64 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[6][4]);
+    var Y05 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[0][5]);
+    var Y15 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[1][5]);
+    var Y25 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[2][5]);
+    var Y35 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[3][5]);
+    var Y45 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[4][5]);
+    var Y55 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[5][5]);
+    var Y65 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[6][5]);
+    var Y06 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[0][6]);
+    var Y16 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[1][6]);
+    var Y26 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[2][6]);
+    var Y36 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[3][6]);
+    var Y46 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[4][6]);
+    var Y56 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[5][6]);
+    var Y66 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[6][6]);
+    var Y07 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[0][7]);
+    var Y17 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[1][7]);
+    var Y27 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[2][7]);
+    var Y37 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[3][7]);
+    var Y47 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[4][7]);
+    var Y57 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[5][7]);
+    var Y67 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[6][7]);
+    var Y08 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[0][8]);
+    var Y18 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[1][8]);
+    var Y28 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[2][8]);
+    var Y38 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[3][8]);
+    var Y48 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[4][8]);
+    var Y58 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[5][8]);
+    var Y68 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[6][8]);
+    var Y09 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[0][9]);
+    var Y19 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[1][9]);
+    var Y29 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[2][9]);
+    var Y39 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[3][9]);
+    var Y49 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[4][9]);
+    var Y59 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[5][9]);
+    var Y69 = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[6][9]);
+    var Y0X = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[0][10]);
+    var Y1X = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[1][10]);
+    var Y2X = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[2][10]);
+    var Y3X = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[3][10]);
+    var Y4X = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[4][10]);
+    var Y5X = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[5][10]);
+    var Y6X = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/"+userId+"/availability/"+Yid[6][10]);
+    console.log("test Your"+teamId);
 
     // update the color of each grid based on the status in database(also tried to use for loops and 2-D array but failed)
     Y00.once('value', function(snapshot){
@@ -979,26 +1058,10 @@ window.onload = function () {
         }
     });
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // update Team Availability of each grid from database
-    var Tid = new Array();
-    for (var i = 0; i < 7; i++) {
-        Tid[i] = new Array(i);
-        for (var j = 0; j < 11; j++) {
-            if (j == 10) {
-                Tid[i][j] = "T" + i.toString() + "X";
-                break;
-            }
-            Tid[i][j] = "T" + i.toString() + j.toString();
-        }
-    }
-    console.log(Tid);
+}
 
-    // We still need to get the size of team!!!!!
-    //var teamSize = 1;
-
-    // update Team Availability table based on database
-    // calculate the number of people who are available at this time, compare it to the size of team. if all team mambers are available, change color to green.
+function updateTeamAvailability() {
+    console.log("test Team");
     var Ref = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + Yid[0][0]);
     Ref.once('value', function(snapshot){
         var temp = snapshot.val();
@@ -1674,63 +1737,4 @@ window.onload = function () {
 
 }
 
-// only used for test
-function submitClick(){
-
-	var firebaseRef = firebase.database().ref();
-
-	firebaseRef.child("Text").set("Some value");
-
-}
-
-// onClick function for each grid
-// change color of grid, change Your Availability status in database, add/minus teamAvailability in database
-function f(e) {
-
-	var T = document.getElementById("T" + e.id);
-
-
-    if(e.style.background=='rgb(255, 222, 222)')
-    {
-        e.style.background = "rgb(51, 153, 0)";
-        root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(e.id).set(true);
-
-        var teamRef = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + e.id);
-        var num;
-
-        //console.log(str);
-
-
-        teamRef.once('value').then(function(snapshot){
-            //console.log(snapshot.val())
-
-            num = snapshot.val();
-            num += 1;
-            console.log(num);
-            teamRef.set(num);
-        });
-
-    }
-    else
-    {
-        e.style.background = "rgb(255, 222, 222)";
-        root.child('Team').child(teamId).child('Schedule').child('eventList').child('eventId').child(userId).child('availability').child(e.id).set(false);
-        var teamRef = firebase.database().ref("Team/"+teamId+"/Schedule/eventList/eventId/teamAvailability/" + e.id);
-        var num;
-
-        //console.log(str);
-
-
-        teamRef.once('value').then(function(snapshot){
-            //console.log(snapshot.val())
-
-            num = snapshot.val();
-            num -= 1;
-            console.log(num);
-            teamRef.set(num);
-        });
-
-    }
-
-}
 

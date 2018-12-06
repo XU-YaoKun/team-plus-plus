@@ -393,6 +393,7 @@ function createHTMLMessage(msg, source, time, name){
 	li.appendChild(img);
 	li.appendChild(p);
 
+
 	// Selects the messages class to always scroll to bottom
 	const messagesCont = document.querySelector('.messages');
 	shouldScroll = messagesCont.scrollTop + messagesCont.clientHeight === messagesCont.scrollHeight;
@@ -404,6 +405,11 @@ function createHTMLMessage(msg, source, time, name){
 	messages.append(li);
 	messages.append(div);
 	
+
+	messages.append(div);
+	
+
+
 }
 
 // Adds message to message window whenever user presses enter

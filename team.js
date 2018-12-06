@@ -7,6 +7,7 @@ var validUser = false;
 var username = null;
 var userID = null;
 var description = "Not defined";
+var currTime = null;
 
 async function teamExistInRef(ref, data){
     return ref.child(data).once('value', function(snapshot) {
@@ -70,6 +71,16 @@ async function getTeamDes(ref){
     });
 }
 
+// Gets the current time for timestamp
+async function getCurrTime(ref){
+    return ref.once('value').then(function(snapshot) {
+        let offset = snapshot.val();
+        let serverTime = new Date().getTime() + offset;
+        let myDate = new Date(serverTime); 
+        currTime = myDate.toString().split(' ')[4];
+    });
+}
+
 async function createTeam() {
     var teamName = prompt("Please enter the team name.");
     var done = false;
@@ -98,11 +109,44 @@ async function createTeam() {
                 teamsref.child("TeamName").set(teamName);
                 firebase.database().ref('Users/' + userID + '/Teams/adminOf').child(teamName).set(teamName);
 
-                teamsref.child('Chatroom').child('Announcements').set("");
+                // Get the currTime
+                await getCurrTime(firebase.database().ref("/.info/serverTimeOffset"));
+
+                // Set up the Announcements chat
+                var newPostRef = teamsref.child('Chatroom').child('Announcements').child('AnnouncementsExt').child('msgArray').push();
+                newPostRef.set({
+                    sender: userID,
+                    message: "Welcome",
+                    time: currTime
+                });
+                teamsref.child('Chatroom').child('Announcements').child('AnnouncementsExt').child('mostRecent').set("Welcome");
+
+                // Set up the general chatroom
                 var chatref = teamsref.child('Chatroom');
                 chatref.child('Chatrooms').child('general').child('chatroomName').set("general");
-                chatref.child('Chatrooms').child('general').child('memberList').child(userID)
-                    .set([userID, username]);
+                chatref.child('Chatrooms').child('general').child('memberList').child(userID).set([userID, username]);
+                chatref.child('Chatrooms').child('general').child('mostRecent').set("Welcome");
+                newPostRef = chatref.child('Chatrooms').child('general').child('msgArray').push();
+                newPostRef.set({
+                    sender: userID,
+                    message: "Welcome",
+                    time: currTime
+                });
+
+                // Set up the directMessages chat
+                DMref = chatref.child('directMessages');
+                await getUserName(firebase.database().ref("/Users/"+userID+"/Name"));
+                DMref.child(userID).child(userID).set({
+                    mostRecent: "Draft your messages here.",
+                    name: username,
+                    userId: userID
+                });
+                newPostRef = DMref.child(userID).child(userID).child("msgArray").push();
+                newPostRef.set({
+                    sender: userID,
+                    message: "Draft your messages here.",
+                    time: currTime
+                });
 
                 alert("You have created " + teamName + ".");
                 done = true;

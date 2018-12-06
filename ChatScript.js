@@ -198,19 +198,25 @@ setTimeout(function() {
 
 	/** Chatrooms **/
 	let chatroomsRef = firebase.database().ref('/Team/'+teamId+'/Chatroom/Chatrooms');
-    chatroomsRef.on("child_added", snapshot => {
+    chatroomsRef.once("value", snapshot => {
 
-		// Fetch from database
-    	let chatroomName = snapshot.val().chatroomName;
-    	let latestMsg = snapshot.val().mostRecent;
+    	snapshot.forEach(function(data) {
+			
+			// Fetch from database
+	    	let chatroomName = data.val().chatroomName;
+	    	let latestMsg = data.val().mostRecent;
 
-    	// Truncates lates message if too long
-    	if(latestMsg.length > 25){
-	    	latestMsg = latestMsg.substring(0,25)+"...";
-    	}
+	    	// Truncates lates message if too long
+	    	if(latestMsg.length > 25){
+		    	latestMsg = latestMsg.substring(0,25)+"...";
+	    	}
 
-    	// Generate HTML element on sidebar
-    	createHTMLContact("chatrooms", chatroomName, latestMsg);
+	    	// Generate HTML element on sidebar
+	    	createHTMLContact("chatrooms", chatroomName, latestMsg);
+		});
+
+
+
 
     });
 	/** Chatrooms **/
@@ -420,3 +426,59 @@ inputElem.addEventListener('keypress', function (e) {
 	}
 
 });
+
+
+
+/*** Add Chatroom Functionality below ***/
+
+var inputElem2 = document.querySelector('#inputEmail');
+var addChatroomButton = document.getElementById('addChatroomButton');
+var addChatroomDialog = document.getElementById('addChatroomDialog');
+
+addChatroomButton.addEventListener('click', function() {
+	addChatroomDialog.showModal();
+});
+
+
+/**
+* Updates chatroom database
+*/
+async function updateChatroomDatabase(){
+
+	let name = inputElem2.value;
+
+	// Get the currTime
+    await getCurrTime(firebase.database().ref("/.info/serverTimeOffset"));
+
+	// Write to database
+	// Create a new post reference with an auto-generated id
+	let addChatroomRef = firebase.database().ref("/Team/"+teamId+"/Chatroom/Chatrooms/").child(name);
+	addChatroomRef.child("chatroomName").set(name);
+
+	let newPostRef = addChatroomRef.child("msgArray").push();
+	newPostRef.set({
+	    sender: userId,
+	    message: "Welcome",
+	    time: currTime
+	});
+
+	// Update the most recent message
+	addChatroomRef.update({
+		mostRecent: "Welcome"
+	});
+
+	let chatroomName = name;
+	let latestMsg = "Welcome";
+
+	// Truncates lates message if too long
+	if(latestMsg.length > 25){
+    	latestMsg = latestMsg.substring(0,25)+"...";
+	}
+
+	// Generate HTML element on sidebar
+	createHTMLContact("chatrooms", chatroomName, latestMsg);
+
+	inputElem2.value = "";
+
+	document.getElementById('addChatroomDialog').close();
+}

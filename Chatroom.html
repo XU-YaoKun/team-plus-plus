@@ -74,9 +74,15 @@
 			<div class="top-right"> 
 				<div class="header-menu"> 
 					<div class="user-area float-right">
-						<a href="Login.html" class="dropdown-toggle active">
-							<img class="user-avatar rounded-circle" src="img/sample.png" alt="User Avatar">
-						</a>
+						<div class="dropdown">
+							<button class="dropbtn" style="background-color: #ffffff; margin-right: 30px">
+								<img id="icon" class="user-avatar rounded-circle" src="img/sample.png" alt="User Avatar">
+							</button>
+							<div class="dropdown-content">
+								<a href="Profile.html">Profile</a>
+								<a href="index.html" onclick="signOut()">Log out</a>
+							</div>
+						</div>	
 					</div> 
 				</div>  
 			</div>
@@ -125,24 +131,16 @@
 							</div>
 						</div>
 						<div class="content">
-
-
 								<div class="messages">
 									<ul>
-
 									</ul>
 								</div>
-
 								<div class="message-input">
 									<div class="wrap">
 										<input class="chatMessage" type="text" placeholder="Write your message..." />
-										<i class="fa fa-paperclip attachment" aria-hidden="true"></i>
 										<button class="submit"><i class="ti-angle-double-up" aria-hidden="true"></i></button>
 									</div>
 								</div>
-
-
-
 						</div>
 					</div>
 					</div>
@@ -166,14 +164,12 @@
 	  firebase.initializeApp(config);
 	</script>
 	
-
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script
 	src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js">
 	</script>
 	<script src="ChatScript.js"></script>
 	
-
 </body>
 
 </html>

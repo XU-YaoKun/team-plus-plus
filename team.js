@@ -106,7 +106,6 @@ async function createTeam() {
 
                 alert("You have created " + teamName + ".");
                 done = true;
-                location.reload();
             }
         }
     }
@@ -152,7 +151,6 @@ async function joinTeam() {
 
                     alert("You have joined " + teamName + ".");
                     done = true;
-                    location.reload();
                 }
             }
         }
@@ -225,12 +223,15 @@ async function addMember() {
                     //update added person's account
                     firebase.database().ref('Users/' + person + '/Teams/memberOf').child(cuTeam).set(cuTeam);
 
+                    var nref = firebase.database().ref("Team/" + cuTeam + "/teamSize");
+                    await getTeamSize(nref);
+                    document.getElementById('number').innerText = tSize;
+
                     var chatref = teamref.child('Chatroom').child('Chatrooms').child('general').child('memberList');
                     chatref.child(person).set([person, username]);
 
                     alert("You have added " + username + " to " + cuTeam + ".");
                     done = true;
-                    location.reload();
                 }
             }
         }
@@ -295,7 +296,6 @@ async function addDescription(){
     await getCurrTeam(ref);
     firebase.database().ref("Team/" + cuTeam + "/description").set(info);
     document.getElementById('descriptionBox').innerHTML = info.toString();
-    location.reload();
 }
 
 
@@ -403,6 +403,7 @@ async function updateViewMem() {
     var members = document.getElementById('allMem');
 
     tref.on("child_added", snapshot => {
+
         var name = snapshot.val()[0];
         var role = snapshot.val()[1];
 

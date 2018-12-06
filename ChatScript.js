@@ -451,18 +451,20 @@ function createHTMLMessage(msg, source, time){
 	if(source == 'server'){
 		li.className += "sent";
 		img.src = "img/eggperson.jpeg";
+		div.style = "padding-left: 50px; font-size: 12px"
 	}
 	else{
 		li.className += "replies";
 		img.src = "img/chat.jpg";
+		div.style = "padding-left: 500px; font-size: 12px"
 	}
 	
 	// Add img and message to li
 	li.appendChild(img);
 	li.appendChild(p);
 
-
-	li.appendChild(div);
+	
+	//li.appendChild(div);
 
 	// Selects the messages class to always scroll to bottom
 	const messagesCont = document.querySelector('.messages');
@@ -473,6 +475,8 @@ function createHTMLMessage(msg, source, time){
 
 	// Put html element on page
 	messages.append(li);
+	
+	messages.append(div);
 	
 
 }

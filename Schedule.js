@@ -5,7 +5,7 @@ var teamId;
 var userId;
 var tSize;
 // get userId from database
-firebase.auth().onAuthStateChanged(async function(user) {
+firebase.auth().onAuthStateChanged(async function (user) {
   // User is signed in: set userId and teamId
   if (user) {
     userId = user.uid;
@@ -20,25 +20,24 @@ firebase.auth().onAuthStateChanged(async function(user) {
     console.log("teamSize has been set: " + tSize);
   }
   // No user is signed in.
-  else {
-  }
+  else {}
 });
 
 // get teamId from datgabase
 async function loadTeamId(ref) {
-  return ref.once("value").then(function(snapshot) {
+  return ref.once("value").then(function (snapshot) {
     //console.log(snapshot.val())
     teamId = snapshot.val().currTeam;
   });
 }
 async function loadTeamSize(ref) {
-  return ref.once("value").then(function(snapshot) {
+  return ref.once("value").then(function (snapshot) {
     //console.log(snapshot.val())
     tSize = snapshot.val().teamSize;
   });
 }
 
-window.onload = function() {
+window.onload = function () {
   // update Your availability for each grid from database
   // var r = firebase.database().ref("Team/"+teamId);
   // r.once('value', function(snapshot){
@@ -757,7 +756,7 @@ window.onload = function() {
     .child(Yid[6][10]);
 
   // update the color of each grid based on the status in database(also tried to use for loops and 2-D array but failed)
-  Y00.once("value", function(snapshot) {
+  Y00.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -769,7 +768,7 @@ window.onload = function() {
     }
   });
 
-  Y10.once("value", function(snapshot) {
+  Y10.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Yid[1][0]).style.background = "rgb(51, 153, 0)";
@@ -780,7 +779,7 @@ window.onload = function() {
     }
   });
 
-  Y20.once("value", function(snapshot) {
+  Y20.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -792,7 +791,7 @@ window.onload = function() {
     }
   });
 
-  Y30.once("value", function(snapshot) {
+  Y30.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -804,7 +803,7 @@ window.onload = function() {
     }
   });
 
-  Y40.once("value", function(snapshot) {
+  Y40.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -816,7 +815,7 @@ window.onload = function() {
     }
   });
 
-  Y50.once("value", function(snapshot) {
+  Y50.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -828,7 +827,7 @@ window.onload = function() {
     }
   });
 
-  Y60.once("value", function(snapshot) {
+  Y60.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -840,7 +839,7 @@ window.onload = function() {
     }
   });
 
-  Y01.once("value", function(snapshot) {
+  Y01.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -852,7 +851,7 @@ window.onload = function() {
     }
   });
 
-  Y11.once("value", function(snapshot) {
+  Y11.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Yid[1][1]).style.background = "rgb(51, 153, 0)";
@@ -863,7 +862,7 @@ window.onload = function() {
     }
   });
 
-  Y21.once("value", function(snapshot) {
+  Y21.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -875,7 +874,7 @@ window.onload = function() {
     }
   });
 
-  Y31.once("value", function(snapshot) {
+  Y31.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -887,7 +886,7 @@ window.onload = function() {
     }
   });
 
-  Y41.once("value", function(snapshot) {
+  Y41.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -899,7 +898,7 @@ window.onload = function() {
     }
   });
 
-  Y51.once("value", function(snapshot) {
+  Y51.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -911,7 +910,7 @@ window.onload = function() {
     }
   });
 
-  Y61.once("value", function(snapshot) {
+  Y61.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -923,7 +922,7 @@ window.onload = function() {
     }
   });
 
-  Y02.once("value", function(snapshot) {
+  Y02.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -935,7 +934,7 @@ window.onload = function() {
     }
   });
 
-  Y12.once("value", function(snapshot) {
+  Y12.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Yid[1][2]).style.background = "rgb(51, 153, 0)";
@@ -946,7 +945,7 @@ window.onload = function() {
     }
   });
 
-  Y22.once("value", function(snapshot) {
+  Y22.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -958,7 +957,7 @@ window.onload = function() {
     }
   });
 
-  Y32.once("value", function(snapshot) {
+  Y32.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -970,7 +969,7 @@ window.onload = function() {
     }
   });
 
-  Y42.once("value", function(snapshot) {
+  Y42.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -982,7 +981,7 @@ window.onload = function() {
     }
   });
 
-  Y52.once("value", function(snapshot) {
+  Y52.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -994,7 +993,7 @@ window.onload = function() {
     }
   });
 
-  Y62.once("value", function(snapshot) {
+  Y62.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1006,7 +1005,7 @@ window.onload = function() {
     }
   });
 
-  Y03.once("value", function(snapshot) {
+  Y03.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1018,7 +1017,7 @@ window.onload = function() {
     }
   });
 
-  Y13.once("value", function(snapshot) {
+  Y13.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Yid[1][3]).style.background = "rgb(51, 153, 0)";
@@ -1029,7 +1028,7 @@ window.onload = function() {
     }
   });
 
-  Y23.once("value", function(snapshot) {
+  Y23.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1041,7 +1040,7 @@ window.onload = function() {
     }
   });
 
-  Y33.once("value", function(snapshot) {
+  Y33.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1053,7 +1052,7 @@ window.onload = function() {
     }
   });
 
-  Y43.once("value", function(snapshot) {
+  Y43.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1065,7 +1064,7 @@ window.onload = function() {
     }
   });
 
-  Y53.once("value", function(snapshot) {
+  Y53.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1077,7 +1076,7 @@ window.onload = function() {
     }
   });
 
-  Y63.once("value", function(snapshot) {
+  Y63.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1088,7 +1087,7 @@ window.onload = function() {
         "rgb(255, 222, 222)";
     }
   });
-  Y04.once("value", function(snapshot) {
+  Y04.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1100,7 +1099,7 @@ window.onload = function() {
     }
   });
 
-  Y14.once("value", function(snapshot) {
+  Y14.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Yid[1][4]).style.background = "rgb(51, 153, 0)";
@@ -1111,7 +1110,7 @@ window.onload = function() {
     }
   });
 
-  Y24.once("value", function(snapshot) {
+  Y24.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1123,7 +1122,7 @@ window.onload = function() {
     }
   });
 
-  Y34.once("value", function(snapshot) {
+  Y34.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1135,7 +1134,7 @@ window.onload = function() {
     }
   });
 
-  Y44.once("value", function(snapshot) {
+  Y44.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1147,7 +1146,7 @@ window.onload = function() {
     }
   });
 
-  Y54.once("value", function(snapshot) {
+  Y54.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1159,7 +1158,7 @@ window.onload = function() {
     }
   });
 
-  Y64.once("value", function(snapshot) {
+  Y64.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1171,7 +1170,7 @@ window.onload = function() {
     }
   });
 
-  Y05.once("value", function(snapshot) {
+  Y05.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1183,7 +1182,7 @@ window.onload = function() {
     }
   });
 
-  Y15.once("value", function(snapshot) {
+  Y15.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Yid[1][5]).style.background = "rgb(51, 153, 0)";
@@ -1194,7 +1193,7 @@ window.onload = function() {
     }
   });
 
-  Y25.once("value", function(snapshot) {
+  Y25.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1206,7 +1205,7 @@ window.onload = function() {
     }
   });
 
-  Y35.once("value", function(snapshot) {
+  Y35.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1218,7 +1217,7 @@ window.onload = function() {
     }
   });
 
-  Y45.once("value", function(snapshot) {
+  Y45.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1230,7 +1229,7 @@ window.onload = function() {
     }
   });
 
-  Y55.once("value", function(snapshot) {
+  Y55.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1242,7 +1241,7 @@ window.onload = function() {
     }
   });
 
-  Y65.once("value", function(snapshot) {
+  Y65.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1254,7 +1253,7 @@ window.onload = function() {
     }
   });
 
-  Y06.once("value", function(snapshot) {
+  Y06.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1266,7 +1265,7 @@ window.onload = function() {
     }
   });
 
-  Y16.once("value", function(snapshot) {
+  Y16.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Yid[1][6]).style.background = "rgb(51, 153, 0)";
@@ -1277,7 +1276,7 @@ window.onload = function() {
     }
   });
 
-  Y26.once("value", function(snapshot) {
+  Y26.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1289,7 +1288,7 @@ window.onload = function() {
     }
   });
 
-  Y36.once("value", function(snapshot) {
+  Y36.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1301,7 +1300,7 @@ window.onload = function() {
     }
   });
 
-  Y46.once("value", function(snapshot) {
+  Y46.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1313,7 +1312,7 @@ window.onload = function() {
     }
   });
 
-  Y56.once("value", function(snapshot) {
+  Y56.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1325,7 +1324,7 @@ window.onload = function() {
     }
   });
 
-  Y66.once("value", function(snapshot) {
+  Y66.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1337,7 +1336,7 @@ window.onload = function() {
     }
   });
 
-  Y07.once("value", function(snapshot) {
+  Y07.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1349,7 +1348,7 @@ window.onload = function() {
     }
   });
 
-  Y17.once("value", function(snapshot) {
+  Y17.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Yid[1][7]).style.background = "rgb(51, 153, 0)";
@@ -1360,7 +1359,7 @@ window.onload = function() {
     }
   });
 
-  Y27.once("value", function(snapshot) {
+  Y27.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1372,7 +1371,7 @@ window.onload = function() {
     }
   });
 
-  Y37.once("value", function(snapshot) {
+  Y37.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1384,7 +1383,7 @@ window.onload = function() {
     }
   });
 
-  Y47.once("value", function(snapshot) {
+  Y47.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1396,7 +1395,7 @@ window.onload = function() {
     }
   });
 
-  Y57.once("value", function(snapshot) {
+  Y57.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1408,7 +1407,7 @@ window.onload = function() {
     }
   });
 
-  Y67.once("value", function(snapshot) {
+  Y67.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1420,7 +1419,7 @@ window.onload = function() {
     }
   });
 
-  Y08.once("value", function(snapshot) {
+  Y08.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1432,7 +1431,7 @@ window.onload = function() {
     }
   });
 
-  Y18.once("value", function(snapshot) {
+  Y18.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Yid[1][8]).style.background = "rgb(51, 153, 0)";
@@ -1443,7 +1442,7 @@ window.onload = function() {
     }
   });
 
-  Y28.once("value", function(snapshot) {
+  Y28.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1455,7 +1454,7 @@ window.onload = function() {
     }
   });
 
-  Y38.once("value", function(snapshot) {
+  Y38.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1467,7 +1466,7 @@ window.onload = function() {
     }
   });
 
-  Y48.once("value", function(snapshot) {
+  Y48.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1479,7 +1478,7 @@ window.onload = function() {
     }
   });
 
-  Y58.once("value", function(snapshot) {
+  Y58.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1491,7 +1490,7 @@ window.onload = function() {
     }
   });
 
-  Y68.once("value", function(snapshot) {
+  Y68.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1503,7 +1502,7 @@ window.onload = function() {
     }
   });
 
-  Y09.once("value", function(snapshot) {
+  Y09.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1515,7 +1514,7 @@ window.onload = function() {
     }
   });
 
-  Y19.once("value", function(snapshot) {
+  Y19.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Yid[1][9]).style.background = "rgb(51, 153, 0)";
@@ -1526,7 +1525,7 @@ window.onload = function() {
     }
   });
 
-  Y29.once("value", function(snapshot) {
+  Y29.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1538,7 +1537,7 @@ window.onload = function() {
     }
   });
 
-  Y39.once("value", function(snapshot) {
+  Y39.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1550,7 +1549,7 @@ window.onload = function() {
     }
   });
 
-  Y49.once("value", function(snapshot) {
+  Y49.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1562,7 +1561,7 @@ window.onload = function() {
     }
   });
 
-  Y59.once("value", function(snapshot) {
+  Y59.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1574,7 +1573,7 @@ window.onload = function() {
     }
   });
 
-  Y69.once("value", function(snapshot) {
+  Y69.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1586,7 +1585,7 @@ window.onload = function() {
     }
   });
 
-  Y0X.once("value", function(snapshot) {
+  Y0X.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1598,7 +1597,7 @@ window.onload = function() {
     }
   });
 
-  Y1X.once("value", function(snapshot) {
+  Y1X.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == true) {
       document.getElementById(Yid[1][10]).style.background = "rgb(51, 153, 0)";
@@ -1609,7 +1608,7 @@ window.onload = function() {
     }
   });
 
-  Y2X.once("value", function(snapshot) {
+  Y2X.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1621,7 +1620,7 @@ window.onload = function() {
     }
   });
 
-  Y3X.once("value", function(snapshot) {
+  Y3X.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1633,7 +1632,7 @@ window.onload = function() {
     }
   });
 
-  Y4X.once("value", function(snapshot) {
+  Y4X.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1645,7 +1644,7 @@ window.onload = function() {
     }
   });
 
-  Y5X.once("value", function(snapshot) {
+  Y5X.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1657,7 +1656,7 @@ window.onload = function() {
     }
   });
 
-  Y6X.once("value", function(snapshot) {
+  Y6X.once("value", function (snapshot) {
     var temp = snapshot.val();
 
     if (temp == true) {
@@ -1693,11 +1692,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[0][0]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[0][0]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[0][0]).style.background = "rgb(51, 153, 0)";
@@ -1708,11 +1707,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[1][0]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[1][0]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[1][0]).style.background = "rgb(51, 153, 0)";
@@ -1723,11 +1722,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[2][0]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[2][0]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[2][0]).style.background = "rgb(51, 153, 0)";
@@ -1738,11 +1737,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[3][0]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[3][0]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[3][0]).style.background = "rgb(51, 153, 0)";
@@ -1753,11 +1752,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[4][0]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[4][0]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[4][0]).style.background = "rgb(51, 153, 0)";
@@ -1768,11 +1767,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[5][0]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[5][0]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[5][0]).style.background = "rgb(51, 153, 0)";
@@ -1783,11 +1782,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[6][0]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[6][0]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[6][0]).style.background = "rgb(51, 153, 0)";
@@ -1798,11 +1797,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[0][1]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[0][1]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[0][1]).style.background = "rgb(51, 153, 0)";
@@ -1813,11 +1812,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[1][1]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[1][1]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[1][1]).style.background = "rgb(51, 153, 0)";
@@ -1828,11 +1827,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[2][1]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[2][1]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[2][1]).style.background = "rgb(51, 153, 0)";
@@ -1843,11 +1842,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[3][1]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[3][1]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[3][1]).style.background = "rgb(51, 153, 0)";
@@ -1858,11 +1857,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[4][1]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[4][1]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[4][1]).style.background = "rgb(51, 153, 0)";
@@ -1873,11 +1872,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[5][1]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[5][1]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[5][1]).style.background = "rgb(51, 153, 0)";
@@ -1888,11 +1887,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[6][1]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[6][1]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[6][1]).style.background = "rgb(51, 153, 0)";
@@ -1903,11 +1902,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[0][2]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[0][2]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[0][2]).style.background = "rgb(51, 153, 0)";
@@ -1918,11 +1917,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[1][2]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[1][2]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[1][2]).style.background = "rgb(51, 153, 0)";
@@ -1933,11 +1932,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[2][2]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[2][2]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[2][2]).style.background = "rgb(51, 153, 0)";
@@ -1948,11 +1947,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[3][2]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[3][2]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[3][2]).style.background = "rgb(51, 153, 0)";
@@ -1963,11 +1962,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[4][2]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[4][2]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[4][2]).style.background = "rgb(51, 153, 0)";
@@ -1978,11 +1977,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[5][2]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[5][2]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[5][2]).style.background = "rgb(51, 153, 0)";
@@ -1993,11 +1992,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[6][2]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[6][2]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[6][2]).style.background = "rgb(51, 153, 0)";
@@ -2008,11 +2007,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[0][2]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[0][2]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[0][2]).style.background = "rgb(51, 153, 0)";
@@ -2023,11 +2022,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[1][2]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[1][2]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[1][2]).style.background = "rgb(51, 153, 0)";
@@ -2038,11 +2037,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[2][2]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[2][2]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[2][2]).style.background = "rgb(51, 153, 0)";
@@ -2053,11 +2052,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[3][2]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[3][2]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[3][2]).style.background = "rgb(51, 153, 0)";
@@ -2068,11 +2067,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[4][2]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[4][2]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[4][2]).style.background = "rgb(51, 153, 0)";
@@ -2083,11 +2082,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[5][2]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[5][2]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[5][2]).style.background = "rgb(51, 153, 0)";
@@ -2098,11 +2097,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[6][2]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[6][2]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[6][2]).style.background = "rgb(51, 153, 0)";
@@ -2113,11 +2112,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[0][3]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[0][3]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[0][3]).style.background = "rgb(51, 153, 0)";
@@ -2128,11 +2127,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[1][3]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[1][3]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[1][3]).style.background = "rgb(51, 153, 0)";
@@ -2143,11 +2142,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[2][3]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[2][3]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[2][3]).style.background = "rgb(51, 153, 0)";
@@ -2158,11 +2157,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[3][3]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[3][3]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[3][3]).style.background = "rgb(51, 153, 0)";
@@ -2173,11 +2172,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[4][3]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[4][3]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[4][3]).style.background = "rgb(51, 153, 0)";
@@ -2188,11 +2187,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[5][3]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[5][3]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[5][3]).style.background = "rgb(51, 153, 0)";
@@ -2203,11 +2202,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[6][3]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[6][3]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[6][3]).style.background = "rgb(51, 153, 0)";
@@ -2218,11 +2217,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[0][4]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[0][4]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[0][4]).style.background = "rgb(51, 153, 0)";
@@ -2233,11 +2232,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[1][4]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[1][4]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[1][4]).style.background = "rgb(51, 153, 0)";
@@ -2248,11 +2247,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[2][4]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[2][4]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[2][4]).style.background = "rgb(51, 153, 0)";
@@ -2263,11 +2262,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[3][4]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[3][4]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[3][4]).style.background = "rgb(51, 153, 0)";
@@ -2278,11 +2277,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[4][4]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[4][4]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[4][4]).style.background = "rgb(51, 153, 0)";
@@ -2293,11 +2292,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[5][4]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[5][4]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[5][4]).style.background = "rgb(51, 153, 0)";
@@ -2308,11 +2307,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[6][4]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[6][4]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[6][4]).style.background = "rgb(51, 153, 0)";
@@ -2323,11 +2322,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[0][5]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[0][5]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[0][5]).style.background = "rgb(51, 153, 0)";
@@ -2338,11 +2337,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[1][5]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[1][5]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[1][5]).style.background = "rgb(51, 153, 0)";
@@ -2353,11 +2352,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[2][5]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[2][5]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[2][5]).style.background = "rgb(51, 153, 0)";
@@ -2368,11 +2367,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[3][5]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[3][5]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[3][5]).style.background = "rgb(51, 153, 0)";
@@ -2383,11 +2382,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[4][5]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[4][5]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[4][5]).style.background = "rgb(51, 153, 0)";
@@ -2398,11 +2397,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[5][5]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[5][5]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[5][5]).style.background = "rgb(51, 153, 0)";
@@ -2413,11 +2412,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[6][5]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[6][5]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[6][5]).style.background = "rgb(51, 153, 0)";
@@ -2428,11 +2427,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[0][6]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[0][6]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[0][6]).style.background = "rgb(51, 153, 0)";
@@ -2443,11 +2442,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[1][6]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[1][6]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[1][6]).style.background = "rgb(51, 153, 0)";
@@ -2458,11 +2457,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[2][6]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[2][6]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[2][6]).style.background = "rgb(51, 153, 0)";
@@ -2473,11 +2472,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[3][6]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[3][6]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[3][6]).style.background = "rgb(51, 153, 0)";
@@ -2488,11 +2487,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[4][6]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[4][6]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[4][6]).style.background = "rgb(51, 153, 0)";
@@ -2503,11 +2502,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[5][6]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[5][6]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[5][6]).style.background = "rgb(51, 153, 0)";
@@ -2518,11 +2517,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[6][6]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[6][6]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[6][6]).style.background = "rgb(51, 153, 0)";
@@ -2533,11 +2532,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[0][7]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[0][7]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[0][7]).style.background = "rgb(51, 153, 0)";
@@ -2548,11 +2547,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[1][7]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[1][7]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[1][7]).style.background = "rgb(51, 153, 0)";
@@ -2563,11 +2562,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[2][7]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[2][7]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[2][7]).style.background = "rgb(51, 153, 0)";
@@ -2578,11 +2577,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[3][7]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[3][7]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[3][7]).style.background = "rgb(51, 153, 0)";
@@ -2593,11 +2592,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[4][7]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[4][7]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[4][7]).style.background = "rgb(51, 153, 0)";
@@ -2608,11 +2607,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[5][7]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[5][7]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[5][7]).style.background = "rgb(51, 153, 0)";
@@ -2623,11 +2622,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[6][7]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[6][7]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[6][7]).style.background = "rgb(51, 153, 0)";
@@ -2638,11 +2637,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[0][8]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[0][8]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[0][8]).style.background = "rgb(51, 153, 0)";
@@ -2653,11 +2652,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[1][8]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[1][8]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[1][8]).style.background = "rgb(51, 153, 0)";
@@ -2668,11 +2667,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[2][8]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[2][8]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[2][8]).style.background = "rgb(51, 153, 0)";
@@ -2683,11 +2682,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[3][8]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[3][8]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[3][8]).style.background = "rgb(51, 153, 0)";
@@ -2698,11 +2697,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[4][8]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[4][8]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[4][8]).style.background = "rgb(51, 153, 0)";
@@ -2713,11 +2712,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[5][8]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[5][8]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[5][8]).style.background = "rgb(51, 153, 0)";
@@ -2728,11 +2727,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[6][8]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[6][8]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[6][8]).style.background = "rgb(51, 153, 0)";
@@ -2743,11 +2742,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[0][9]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[0][9]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[0][9]).style.background = "rgb(51, 153, 0)";
@@ -2758,11 +2757,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[1][9]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[1][9]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[1][9]).style.background = "rgb(51, 153, 0)";
@@ -2773,11 +2772,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[2][9]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[2][9]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[2][9]).style.background = "rgb(51, 153, 0)";
@@ -2788,11 +2787,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[3][9]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[3][9]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[3][9]).style.background = "rgb(51, 153, 0)";
@@ -2803,11 +2802,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[4][9]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[4][9]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[4][9]).style.background = "rgb(51, 153, 0)";
@@ -2818,11 +2817,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[5][9]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[5][9]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[5][9]).style.background = "rgb(51, 153, 0)";
@@ -2833,11 +2832,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[6][9]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[6][9]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[6][9]).style.background = "rgb(51, 153, 0)";
@@ -2848,11 +2847,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[0][10]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[0][10]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[0][10]).style.background = "rgb(51, 153, 0)";
@@ -2863,11 +2862,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[1][10]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[1][10]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[1][10]).style.background = "rgb(51, 153, 0)";
@@ -2878,11 +2877,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[2][10]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[2][10]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[2][10]).style.background = "rgb(51, 153, 0)";
@@ -2893,11 +2892,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[3][10]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[3][10]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[3][10]).style.background = "rgb(51, 153, 0)";
@@ -2908,11 +2907,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[4][10]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[4][10]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[4][10]).style.background = "rgb(51, 153, 0)";
@@ -2923,11 +2922,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[5][10]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[5][10]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[5][10]).style.background = "rgb(51, 153, 0)";
@@ -2938,11 +2937,11 @@ window.onload = function() {
     .database()
     .ref(
       "Team/" +
-        teamId +
-        "/Schedule/eventList/eventId/teamAvailability/" +
-        Yid[6][10]
+      teamId +
+      "/Schedule/eventList/eventId/teamAvailability/" +
+      Yid[6][10]
     );
-  Ref.once("value", function(snapshot) {
+  Ref.once("value", function (snapshot) {
     var temp = snapshot.val();
     if (temp == tSize) {
       document.getElementById(Tid[6][10]).style.background = "rgb(51, 153, 0)";
@@ -2979,15 +2978,15 @@ function f(e) {
       .database()
       .ref(
         "Team/" +
-          teamId +
-          "/Schedule/eventList/eventId/teamAvailability/" +
-          e.id
+        teamId +
+        "/Schedule/eventList/eventId/teamAvailability/" +
+        e.id
       );
     var num;
 
     //console.log(str);
 
-    teamRef.once("value").then(function(snapshot) {
+    teamRef.once("value").then(function (snapshot) {
       //console.log(snapshot.val())
 
       num = snapshot.val();
@@ -3011,15 +3010,15 @@ function f(e) {
       .database()
       .ref(
         "Team/" +
-          teamId +
-          "/Schedule/eventList/eventId/teamAvailability/" +
-          e.id
+        teamId +
+        "/Schedule/eventList/eventId/teamAvailability/" +
+        e.id
       );
     var num;
 
     //console.log(str);
 
-    teamRef.once("value").then(function(snapshot) {
+    teamRef.once("value").then(function (snapshot) {
       //console.log(snapshot.val())
 
       num = snapshot.val();

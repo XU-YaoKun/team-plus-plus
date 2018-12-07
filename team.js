@@ -8,14 +8,15 @@ var username = null;
 var userID = null;
 var taskCount = 0;
 var description = "Not defined";
+var currTime = null;
 
 async function getIndividualTask(ref) {
   var taskDoer;
   var taskStatus;
-  ref.on("value", function(snapshot) {
+  ref.on("value", function (snapshot) {
     console.log("HERE");
     if (snapshot.val() !== null) {
-      snapshot.forEach(function(item) {
+      snapshot.forEach(function (item) {
         taskDoer = item.val().handler;
         taskStatus = item.val().status;
         if (taskDoer == username && taskStatus !== "fin") {
@@ -27,7 +28,7 @@ async function getIndividualTask(ref) {
 }
 
 async function teamExistInRef(ref, data) {
-  return ref.child(data).once("value", function(snapshot) {
+  return ref.child(data).once("value", function (snapshot) {
     if (snapshot.exists()) {
       existTeam = true;
     } else {
@@ -37,7 +38,7 @@ async function teamExistInRef(ref, data) {
 }
 
 async function isInTeam(ref, data) {
-  return ref.child(data).once("value", function(snapshot) {
+  return ref.child(data).once("value", function (snapshot) {
     if (snapshot.exists()) {
       inTeam = true;
     } else {
@@ -50,11 +51,11 @@ async function isUser(ref, field, data) {
   return ref
     .orderByChild(field)
     .equalTo(data)
-    .once("value", function(snapshot) {
+    .once("value", function (snapshot) {
       if (snapshot.exists()) {
         console.log("valid user");
         validUser = true;
-        snapshot.forEach(function(data) {
+        snapshot.forEach(function (data) {
           person = data.key;
         });
       } else {
@@ -65,26 +66,36 @@ async function isUser(ref, field, data) {
 }
 
 async function getTeamSize(ref) {
-  return ref.once("value").then(function(snapshot) {
+  return ref.once("value").then(function (snapshot) {
     tSize = snapshot.val();
   });
 }
 
 async function getCurrTeam(ref) {
-  return ref.once("value").then(function(snapshot) {
+  return ref.once("value").then(function (snapshot) {
     cuTeam = snapshot.val();
   });
 }
 
 async function getUserName(ref) {
-  return ref.once("value").then(function(snapshot) {
+  return ref.once("value").then(function (snapshot) {
     username = snapshot.val();
   });
 }
 
 async function getTeamDes(ref) {
-  return ref.once("value").then(function(snapshot) {
+  return ref.once("value").then(function (snapshot) {
     description = snapshot.val();
+  });
+}
+
+// Gets the current time for timestamp
+async function getCurrTime(ref) {
+  return ref.once('value').then(function (snapshot) {
+    let offset = snapshot.val();
+    let serverTime = new Date().getTime() + offset;
+    let myDate = new Date(serverTime);
+    currTime = myDate.toString().split(' ')[4];
   });
 }
 
@@ -102,56 +113,64 @@ async function createTeam() {
       await teamExistInRef(rootref, teamName);
 
       if (existTeam) {
-        teamName = prompt(
-          "Team name " +
-            teamName +
-            " already taken. Please enter another team name."
-        );
+        teamName = prompt("Team name " + teamName + " already taken. Please enter another team name.");
       } else {
-        rootref
-          .child(teamName)
-          .child("teamSize")
-          .set(1);
+        rootref.child(teamName).child('teamSize').set(1);
         var teamsref = rootref.child(teamName);
         var userref = firebase.database().ref("Users/" + userID + "/Name");
         await getUserName(userref);
-        teamsref
-          .child("Members")
-          .child(userID)
-          .set([username, "Admin"]);
+        teamsref.child("Members").child(userID).set([username, "Admin"]);
         teamsref.child("description").set("");
         teamsref.child("admin").set(userID);
         teamsref.child("TeamName").set(teamName);
-        firebase
-          .database()
-          .ref("Users/" + userID + "/Teams/adminOf")
-          .child(teamName)
-          .set(teamName);
+        firebase.database().ref('Users/' + userID + '/Teams/adminOf').child(teamName).set(teamName);
 
-        teamsref
-          .child("Chatroom")
-          .child("Announcements")
-          .set("");
-        var chatref = teamsref.child("Chatroom");
-        chatref
-          .child("Chatrooms")
-          .child("general")
-          .child("chatroomName")
-          .set("general");
-        chatref
-          .child("Chatrooms")
-          .child("general")
-          .child("memberList")
-          .child(userID)
-          .set([userID, username]);
+        // Get the currTime
+        await getCurrTime(firebase.database().ref("/.info/serverTimeOffset"));
+
+        // Set up the Announcements chat
+        var newPostRef = teamsref.child('Chatroom').child('Announcements').child('AnnouncementsExt').child('msgArray').push();
+        newPostRef.set({
+          sender: userID,
+          message: "Welcome",
+          time: currTime
+        });
+        teamsref.child('Chatroom').child('Announcements').child('AnnouncementsExt').child('mostRecent').set("Welcome");
+
+        // Set up the general chatroom
+        var chatref = teamsref.child('Chatroom');
+        chatref.child('Chatrooms').child('general').child('chatroomName').set("general");
+        chatref.child('Chatrooms').child('general').child('memberList').child(userID).set([userID, username]);
+        chatref.child('Chatrooms').child('general').child('mostRecent').set("Welcome");
+        newPostRef = chatref.child('Chatrooms').child('general').child('msgArray').push();
+        newPostRef.set({
+          sender: userID,
+          message: "Welcome",
+          time: currTime
+        });
+
+        // Set up the directMessages chat
+        DMref = chatref.child('directMessages');
+        await getUserName(firebase.database().ref("/Users/" + userID + "/Name"));
+        DMref.child(userID).child(userID).set({
+          mostRecent: "Draft your messages here.",
+          name: username,
+          userId: userID
+        });
+        newPostRef = DMref.child(userID).child(userID).child("msgArray").push();
+        newPostRef.set({
+          sender: userID,
+          message: "Draft your messages here.",
+          time: currTime
+        });
 
         alert("You have created " + teamName + ".");
         done = true;
-        location.reload();
       }
     }
   }
 }
+
 
 async function joinTeam() {
   var teamName = prompt("Please enter the team name that you want to join.");
@@ -167,14 +186,9 @@ async function joinTeam() {
       await teamExistInRef(rootref, teamName);
 
       if (!existTeam) {
-        teamName = prompt(
-          "Team does not exist, please enter another team name."
-        );
+        teamName = prompt("Team does not exist, please enter another team name.");
       } else {
-        await isInTeam(
-          firebase.database().ref("Team/" + teamName + "/Members/"),
-          userID
-        );
+        await isInTeam(firebase.database().ref("Team/" + teamName + "/Members/"), userID);
         if (inTeam) {
           alert("You are already in " + teamName + ".");
           done = true;
@@ -186,26 +200,14 @@ async function joinTeam() {
           var teamsref = rootref.child(teamName);
           var userref = firebase.database().ref("Users/" + userID + "/Name");
           await getUserName(userref);
-          teamsref
-            .child("Members")
-            .child(userID)
-            .set([username, "Member"]);
-          firebase
-            .database()
-            .ref("Users/" + userID + "/Teams/memberOf")
-            .child(teamName)
-            .set(teamName);
+          teamsref.child("Members").child(userID).set([username, "Member"]);
+          firebase.database().ref('Users/' + userID + '/Teams/memberOf').child(teamName).set(teamName);
 
-          var chatref = teamsref
-            .child("Chatroom")
-            .child("Chatrooms")
-            .child("general")
-            .child("memberList");
+          var chatref = teamsref.child('Chatroom').child('Chatrooms').child('general').child('memberList');
           chatref.child(userID).set([userID, username]);
 
           alert("You have joined " + teamName + ".");
           done = true;
-          location.reload();
         }
       }
     }
@@ -267,9 +269,7 @@ async function modifyAdmin(uid) {
 }
 
 async function addMember() {
-  var email = prompt(
-    "Please enter the email of the user that you want to add."
-  );
+  var email = prompt("Please enter the email of the user that you want to add.");
   var rootref = firebase.database().ref("Users");
   var done = false;
 
@@ -288,10 +288,7 @@ async function addMember() {
         var ref = firebase.database().ref("Users/" + userID + "/currTeam");
         await getCurrTeam(ref);
         //check if is already in team
-        await isInTeam(
-          firebase.database().ref("Team/" + cuTeam + "/Members/"),
-          person
-        );
+        await isInTeam(firebase.database().ref("Team/" + cuTeam + "/Members/"), person);
         if (inTeam) {
           alert("The user you want to add is already in " + cuTeam + ".");
           done = true;
@@ -300,31 +297,23 @@ async function addMember() {
           //update members field
           var userref = firebase.database().ref("Users/" + person + "/Name");
           await getUserName(userref);
-          teamref
-            .child("Members")
-            .child(person)
-            .set([username, "Member"]);
+          teamref.child("Members").child(person).set([username, "Member"]);
           //update team size
           await getTeamSize(teamref.child("teamSize"));
           tSize = tSize + 1;
           teamref.child("teamSize").set(tSize);
           //update added person's account
-          firebase
-            .database()
-            .ref("Users/" + person + "/Teams/memberOf")
-            .child(cuTeam)
-            .set(cuTeam);
+          firebase.database().ref('Users/' + person + '/Teams/memberOf').child(cuTeam).set(cuTeam);
 
-          var chatref = teamref
-            .child("Chatroom")
-            .child("Chatrooms")
-            .child("general")
-            .child("memberList");
+          var nref = firebase.database().ref("Team/" + cuTeam + "/teamSize");
+          await getTeamSize(nref);
+          document.getElementById('number').innerText = tSize;
+
+          var chatref = teamref.child('Chatroom').child('Chatrooms').child('general').child('memberList');
           chatref.child(person).set([person, username]);
 
           alert("You have added " + username + " to " + cuTeam + ".");
           done = true;
-          location.reload();
         }
       }
     }
@@ -406,12 +395,8 @@ async function addDescription() {
   var info = prompt("Please enter a brief description of your team below.");
   var ref = firebase.database().ref("Users/" + userID + "/currTeam");
   await getCurrTeam(ref);
-  firebase
-    .database()
-    .ref("Team/" + cuTeam + "/description")
-    .set(info);
-  document.getElementById("descriptionBox").innerHTML = info.toString();
-  location.reload();
+  firebase.database().ref("Team/" + cuTeam + "/description").set(info);
+  document.getElementById('descriptionBox').innerHTML = info.toString();
 }
 
 async function updateView() {
@@ -435,7 +420,7 @@ async function updateView() {
   var path = firebase.database().ref("Users/" + userID + "/Name");
   await getUserName(path);
   await getIndividualTask(taskRef);
-  setTimeout(function() {
+  setTimeout(function () {
     document.getElementById("taskNum").innerText = taskCount;
   }, 50);
 
@@ -460,7 +445,7 @@ async function updateView() {
       button1.type = "button";
       button1.style = "width:50px; margin: auto";
       button1.textAlign = "center";
-      button1.addEventListener("click", function() {
+      button1.addEventListener("click", function () {
         assignRole(id);
       });
 
@@ -470,7 +455,7 @@ async function updateView() {
       button2.type = "button";
       button2.style = "width:50px; margin: auto";
       button2.textAlign = "center";
-      button2.addEventListener("click", function() {
+      button2.addEventListener("click", function () {
         modifyAdmin(id);
       });
 
@@ -480,7 +465,7 @@ async function updateView() {
       button3.type = "button";
       button3.style = "width: 50px; margin: auto";
       button3.textAlign = "center";
-      button3.addEventListener("click", function() {
+      button3.addEventListener("click", function () {
         removeMember(id);
       });
 
@@ -512,30 +497,21 @@ async function updateView() {
 async function updateViewMem() {
   var ref = firebase.database().ref("Users/" + userID + "/currTeam");
   await getCurrTeam(ref);
-  document.getElementById("teamName").innerText =
-    "You are a member of: " + cuTeam;
+  document.getElementById('teamName').innerText = "You are in: " + cuTeam;
 
   var dref = firebase.database().ref("Team/" + cuTeam + "/description");
   await getTeamDes(dref);
-  document.getElementById("teamDes").innerText =
-    "Team Description: " + description;
+  document.getElementById('teamDes').innerText = "Team Description: " + description;
 
   var nref = firebase.database().ref("Team/" + cuTeam + "/teamSize");
   await getTeamSize(nref);
-  document.getElementById("number").innerText = tSize;
+  document.getElementById('number').innerText = tSize;
 
   var tref = firebase.database().ref("Team/" + cuTeam + "/Members");
-  var members = document.getElementById("allMem");
-
-  var taskRef = firebase.database().ref("Team/" + cuTeam + "/Tasks");
-  var path = firebase.database().ref("Users/" + userID + "/Name");
-  await getUserName(path);
-  await getIndividualTask(taskRef);
-  setTimeout(function() {
-    document.getElementById("taskNum").innerText = taskCount;
-  }, 50);
+  var members = document.getElementById('allMem');
 
   tref.on("child_added", snapshot => {
+
     var name = snapshot.val()[0];
     var role = snapshot.val()[1];
 
@@ -577,7 +553,7 @@ async function updateAdminList() {
     button.className = "btn btn-success btn-lg btn-block";
     button.type = "button";
     button.style = "width:150px";
-    button.addEventListener("click", function() {
+    button.addEventListener("click", function () {
       redirectAdmin(teamName);
     });
     button.innerText = "Go";
@@ -616,7 +592,7 @@ async function updateMemList() {
     button.className = "btn btn-success btn-lg btn-block";
     button.type = "button";
     button.style = "width: 150px";
-    button.addEventListener("click", function() {
+    button.addEventListener("click", function () {
       redirectMem(teamName);
     });
     button.innerText = "Go";

@@ -4,12 +4,13 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>HomePage</title>
+  <title>Home: Admin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
   <link rel="stylesheet" href="assets/css/themify-icons.css" />
   <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="icon" href="img/logo.png">
 
   <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
   <script>
@@ -185,7 +186,7 @@
             </div>
           </div>
         </div>
-
+    <!--
         <div class="col-lg-3 col-md-6">
           <div class="card">
             <div class="card-body">
@@ -206,7 +207,7 @@
           </div>
         </div>
       </div>
-
+    -->
       <div class="row">
         <div class="col-lg-12">
           <div class="card">
@@ -215,7 +216,7 @@
               <td>
                 <button style="width: 100px; margin: auto" class="btn btn-success btn-lg btn-block add ti-pencil" id="descriptionButton"
                   onclick="addDescription()">
-                  &nbsp;Edit
+                  Edit
                 </button>
               </td>
             </div>
@@ -239,7 +240,7 @@
                 <div class="card-body">
                   <button style="width: 100%; margin: auto" class="btn btn-success btn-lg btn-block add ti-plus" type="button"
                     onclick="addMember()">
-                    &nbsp;Add Member
+                    Add Member
                   </button>
                 </div>
               </div>
@@ -264,79 +265,65 @@
         </div>
         <!-- /# column -->
       </div>
-      <!-- Team Management  End -->
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
-              <h4 class="box-title">Announcements:</h4>
-              <p>Post announcements</p>
-            </div>
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="card-body">
-                  <button style="width: 20%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button">
-                    Post
-                  </button>
-                </div>
-              </div>
-              <div class="col-lg-9">
-                <div class="card-body">
-                  <p>You can find past announcements here</p>
-                </div>
-                <!-- /.card-body -->
-              </div>
-            </div>
-            <!-- /.row -->
-            <div class="card-body"></div>
-          </div>
-        </div>
-      </div>
+      <!--  Team Management  End -->
+                <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">  
+                                <div class="card-body">
+                                    <h4 class="box-title">Events </h4>
+                                </div>
+                                <div class="row"> 
+                                    <div class="col-lg-12">
+                                        <div class="card-body"> 
+                                            <div class="table">
+                                                <table style="width:100%; margin: 5px" id="eventTable">
+                                                    <tr>
+                                                        <td>Date</td>
+                                                        <td>Time</td>
+                                                        <td>Event Name</td>
+                                                        <td>Event Description</td>
+                                                        <td></td>
+                                                    </tr>
+                                                </table>
+                                                <div id="eventContent"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <div class="card-body">
+                                            <button style="width: 40%; margin: auto" class="btn btn-success btn-lg btn-block add ti-plus" type="button" onclick="makeEvent()"> Create Event</button>
+                                            <dialog id="dialog">
+                                                    <form method="dialog">
+                                                      <p style="color: black; font-weight: bold; font-size: large; text-align: center">Create Event</p>
+                                                      <pre><b>Event Name:</b> <input id="eventName" type="text" placeholder="Event Name" class="title" style="width:70%"></input></pre>
+                                                      <pre><b>Event Date:</b> <input id="eventDate" type="date" placeholder="Event Date" class="title" style="width:70%"></input></pre>
+                                                      <pre><b>Start Time:</b> <input id="eventStart" type="time" style="width: 70%"></pre>
+                                                      <pre><b>End Time:</b> <input id="eventEnd" type="time" style="width: 70%"></pre>
+                                                      <pre><b>Event Description: </b> <input id="eventDescription" type="text" placeholder="Description" style="width:100%; height: 70px; text-align: left"></input></pre>
+                                                      <button  style="color: black" onclick="eventSave()" >Save</button>&nbsp&nbsp&nbsp&nbsp&nbsp<button class="cancel" style="color: black">Cancel</button>
+                                                   </form>
+                                                  </dialog>
+                                                  <dialog id="editDialog">
+                                                        <form method="dialog">
+                                                          <p style="color: black; font-weight: bold; font-size: large; text-align: center">Edit Event</p>
+                                                          <pre><b>Event Name:</b> <input id="eventNameEdit" type="text" placeholder="Event Name" class="title" style="width:70%"></input></pre>
+                                                          <pre><b>Event Date:</b> <input id="eventDateEdit" type="date" placeholder="Event Date" class="title" style="width:70%"></input></pre>
+                                                          <pre><b>Start Time:</b> <input id="eventStartEdit" type="time" style="width: 70%"></pre>
+                                                          <pre><b>End Time:</b> <input id="eventEndEdit" type="time" style="width: 70%"></pre>
+                                                          <pre><b>Event Description: </b> <input id="eventDescriptionEdit" type="text" placeholder="Description" style="width:100%; height: 70px; text-align: left"></input></pre>
+                                                          <button  style="color: black" onclick="eventEditSave()" >Save</button>&nbsp&nbsp&nbsp&nbsp&nbsp<button class="cancel" style="color: black">Cancel</button>
+                                                       </form>
+                                                      </dialog>     
+                                     </div> <!-- /.card-body -->
+                                    </div>
+                                </div> <!-- /.row --> 
+                                <div class="card-body"></div>
+                            </div> 
+                        </div>
+                 </div>
+             </div><!--content End-->
+    </div><!--Right panel end-->
 
-      <!--
-          <div class="row">
-          <div class="col-lg-12">
-              <div class="card">
-                  <div class="card-body">
-                      <h4 class="box-title">Poll </h4>
-                      <p>let us vote for decision!</p>
-                  </div>
-                  <div class="row">
-                      <div class="col-lg-12">
-                          <div class="card-body">
-                              <button style="width: 20%; padding: 5px" class="btn btn-success btn-lg btn-block"
-                                  type="button">create poll</button>
-                          </div>
-                      </div>
-                      <div class="col-lg-9">
-                          <div class="card-body">
-                              <p>pollint ongoing.</p>
-                          </div>
-        -->
-      <!-- /.card-body -->
-      <!--
-          </div>
-                      <div class="col-lg-9">
-                          <div class="card-body">
-                              <p>pollint in the past.</p>
-                          </div>
-        -->
-      <!-- /.card-body -->
-      <!--
-          </div>
-                  </div>
-        -->
-      <!-- /.row -->
-      <!--
-          <div class="card-body"></div>
-                  </div>
-              </div>
-          </div>
-        -->
-    </div>
-    <!-- content End -->
-  </div>
-  <!-- Right panel end -->
 </body>
 <script src="team.js"></script>
 

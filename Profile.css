@@ -1,5 +1,5 @@
 .profile {
-  background: aliceblue;
+  background: white;
 }
 
 table {
@@ -44,6 +44,10 @@ input {
 .push {
   border-radius: 5px;
 
-  background-color: #00c292;
+  background-color: #5cb85c;
   color: #ffffff;
+}
+
+.push:hover {
+  background-color: #4cae4c
 }

@@ -725,6 +725,14 @@ async function updateViewMem() {
   var tref = firebase.database().ref("Team/" + cuTeam + "/Members");
   var members = document.getElementById("allMem");
 
+  var taskRef = firebase.database().ref("Team/" + cuTeam + "/Tasks");
+  var path = firebase.database().ref("Users/" + userID + "/Name");
+  await getUserName(path);
+  await getIndividualTask(taskRef);
+  setTimeout(function() {
+    document.getElementById("taskNum").innerText = taskCount;
+  }, 50);
+
   tref.on("child_added", snapshot => {
     var name = snapshot.val()[0];
     var role = snapshot.val()[1];

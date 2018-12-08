@@ -130,14 +130,15 @@ function setUpChat(chatType, name, optionalId){
 	}
 
 	// Fill in chat window with each message from database branch
-	chatRef.child("msgArray").once("value", snapshot => {
+	chatRef.child("msgArray").off();
+	chatRef.child("msgArray").on("child_added", snapshot => {
 
-		snapshot.forEach(function(data) {
+		//snapshot.forEach(function(data) {
 			
 			// Get value of message and time
-			let inputMsg = data.val().message;
-			let inputSender = data.val().sender;
-			let timestamp = data.val().time;
+			let inputMsg = snapshot.val().message;
+			let inputSender = snapshot.val().sender;
+			let timestamp = snapshot.val().time;
 
 			// Determine who is sending the message
 			let source;
@@ -159,7 +160,7 @@ function setUpChat(chatType, name, optionalId){
 			else{
 				createHTMLMessage(inputMsg, source, timestamp, nameOfSender);
 			}
-		});
+		//});
 	});
 }
 
@@ -179,6 +180,7 @@ setTimeout(function() {
 
 	/** Announcements **/
 	let announcementsRef = firebase.database().ref('/Team/'+teamId+'/Chatroom/Announcements');
+	announcementsRef.off();
     announcementsRef.on("child_added", snapshot => {
 
     	// Fetch latest message on announcements
@@ -198,6 +200,7 @@ setTimeout(function() {
 
 	/** Chatrooms **/
 	let chatroomsRef = firebase.database().ref('/Team/'+teamId+'/Chatroom/Chatrooms');
+	chatroomsRef.off();
     chatroomsRef.once("value", snapshot => {
 
     	snapshot.forEach(function(data) {
@@ -215,15 +218,13 @@ setTimeout(function() {
 	    	createHTMLContact("chatrooms", chatroomName, latestMsg);
 		});
 
-
-
-
     });
 	/** Chatrooms **/
 
 
 	/** Direct Messages **/
     let friendsRef = firebase.database().ref('/Team/'+teamId+'/Chatroom/directMessages/'+userId); 			
+    friendsRef.off();
     friendsRef.on("child_added", snapshot => {
 
     	// Fetch from database
@@ -289,36 +290,6 @@ async function updateMessageDatabase(msg){
 				mostRecent: msg
 			});		
 		}
-
-		// Append the new message to chat window
-		chatRef.child("msgArray").limitToLast(1).once("child_added", snapshot => {
-
-			// Get value of message and time
-			let inputMsg = snapshot.val().message;
-			let inputSender = snapshot.val().sender;
-			let timestamp = snapshot.val().time;
-
-			// Determine who is sending the message
-			let source;
-			if(inputSender == userId){
-				source = "client";
-			}
-			else{
-				source = "server";
-			}
-
-			// Set name of sender
-			friendRef = firebase.database().ref("/Users/"+inputSender);
-			getName(friendRef);
-
-			// Add chat bubble to window
-			if(inAnnounce){
-				createHTMLMessage(inputMsg, "server", timestamp, "Admin");
-			}
-			else{
-				createHTMLMessage(inputMsg, source, timestamp, nameOfSender);
-			}
-		});
 	}
 }
 
@@ -409,7 +380,7 @@ function createHTMLMessage(msg, source, time, name){
 	if(!shouldScroll){
 		messagesCont.scrollTop = messagesCont.scrollHeight;
 	}
-	
+
 }
 
 // Adds message to message window whenever user presses enter
@@ -453,18 +424,16 @@ async function updateChatroomDatabase(){
 	// Write to database
 	// Create a new post reference with an auto-generated id
 	let addChatroomRef = firebase.database().ref("/Team/"+teamId+"/Chatroom/Chatrooms/").child(name);
-	addChatroomRef.child("chatroomName").set(name);
+	addChatroomRef.set({
+		mostRecent: "Welcome",
+		chatroomName: name
+	});
 
 	let newPostRef = addChatroomRef.child("msgArray").push();
 	newPostRef.set({
 	    sender: userId,
 	    message: "Welcome",
 	    time: currTime
-	});
-
-	// Update the most recent message
-	addChatroomRef.update({
-		mostRecent: "Welcome"
 	});
 
 	let chatroomName = name;

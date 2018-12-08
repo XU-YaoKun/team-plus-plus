@@ -1,302 +1,343 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>HomePage</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>HomePage</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/themify-icons.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 
-    <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
-    <script>
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyCDwFS1dxv0WWEbgehMdtsIQ3F_WQlKDnE",
-            authDomain: "team-plus-plus.firebaseapp.com",
-            databaseURL: "https://team-plus-plus.firebaseio.com",
-            projectId: "team-plus-plus",
-            storageBucket: "team-plus-plus.appspot.com",
-            messagingSenderId: "836611996730"
-        };
-        firebase.initializeApp(config);
+  <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCDwFS1dxv0WWEbgehMdtsIQ3F_WQlKDnE",
+        authDomain: "team-plus-plus.firebaseapp.com",
+        databaseURL: "https://team-plus-plus.firebaseio.com",
+        projectId: "team-plus-plus",
+        storageBucket: "team-plus-plus.appspot.com",
+        messagingSenderId: "836611996730"
+      };
+      firebase.initializeApp(config);
     </script>
-    <script>
-        window.onload = function () {
-
-            firebase.auth().onAuthStateChanged(function(user){
-                // User is signed in: set userId and teamId
-                if (user){
-                    userID = user.uid;
-                    updateView();
-                }
-                // No user is signed in.
-                else{
-                    console.log('User is not logged in. !!')
-                }
-            });
-        };
+  <script>
+    window.onload = function() {
+        firebase.auth().onAuthStateChanged(function(user) {
+          // User is signed in: set userId and teamId
+          if (user) {
+            userID = user.uid;
+            updateView();
+          }
+          // No user is signed in.
+          else {
+            console.log("User is not logged in. !!");
+            window.location.href = "index.html";
+          }
+        });
+      };
     </script>
-
+  <script>
+    function signOut() {
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            console.log("Signing out");
+            firebase.auth().signOut();
+          }
+        });
+      }
+    </script>
 </head>
+
 <body>
-    
-    <!-- Left Panel --> 
-    <aside id="left-panel" class="left-panel">
-        <nav class="navbar navbar-default"> 
-            <div id="main-menu" class="main-menu">
-                <ul class="nav navbar-nav">
-                    <li class="menu-title">For team</li><!-- /.menu-title -->
-                    <li class="menu-item-has-children dropdown">
-                        <a href="OverView.html" >Overview</a>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="Chatroom.html">Chatroom</a>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="Schedule.html">Schedule</a>
-                    </li>
+  <!-- Left Panel -->
+  <aside id="left-panel" class="left-panel">
+    <nav class="navbar navbar-default">
+      <div id="main-menu" class="main-menu">
+        <ul class="nav navbar-nav">
+          <li class="menu-title">For team</li>
+          <!-- /.menu-title -->
+          <li class="menu-item-has-children dropdown">
+            <a href="HomePage.html"><span class="ti-home flat-color-4" style="padding-right: 30px"></span>Home</a>
+          </li>
+          <!--
+              <li class="menu-item-has-children dropdown">
+                  <a href="OverView.html"><span class="ti-menu-alt flat-color-1" style="padding-right: 30px"></span>Overview</a>
+              </li>
+            -->
+          <li class="menu-item-has-children dropdown">
+            <a href="Schedule.html"><span class="ti-time flat-color-3" style="padding-right: 30px"></span>Schedule</a>
+          </li>
+          <li class="menu-item-has-children dropdown">
+            <a href="Task.html"><span class="ti-agenda flat-color-5" style="padding-right: 30px"></span>Tasks</a>
+          </li>
+          <li class="menu-item-has-children dropdown">
+            <a href="Chatroom.html"><span class="ti-comments flat-color-2" style="padding-right: 30px"></span>Chat</a>
+          </li>
 
-                    <li class="menu-title">For you</li><!-- /.menu-title -->
+          <li class="menu-title">For you</li>
+          <!-- /.menu-title -->
 
-                    <li class="menu-item-has-children dropdown">
-                        <a href="HomePage.html">HomePage</a>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                            <a href="Task.html">Tasks</a>
-                        </li>
-                    <li>
-                        <a href="Profile.html">Profile</a>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="team.html">change team</a>
-                    </li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </nav>
-    </aside><!-- /#left-panel --> 
-    <!-- Left Panel -->
+          <li>
+            <a href="Profile.html"><span class="ti-crown flat-color-6" style="padding-right: 30px"></span>Profile</a>
+          </li>
+          <li class="menu-item-has-children dropdown">
+            <a href="team.html"><span class="ti-menu-alt flat-color-7" style="padding-right: 30px"></span>Change Team</a>
+          </li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+  </aside>
+  <!-- /#left-panel -->
+  <!-- Left Panel -->
 
-    <!-- right Panel-->
-    <!-- Header-->
-    <div id="right-panel" class="right-panel">
-
-        <header id="header" class="header">  
-            <div class="top-left">
-                <div class="navbar-header"> 
-                    <p>TEAM++</p>
-                </div> 
+  <!-- right Panel -->
+  <!-- Header -->
+  <div id="right-panel" class="right-panel">
+    <header id="header" class="header">
+      <div class="top-left">
+        <div class="navbar-header">
+          <p>Team++</p>
+        </div>
+      </div>
+      <div class="top-right">
+        <div class="header-menu">
+          <div class="user-area float-right">
+            <div class="dropdown">
+              <button class="dropbtn" style="background-color: #ffffff; margin-right: 30px">
+                <img id="icon" class="user-avatar rounded-circle" src="img/sample.png" alt="User Avatar" />
+              </button>
+              <div class="dropdown-content">
+                <a href="Profile.html">Profile</a>
+                <a href="index.html" onclick="signOut()">Log out</a>
+              </div>
             </div>
-            <div class="top-right"> 
-                <div class="header-menu"> 
-                    <div class="user-area float-right">
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- /header -->
+    <!-- Header -->
 
-                        <a href="Login.html" class="dropdown-toggle active">
-                            <img class="user-avatar rounded-circle" src="img/sample.png" alt="User Avatar">
-                        </a>
+    <div class="content">
+      <!-- add your code here:) feel free to add your own .css file -->
 
-                    </div> 
-                </div>  
-            </div>
-        </header><!-- /header -->
-        <!-- Header-->
-
-        <div class="content">
-                <!--add your code here:) feel free to add your own .css file-->
-
-                <!--overall info-->
-                <div class="row">
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="stat-widget-five">
-                                        <div class="stat-icon dib flat-color-1">
-                                            <span class="ti-user"></span>
-                                        </div>
-                                        <div class="stat-content">
-                                            <div class="text-left dib"> 
-                                                <div class="stat-text"><span id="number" class="count"></span></div>
-                                                <div class="stat-heading">teammates</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-        
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="stat-widget-five">
-                                        <div class="stat-icon dib flat-color-2">
-                                            <span class="ti-hummer"></span>
-                                        </div>
-                                        <div class="stat-content">
-                                            <div class="text-left dib">
-                                                <div class="stat-text"><span class="count">15</span></div>
-                                                <div class="stat-heading">undo tasks</div> 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-        
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="stat-widget-five">
-                                        <div class="stat-icon dib flat-color-3">
-                                            <span class="ti-timer"></span>
-                                        </div>
-                                        <div class="stat-content">
-                                            <div class="text-left dib"> 
-                                                <div class="stat-text"><span class="count">2</span></div>
-                                                <div class="stat-heading">dues tomorrow</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-        
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="stat-widget-five">
-                                        <div class="stat-icon dib flat-color-4">
-                                            <span class="ti-alarm-clock"></span>
-                                        </div>
-                                        <div class="stat-content">
-                                            <div class="text-left dib"> 
-                                                <div class="stat-text"><span class="count">72</span></div>
-                                                <div class="stat-heading">before overall deadline</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h10 class="box-title">Team Description</h10>
-                            <td>
-                                <button style="width: 100px; padding: 5px" class="btn btn-success btn-lg btn-block add ti-pencil"
-                                        id="descriptionButton" onclick="addDescription()">Edit</button>
-                            </td>
-                        </div>
-                        <table>
-                            <tr>
-                                <td id="descriptionBox" style="width: 1000px; text-align: center">
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
+      <!-- overall info -->
+      <div class="row">
+        <div class="col-lg-3 col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <div class="stat-widget-five">
+                <div class="stat-icon dib flat-color-1">
+                  <span class="ti-user"></span>
                 </div>
-            </div>
-                    <!--  Team Management  -->
-            <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card">  
-                            <div class="card-body">
-                                <h4 id = "teamName" class="box-title">Team Management </h4>
-                            </div>
-                            <div class="row"> 
-                                <div class="col-lg-4">
-                                    <div class="card-body">
-                                        <button style="width: 100%; padding: 5px" class="btn btn-success btn-lg btn-block add ti-plus" type="button" onclick="addMember()">Add Member</button>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-lg-11" style="margin-left: 30px">
-                                    <table class="table">
-                                        <thead id="status">
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Role</th>
-                                            <th>Change Role</th>
-                                            <th>Change to Admin</th>
-                                            <th>Delete This Member</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody id="allMem">
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                                </div>
-                            </div>
-                        </div> 
-                    </div><!-- /# column -->
+                <div class="stat-content">
+                  <div class="text-left dib">
+                    <div class="stat-text">
+                      <span id="number" class="count"></span>
+                    </div>
+                    <div class="stat-heading">teammate(s)</div>
+                  </div>
                 </div>
-                <!--  Team Management  End -->
-                <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card">  
-                                <div class="card-body">
-                                    <h4 class="box-title">Post Announcement </h4>
-                                    <p>convey important info here:)</p>
-                                </div>
-                                <div class="row"> 
-                                    <div class="col-lg-12">
-                                        <div class="card-body"> 
-                                            <button style="width: 20%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button">Post</button>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="card-body">
-                                            <p>here is announcement in the past.</p>
-                                        </div> <!-- /.card-body -->
-                                    </div>
-                                </div> <!-- /.row --> 
-                                <div class="card-body"></div>
-                            </div> 
-                        </div>
-                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-                 <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card">  
-                                <div class="card-body">
-                                    <h4 class="box-title">Poll </h4>
-                                    <p>let us vote for decision!</p>
-                                </div>
-                                <div class="row"> 
-                                    <div class="col-lg-12">
-                                        <div class="card-body"> 
-                                            <button style="width: 20%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button">create poll</button>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="card-body">
-                                            <p>pollint ongoing.</p>
-                                        </div> <!-- /.card-body -->
-                                    </div>
-                                    <div class="col-lg-9">
-                                            <div class="card-body">
-                                                <p>pollint in the past.</p>
-                                            </div> <!-- /.card-body -->
-                                        </div>
-                                </div> <!-- /.row --> 
-                                <div class="card-body"></div>
-                            </div> 
-                        </div>
-                 </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <div class="stat-widget-five">
+                <div class="stat-icon dib flat-color-2">
+                  <span class="ti-hummer"></span>
+                </div>
+                <div class="stat-content">
+                  <div class="text-left dib">
+                    <div class="stat-text">
+                      <span class="count" id="taskNum"></span>
+                    </div>
+                    <div class="stat-heading">to-do tasks</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-                 
+        <div class="col-lg-3 col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <div class="stat-widget-five">
+                <div class="stat-icon dib flat-color-3">
+                  <span class="ti-timer"></span>
+                </div>
+                <div class="stat-content">
+                  <div class="text-left dib">
+                    <div class="stat-text"><span class="count">2</span></div>
+                    <div class="stat-heading">tasks due tomorrow</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
+        <div class="col-lg-3 col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <div class="stat-widget-five">
+                <div class="stat-icon dib flat-color-4">
+                  <span class="ti-alarm-clock"></span>
+                </div>
+                <div class="stat-content">
+                  <div class="text-left dib">
+                    <div class="stat-text"><span class="count">72</span></div>
+                    <div class="stat-heading">
+                      hours before project deadline
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-             </div><!--content End-->
-    </div><!--Right panel end-->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h10 class="box-title">Team Description:&nbsp;</h10>
+              <td>
+                <button style="width: 100px; margin: auto" class="btn btn-success btn-lg btn-block add ti-pencil" id="descriptionButton"
+                  onclick="addDescription()">
+                  &nbsp;Edit
+                </button>
+              </td>
+            </div>
+            <table>
+              <tr>
+                <td id="descriptionBox" style="width: 1000px; text-align: center"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Team Management -->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h4 id="teamName" class="box-title">Team Management</h4>
+            </div>
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="card-body">
+                  <button style="width: 100%; margin: auto" class="btn btn-success btn-lg btn-block add ti-plus" type="button"
+                    onclick="addMember()">
+                    &nbsp;Add Member
+                  </button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-11" style="margin-left: 30px">
+                  <table class="table">
+                    <thead id="status">
+                      <tr>
+                        <th style="text-align: center">Name</th>
+                        <th style="text-align: center">Role</th>
+                        <th style="text-align: center">Change Role</th>
+                        <th style="text-align: center">Give Admin Status</th>
+                        <th style="text-align: center">Remove Member</th>
+                      </tr>
+                    </thead>
+                    <tbody id="allMem" style="text-align: center"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /# column -->
+      </div>
+      <!-- Team Management  End -->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="box-title">Announcements:</h4>
+              <p>Post announcements</p>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card-body">
+                  <button style="width: 20%; padding: 5px" class="btn btn-success btn-lg btn-block" type="button">
+                    Post
+                  </button>
+                </div>
+              </div>
+              <div class="col-lg-9">
+                <div class="card-body">
+                  <p>You can find past announcements here</p>
+                </div>
+                <!-- /.card-body -->
+              </div>
+            </div>
+            <!-- /.row -->
+            <div class="card-body"></div>
+          </div>
+        </div>
+      </div>
 
-   
-    
+      <!--
+          <div class="row">
+          <div class="col-lg-12">
+              <div class="card">
+                  <div class="card-body">
+                      <h4 class="box-title">Poll </h4>
+                      <p>let us vote for decision!</p>
+                  </div>
+                  <div class="row">
+                      <div class="col-lg-12">
+                          <div class="card-body">
+                              <button style="width: 20%; padding: 5px" class="btn btn-success btn-lg btn-block"
+                                  type="button">create poll</button>
+                          </div>
+                      </div>
+                      <div class="col-lg-9">
+                          <div class="card-body">
+                              <p>pollint ongoing.</p>
+                          </div>
+        -->
+      <!-- /.card-body -->
+      <!--
+          </div>
+                      <div class="col-lg-9">
+                          <div class="card-body">
+                              <p>pollint in the past.</p>
+                          </div>
+        -->
+      <!-- /.card-body -->
+      <!--
+          </div>
+                  </div>
+        -->
+      <!-- /.row -->
+      <!--
+          <div class="card-body"></div>
+                  </div>
+              </div>
+          </div>
+        -->
+    </div>
+    <!-- content End -->
+  </div>
+  <!-- Right panel end -->
 </body>
 <script src="team.js"></script>
+
 </html>

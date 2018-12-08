@@ -1,27 +1,27 @@
 # Team-Plus-Plus
 
-*a web app for team collaboration*
+_A web app for team collaboration_
 
-This application is now deployed to a firebase server, here is the link [Team++](https://team-plus-plus.firebaseapp.com)
+This application is now deployed to a firebase server. Here is the link [Team++](https://team-plus-plus.firebaseapp.com)
 
-------
+---
 
-_The functionality inlcudes_
+_The functionality includes_
 
-1. Account managements, including sign up, login and logout etc.
+1. Account management including sign up, login, logout, etc.
 
-2. Team managements, including create team, join team, leave team, assign roles.
+2. Team management, including create team, join team, leave team, and assign roles.
 
-3. Calender, we integrated google calender into our web and also developed our own task management tool and availability panel.
+3. Calender: We integrated Google Calendar into our web application and also developed our own task management tool and schedule availability panel.
 
-4. Instance chat, the chatroom part is implemented using node.js and surports instance chatting.
+4. Instant chat: The chat portion is implemented using node.js and supports instant messaging.
 
-5. Profile thing.
+5. Modifiable user profiles
 
-_Tecnology_
+_Technology_
 
-1. HTML, CSS, Javascript
+1. HTML, CSS, JavaScript
 
-2. firebase as the backend database
+2. Firebase as the backend database
 
 3. node.js

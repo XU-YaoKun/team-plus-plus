@@ -1,5 +1,6 @@
 <!DOCTYPE <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,59 +13,68 @@
 
 </head>
 <script>
-	
+    function signOut() {
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                console.log("Signing out");
+                firebase.auth().signOut();
+            }
+        });
+    }
 </script>
+
 <body>
-    
-    <!-- Left Panel --> 
+
+    <!-- Left Panel -->
     <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-default">
             <div id="main-menu" class="main-menu">
                 <ul class="nav navbar-nav">
                     <li class="menu-title">For team</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
-                        <a href="OverView.html"><span class="ti-menu-alt flat-color-1" style="padding-right: 30px"></span>Overview</a>
+                        <a href="HomePage.html"><span class="ti-home flat-color-4" style="padding-right: 30px"></span>Home</a>
                     </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="Chatroom.html"><span class="ti-comments flat-color-2" style="padding-right: 30px"></span>Chatroom</a>
-                    </li>
+                    <!--
+                        <li class="menu-item-has-children dropdown">
+                            <a href="OverView.html"><span class="ti-menu-alt flat-color-1" style="padding-right: 30px"></span>Overview</a>
+                        </li>-->
                     <li class="menu-item-has-children dropdown">
                         <a href="Schedule.html"><span class="ti-time flat-color-3" style="padding-right: 30px"></span>Schedule</a>
-                    </li>
-
-                    <li class="menu-title">For you</li><!-- /.menu-title -->
-
-                    <li class="menu-item-has-children dropdown">
-                        <a href="HomePage.html"><span class="ti-home flat-color-4" style="padding-right: 30px"></span>HomePage</a>
                     </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="Task.html"><span class="ti-agenda flat-color-5" style="padding-right: 30px"></span>Tasks</a>
                     </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="Chatroom.html"><span class="ti-comments flat-color-2" style="padding-right: 30px"></span>Chat</a>
+                    </li>
+
+                    <li class="menu-title">For you</li><!-- /.menu-title -->
+
                     <li>
                         <a href="Profile.html"><span class="ti-crown flat-color-6" style="padding-right: 30px"></span>Profile</a>
                     </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="team.html"><span class="ti-menu-alt flat-color-7" style="padding-right: 30px"></span>Change
-                            team</a>
+                            Team</a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
-        </nav> 
-    </aside><!-- /#left-panel --> 
+        </nav>
+    </aside><!-- /#left-panel -->
     <!-- Left Panel -->
 
     <!-- right Panel-->
     <!-- Header-->
     <div id="right-panel" class="right-panel">
 
-        <header id="header" class="header">  
+        <header id="header" class="header">
             <div class="top-left">
-                <div class="navbar-header"> 
-                    <p>TEAM++</p>
-                </div> 
+                <div class="navbar-header">
+                    <p>Team++</p>
+                </div>
             </div>
-            <div class="top-right"> 
-                <div class="header-menu"> 
+            <div class="top-right">
+                <div class="header-menu">
                     <div class="user-area float-right">
                         <div class="dropdown">
                             <button class="dropbtn" style="background-color: #ffffff; margin-right: 30px">
@@ -74,65 +84,123 @@
                                 <a href="Profile.html">Profile</a>
                                 <a href="index.html" onclick="signOut()">Log out</a>
                             </div>
-                        </div> 
-                    </div> 
-                </div>  
+                        </div>
+                    </div>
+                </div>
             </div>
         </header><!-- /header -->
         <!-- Header-->
         <style>
-	        	#tasks{text-align: center; font-weight: bold }
-	        	#tasks p{color:black; font-weight: bold; background-color: #ebebeb}
-	    	    #tasks li {border-radius: 25px; border:1px solid black; padding: 10px; overflow: hidden;}
-	    	    #tasks ul {list-style-type: none;}
-	    	    #todo li {background-color: #ffaaaa}
-	    	    #ip li {background-color: #ffff91}
-	    	    #fin li {background-color: #90ff90}
-	    	    .left {position:relative; width: 35px; bottom:15px; left:15%;  font-size: xx-large;}
-	    	    .right {position:relative; width: 35px; bottom:61px; left:73%;font-size: xx-large;}
-	    	    .add {position:absolute; right: 10%; color: gray}
-	    	    .arrows{margin:-40px}
-	    	    dialog{border-radius: 25px; text-align: center; width:400px;}
-	    	    dialog input{width:100%}
-	    </style>
+            #tasks {
+                text-align: center;
+                font-weight: bold
+            }
+
+            #tasks p {
+                color: black;
+                font-weight: bold;
+                background-color: #ebebeb
+            }
+
+            #tasks li {
+                border-radius: 25px;
+                border: 1px solid black;
+                padding: 10px;
+                overflow: hidden;
+            }
+
+            #tasks ul {
+                list-style-type: none;
+            }
+
+            #todo li {
+                background-color: #ffaaaa
+            }
+
+            #ip li {
+                background-color: #ffff91
+            }
+
+            #fin li {
+                background-color: #90ff90
+            }
+
+            .left {
+                position: relative;
+                width: 35px;
+                bottom: 15px;
+                left: 15%;
+                font-size: xx-large;
+            }
+
+            .right {
+                position: relative;
+                width: 35px;
+                bottom: 61px;
+                left: 73%;
+                font-size: xx-large;
+            }
+
+            .add {
+                position: absolute;
+                right: 10%;
+                color: gray
+            }
+
+            .arrows {
+                margin: -40px
+            }
+
+            dialog {
+                border-radius: 25px;
+                text-align: center;
+                width: 400px;
+            }
+
+            dialog input {
+                width: 100%
+            }
+        </style>
         <div class="content">
-                <!--add your code here:) feel free to add your own .css file-->
-                <div id="tasks">
-	                <div id="todo" class="col-sm-4">
-		                <p>Todo<a class="add">+</a></p>
-						<ul id="todolist">
-						</ul>
-	                </div>
-	                <div id="ip" class="col-sm-4" >
-		                <p>In-Progress<b class="add">+</b></p>
-						<ul id="iplist">
-						</ul>
-	                </div>
-	                <div id="fin" class="col-sm-4">
-		                <p>Finished<b class="add">+</b></p>
-						<ul id="finlist">
-						</ul>
-	                </div>
-				</div>
-		</div>
+            <!--add your code here:) feel free to add your own .css file-->
+            <div id="tasks">
+                <div id="todo" class="col-sm-4">
+                    <p>To-do<a class="add">+</a></p>
+                    <ul id="todolist">
+                    </ul>
+                </div>
+                <div id="ip" class="col-sm-4">
+                    <p>In-Progress<b class="add">+</b></p>
+                    <ul id="iplist">
+                    </ul>
+                </div>
+                <div id="fin" class="col-sm-4">
+                    <p>Finished<b class="add">+</b></p>
+                    <ul id="finlist">
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
     <dialog id="dialog">
-	  <form method="dialog">
-		<p style="color: black; font-weight: bold; font-size: large">Add Task</p>
-		<pre><b>Task Title:</b> <input id="title0" type="text" placeholder="Task Title" class="title" style="width:70%"></input></pre>
-	    <pre><b>Task Handler:</b> <select id="handler0" class="members" name="handler" style="width:65%"></select></pre>
-		<button id="save" style="color: black">Save</button>&nbsp&nbsp&nbsp&nbsp&nbsp<button class="cancel" style="color: black">Cancel</button>
-	  </form>
-	</dialog>
-	<dialog id="editDialog">
-	  <form method="dialog">
-		<p style="color: black; font-weight: bold; font-size: large">Edit Task</p>
-	    <pre><b>Task Title:</b> <input id="title1" class="members" type="text" placeholder="Task Title" class="title" style="width:70%"></input></pre>
-	    <pre><b>Task Handler:</b> <select id="handler1" name="handler" style="width:65%"></select></pre>
-		<button id="update" style="color: black">Update</button>&nbsp&nbsp&nbsp&nbsp&nbsp<button id="delete" style="color: black">Delete</button>&nbsp&nbsp&nbsp&nbsp&nbsp<button class="cancel" style="color: black">Cancel</button>
-	  </form>
-	</dialog>
+        <form method="dialog">
+            <p style="color: black; font-weight: bold; font-size: large">Add Task</p>
+            <pre><b>Task Title:</b> <input id="title0" type="text" placeholder="Task Title" class="title" style="width:70%"></input></pre>
+            <pre><b>Task Handler:</b> <select id="handler0" class="members" name="handler" style="width:65%"></select></pre>
+            <button id="save" style="color: black">Save</button>&nbsp&nbsp&nbsp&nbsp&nbsp<button class="cancel" style="color: black">Cancel</button>
+        </form>
+    </dialog>
+    <dialog id="editDialog">
+        <form method="dialog">
+            <p style="color: black; font-weight: bold; font-size: large">Edit Task</p>
+            <pre><b>Task Title:</b> <input id="title1" class="members" type="text" placeholder="Task Title" class="title" style="width:70%"></input></pre>
+            <pre><b>Task Handler:</b> <select id="handler1" name="handler" style="width:65%"></select></pre>
+            <button id="update" style="color: black">Update</button>&nbsp&nbsp&nbsp&nbsp&nbsp<button id="delete" style="color: black">Delete</button>&nbsp&nbsp&nbsp&nbsp&nbsp<button
+                class="cancel" style="color: black">Cancel</button>
+        </form>
+    </dialog>
 </body>
 <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
 <script src="Task.js"></script>
+
 </html>

@@ -222,7 +222,7 @@ async function joinTeam() {
               DMref.child(userID).child(snapshot.key).set({
                 mostRecent: "Send your messages here.",
                 name: snapshot.val()[0],
-                userId: userID
+                userId: snapshot.key
               });
               newPostRef = DMref.child(userID).child(snapshot.key).child("msgArray").push();
               newPostRef.set({
@@ -359,7 +359,7 @@ async function addMember() {
             DMref.child(person).child(snapshot.key).set({
               mostRecent: "Send your messages here.",
               name: snapshot.val()[0],
-              userId: person
+              userId: snapshot.key
             });
             newPostRef = DMref.child(person).child(snapshot.key).child("msgArray").push();
             newPostRef.set({

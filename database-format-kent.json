@@ -16,7 +16,11 @@
         },
         "directMessages": {
           "*userId*": {
-            "msgArray": ["*msg*", "*msg*", "..."],
+            "msgArray": [
+              "*msg*",
+              "*msg*",
+              "..."
+            ],
             "name": "",
             "userId": ""
           }
@@ -48,7 +52,11 @@
         "*taskId*": {
           "taskName": "",
           "deadline": "",
-          "participants": ["*userID*", "*userID*", "..."]
+          "participants": [
+            "*userID*",
+            "*userID*",
+            "..."
+          ]
         }
       }
     }

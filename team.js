@@ -9,6 +9,8 @@ var userID = null;
 var taskCount = 0;
 var description = "Not defined";
 var currTime = null;
+var oldEventName = null;
+var eventNum = 0;
 
 async function getIndividualTask(ref) {
   var taskDoer;

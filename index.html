@@ -27,9 +27,13 @@
         function checkIfSignedIn() {
             firebase.auth().onAuthStateChanged(function (user) {
                 if (user) {
-                    window.location.href = "team.html"
+                    window.location.href = "team.html";
                 }
-            })
+            });
+        }
+
+        function rememberUser() {
+
         }
 
         function signIn() {
@@ -40,6 +44,21 @@
             else {
                 var userEmail = document.getElementById('inputEmail').value;
                 var userPass = document.getElementById('inputPassword').value;
+                var rememberMe = document.getElementById("rememberMe");
+                if(rememberMe.checked == true) {
+                    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(function(error) {
+                        // Handle Errors here.
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                    });
+                }
+                else {
+                    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).catch(function(error) {
+                        // Handle Errors here.
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                    });
+                }
                 firebase.auth().signInWithEmailAndPassword(userEmail, userPass).catch(function (error) {
                     // Handle Errors here.
                     var errorCode = error.code;
@@ -57,7 +76,7 @@
                     if (user) {
                         window.location.href = "team.html";
                     }
-                })
+                });
             }
         }
     </script>
@@ -78,7 +97,7 @@
         <input type="password" id="inputPassword" class="form-control" placeholder="******" required>
         <div class="checkbox mb-3">
             <label>
-                <input type="checkbox" value="remember-me"> Remember me </input>
+                <input type="checkbox" id="rememberMe"> Remember me </input>
             </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="button" onclick="signIn()">Sign in</button>

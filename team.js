@@ -303,7 +303,7 @@ async function modifyAdmin(uid) {
       "The admin of " + cuTeam + " has been changed to " + newAdminname + "."
     );
     window.location = "team.html";
-  } else alert("Canceled");
+  } else alert("Cancelled");
 }
 
 async function addMember() {
@@ -453,19 +453,28 @@ async function assignRole(uid) {
   var ref = firebase.database().ref("Users/" + userID + "/currTeam");
   await getCurrTeam(ref);
   var role = prompt("Please enter the role of " + username + ".");
-  firebase
-    .database()
-    .ref("Team/" + cuTeam + "/Members/" + uid)
-    .set([username, role]);
-  location.reload();
+  if (role == null || role == "")
+  {
+      alert("Cancelled");
+  }
+  else{
+      firebase.database().ref("Team/" + cuTeam + "/Members/" + uid).set([username, role]);
+      location.reload();
+  }
 }
 
 async function addDescription() {
   var info = prompt("Please enter a brief description of your team below.");
   var ref = firebase.database().ref("Users/" + userID + "/currTeam");
   await getCurrTeam(ref);
-  firebase.database().ref("Team/" + cuTeam + "/description").set(info);
-  document.getElementById('descriptionBox').innerHTML = info.toString();
+  if (info == null || info == "")
+  {
+      alert("Cancelled");
+  }
+  else{
+      firebase.database().ref("Team/" + cuTeam + "/description").set(info);
+      document.getElementById('descriptionBox').innerHTML = info.toString();
+  }
 }
 
 async function updateView() {

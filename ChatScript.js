@@ -289,37 +289,37 @@ async function updateMessageDatabase(msg){
 				mostRecent: msg
 			});		
 		}
+
+		// Append the new message to chat window
+		chatRef.child("msgArray").limitToLast(1).once("child_added", snapshot => {
+
+			// Get value of message and time
+			let inputMsg = snapshot.val().message;
+			let inputSender = snapshot.val().sender;
+			let timestamp = snapshot.val().time;
+
+			// Determine who is sending the message
+			let source;
+			if(inputSender == userId){
+				source = "client";
+			}
+			else{
+				source = "server";
+			}
+
+			// Set name of sender
+			friendRef = firebase.database().ref("/Users/"+inputSender);
+			getName(friendRef);
+
+			// Add chat bubble to window
+			if(inAnnounce){
+				createHTMLMessage(inputMsg, "server", timestamp, "Admin");
+			}
+			else{
+				createHTMLMessage(inputMsg, source, timestamp, nameOfSender);
+			}
+		});
 	}
-
-	// Append the new message to chat window
-	chatRef.child("msgArray").limitToLast(1).once("child_added", snapshot => {
-
-		// Get value of message and time
-		let inputMsg = snapshot.val().message;
-		let inputSender = snapshot.val().sender;
-		let timestamp = snapshot.val().time;
-
-		// Determine who is sending the message
-		let source;
-		if(inputSender == userId){
-			source = "client";
-		}
-		else{
-			source = "server";
-		}
-
-		// Set name of sender
-		friendRef = firebase.database().ref("/Users/"+inputSender);
-		getName(friendRef);
-
-		// Add chat bubble to window
-		if(inAnnounce){
-			createHTMLMessage(inputMsg, "server", timestamp, "Admin");
-		}
-		else{
-			createHTMLMessage(inputMsg, source, timestamp, nameOfSender);
-		}
-	});
 }
 
 // Generates HTML element on sidebar for a specific contact
@@ -399,16 +399,16 @@ function createHTMLMessage(msg, source, time, name){
 	li.appendChild(img);
 	li.appendChild(p);
 
+	// Put html element on page
+	messages.append(li);
+	messages.append(div);
+
 	// Selects the messages class to always scroll to bottom
 	const messagesCont = document.querySelector('.messages');
 	shouldScroll = messagesCont.scrollTop + messagesCont.clientHeight === messagesCont.scrollHeight;
 	if(!shouldScroll){
 		messagesCont.scrollTop = messagesCont.scrollHeight;
 	}
-
-	// Put html element on page
-	messages.append(li);
-	messages.append(div);
 	
 }
 

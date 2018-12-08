@@ -168,7 +168,6 @@ async function createTeam() {
 
         alert("You have created " + teamName + ".");
         done = true;
-        location.reload();
       }
     }
   }
@@ -245,7 +244,6 @@ async function joinTeam() {
 
           alert("You have joined " + teamName + ".");
           done = true;
-          location.reload();
         }
       }
     }

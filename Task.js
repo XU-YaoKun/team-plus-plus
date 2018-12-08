@@ -37,7 +37,7 @@ firebase.auth().onAuthStateChanged(async function (user) {
     console.log("teamId has been set: " + teamId);
   }
   // No user is signed in.
-  else {}
+  else { }
 });
 
 async function loadTeamId(ref) {
@@ -82,7 +82,7 @@ setTimeout(function () {
       console.log(oneRef.key);
       node.innerHTML = `<div class="${list}"><li id="${
         oneRef.key
-      }"><div class="title">Title: ${title}</div><div class="handler">Handler: ${handler}</div></li><div class="arrows"><div class="left">⇦</div><div class="right">⇨</div></div></div>`;
+        }"><div class="title">Title: ${title}</div><div class="handler">Handler: ${handler}</div></li><div class="arrows"><div class="left">⇦</div><div class="right">⇨</div></div></div>`;
       //left arrow
       node.childNodes[0].childNodes[1].childNodes[0].addEventListener(
         "click",
@@ -203,7 +203,7 @@ setTimeout(function () {
     setTimeout(function () {
       node.innerHTML = `<div class="${list}"><li id="${
         oneRef.key
-      }"><div class="title">Title: ${title}</div><div class="handler">Handler: ${handler}</div></li><div class="arrows"><div class="left">⇦</div><div class="right">⇨</div></div></div>`;
+        }"><div class="title">Title: ${title}</div><div class="handler">Handler: ${handler}</div></li><div class="arrows"><div class="left">⇦</div><div class="right">⇨</div></div></div>`;
       node.childNodes[0].childNodes[1].childNodes[0].addEventListener(
         "click",
         function () {

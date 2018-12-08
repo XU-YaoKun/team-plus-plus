@@ -90,11 +90,11 @@ async function getTeamDes(ref) {
 }
 
 // Gets the current time for timestamp
-async function getCurrTime(ref){
-  return ref.once('value').then(function(snapshot) {
+async function getCurrTime(ref) {
+  return ref.once('value').then(function (snapshot) {
     let offset = snapshot.val();
     let serverTime = new Date().getTime() + offset;
-    let myDate = new Date(serverTime); 
+    let myDate = new Date(serverTime);
     currTime = myDate.toString().split(' ')[4];
   });
 }
@@ -104,19 +104,19 @@ async function createTeam() {
   var done = false;
   var rootref = firebase.database().ref("Team");
 
-  while(!done){
-    if (teamName == null || teamName == ""){
+  while (!done) {
+    if (teamName == null || teamName == "") {
       alert("Cancelled");
       done = true;
     }
-    else{
+    else {
       //check if team name exist in database
       await teamExistInRef(rootref, teamName);
 
-      if(existTeam){
+      if (existTeam) {
         teamName = prompt("Team name " + teamName + " already taken. Please enter another team name.");
       }
-      else{
+      else {
         rootref.child(teamName).child('teamSize').set(1);
         var teamsref = rootref.child(teamName);
         var userref = firebase.database().ref("Users/" + userID + "/Name");
@@ -153,7 +153,7 @@ async function createTeam() {
 
         // Set up the directMessages chat
         var DMref = chatref.child('directMessages');
-        await getUserName(firebase.database().ref("/Users/"+userID+"/Name"));
+        await getUserName(firebase.database().ref("/Users/" + userID + "/Name"));
         DMref.child(userID).child(userID).set({
           mostRecent: "Send your messages here.",
           name: username,
@@ -180,67 +180,67 @@ async function joinTeam() {
   var done = false;
   var rootref = firebase.database().ref("Team");
 
-  while(!done){
-    if (teamName == null || teamName == ""){
-        alert("Cancelled");
-        done = true;
+  while (!done) {
+    if (teamName == null || teamName == "") {
+      alert("Cancelled");
+      done = true;
     }
-    else{
+    else {
       //check if team name exist in database
       await teamExistInRef(rootref, teamName);
 
-      if(!existTeam){
+      if (!existTeam) {
         teamName = prompt("Team does not exist, please enter another team name.");
       }
-      else{
+      else {
         await isInTeam(firebase.database().ref("Team/" + teamName + "/Members/"), userID);
-        if(inTeam){
-            alert("You are already in " + teamName + ".");
-            done = true;
+        if (inTeam) {
+          alert("You are already in " + teamName + ".");
+          done = true;
         }
-        else{
-            var tref = firebase.database().ref("Team/" + teamName + "/teamSize");
-            await getTeamSize(tref);
-            tSize = tSize + 1;
-            tref.set(tSize);
-            var teamsref = rootref.child(teamName);
-            var userref = firebase.database().ref("Users/" + userID + "/Name");
-            var memref = teamsref.child("Members");
-            await getUserName(userref);
-            memref.child(userID).set([username, "Member"]);
-            firebase.database().ref('Users/' + userID + '/Teams/memberOf').child(teamName).set(teamName);
+        else {
+          var tref = firebase.database().ref("Team/" + teamName + "/teamSize");
+          await getTeamSize(tref);
+          tSize = tSize + 1;
+          tref.set(tSize);
+          var teamsref = rootref.child(teamName);
+          var userref = firebase.database().ref("Users/" + userID + "/Name");
+          var memref = teamsref.child("Members");
+          await getUserName(userref);
+          memref.child(userID).set([username, "Member"]);
+          firebase.database().ref('Users/' + userID + '/Teams/memberOf').child(teamName).set(teamName);
 
-            // Get the currTime
-            await getCurrTime(firebase.database().ref("/.info/serverTimeOffset"));
+          // Get the currTime
+          await getCurrTime(firebase.database().ref("/.info/serverTimeOffset"));
 
-            // Set up the directMessages chat
-            var DMref = teamsref.child('Chatroom').child('directMessages');
+          // Set up the directMessages chat
+          var DMref = teamsref.child('Chatroom').child('directMessages');
 
-            // Iterate thtough list of members creating a direct message between them and the new member
-            memref.on("child_added", snapshot => {
-              DMref.child(userID).child(snapshot.key).set({
-                mostRecent: "Send your messages here.",
-                name: snapshot.val()[0],
-                userId: userID
-              });
-              newPostRef = DMref.child(userID).child(snapshot.key).child("msgArray").push();
-              newPostRef.set({
-                sender: "Admin",
-                message: "Send your messages here.",
-                time: currTime
-              });
+          // Iterate thtough list of members creating a direct message between them and the new member
+          memref.on("child_added", snapshot => {
+            DMref.child(userID).child(snapshot.key).set({
+              mostRecent: "Send your messages here.",
+              name: snapshot.val()[0],
+              userId: userID
+            });
+            newPostRef = DMref.child(userID).child(snapshot.key).child("msgArray").push();
+            newPostRef.set({
+              sender: "Admin",
+              message: "Send your messages here.",
+              time: currTime
+            });
 
-              DMref.child(snapshot.key).child(userID).set({
-                mostRecent: "Send your messages here.",
-                name: username,
-                userId: userID
-              });
-              newPostRef = DMref.child(snapshot.key).child(userID).child("msgArray").push();
-              newPostRef.set({
-                sender: "Admin",
-                message: "Send your messages here.",
-                time: currTime
-              });
+            DMref.child(snapshot.key).child(userID).set({
+              mostRecent: "Send your messages here.",
+              name: username,
+              userId: userID
+            });
+            newPostRef = DMref.child(snapshot.key).child(userID).child("msgArray").push();
+            newPostRef.set({
+              sender: "Admin",
+              message: "Send your messages here.",
+              time: currTime
+            });
           });
 
           alert("You have joined " + teamName + ".");
@@ -453,13 +453,12 @@ async function assignRole(uid) {
   var ref = firebase.database().ref("Users/" + userID + "/currTeam");
   await getCurrTeam(ref);
   var role = prompt("Please enter the role of " + username + ".");
-  if (role == null || role == "")
-  {
-      alert("Cancelled");
+  if (role == null || role == "") {
+    alert("Cancelled");
   }
-  else{
-      firebase.database().ref("Team/" + cuTeam + "/Members/" + uid).set([username, role]);
-      location.reload();
+  else {
+    firebase.database().ref("Team/" + cuTeam + "/Members/" + uid).set([username, role]);
+    location.reload();
   }
 }
 
@@ -467,13 +466,12 @@ async function addDescription() {
   var info = prompt("Please enter a brief description of your team below.");
   var ref = firebase.database().ref("Users/" + userID + "/currTeam");
   await getCurrTeam(ref);
-  if (info == null || info == "")
-  {
-      alert("Cancelled");
+  if (info == null || info == "") {
+    alert("Cancelled");
   }
-  else{
-      firebase.database().ref("Team/" + cuTeam + "/description").set(info);
-      document.getElementById('descriptionBox').innerHTML = info.toString();
+  else {
+    firebase.database().ref("Team/" + cuTeam + "/description").set(info);
+    document.getElementById('descriptionBox').innerHTML = info.toString();
   }
 }
 

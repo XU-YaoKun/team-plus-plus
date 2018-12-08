@@ -20,7 +20,7 @@ firebase.auth().onAuthStateChanged(async function (user) {
     console.log("teamSize has been set: " + tSize);
   }
   // No user is signed in.
-  else {}
+  else { }
 });
 
 // get teamId from datgabase

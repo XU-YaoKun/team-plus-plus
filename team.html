@@ -14,43 +14,43 @@
   <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
   <script>
     // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyCDwFS1dxv0WWEbgehMdtsIQ3F_WQlKDnE",
-        authDomain: "team-plus-plus.firebaseapp.com",
-        databaseURL: "https://team-plus-plus.firebaseio.com",
-        projectId: "team-plus-plus",
-        storageBucket: "team-plus-plus.appspot.com",
-        messagingSenderId: "836611996730"
-      };
-      firebase.initializeApp(config);
-    </script>
+    var config = {
+      apiKey: "AIzaSyCDwFS1dxv0WWEbgehMdtsIQ3F_WQlKDnE",
+      authDomain: "team-plus-plus.firebaseapp.com",
+      databaseURL: "https://team-plus-plus.firebaseio.com",
+      projectId: "team-plus-plus",
+      storageBucket: "team-plus-plus.appspot.com",
+      messagingSenderId: "836611996730"
+    };
+    firebase.initializeApp(config);
+  </script>
   <script>
-    window.onload = function() {
-        firebase.auth().onAuthStateChanged(function(user) {
-          // User is signed in: set userId and teamId
-          if (user) {
-            userID = user.uid;
-            updateAdminList();
-            updateMemList();
-          }
-          // No user is signed in.
-          else {
-            console.log("User is not logged in.");
-            window.location.href = "index.html";
-          }
-        });
-      };
-    </script>
+    window.onload = function () {
+      firebase.auth().onAuthStateChanged(function (user) {
+        // User is signed in: set userId and teamId
+        if (user) {
+          userID = user.uid;
+          updateAdminList();
+          updateMemList();
+        }
+        // No user is signed in.
+        else {
+          console.log("User is not logged in.");
+          window.location.href = "index.html";
+        }
+      });
+    };
+  </script>
   <script>
     function signOut() {
-        firebase.auth().onAuthStateChanged(function(user) {
-          if (user) {
-            console.log("Signing out");
-            firebase.auth().signOut();
-          }
-        });
-      }
-    </script>
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          console.log("Signing out");
+          firebase.auth().signOut();
+        }
+      });
+    }
+  </script>
 </head>
 
 <body>

@@ -17,70 +17,70 @@
   <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
   <script>
     // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyCDwFS1dxv0WWEbgehMdtsIQ3F_WQlKDnE",
-        authDomain: "team-plus-plus.firebaseapp.com",
-        databaseURL: "https://team-plus-plus.firebaseio.com",
-        projectId: "team-plus-plus",
-        storageBucket: "team-plus-plus.appspot.com",
-        messagingSenderId: "836611996730"
-      };
-      firebase.initializeApp(config);
-    </script>
+    var config = {
+      apiKey: "AIzaSyCDwFS1dxv0WWEbgehMdtsIQ3F_WQlKDnE",
+      authDomain: "team-plus-plus.firebaseapp.com",
+      databaseURL: "https://team-plus-plus.firebaseio.com",
+      projectId: "team-plus-plus",
+      storageBucket: "team-plus-plus.appspot.com",
+      messagingSenderId: "836611996730"
+    };
+    firebase.initializeApp(config);
+  </script>
   <script>
     function checkIfSignedIn() {
-        firebase.auth().onAuthStateChanged(function(user) {
-          if (user) {
-            window.location.href = "team.html";
-          }
-        });
-      }
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          window.location.href = "team.html";
+        }
+      });
+    }
 
-      function signUp() {
-        var database = firebase.database();
-        var userName = document.getElementById("userName").value;
-        var userEmail = document.getElementById("inputEmail").value;
-        var userPass = document.getElementById("inputPassword").value;
-        var userPhone = document.getElementById("phoneNum").value;
-        firebase
-          .auth()
-          .createUserWithEmailAndPassword(userEmail, userPass)
-          .then(function() {
-            // If user signs up successfully, moves user back to login
-            alert("You have successfully registered for an account!");
-            registerUser(userEmail, userPass, userName, userPhone);
-            firebase.auth().onAuthStateChanged(function(user) {
-              if (user) {
-                firebase.auth().signOut();
-                window.location.href = "index.html";
-              }
-            });
-          })
-          .catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // Alerts user if weak password or other errors occur.
-            if (errorCode === "auth/weak-password") {
-              alert("The password is too weak.");
-            } else {
-              alert(errorMessage);
+    function signUp() {
+      var database = firebase.database();
+      var userName = document.getElementById("userName").value;
+      var userEmail = document.getElementById("inputEmail").value;
+      var userPass = document.getElementById("inputPassword").value;
+      var userPhone = document.getElementById("phoneNum").value;
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(userEmail, userPass)
+        .then(function () {
+          // If user signs up successfully, moves user back to login
+          alert("You have successfully registered for an account!");
+          registerUser(userEmail, userPass, userName, userPhone);
+          firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+              firebase.auth().signOut();
+              window.location.href = "index.html";
             }
-            console.log(error);
           });
-      }
-
-      function registerUser(userEmail, userPass, userName, userPhone) {
-        var userId = firebase.auth().currentUser.uid;
-        var userRef = firebase.database().ref("Users");
-        var userIdRef = userRef.child(userId).set({
-          Email: userEmail,
-          Password: userPass,
-          Name: userName,
-          Phone: userPhone
+        })
+        .catch(function (error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // Alerts user if weak password or other errors occur.
+          if (errorCode === "auth/weak-password") {
+            alert("The password is too weak.");
+          } else {
+            alert(errorMessage);
+          }
+          console.log(error);
         });
-      }
-    </script>
+    }
+
+    function registerUser(userEmail, userPass, userName, userPhone) {
+      var userId = firebase.auth().currentUser.uid;
+      var userRef = firebase.database().ref("Users");
+      var userIdRef = userRef.child(userId).set({
+        Email: userEmail,
+        Password: userPass,
+        Name: userName,
+        Phone: userPhone
+      });
+    }
+  </script>
 </head>
 
 <body class="text-center" onload="checkIfSignedIn()">

@@ -13,14 +13,14 @@
   <link rel="stylesheet" href="Profile.css" />
   <script>
     function signOut() {
-        firebase.auth().onAuthStateChanged(function(user) {
-          if (user) {
-            console.log("Signing out");
-            firebase.auth().signOut();
-          }
-        });
-      }
-    </script>
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          console.log("Signing out");
+          firebase.auth().signOut();
+        }
+      });
+    }
+  </script>
 </head>
 
 <body>

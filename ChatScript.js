@@ -1,8 +1,8 @@
-var inputElem = document.querySelector(".chatMessage");
-var contacts = document.querySelector("#contacts").children[0];
-var messages = document.querySelector(".messages").children[0];
-var userDisplayName = document.querySelector("#userDisplayName");
-var chatroomDisplayName = document.querySelector("#chatroomDisplayName");
+var inputElem = document.querySelector('.chatMessage');
+var contacts = document.querySelector('#contacts').children[0];
+var messages = document.querySelector('.messages').children[0];
+var userDisplayName = document.querySelector('#userDisplayName');
+var chatroomDisplayName = document.querySelector('#chatroomDisplayName');
 
 var userId;
 var teamId;
@@ -24,13 +24,14 @@ var nameOfSender = "Your Friend";
 var currTime;
 
 // Sets userId and teamId when user is logged in
-firebase.auth().onAuthStateChanged(async function(user) {
+firebase.auth().onAuthStateChanged(async function (user) {
   // User is signed in: set userId and teamId
   if (user) {
     userId = user.uid;
 
     let ref = firebase.database().ref("Users/" + userId);
     await loadTeamId(ref);
+
   }
   // No user is signed in.
   else {
@@ -39,14 +40,14 @@ firebase.auth().onAuthStateChanged(async function(user) {
 
 // Sets teamId
 async function loadTeamId(ref) {
-  return ref.once("value").then(function(snapshot) {
+  return ref.once('value').then(function (snapshot) {
     teamId = snapshot.val().currTeam;
   });
 }
 
 // Signs user out of website
 function signOut() {
-  firebase.auth().onAuthStateChanged(function(user) {
+  firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
       console.log("Signing out");
       firebase.auth().signOut();
@@ -56,15 +57,15 @@ function signOut() {
 
 // Determines if current user is an admin
 function checkAdmin(ref) {
-  ref.once("value").then(function(snapshot) {
+  ref.once('value').then(function (snapshot) {
     // Check if the current user is the same as the admin listed on team
-    isAdmin = userId == snapshot.val().admin;
+    isAdmin = (userId == snapshot.val().admin);
   });
 }
 
 // Sets name of person sending message
 function getName(ref) {
-  ref.once("value").then(function(snapshot) {
+  ref.once('value').then(function (snapshot) {
     // Check if the current user is the same as the admin listed on team
     nameOfSender = snapshot.val().Name;
   });
@@ -72,16 +73,17 @@ function getName(ref) {
 
 // Gets the current time for timestamp
 async function getCurrTime(ref) {
-  return ref.once("value").then(function(snapshot) {
+  return ref.once('value').then(function (snapshot) {
     let offset = snapshot.val();
     let serverTime = new Date().getTime() + offset;
     let myDate = new Date(serverTime);
-    currTime = myDate.toString().split(" ")[4];
+    currTime = myDate.toString().split(' ')[4];
   });
 }
 
 // Sets up chat window for announcements, chatrooms, and directMessages according to parameters
 function setUpChat(chatType, name, optionalId) {
+
   // Sets up displays, variables, and refs based on chat type
   if (chatType == "announcements") {
     // Display name
@@ -96,10 +98,9 @@ function setUpChat(chatType, name, optionalId) {
     checkAdmin(adminRef);
 
     // Set reference to Announcements page on firebase
-    chatRef = firebase
-      .database()
-      .ref("/Team/" + teamId + "/Chatroom/Announcements/AnnouncementsExt");
-  } else if (chatType == "chatrooms") {
+    chatRef = firebase.database().ref("/Team/" + teamId + "/Chatroom/Announcements/AnnouncementsExt");
+  }
+  else if (chatType == "chatrooms") {
     // Display name
     chatroomDisplayName.innerHTML = name;
 
@@ -108,11 +109,9 @@ function setUpChat(chatType, name, optionalId) {
     inAnnounce = false;
 
     // Set reference to chatrooms page on firebase
-    chatRef = firebase
-      .database()
-      .ref("/Team/" + teamId + "/Chatroom/Chatrooms/" + name);
-  } else {
-    // directMessages
+    chatRef = firebase.database().ref("/Team/" + teamId + "/Chatroom/Chatrooms/" + name);
+  }
+  else {	// directMessages
     // Display name
     chatroomDisplayName.innerHTML = name;
 
@@ -121,26 +120,8 @@ function setUpChat(chatType, name, optionalId) {
     inAnnounce = false;
 
     // Set references for saving messages in both user's messages
-    chatRef = firebase
-      .database()
-      .ref(
-        "/Team/" +
-          teamId +
-          "/Chatroom/directMessages/" +
-          userId +
-          "/" +
-          optionalId
-      );
-    othersRef = firebase
-      .database()
-      .ref(
-        "/Team/" +
-          teamId +
-          "/Chatroom/directMessages/" +
-          optionalId +
-          "/" +
-          userId
-      );
+    chatRef = firebase.database().ref("/Team/" + teamId + "/Chatroom/directMessages/" + userId + "/" + optionalId);
+    othersRef = firebase.database().ref("/Team/" + teamId + "/Chatroom/directMessages/" + optionalId + "/" + userId);
   }
 
   // Removes all messages in the message window
@@ -150,7 +131,9 @@ function setUpChat(chatType, name, optionalId) {
 
   // Fill in chat window with each message from database branch
   chatRef.child("msgArray").once("value", snapshot => {
-    snapshot.forEach(function(data) {
+
+    snapshot.forEach(function (data) {
+
       // Get value of message and time
       let inputMsg = data.val().message;
       let inputSender = data.val().sender;
@@ -160,7 +143,8 @@ function setUpChat(chatType, name, optionalId) {
       let source;
       if (inputSender == userId) {
         source = "client";
-      } else {
+      }
+      else {
         source = "server";
       }
 
@@ -171,7 +155,8 @@ function setUpChat(chatType, name, optionalId) {
       // Add chat bubble to window
       if (chatType == "announcements") {
         createHTMLMessage(inputMsg, "server", timestamp, "Admin");
-      } else {
+      }
+      else {
         createHTMLMessage(inputMsg, source, timestamp, nameOfSender);
       }
     });
@@ -179,23 +164,23 @@ function setUpChat(chatType, name, optionalId) {
 }
 
 // Wait for log in to work so we don't get a null uid
-setTimeout(function() {
+setTimeout(function () {
   console.log("Ready to fill contacts!");
 
   console.log("userID: " + userId);
   console.log("teamId: " + teamId);
 
   /** Set Name **/
-  let userRef = firebase.database().ref("/Users/" + userId);
+  let userRef = firebase.database().ref('/Users/' + userId);
   userRef.on("value", snapshot => {
     userDisplayName.innerHTML = snapshot.val().Name;
-  });
+  })
+
 
   /** Announcements **/
-  let announcementsRef = firebase
-    .database()
-    .ref("/Team/" + teamId + "/Chatroom/Announcements");
+  let announcementsRef = firebase.database().ref('/Team/' + teamId + '/Chatroom/Announcements');
   announcementsRef.on("child_added", snapshot => {
+
     // Fetch latest message on announcements
     let latestMsg = snapshot.val().mostRecent;
 
@@ -206,15 +191,17 @@ setTimeout(function() {
 
     // Generate HTML element on sidebar
     createHTMLContact("announcements", "Announcements", latestMsg);
+
   });
   /** Announcements **/
 
+
   /** Chatrooms **/
-  let chatroomsRef = firebase
-    .database()
-    .ref("/Team/" + teamId + "/Chatroom/Chatrooms");
+  let chatroomsRef = firebase.database().ref('/Team/' + teamId + '/Chatroom/Chatrooms');
   chatroomsRef.once("value", snapshot => {
-    snapshot.forEach(function(data) {
+
+    snapshot.forEach(function (data) {
+
       // Fetch from database
       let chatroomName = data.val().chatroomName;
       let latestMsg = data.val().mostRecent;
@@ -227,14 +214,18 @@ setTimeout(function() {
       // Generate HTML element on sidebar
       createHTMLContact("chatrooms", chatroomName, latestMsg);
     });
+
+
+
+
   });
   /** Chatrooms **/
 
+
   /** Direct Messages **/
-  let friendsRef = firebase
-    .database()
-    .ref("/Team/" + teamId + "/Chatroom/directMessages/" + userId);
+  let friendsRef = firebase.database().ref('/Team/' + teamId + '/Chatroom/directMessages/' + userId);
   friendsRef.on("child_added", snapshot => {
+
     // Fetch from database
     let friendName = snapshot.val().name;
     let friendId = snapshot.val().userId;
@@ -247,19 +238,25 @@ setTimeout(function() {
 
     // Generate HTML element on sidebar
     createHTMLContact("directMessages", friendName, latestMsg, friendId);
+
   });
   /** Direct Messages **/
 
+
   // Start at the announcements page
   setUpChat("announcements", "Announcements");
+
+
 }, 1500);
 
 /**
- * Updates message database
- */
+* Updates message database
+*/
 async function updateMessageDatabase(msg) {
+
   // Only let admins post to announcements
-  if ((inAnnounce && isAdmin) || !inAnnounce) {
+  if ((inAnnounce && isAdmin) || (!inAnnounce)) {
+
     // Get the currTime
     await getCurrTime(firebase.database().ref("/.info/serverTimeOffset"));
 
@@ -278,7 +275,7 @@ async function updateMessageDatabase(msg) {
     });
 
     // If calling from directMessages then update other's too except if talking to self
-    if (inDM && othersRef.toString() != chatRef.toString()) {
+    if (inDM && (othersRef.toString() != chatRef.toString())) {
       // Update other member's database info
       newPostRef = othersRef.child("msgArray").push();
       newPostRef.set({
@@ -292,13 +289,10 @@ async function updateMessageDatabase(msg) {
         mostRecent: msg
       });
     }
-  }
 
-  // Append the new message to chat window
-  chatRef
-    .child("msgArray")
-    .limitToLast(1)
-    .once("child_added", snapshot => {
+    // Append the new message to chat window
+    chatRef.child("msgArray").limitToLast(1).once("child_added", snapshot => {
+
       // Get value of message and time
       let inputMsg = snapshot.val().message;
       let inputSender = snapshot.val().sender;
@@ -308,7 +302,8 @@ async function updateMessageDatabase(msg) {
       let source;
       if (inputSender == userId) {
         source = "client";
-      } else {
+      }
+      else {
         source = "server";
       }
 
@@ -319,14 +314,17 @@ async function updateMessageDatabase(msg) {
       // Add chat bubble to window
       if (inAnnounce) {
         createHTMLMessage(inputMsg, "server", timestamp, "Admin");
-      } else {
+      }
+      else {
         createHTMLMessage(inputMsg, source, timestamp, nameOfSender);
       }
     });
+  }
 }
 
 // Generates HTML element on sidebar for a specific contact
 function createHTMLContact(chatType, name, latestMsg, optionalId) {
+
   // Create elements of contact
   let li = document.createElement("li");
   let div1 = document.createElement("div");
@@ -344,19 +342,15 @@ function createHTMLContact(chatType, name, latestMsg, optionalId) {
   // Add img and ability to switch between chats
   if (chatType == "announcements") {
     img.src += "img/announcement.png";
-    div1.onclick = function() {
-      setUpChat("announcements", "Announcements");
-    };
-  } else if (chatType == "chatrooms") {
+    div1.onclick = function () { setUpChat("announcements", "Announcements") };
+  }
+  else if (chatType == "chatrooms") {
     img.src += "img/admin_1.png";
-    div1.onclick = function() {
-      setUpChat("chatrooms", name);
-    };
-  } else {
+    div1.onclick = function () { setUpChat("chatrooms", name) };
+  }
+  else {
     img.src += "img/user.png";
-    div1.onclick = function() {
-      setUpChat("directMessages", name, optionalId);
-    };
+    div1.onclick = function () { setUpChat("directMessages", name, optionalId) };
   }
 
   // FIXME: Add online status !!!
@@ -378,6 +372,7 @@ function createHTMLContact(chatType, name, latestMsg, optionalId) {
 
 // Generates HTML element on message window for a specific message
 function createHTMLMessage(msg, source, time, name) {
+
   // Timestamp
   let div = document.createElement("p");
   div.innerHTML += name + ": " + time.toString();
@@ -389,60 +384,67 @@ function createHTMLMessage(msg, source, time, name) {
   p.innerHTML += msg;
 
   // Determine the class attribute and image to append
-  if (source == "server") {
+  if (source == 'server') {
     li.className += "sent";
     img.src = "img/eggperson.jpeg";
-    div.style = "padding-left: 50px; font-size: 12px";
-  } else {
+    div.style = "padding-left: 50px; font-size: 12px"
+  }
+  else {
     li.className += "replies";
     img.src = "img/chat.jpg";
-    div.style = "padding-left: 500px; font-size: 12px";
+    div.style = "padding-left: 500px; font-size: 12px"
   }
 
   // Add img and message to li
   li.appendChild(img);
   li.appendChild(p);
 
+  // Put html element on page
+  messages.append(li);
+  messages.append(div);
+
   // Selects the messages class to always scroll to bottom
-  const messagesCont = document.querySelector(".messages");
-  shouldScroll =
-    messagesCont.scrollTop + messagesCont.clientHeight ===
-    messagesCont.scrollHeight;
+  const messagesCont = document.querySelector('.messages');
+  shouldScroll = messagesCont.scrollTop + messagesCont.clientHeight === messagesCont.scrollHeight;
   if (!shouldScroll) {
     messagesCont.scrollTop = messagesCont.scrollHeight;
   }
 
-  // Put html element on page
-  messages.append(li);
-  messages.append(div);
 }
 
 // Adds message to message window whenever user presses enter
-inputElem.addEventListener("keypress", function(e) {
+inputElem.addEventListener('keypress', function (e) {
   var key = e.which || e.keyCode;
   if (key === 13) {
+
     // Checked if the user entered anything
     if (inputElem.value != "") {
       updateMessageDatabase(inputElem.value);
       inputElem.value = "";
     }
+
   }
+
 });
+
+
 
 /*** Add Chatroom Functionality below ***/
 
-var inputElem2 = document.querySelector("#inputEmail");
-var addChatroomButton = document.getElementById("addChatroomButton");
-var addChatroomDialog = document.getElementById("addChatroomDialog");
+var inputElem2 = document.querySelector('#inputEmail');
+var addChatroomButton = document.getElementById('addChatroomButton');
+var addChatroomDialog = document.getElementById('addChatroomDialog');
 
-addChatroomButton.addEventListener("click", function() {
+addChatroomButton.addEventListener('click', function () {
   addChatroomDialog.showModal();
 });
 
+
 /**
- * Updates chatroom database
- */
+* Updates chatroom database
+*/
 async function updateChatroomDatabase() {
+
   let name = inputElem2.value;
 
   // Get the currTime
@@ -450,10 +452,7 @@ async function updateChatroomDatabase() {
 
   // Write to database
   // Create a new post reference with an auto-generated id
-  let addChatroomRef = firebase
-    .database()
-    .ref("/Team/" + teamId + "/Chatroom/Chatrooms/")
-    .child(name);
+  let addChatroomRef = firebase.database().ref("/Team/" + teamId + "/Chatroom/Chatrooms/").child(name);
   addChatroomRef.child("chatroomName").set(name);
 
   let newPostRef = addChatroomRef.child("msgArray").push();
@@ -481,5 +480,5 @@ async function updateChatroomDatabase() {
 
   inputElem2.value = "";
 
-  document.getElementById("addChatroomDialog").close();
+  document.getElementById('addChatroomDialog').close();
 }

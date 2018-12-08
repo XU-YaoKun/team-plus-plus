@@ -29,19 +29,19 @@ function drawBar(
 }
 
 var myVinyls = {
-  "have done": 10,
-  doing: 14,
-  "will do": 2,
-  "not plan": 12
+  Finished: 10,
+  "In Progress": 14,
+  Planned: 2,
+  "Not Planned": 12
 };
 
-var Barchart = function(options) {
+var Barchart = function (options) {
   this.options = options;
   this.canvas = options.canvas;
   this.ctx = this.canvas.getContext("2d");
   this.colors = options.colors;
 
-  this.draw = function() {
+  this.draw = function () {
     var maxValue = 0;
     for (var categ in this.options.data) {
       maxValue = Math.max(maxValue, this.options.data[categ]);

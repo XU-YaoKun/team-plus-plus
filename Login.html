@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Team++ Login</title>
     <link rel="stylesheet" href="LpageStyle.css">
-    <link rel="icon" href="img/logo.png">
     <!--Load bootstrap-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
@@ -25,17 +24,12 @@
     </script>
     <script>
         function checkIfSignedIn() {
-            firebase.auth().onAuthStateChanged(function (user) {
+            firebase.auth.onAuthStateChanged(function (user) {
                 if (user) {
-                    window.location.href = "team.html";
+                    window.location.href = "team.html"
                 }
-            });
+            })
         }
-
-        function rememberUser() {
-
-        }
-
         function signIn() {
             if (firebase.auth().currentUser) {
                 // Signout if user currently signed in.
@@ -44,21 +38,6 @@
             else {
                 var userEmail = document.getElementById('inputEmail').value;
                 var userPass = document.getElementById('inputPassword').value;
-                var rememberMe = document.getElementById("rememberMe");
-                if(rememberMe.checked == true) {
-                    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(function(error) {
-                        // Handle Errors here.
-                        var errorCode = error.code;
-                        var errorMessage = error.message;
-                    });
-                }
-                else {
-                    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).catch(function(error) {
-                        // Handle Errors here.
-                        var errorCode = error.code;
-                        var errorMessage = error.message;
-                    });
-                }
                 firebase.auth().signInWithEmailAndPassword(userEmail, userPass).catch(function (error) {
                     // Handle Errors here.
                     var errorCode = error.code;
@@ -76,7 +55,7 @@
                     if (user) {
                         window.location.href = "team.html";
                     }
-                });
+                })
             }
         }
     </script>
@@ -90,14 +69,14 @@
                     Team++ is a platorm that will help maximize your team productivity.</p>
     </div>
     <form class="login">
-        <img class="mb-3" src="img/logo.png" alt="Team++ Logo" width="150" height="150" />
+        <img class="mb-3" src="img/login_T.png" alt="Team++ Logo" width="72" height="72" />
         <label for="inputEmail" class="text-left tag">Email Address</label>
         <input type="text" id="inputEmail" class="form-control" placeholder="you@example.com" required autofocus>
         <label for="inputPassword" class="text-left tag">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="******" required>
         <div class="checkbox mb-3">
             <label>
-                <input type="checkbox" id="rememberMe"> Remember me </input>
+                <input type="checkbox" value="remember-me"> Remember me </input>
             </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="button" onclick="signIn()">Sign in</button>

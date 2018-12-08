@@ -570,6 +570,58 @@ async function updateView() {
     }
     members.appendChild(tr);
   });
+  
+  var eref = firebase.database().ref("Team/" + cuTeam + "/Events");
+    var events = document.getElementById('eventTable');
+    var tableRowNum = events.rows.length; 
+
+    if(eref == null){
+        console.log('The event page is not yet set up.')
+    }
+    else{
+        eref.on("child_added", snapshot => {
+
+          
+            var eventName = snapshot.key;
+            var eventDate = snapshot.child("Date").val()
+            var eventDescription = snapshot.child("Description").val();
+            var eventEndTime = snapshot.child("End Time").val();
+            var eventStartTime = snapshot.child("Start Time").val();
+            
+            if(eventName == null || eventDate == null || eventDescription == null
+                || eventEndTime == null || eventStartTime == null){
+                    return false;
+                }
+            else{
+            var row = events.insertRow(tableRowNum);
+            var firstCell = row.insertCell(0);
+            var secondCell = row.insertCell(1);
+            var thirdCell = row.insertCell(2);
+            var fourthCell = row.insertCell(3);
+            var fifthCell = row.insertCell(4);
+            var sixthCell = row.insertCell(5);
+
+            var deleteButton = document.createElement("button");
+            var buttonName = document.createTextNode("Delete");
+            deleteButton.appendChild(buttonName);
+            sixthCell.appendChild(deleteButton);
+            deleteButton.onclick = function() { deleteEvent(eventName) };
+
+            var editButton = document.createElement("button");
+            var buttonName1 = document.createTextNode("Edit");
+            editButton.appendChild(buttonName1);
+            fifthCell.appendChild(editButton);
+            editButton.onclick = function(){ onClickEditEvent(eventName, eventDescription, eventDate, eventStartTime, eventEndTime)};
+
+
+            firstCell.innerHTML = eventDate;
+            secondCell.innerHTML = eventStartTime + " to " + eventEndTime;
+            thirdCell.innerHTML = eventName;
+            fourthCell.innerHTML = eventDescription;
+            }
+           
+        });
+    }
 }
 
 async function updateViewMem() {
@@ -606,6 +658,37 @@ async function updateViewMem() {
 
     members.appendChild(tr);
   });
+  
+  var eref = firebase.database().ref("Team/" + cuTeam + "/Events");
+  var events = document.getElementById('eventTable');
+  var tableRowNum = events.rows.length; 
+
+  if(eref == null){
+      console.log('The event page is not yet set up.')
+  }
+  else{
+    eref.once("child_added", snapshot => {
+      var eventName = snapshot.key;
+      var eventDate = snapshot.child("Date").val()
+      var eventDescription = snapshot.child("Description").val();
+      var eventEndTime = snapshot.child("End Time").val();
+      var eventStartTime = snapshot.child("Start Time").val();
+
+      var row = events.insertRow(tableRowNum);
+      var firstCell = row.insertCell(0);
+      var secondCell = row.insertCell(1);
+      var thirdCell = row.insertCell(2);
+      var fourthCell = row.insertCell(3);
+      var fifthCell = row.insertCell(4);
+      var sixthCell = row.insertCell(5);
+
+      firstCell.innerHTML = eventDate;
+      secondCell.innerHTML = eventStartTime + " to " + eventEndTime;
+      thirdCell.innerHTML = eventName;
+      fourthCell.innerHTML = eventDescription;
+    });
+  }
+  
 }
 
 async function updateAdminList() {
@@ -702,4 +785,203 @@ function redirectMem(currentTeam) {
     .ref("Users/" + userID + "/currTeam")
     .set(currentTeam);
   window.location = "HomePageMem.html";
+}
+
+
+function makeEvent(){
+    var dialog = document.getElementById('dialog');
+    dialog.showModal();
+ }
+
+ function onClickEditEvent(eventName, eventDescription, eventDate, eventStartTime, eventEndTime){
+    var dialog = document.getElementById('editDialog');
+    var ref = firebase.database().ref("Team/" + cuTeam + "/Events/" + eventName);
+    document.getElementById('eventNameEdit').value = eventName;
+    document.getElementById('eventDescriptionEdit').value = eventDescription;
+    document.getElementById('eventDateEdit').value = eventDate; 
+    document.getElementById('eventStartEdit').value = eventStartTime;
+    document.getElementById('eventEndEdit').value = eventEndTime;
+    oldEventName = eventName;
+    dialog.showModal();
+ }
+
+ function eventEditSave(){
+     
+     //Get the new values
+     var eventName = document.getElementById('eventNameEdit').value;
+     var eventDate = document.getElementById('eventDateEdit').value;
+     var eventDescription = document.getElementById('eventDescriptionEdit').value;
+     var eventStartTime = document.getElementById('eventStartEdit').value;
+     var eventEndTime = document.getElementById('eventEndEdit').value;
+
+     //Validate the new values
+     var root = firebase.database().ref("Team/" + cuTeam + "/Events");
+     root.once("child_added", function(snapshot){
+         var existedName = snapshot.key;
+         if(eventName == existedName && existedName != oldEventName){
+             alert("This name is already taken. Please enter a new name");
+         }
+         else if(eventName == '' || /^\s+$/.test(eventName)){
+             alert("The event name is missing. Please enter a nam for the event");
+         }
+         else if(eventDescription == '' || /^\s+$/.test(eventDescription)){
+            alert('The event is missing a description. Please add a description !');
+         }
+         else if(eventEndTime < eventStartTime){
+            alert('The event ends before it even starts. Please change the time !')
+         }
+         else{ 
+            alert('You have successfully edited the event.');
+           
+           root.child(oldEventName).set(null);
+           
+            var ref =  root.child(eventName);
+            ref.child("Date").set(eventDate);
+            ref.child("Description").set(eventDescription);
+            ref.child("Start Time").set(eventStartTime);
+            ref.child("End Time").set(eventEndTime);
+            
+            var table = document.getElementById('eventTable');
+            var rowNum = table.rows.length;
+        
+            for(var i = 0; i < rowNum; i++){
+                var thisRow = table.rows[i];
+                var thisRowEventName = thisRow.cells[2].innerHTML;
+                if(thisRowEventName == oldEventName){
+                    thisRow.cells[0].innerHTML = eventDate;
+                    thisRow.cells[1].innerHTML = eventStartTime + "\t" + eventEndTime;
+                    thisRow.cells[2].innerHTML = eventName;
+                    thisRow.cells[3].innerHTML = eventDescription;
+                    
+                    var editButton = thisRow.cells[4].childNodes[0];
+                    editButton.onclick = function(){ onClickEditEvent(eventName)};
+
+                    var deleteButton = thisRow.cells[5].childNodes[0];
+                    deleteButton.onclick = function(){ deleteEvent(eventName)};
+
+                }
+            }
+            //Clear old infor
+            oldEventName = null;
+            document.getElementById('eventNameEdit').value = "";
+            document.getElementById('eventDateEdit').value = "";
+            document.getElementById('eventDescriptionEdit').value = "";
+            document.getElementById('eventStartEdit').value = "";
+            document.getElementById('eventEndEdit').value = "";
+         }
+         
+     })
+ }
+
+
+ function deleteEvent(eventName){
+
+    //delete from firebase
+     var ref = firebase.database().ref("Team/" + cuTeam + "/Events/" + eventName);
+     ref.set(null);
+
+    //delete from table
+    var table = document.getElementById('eventTable');
+    var rowNum = table.rows.length;
+
+    for(var i = 0; i < rowNum; i++){
+        var thisRow = table.rows[i];
+        var thisRowEventName = thisRow.cells[2].innerHTML;
+        if(thisRowEventName == eventName){
+            table.deleteRow(i);
+            return true;
+        }
+    }
+}
+
+//Save Event Details into database.
+function eventSaveHelper(eventName, eventDate, eventDescription, eventStartTime, eventEndTime){
+    var root = firebase.database().ref("Team").child(cuTeam).child("Events");
+        var eventRef = root.child(eventName);
+        eventRef.child("Date").set(eventDate);
+        eventRef.child("Description").set(eventDescription);
+        eventRef.child("Start Time").set(eventStartTime);
+        eventRef.child("End Time").set(eventEndTime);
+   
+        //Clear fields
+        document.getElementById('eventName').value = "";
+        document.getElementById('eventDate').value = "";
+        document.getElementById('eventDescription').value = "";
+        document.getElementById('eventStart').value = "";
+        document.getElementById('eventEnd').value = "";
+        
+        var x = document.getElementById('dialog');
+        x.close();
+   
+        var events = document.getElementById('eventTable');
+        var tableRowNum = events.rows.length; 
+   
+        var row = events.insertRow(tableRowNum);
+               var firstCell = row.insertCell(0);
+               var secondCell = row.insertCell(1);
+               var thirdCell = row.insertCell(2);
+               var fourthCell = row.insertCell(3);
+               var fifthCell = row.insertCell(4);
+               var sixthCell = row.insertCell(5);
+   
+               var deleteButton = document.createElement("button");
+               var buttonName = document.createTextNode("Delete");
+               deleteButton.appendChild(buttonName);
+               sixthCell.appendChild(deleteButton);
+               deleteButton.onclick = function() { deleteEvent(eventName) };
+
+               var editButton = document.createElement("button");
+               var buttonName1 = document.createTextNode("Edit");
+               editButton.appendChild(buttonName1);
+               fifthCell.appendChild(editButton);
+              editButton.onclick = function(){ onClickEditEvent(eventName, eventDescription, eventDate, eventStartTime, eventEndTime)};
+
+               firstCell.innerHTML = eventDate;
+               secondCell.innerHTML = eventStartTime + " to " + eventEndTime;
+               thirdCell.innerHTML = eventName;
+               fourthCell.innerHTML = eventDescription;
+}
+
+
+function eventSave(){
+
+    //Receive Information from the dialog
+     var eventName = document.getElementById('eventName').value;
+     var eventDate = document.getElementById('eventDate').value;
+     var eventDescription = document.getElementById('eventDescription').value;
+     var eventStartTime = document.getElementById('eventStart').value;
+     var eventEndTime = document.getElementById('eventEnd').value;
+
+    
+     //Check for valid information
+     if(eventName == '' || /^\s+$/.test(eventName)){
+        alert('The event is missing a name. Please add a name !');
+     }
+     else if(eventDescription == '' || /^\s+$/.test(eventDescription)){
+        alert('The event is missing a description. Please add a description !');
+     }
+     else if(eventEndTime < eventStartTime){
+        alert('The event ends before it even starts. Please change the time !')
+     }
+
+   
+    else if(eventNum == 0){
+        alert('You have successfully created the event.');
+        eventSaveHelper(eventName, eventDate, eventDescription, eventStartTime, eventEndTime);
+    }
+    else{
+    var valid = firebase.database().ref("Team/" + cuTeam + "/Events");
+    valid.once('child_added', function(snapshot){
+        var name = snapshot.key;
+
+        if(eventName == name){
+            alert('There is already another event with the same name. Please change the name of the current event');
+        }
+     
+         else{ 
+                 alert('You have successfully created the event.');
+                 eventSaveHelper(eventName, eventDate, eventDescription, eventStartTime, eventEndTime);
+         }
+    })
+  }  
 }

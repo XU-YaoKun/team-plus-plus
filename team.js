@@ -421,12 +421,17 @@ async function addMember() {
 
           // Iterate thtough list of members creating a direct message between them and the new member
           memref.on("child_added", snapshot => {
-            DMref.child(person).child(snapshot.key).set({
-              mostRecent: "Send your messages here.",
-              name: snapshot.val()[0],
-              userId: snapshot.key
-            });
-            newPostRef = DMref.child(person).child(snapshot.key).child("msgArray").push();
+            DMref.child(person)
+              .child(snapshot.key)
+              .set({
+                mostRecent: "Send your messages here.",
+                name: snapshot.val()[0],
+                userId: snapshot.key
+              });
+            newPostRef = DMref.child(person)
+              .child(snapshot.key)
+              .child("msgArray")
+              .push();
             newPostRef.set({
               sender: "Admin",
               message: "Send your messages here.",
@@ -1059,11 +1064,11 @@ function eventSave() {
 
   //Check for valid information
   if (eventName == "" || /^\s+$/.test(eventName)) {
-    alert("The event is missing a name. Please add a name !");
+    alert("The event is missing a name. Please add a name.");
   } else if (eventDescription == "" || /^\s+$/.test(eventDescription)) {
-    alert("The event is missing a description. Please add a description !");
+    alert("The event is missing a description. Please add a description.");
   } else if (eventEndTime < eventStartTime) {
-    alert("The event ends before it even starts. Please change the time !");
+    alert("The event ends before it even starts. Please change the time.");
   } else if (eventNum == 0) {
     alert("You have successfully created the event.");
     eventSaveHelper(
@@ -1080,7 +1085,7 @@ function eventSave() {
 
       if (eventName == name) {
         alert(
-          "There is already another event with the same name. Please change the name of the current event"
+          "There is already another event with the same name. Please change the name of the current event."
         );
       } else {
         alert("You have successfully created the event.");

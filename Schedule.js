@@ -2,6 +2,9 @@ var root = firebase.database().ref();
 var teamId;
 var userId;
 var tSize;
+var adminId;
+var currentTeam;
+
 var Yid = new Array();
 for (var i = 0; i < 7; i++) {
   Yid[i] = new Array(i);
@@ -3106,4 +3109,35 @@ function updateTeamAvailability() {
       document.getElementById(Tid[6][10]).style.background = "rgb(51, 153, 0)";
     }
   });
+}
+
+async function getCurrTeam(ref){
+  return ref.once('value').then(function(snapshot){
+      currentTeam = snapshot.val();
+      console.log(currentTeam);
+  });
+}
+
+async function getAdminID(ref){
+  return ref.once('value').then(function(snapshot){
+    adminId = snapshot.val();
+    console.log(adminId);
+  })
+}
+
+async function changeView(){
+  var item = document.getElementById("move");
+  var ref = firebase.database().ref("Users/" + userId + "/currTeam");
+  await getCurrTeam(ref);
+  var aRef = firebase.database().ref("Team/" + currentTeam + "/admin");
+  await getAdminID(aRef);
+  if(adminId == userId){
+    console.log("Should not be printed");
+    item.href = "HomePage.html";
+  }
+  else{
+    item.href = "HomePageMem.html";
+    console.log("Should be printed");
+  } 
+
 }

@@ -37,6 +37,22 @@
 
         }
     </script>
+      <script>
+        window.onload = function () {
+          firebase.auth().onAuthStateChanged(function (user) {
+            // User is signed in: set userId and teamId
+            if (user) {
+              userID = user.uid;
+              changeView();
+            }
+            // No user is signed in.
+            else {
+              console.log("User is not logged in. !!");
+              window.location.href = "index.html";
+            }
+          });
+        };
+      </script>
 </head>
 
 <body>
@@ -48,7 +64,7 @@
                     <li class="menu-title">For team</li>
                     <!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
-                        <a href="HomePage.html"><span class="ti-home flat-color-4" style="padding-right: 30px"></span>Home</a>
+                        <a id="move"><span class="ti-home flat-color-4" style="padding-right: 30px"></span>Home</a>
                     </li>
                     <!--
                     <li class="menu-item-has-children dropdown">

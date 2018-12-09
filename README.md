@@ -20,6 +20,6 @@ _The functionality includes_
 
 _Technology_
 
-1. HTML, CSS, JavaScript
+1. HTML, CSS, JavaScript, Bootstrap
 
 2. Firebase Realtime Database

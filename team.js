@@ -11,6 +11,7 @@ var description = "Not defined";
 var currTime = null;
 var oldEventName = null;
 var eventNum = 0;
+var adminId = null;
 
 async function getIndividualTask(ref) {
   var taskDoer;
@@ -1104,4 +1105,28 @@ function eventSave() {
       }
     });
   }
+}
+
+async function getAdminID(ref){
+  return ref.once('value').then(function(snapshot){
+    adminId = snapshot.val();
+    console.log(adminId);
+  })
+}
+
+async function changeView(){
+  var item = document.getElementById("move");
+  var ref = firebase.database().ref("Users/" + userID + "/currTeam");
+  await getCurrTeam(ref);
+  var aRef = firebase.database().ref("Team/" + cuTeam + "/admin");
+  await getAdminID(aRef);
+  if(adminId == userID){
+    console.log("Should not be printed");
+    item.href = "HomePage.html";
+  }
+  else{
+    item.href = "HomePageMem.html";
+    console.log("Should be printed");
+  } 
+
 }

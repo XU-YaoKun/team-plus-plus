@@ -7,6 +7,9 @@ var chatroomDisplayName = document.querySelector('#chatroomDisplayName');
 var userId;
 var teamId;
 
+var adminId = null;
+var currentTeam = null;
+
 var chatRef;
 var othersRef;
 
@@ -177,6 +180,7 @@ setTimeout(function () {
 		userDisplayName.innerHTML = snapshot.val().Name;
 	})
 
+	changeView();
 
 	/** Announcements **/
 	let announcementsRef = firebase.database().ref('/Team/' + teamId + '/Chatroom/Announcements');
@@ -451,3 +455,34 @@ async function updateChatroomDatabase() {
 
 	document.getElementById('addChatroomDialog').close();
 }
+
+async function getCurrTeam(ref){
+	return ref.once('value').then(function(snapshot){
+		currentTeam = snapshot.val();
+		console.log(currentTeam);
+	});
+  }
+  
+  async function getAdminID(ref){
+	return ref.once('value').then(function(snapshot){
+	  adminId = snapshot.val();
+	  console.log(adminId);
+	})
+  }
+  
+  async function changeView(){
+	var item = document.getElementById("move");
+	var ref = firebase.database().ref("Users/" + userId + "/currTeam");
+	await getCurrTeam(ref);
+	var aRef = firebase.database().ref("Team/" + currentTeam + "/admin");
+	await getAdminID(aRef);
+	if(adminId == userId){
+	  console.log("Should not be printed");
+	  item.href = "HomePage.html";
+	}
+	else{
+	  item.href = "HomePageMem.html";
+	  console.log("Should be printed");
+	} 
+  
+  }

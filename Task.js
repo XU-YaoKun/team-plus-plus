@@ -23,11 +23,14 @@ var editDialog = document.getElementById("editDialog");
 var selectTags = document.getElementsByClassName("members");
 var taskRef = null;
 var memRef = null;
+var adminId = null;
+var currentTeam = null;
+var userId = null;
 
 firebase.auth().onAuthStateChanged(async function(user) {
   // User is signed in: set userId and teamId
   if (user) {
-    var userId = user.uid;
+    userId = user.uid;
     console.log("Hello " + user.uid);
     var ref = firebase.database().ref("Users/" + userId);
     await loadTeamId(ref);
@@ -55,6 +58,7 @@ setTimeout(function() {
     memRef = firebase.database().ref("Team/" + teamId + "/Members");
   }
 
+  changeView();
   //Load in Team Members
   memRef.once("value", snapshot => {
     //console.log(snapshot.val());
@@ -293,3 +297,34 @@ setTimeout(function() {
     });
   }
 }, 1500);
+
+async function getCurrTeam(ref){
+  return ref.once('value').then(function(snapshot){
+      currentTeam = snapshot.val();
+      console.log(currentTeam);
+  });
+}
+
+async function getAdminID(ref){
+  return ref.once('value').then(function(snapshot){
+    adminId = snapshot.val();
+    console.log(adminId);
+  })
+}
+
+async function changeView(){
+  var item = document.getElementById("move");
+  var ref = firebase.database().ref("Users/" + userId + "/currTeam");
+  await getCurrTeam(ref);
+  var aRef = firebase.database().ref("Team/" + currentTeam + "/admin");
+  await getAdminID(aRef);
+  if(adminId == userId){
+    console.log("Should not be printed");
+    item.href = "HomePage.html";
+  }
+  else{
+    item.href = "HomePageMem.html";
+    console.log("Should be printed");
+  } 
+
+}

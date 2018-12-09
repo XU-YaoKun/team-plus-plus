@@ -12,9 +12,9 @@ _The functionality includes_
 
 2. Team management, including create team, join team, leave team, and assign roles.
 
-3. Calender: We integrated Google Calendar into our web application and also developed our own task management tool and schedule availability panel.
+3. Event management: We added the ability to add, modify, and delete events through web application and also developed our own task management tool similar to Trello and scheduling tool similar to when2meet.
 
-4. Instant chat: The chat portion is implemented using node.js and supports instant messaging.
+4. Instant chat: The chat portion is implemented using Firebase event listeners and supports instant messaging.
 
 5. Modifiable user profiles
 
@@ -22,6 +22,4 @@ _Technology_
 
 1. HTML, CSS, JavaScript
 
-2. Firebase as the backend database
-
-3. node.js
+2. Firebase Realtime Database

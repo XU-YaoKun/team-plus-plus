@@ -15,10 +15,10 @@ var eventNum = 0;
 async function getIndividualTask(ref) {
   var taskDoer;
   var taskStatus;
-  ref.on("value", function (snapshot) {
+  ref.on("value", function(snapshot) {
     console.log("HERE");
     if (snapshot.val() !== null) {
-      snapshot.forEach(function (item) {
+      snapshot.forEach(function(item) {
         taskDoer = item.val().handler;
         taskStatus = item.val().status;
         if (taskDoer == username && taskStatus !== "fin") {
@@ -30,7 +30,7 @@ async function getIndividualTask(ref) {
 }
 
 async function teamExistInRef(ref, data) {
-  return ref.child(data).once("value", function (snapshot) {
+  return ref.child(data).once("value", function(snapshot) {
     if (snapshot.exists()) {
       existTeam = true;
     } else {
@@ -40,7 +40,7 @@ async function teamExistInRef(ref, data) {
 }
 
 async function isInTeam(ref, data) {
-  return ref.child(data).once("value", function (snapshot) {
+  return ref.child(data).once("value", function(snapshot) {
     if (snapshot.exists()) {
       inTeam = true;
     } else {
@@ -53,11 +53,11 @@ async function isUser(ref, field, data) {
   return ref
     .orderByChild(field)
     .equalTo(data)
-    .once("value", function (snapshot) {
+    .once("value", function(snapshot) {
       if (snapshot.exists()) {
         console.log("valid user");
         validUser = true;
-        snapshot.forEach(function (data) {
+        snapshot.forEach(function(data) {
           person = data.key;
         });
       } else {
@@ -68,32 +68,32 @@ async function isUser(ref, field, data) {
 }
 
 async function getTeamSize(ref) {
-  return ref.once("value").then(function (snapshot) {
+  return ref.once("value").then(function(snapshot) {
     tSize = snapshot.val();
   });
 }
 
 async function getCurrTeam(ref) {
-  return ref.once("value").then(function (snapshot) {
+  return ref.once("value").then(function(snapshot) {
     cuTeam = snapshot.val();
   });
 }
 
 async function getUserName(ref) {
-  return ref.once("value").then(function (snapshot) {
+  return ref.once("value").then(function(snapshot) {
     username = snapshot.val();
   });
 }
 
 async function getTeamDes(ref) {
-  return ref.once("value").then(function (snapshot) {
+  return ref.once("value").then(function(snapshot) {
     description = snapshot.val();
   });
 }
 
 // Gets the current time for timestamp
 async function getCurrTime(ref) {
-  return ref.once("value").then(function (snapshot) {
+  return ref.once("value").then(function(snapshot) {
     let offset = snapshot.val();
     let serverTime = new Date().getTime() + offset;
     let myDate = new Date(serverTime);
@@ -117,8 +117,8 @@ async function createTeam() {
       if (existTeam) {
         teamName = prompt(
           "Team name " +
-          teamName +
-          " already taken. Please enter another team name."
+            teamName +
+            " already taken. Please enter another team name."
         );
       } else {
         rootref
@@ -421,12 +421,17 @@ async function addMember() {
 
           // Iterate thtough list of members creating a direct message between them and the new member
           memref.on("child_added", snapshot => {
-            DMref.child(person).child(snapshot.key).set({
-              mostRecent: "Send your messages here.",
-              name: snapshot.val()[0],
-              userId: snapshot.key
-            });
-            newPostRef = DMref.child(person).child(snapshot.key).child("msgArray").push();
+            DMref.child(person)
+              .child(snapshot.key)
+              .set({
+                mostRecent: "Send your messages here.",
+                name: snapshot.val()[0],
+                userId: snapshot.key
+              });
+            newPostRef = DMref.child(person)
+              .child(snapshot.key)
+              .child("msgArray")
+              .push();
             newPostRef.set({
               sender: "Admin",
               message: "Send your messages here.",
@@ -570,7 +575,7 @@ async function updateView() {
   var path = firebase.database().ref("Users/" + userID + "/Name");
   await getUserName(path);
   await getIndividualTask(taskRef);
-  setTimeout(function () {
+  setTimeout(function() {
     document.getElementById("taskNum").innerText = taskCount;
   }, 50);
 
@@ -595,7 +600,7 @@ async function updateView() {
       button1.type = "button";
       button1.style = "width:50px; margin: auto";
       button1.textAlign = "center";
-      button1.addEventListener("click", function () {
+      button1.addEventListener("click", function() {
         assignRole(id);
       });
 
@@ -605,7 +610,7 @@ async function updateView() {
       button2.type = "button";
       button2.style = "width:50px; margin: auto";
       button2.textAlign = "center";
-      button2.addEventListener("click", function () {
+      button2.addEventListener("click", function() {
         modifyAdmin(id);
       });
 
@@ -615,7 +620,7 @@ async function updateView() {
       button3.type = "button";
       button3.style = "width: 50px; margin: auto";
       button3.textAlign = "center";
-      button3.addEventListener("click", function () {
+      button3.addEventListener("click", function() {
         removeMember(id);
       });
 
@@ -678,7 +683,7 @@ async function updateView() {
         var buttonName = document.createTextNode("Delete");
         deleteButton.appendChild(buttonName);
         sixthCell.appendChild(deleteButton);
-        deleteButton.onclick = function () {
+        deleteButton.onclick = function() {
           deleteEvent(eventName);
         };
 
@@ -686,7 +691,7 @@ async function updateView() {
         var buttonName1 = document.createTextNode("Edit");
         editButton.appendChild(buttonName1);
         fifthCell.appendChild(editButton);
-        editButton.onclick = function () {
+        editButton.onclick = function() {
           onClickEditEvent(
             eventName,
             eventDescription,
@@ -726,7 +731,7 @@ async function updateViewMem() {
   var path = firebase.database().ref("Users/" + userID + "/Name");
   await getUserName(path);
   await getIndividualTask(taskRef);
-  setTimeout(function () {
+  setTimeout(function() {
     document.getElementById("taskNum").innerText = taskCount;
   }, 50);
 
@@ -801,7 +806,7 @@ async function updateAdminList() {
     button.className = "btn btn-success btn-lg btn-block";
     button.type = "button";
     button.style = "width:150px";
-    button.addEventListener("click", function () {
+    button.addEventListener("click", function() {
       redirectAdmin(teamName);
     });
     button.innerText = "Go";
@@ -840,7 +845,7 @@ async function updateMemList() {
     button.className = "btn btn-success btn-lg btn-block";
     button.type = "button";
     button.style = "width: 150px";
-    button.addEventListener("click", function () {
+    button.addEventListener("click", function() {
       redirectMem(teamName);
     });
     button.innerText = "Go";
@@ -907,7 +912,7 @@ function eventEditSave() {
 
   //Validate the new values
   var root = firebase.database().ref("Team/" + cuTeam + "/Events");
-  root.once("child_added", function (snapshot) {
+  root.once("child_added", function(snapshot) {
     var existedName = snapshot.key;
     if (eventName == existedName && existedName != oldEventName) {
       alert("This name is already taken. Please enter a new name");
@@ -941,12 +946,12 @@ function eventEditSave() {
           thisRow.cells[3].innerHTML = eventDescription;
 
           var editButton = thisRow.cells[4].childNodes[0];
-          editButton.onclick = function () {
+          editButton.onclick = function() {
             onClickEditEvent(eventName);
           };
 
           var deleteButton = thisRow.cells[5].childNodes[0];
-          deleteButton.onclick = function () {
+          deleteButton.onclick = function() {
             deleteEvent(eventName);
           };
         }
@@ -1025,7 +1030,7 @@ function eventSaveHelper(
   var buttonName = document.createTextNode("Delete");
   deleteButton.appendChild(buttonName);
   sixthCell.appendChild(deleteButton);
-  deleteButton.onclick = function () {
+  deleteButton.onclick = function() {
     deleteEvent(eventName);
   };
 
@@ -1033,7 +1038,7 @@ function eventSaveHelper(
   var buttonName1 = document.createTextNode("Edit");
   editButton.appendChild(buttonName1);
   fifthCell.appendChild(editButton);
-  editButton.onclick = function () {
+  editButton.onclick = function() {
     onClickEditEvent(
       eventName,
       eventDescription,
@@ -1075,7 +1080,7 @@ function eventSave() {
     );
   } else {
     var valid = firebase.database().ref("Team/" + cuTeam + "/Events");
-    valid.once("child_added", function (snapshot) {
+    valid.once("child_added", function(snapshot) {
       var name = snapshot.key;
 
       if (eventName == name) {

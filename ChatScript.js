@@ -316,15 +316,15 @@ function createHTMLContact(chatType, name, latestMsg, optionalId) {
 
 	// Add img and ability to switch between chats
 	if (chatType == "announcements") {
-		img.src += "img/announcement.png";
+		img.src = "img/announcement.png";
 		div1.onclick = function () { setUpChat("announcements", "Announcements") };
 	}
 	else if (chatType == "chatrooms") {
-		img.src += "img/admin_1.png";
+		img.src = "img/admin_1.png";
 		div1.onclick = function () { setUpChat("chatrooms", name) };
 	}
 	else {
-		img.src += "img/user.png";
+		img.src = "img/user.png";
 		div1.onclick = function () { setUpChat("directMessages", name, optionalId) };
 	}
 

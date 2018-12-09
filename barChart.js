@@ -29,10 +29,10 @@ function drawBar(
 }
 
 var myVinyls = {
-  "have done": 10,
-  doing: 14,
-  "will do": 2,
-  "not plan": 12
+  Finished: 10,
+  "In Progress": 14,
+  Planned: 2,
+  "Not Planned": 12
 };
 
 var Barchart = function(options) {

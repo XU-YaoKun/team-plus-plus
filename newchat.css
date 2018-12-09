@@ -1,101 +1,107 @@
 html,
 body {
-	height: 100%;
+  height: 100%;
 }
 
 .logo {
-	text-align: center;
+  text-align: center;
 }
 
 .ti {
-	color: #f5f5f5;
-	font-family: "Times New Roman", Times, serif;
-	font-size: 70px;
-	float: left;
+  color: #f5f5f5;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 70px;
+  float: left;
 }
 
 .createChatroom {
-	background-color: #f5f5f5;
-	max-width: 1100px;
-    padding: 15px;
-    margin: 10%;
-	border: 1px solid black;
-	border-radius: 15px;
-	float: center;
+  background-color: #f5f5f5;
+  max-width: 1100px;
+  padding: 15px;
+  margin: 10%;
+  border: 1px solid black;
+  border-radius: 15px;
+  float: center;
 }
 
 .tag {
-	float: left;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	width: 100%;
-	position: relative;
+  float: left;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  position: relative;
 }
 
 .fp {
-	width: 100%;
-	padding: 15px;
+  width: 100%;
+  padding: 15px;
 }
 
 .createChatroom .checkbox {
-	font-weight: 400;
-	padding-top: 10px;
+  font-weight: 400;
+  padding-top: 10px;
 }
 
 .createChatroom .form-control {
-	position: relative;
-	box-sizing: border-box;
-	height: auto;
-    padding: 10px;
-	font-size: 16px;
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
 }
 
 .createChatroom .form-control:focus {
-	z-index: 2;
+  z-index: 2;
 }
 
 /* Dropdown Button */
 .dropbtn {
-    width: 100%;
-    background-color: rgb(172, 179, 172);
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    display: inline;
+  width: 100%;
+  background-color: rgb(172, 179, 172);
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  display: inline;
 }
 
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
-    width: 100%;
-    position: relative;
-	border-radius: 15px;
-    display: inline-block;
+  width: 100%;
+  position: relative;
+  border-radius: 15px;
+  display: inline-block;
 }
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
-    width: 100%;
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+  width: 100%;
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }
 
 /* Links inside the dropdown */
 .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd;}
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
 
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: #113322;} 
+.dropdown:hover .dropbtn {
+  background-color: #113322;
+}

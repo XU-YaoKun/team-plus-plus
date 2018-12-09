@@ -2,174 +2,251 @@
 <html>
 
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Chatroom</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Team Chat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
+  <link rel="stylesheet" href="assets/css/themify-icons.css" />
 
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="ChatStyle.css" />
+  <link rel="icon" href="img/logo.png" />
 
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="ChatStyle.css">
-    <link rel="icon" href="img/logo.png">
-
-
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <link rel="stylesheet" href="chatroom.css">
-
+  <link rel="stylesheet" href="assets/css/themify-icons.css" />
+  <link rel="stylesheet" href="chatroom.css" />
+  <script>
+    function signOut() {
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          console.log("Signing out");
+          firebase.auth().signOut();
+        }
+      });
+    }
+  </script>
 </head>
 
 <body>
+  <!-- Left Panel -->
+  <aside id="left-panel" class="left-panel">
+    <nav class="navbar navbar-default">
+      <div id="main-menu" class="main-menu">
+        <ul class="nav navbar-nav">
+          <li class="menu-title">For team</li>
+          <!-- /.menu-title -->
+          <li class="menu-item-has-children dropdown">
+            <a href="HomePage.html"><span class="ti-home flat-color-4" style="padding-right: 30px"></span>Home</a>
+          </li>
+          <!--
+              <li class="menu-item-has-children dropdown">
+              	<a href="OverView.html"><span class="ti-menu-alt flat-color-1" style="padding-right: 30px"></span>Overview</a>
+              </li>
+            -->
+          <li class="menu-item-has-children dropdown">
+            <a href="Schedule.html"><span class="ti-time flat-color-3" style="padding-right: 30px"></span>Schedule</a>
+          </li>
+          <li class="menu-item-has-children dropdown">
+            <a href="Task.html"><span class="ti-agenda flat-color-5" style="padding-right: 30px"></span>Tasks</a>
+          </li>
+          <li class="menu-item-has-children dropdown">
+            <a href="Chatroom.html"><span class="ti-comments flat-color-2" style="padding-right: 30px"></span>Chat</a>
+          </li>
 
-    <!-- Left Panel -->
-    <aside id="left-panel" class="left-panel">
-        <nav class="navbar navbar-default">
-            <div id="main-menu" class="main-menu">
-                <ul class="nav navbar-nav">
-                    <li class="menu-title">For team</li><!-- /.menu-title -->
-                    <li class="menu-item-has-children dropdown">
-                        <a href="OverView.html"><span class="ti-menu-alt flat-color-1" style="padding-right: 30px"></span>Overview</a>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="Chatroom.html"><span class="ti-comments flat-color-2" style="padding-right: 30px"></span>Chatroom</a>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="Schedule.html"><span class="ti-time flat-color-3" style="padding-right: 30px"></span>Schedule</a>
-                    </li>
+          <li class="menu-title">For you</li>
+          <!-- /.menu-title -->
 
-                    <li class="menu-title">For you</li><!-- /.menu-title -->
+          <li>
+            <a href="Profile.html"><span class="ti-crown flat-color-6" style="padding-right: 30px"></span>Profile</a>
+          </li>
+          <li class="menu-item-has-children dropdown">
+            <a href="team.html"><span class="ti-menu-alt flat-color-7" style="padding-right: 30px"></span>Change Team</a>
+          </li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+  </aside>
+  <!-- /#left-panel -->
+  <!-- Left Panel -->
 
-                    <li class="menu-item-has-children dropdown">
-                        <a href="HomePage.html"><span class="ti-home flat-color-4" style="padding-right: 30px"></span>HomePage</a>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="Task.html"><span class="ti-agenda flat-color-5" style="padding-right: 30px"></span>Tasks</a>
-                    </li>
-                    <li>
-                        <a href="Profile.html"><span class="ti-crown flat-color-6" style="padding-right: 30px"></span>Profile</a>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="team.html"><span class="ti-menu-alt flat-color-7" style="padding-right: 30px"></span>Change
-                            team</a>
-                    </li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </nav>
-    </aside><!-- /#left-panel -->
-    <!-- Left Panel -->
+  <!-- right Panel -->
+  <!-- Header -->
+  <div id="right-panel" class="right-panel">
+    <header id="header" class="header">
+      <div class="top-left">
+        <div class="navbar-header">
+          <p>Team++</p>
+        </div>
+      </div>
 
-    <!-- right Panel-->
-    <!-- Header-->
-    <div id="right-panel" class="right-panel">
-        <header id="header" class="header">
-            <div class="top-left">
-                <div class="navbar-header">
-                    <p>TEAM++</p>
-                </div>
+      <div class="top-right">
+        <div class="header-menu">
+          <div class="user-area float-right">
+            <div class="dropdown">
+              <button class="dropbtn" style="background-color: #ffffff; margin-right: 30px">
+                <img id="icon" class="user-avatar rounded-circle" src="img/sample.png" alt="User Avatar" />
+              </button>
+              <div class="dropdown-content">
+                <a href="Profile.html">Profile</a>
+                <a href="index.html" onclick="signOut()">Log out</a>
+              </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- /header -->
+    <!-- Header -->
 
-			<div class="top-right"> 
-				<div class="header-menu"> 
-					<div class="user-area float-right">
-						<div class="dropdown">
-							<button class="dropbtn" style="background-color: #ffffff; margin-right: 30px">
-								<img id="icon" class="user-avatar rounded-circle" src="img/sample.png" alt="User Avatar">
-							</button>
-							<div class="dropdown-content">
-								<a href="Profile.html">Profile</a>
-								<a href="index.html" onclick="signOut()">Log out</a>
-							</div>
-						</div>	
-					</div> 
-				</div>  
-			</div>
-		</header><!-- /header -->
-		<!-- Header-->
-		
-		<div class="content">
+    <div class="content">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-header">
+                <strong class="card-title" id="chatroomDisplayName">Announcements</strong>
+              </div>
+              <div id="frame">
+                <div id="sidepanel">
+                  <div id="profile">
+                    <div class="wrap">
+                      <img id="profile-img" src="img/admin_2.jpg" class="online" alt="" />
+                      <p id="userDisplayName"></p>
+                      <i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
+                      <div id="status-options">
+                        <ul>
+                          <li id="status-online" class="active">
+                            <span class="status-circle"></span>
+                            <p>Online</p>
+                          </li>
+                          <li id="status-away">
+                            <span class="status-circle"></span>
+                            <p>Away</p>
+                          </li>
+                          <li id="status-busy">
+                            <span class="status-circle"></span>
+                            <p>Busy</p>
+                          </li>
+                          <li id="status-offline">
+                            <span class="status-circle"></span>
+                            <p>Offline</p>
+                          </li>
+                        </ul>
+                      </div>
+                      <div id="expanded">
+                        <label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true"></i></label>
+                        <input name="twitter" type="text" value="mikeross" />
+                        <label for="twitter"><i class="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
+                        <input name="twitter" type="text" value="ross81" />
+                        <label for="twitter"><i class="fa fa-instagram fa-fw" aria-hidden="true"></i></label>
+                        <input name="twitter" type="text" value="mike.ross" />
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <button style="width: 100%;"><span class="flat-color-1" style="padding-left: 80px; padding-right: 80px;  font-family: 'Open Sans';" onclick="window.open('newChatroom.html','create new chatroom','height=500,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=no');"> +  Add New Chatroom</span></button> -->
+                  <button style="width: 100%;"><span class="flat-color-1" style="padding-left: 80px; padding-right: 80px;  font-family: 'Open Sans';"
+                      id="addChatroomButton"> + Add New Chat Room</span></button>
 
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="card">
-						<div class="card-body">
-								<div class="card-header">
-										<strong class="card-title" id="chatroomDisplayName">Announcements</strong>
-									</div>
-					<div id="frame">
-						<div id="sidepanel">	
-							<div id="profile">
-								<div class="wrap">
-									<img id="profile-img" src="img/admin_2.jpg" class="online" alt="" />
-									<p id="userDisplayName"></p>
-									<i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
-									<div id="status-options">
-										<ul>
-											<li id="status-online" class="active"><span class="status-circle"></span> <p>Online</p></li>
-											<li id="status-away"><span class="status-circle"></span> <p>Away</p></li>
-											<li id="status-busy"><span class="status-circle"></span> <p>Busy</p></li>
-											<li id="status-offline"><span class="status-circle"></span> <p>Offline</p></li>
-										</ul>
-									</div>
-									<div id="expanded">
-										<label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true"></i></label>
-										<input name="twitter" type="text" value="mikeross" />
-										<label for="twitter"><i class="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
-										<input name="twitter" type="text" value="ross81" />
-										<label for="twitter"><i class="fa fa-instagram fa-fw" aria-hidden="true"></i></label>
-										<input name="twitter" type="text" value="mike.ross" />
-									</div>
-								</div>
-							</div>
-							<button style="width: 100%;"><span class="flat-color-1" style="padding-left: 80px; padding-right: 80px;  font-family: 'Open Sans';" onclick="window.open('newChatroom.html','create new chatroom','height=500,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=no');"> +  Add New Chatroom</span></button>
-							<div id="contacts">
-								<ul>
-									
-								</ul>
-							</div>
-						</div>
-						<div class="content">
-								<div class="messages">
-									<ul>
-									</ul>
-								</div>
-								<div class="message-input">
-									<div class="wrap">
-										<input class="chatMessage" type="text" placeholder="Write your message..." />
-										<button class="submit"><i class="ti-angle-double-up" aria-hidden="true"></i></button>
-									</div>
-								</div>
-						</div>
-					</div>
-					</div>
-				</div>
-				</div>
-			</div>
-		</div>
-	</div>
-    
-	<script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
-	<script>
-	  // Initialize Firebase
-	  var config = {
-		apiKey: "AIzaSyCDwFS1dxv0WWEbgehMdtsIQ3F_WQlKDnE",
-		authDomain: "team-plus-plus.firebaseapp.com",
-		databaseURL: "https://team-plus-plus.firebaseio.com",
-		projectId: "team-plus-plus",
-		storageBucket: "team-plus-plus.appspot.com",
-		messagingSenderId: "836611996730"
-	  };
-	  firebase.initializeApp(config);
-	</script>
-	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js">
-	</script>
-	<script src="ChatScript.js"></script>
-	
+
+                  <dialog id="addChatroomDialog">
+
+                    <head>
+                      <meta charset="utf-8" />
+                      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                      <title>Create a new chatroom</title>
+                      <meta name="viewport" content="width=device-width, initial-scale=1">
+                      <link rel="stylesheet" type="text/css" media="screen" href="newChat.css" />
+                      <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+                      <link rel="stylesheet" href="assets/css/themify-icons.css">
+                      <link rel="stylesheet" href="newchat.css">
+                    </head>
+
+                    <body>
+                      <div class="row">
+                        <form class="createChatroom text-center">
+                          <img class="mb-3" src="img/logo.png" alt="Team++ Logo" width="72" height="72" />
+                          <label for="inputEmail" class="text-left tag">Chatroom Name:</label>
+                          <input type="text" id="inputEmail" class="form-control" placeholder="Chatroom Name" required
+                            autofocus>
+                          <p>Please click Create, NOT enter</p>
+                          <button class="btn btn-lg btn-primary btn-block" type="button" style="margin-top: 20px"
+                            onclick="updateChatroomDatabase()">Create</button>
+
+                          <button class="btn btn-lg btn-secondary btn-block cancel" onclick="document.getElementById('addChatroomDialog').close()"
+                            style="color: black">Cancel</button>
+                          <!--<input type="reset" value="Cancel" onclick="document.getElementById('addChatroomDialog').close()"> </input> -->
+                        </form>
+                      </div>
+
+                      <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+                      <script>
+                        // Initialize Firebase
+                        var config = {
+                          apiKey: "AIzaSyCDwFS1dxv0WWEbgehMdtsIQ3F_WQlKDnE",
+                          authDomain: "team-plus-plus.firebaseapp.com",
+                          databaseURL: "https://team-plus-plus.firebaseio.com",
+                          projectId: "team-plus-plus",
+                          storageBucket: "team-plus-plus.appspot.com",
+                          messagingSenderId: "836611996730"
+                        };
+                        firebase.initializeApp(config);
+                      </script>
+                      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+                    </body>
+
+                  </dialog>
+
+                  <style>
+                    dialog input{width:100%}
+						    	dialog{border-radius: 25px; text-align: center; width:400px;}
+						    </style>
+
+                  <div id="contacts">
+                    <ul></ul>
+                  </div>
+                </div>
+                <div class="content">
+                  <div class="messages">
+                    <ul></ul>
+                  </div>
+                  <div class="message-input">
+                    <div class="wrap">
+                      <input class="chatMessage" type="text" placeholder="Write your message..." />
+                      <button class="submit">
+                        <i class="ti-angle-double-up" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCDwFS1dxv0WWEbgehMdtsIQ3F_WQlKDnE",
+      authDomain: "team-plus-plus.firebaseapp.com",
+      databaseURL: "https://team-plus-plus.firebaseio.com",
+      projectId: "team-plus-plus",
+      storageBucket: "team-plus-plus.appspot.com",
+      messagingSenderId: "836611996730"
+    };
+    firebase.initializeApp(config);
+  </script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+  <script src="ChatScript.js"></script>
 </body>
 
 </html>

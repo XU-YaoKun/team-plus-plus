@@ -677,19 +677,12 @@ async function updateView() {
         var thirdCell = row.insertCell(2);
         var fourthCell = row.insertCell(3);
         var fifthCell = row.insertCell(4);
-        var sixthCell = row.insertCell(5);
-
-        var deleteButton = document.createElement("button");
-        var buttonName = document.createTextNode("Delete");
-        deleteButton.appendChild(buttonName);
-        sixthCell.appendChild(deleteButton);
-        deleteButton.onclick = function() {
-          deleteEvent(eventName);
-        };
+        //var sixthCell = row.insertCell(5);
 
         var editButton = document.createElement("button");
         var buttonName1 = document.createTextNode("Edit");
         editButton.appendChild(buttonName1);
+        editButton.style = "background-color: #5cb85c; color: #ffffff; border-radius: 5px;"
         fifthCell.appendChild(editButton);
         editButton.onclick = function() {
           onClickEditEvent(
@@ -699,6 +692,15 @@ async function updateView() {
             eventStartTime,
             eventEndTime
           );
+        };
+
+        var deleteButton = document.createElement("button");
+        var buttonName = document.createTextNode("Delete");
+        deleteButton.appendChild(buttonName);
+        deleteButton.style = "background-color: #5cb85c; color: #ffffff; border-radius: 5px;"
+        fifthCell.appendChild(deleteButton);
+        deleteButton.onclick = function() {
+          deleteEvent(eventName);
         };
 
         firstCell.innerHTML = eventDate;
@@ -1024,19 +1026,13 @@ function eventSaveHelper(
   var thirdCell = row.insertCell(2);
   var fourthCell = row.insertCell(3);
   var fifthCell = row.insertCell(4);
-  var sixthCell = row.insertCell(5);
+//  var sixthCell = row.insertCell(5);
 
-  var deleteButton = document.createElement("button");
-  var buttonName = document.createTextNode("Delete");
-  deleteButton.appendChild(buttonName);
-  sixthCell.appendChild(deleteButton);
-  deleteButton.onclick = function() {
-    deleteEvent(eventName);
-  };
 
   var editButton = document.createElement("button");
   var buttonName1 = document.createTextNode("Edit");
   editButton.appendChild(buttonName1);
+  editButton.style = "background-color: #5cb85c; color: #ffffff; border-radius: 5px;"
   fifthCell.appendChild(editButton);
   editButton.onclick = function() {
     onClickEditEvent(
@@ -1046,6 +1042,15 @@ function eventSaveHelper(
       eventStartTime,
       eventEndTime
     );
+  };
+
+  var deleteButton = document.createElement("button");
+  var buttonName = document.createTextNode("Delete");
+  deleteButton.appendChild(buttonName);
+  deleteButton.style = "background-color: #5cb85c; color: #ffffff; border-radius: 5px;"
+  fifthCell.appendChild(deleteButton);
+  deleteButton.onclick = function() {
+    deleteEvent(eventName);
   };
 
   firstCell.innerHTML = eventDate;

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Team++ Login</title>
+    <title>Team++ Log-in</title>
     <link rel="stylesheet" href="LpageStyle.css">
     <link rel="icon" href="img/logo.png">
     <!--Load bootstrap-->
@@ -45,15 +45,15 @@
                 var userEmail = document.getElementById('inputEmail').value;
                 var userPass = document.getElementById('inputPassword').value;
                 var rememberMe = document.getElementById("rememberMe");
-                if(rememberMe.checked == true) {
-                    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(function(error) {
+                if (rememberMe.checked == true) {
+                    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(function (error) {
                         // Handle Errors here.
                         var errorCode = error.code;
                         var errorMessage = error.message;
                     });
                 }
                 else {
-                    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).catch(function(error) {
+                    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).catch(function (error) {
                         // Handle Errors here.
                         var errorCode = error.code;
                         var errorMessage = error.message;

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chatroom</title>
+  <title>Team Chat</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
@@ -146,57 +146,62 @@
                       </div>
                     </div>
                   </div>
-							<!-- <button style="width: 100%;"><span class="flat-color-1" style="padding-left: 80px; padding-right: 80px;  font-family: 'Open Sans';" onclick="window.open('newChatroom.html','create new chatroom','height=500,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=no');"> +  Add New Chatroom</span></button> -->
-							<button style="width: 100%;"><span class="flat-color-1" style="padding-left: 80px; padding-right: 80px;  font-family: 'Open Sans';" id="addChatroomButton"> +  Add New Chatroom</span></button>
-							
+                  <!-- <button style="width: 100%;"><span class="flat-color-1" style="padding-left: 80px; padding-right: 80px;  font-family: 'Open Sans';" onclick="window.open('newChatroom.html','create new chatroom','height=500,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=no');"> +  Add New Chatroom</span></button> -->
+                  <button style="width: 100%;"><span class="flat-color-1" style="padding-left: 80px; padding-right: 80px;  font-family: 'Open Sans';"
+                      id="addChatroomButton"> + Add New Chat Room</span></button>
 
-						    <dialog id="addChatroomDialog">
 
-						   		<head>
-									<meta charset="utf-8" />
-									<meta http-equiv="X-UA-Compatible" content="IE=edge">
-									<title>Create a new chatroom</title>
-									<meta name="viewport" content="width=device-width, initial-scale=1">
-									<link rel="stylesheet" type="text/css" media="screen" href="newChat.css" />
-									<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-									<link rel="stylesheet" href="assets/css/themify-icons.css">
-									<link rel="stylesheet" href="newchat.css">
-								</head>
-								<body>
-									<div class="row">
-										<form class="createChatroom text-center">
-											<img class="mb-3" src="img/logo.png" alt="Team++ Logo" width="72" height="72"/>
-											<label for="inputEmail" class="text-left tag">Chatroom Name:</label>
-											<input type="text" id="inputEmail" class="form-control" placeholder="Chatroom Name" required autofocus>
-											<p>Please click Create, NOT enter</p>
-											<button class="btn btn-lg btn-primary btn-block" type="button" style="margin-top: 20px" onclick="updateChatroomDatabase()">Create</button>
+                  <dialog id="addChatroomDialog">
 
-											<button class="btn btn-lg btn-secondary btn-block cancel" onclick="document.getElementById('addChatroomDialog').close()" style="color: black">Cancel</button>
-											<!--<input type="reset" value="Cancel" onclick="document.getElementById('addChatroomDialog').close()"> </input> -->
-										</form>
-									</div>
+                    <head>
+                      <meta charset="utf-8" />
+                      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                      <title>Create a new chatroom</title>
+                      <meta name="viewport" content="width=device-width, initial-scale=1">
+                      <link rel="stylesheet" type="text/css" media="screen" href="newChat.css" />
+                      <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+                      <link rel="stylesheet" href="assets/css/themify-icons.css">
+                      <link rel="stylesheet" href="newchat.css">
+                    </head>
 
-								  <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
-								  <script>
-								    // Initialize Firebase
-								    var config = {
-								    apiKey: "AIzaSyCDwFS1dxv0WWEbgehMdtsIQ3F_WQlKDnE",
-								    authDomain: "team-plus-plus.firebaseapp.com",
-								    databaseURL: "https://team-plus-plus.firebaseio.com",
-								    projectId: "team-plus-plus",
-								    storageBucket: "team-plus-plus.appspot.com",
-								    messagingSenderId: "836611996730"
-								    };
-								    firebase.initializeApp(config);
-								  </script>
-								  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                    <body>
+                      <div class="row">
+                        <form class="createChatroom text-center">
+                          <img class="mb-3" src="img/logo.png" alt="Team++ Logo" width="72" height="72" />
+                          <label for="inputEmail" class="text-left tag">Chatroom Name:</label>
+                          <input type="text" id="inputEmail" class="form-control" placeholder="Chatroom Name" required
+                            autofocus>
+                          <p>Please click Create, NOT enter</p>
+                          <button class="btn btn-lg btn-primary btn-block" type="button" style="margin-top: 20px"
+                            onclick="updateChatroomDatabase()">Create</button>
 
-								</body>
+                          <button class="btn btn-lg btn-secondary btn-block cancel" onclick="document.getElementById('addChatroomDialog').close()"
+                            style="color: black">Cancel</button>
+                          <!--<input type="reset" value="Cancel" onclick="document.getElementById('addChatroomDialog').close()"> </input> -->
+                        </form>
+                      </div>
 
-							</dialog>
+                      <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+                      <script>
+                        // Initialize Firebase
+                        var config = {
+                          apiKey: "AIzaSyCDwFS1dxv0WWEbgehMdtsIQ3F_WQlKDnE",
+                          authDomain: "team-plus-plus.firebaseapp.com",
+                          databaseURL: "https://team-plus-plus.firebaseio.com",
+                          projectId: "team-plus-plus",
+                          storageBucket: "team-plus-plus.appspot.com",
+                          messagingSenderId: "836611996730"
+                        };
+                        firebase.initializeApp(config);
+                      </script>
+                      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-						    <style>
-						    	dialog input{width:100%}
+                    </body>
+
+                  </dialog>
+
+                  <style>
+                    dialog input{width:100%}
 						    	dialog{border-radius: 25px; text-align: center; width:400px;}
 						    </style>
 

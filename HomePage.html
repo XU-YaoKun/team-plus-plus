@@ -4,52 +4,53 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>HomePage</title>
+  <title>Home: Admin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
   <link rel="stylesheet" href="assets/css/themify-icons.css" />
   <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="icon" href="img/logo.png">
 
   <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
   <script>
     // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyCDwFS1dxv0WWEbgehMdtsIQ3F_WQlKDnE",
-        authDomain: "team-plus-plus.firebaseapp.com",
-        databaseURL: "https://team-plus-plus.firebaseio.com",
-        projectId: "team-plus-plus",
-        storageBucket: "team-plus-plus.appspot.com",
-        messagingSenderId: "836611996730"
-      };
-      firebase.initializeApp(config);
-    </script>
+    var config = {
+      apiKey: "AIzaSyCDwFS1dxv0WWEbgehMdtsIQ3F_WQlKDnE",
+      authDomain: "team-plus-plus.firebaseapp.com",
+      databaseURL: "https://team-plus-plus.firebaseio.com",
+      projectId: "team-plus-plus",
+      storageBucket: "team-plus-plus.appspot.com",
+      messagingSenderId: "836611996730"
+    };
+    firebase.initializeApp(config);
+  </script>
   <script>
-    window.onload = function() {
-        firebase.auth().onAuthStateChanged(function(user) {
-          // User is signed in: set userId and teamId
-          if (user) {
-            userID = user.uid;
-            updateView();
-          }
-          // No user is signed in.
-          else {
-            console.log("User is not logged in. !!");
-            window.location.href = "index.html";
-          }
-        });
-      };
-    </script>
+    window.onload = function () {
+      firebase.auth().onAuthStateChanged(function (user) {
+        // User is signed in: set userId and teamId
+        if (user) {
+          userID = user.uid;
+          updateView();
+        }
+        // No user is signed in.
+        else {
+          console.log("User is not logged in. !!");
+          window.location.href = "index.html";
+        }
+      });
+    };
+  </script>
   <script>
     function signOut() {
-        firebase.auth().onAuthStateChanged(function(user) {
-          if (user) {
-            console.log("Signing out");
-            firebase.auth().signOut();
-          }
-        });
-      }
-    </script>
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          console.log("Signing out");
+          firebase.auth().signOut();
+        }
+      });
+    }
+  </script>
 </head>
 
 <body>
@@ -185,7 +186,7 @@
             </div>
           </div>
         </div>
-
+        <!--
         <div class="col-lg-3 col-md-6">
           <div class="card">
             <div class="card-body">
@@ -206,122 +207,127 @@
           </div>
         </div>
       </div>
-
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
-              <h10 class="box-title">Team Description:&nbsp;</h10>
-              <td>
-                <button style="width: 100px; margin: auto" class="btn btn-success btn-lg btn-block add ti-pencil" id="descriptionButton"
-                  onclick="addDescription()">
-                  &nbsp;Edit
-                </button>
-              </td>
+    -->
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <h10 class="box-title">Team Description:&nbsp;</h10>
+                <td>
+                  <button style="width: 100px; margin: auto" class="btn btn-success btn-lg btn-block add ti-pencil" id="descriptionButton"
+                    onclick="addDescription()">
+                    Edit
+                  </button>
+                </td>
+              </div>
+              <table>
+                <tr>
+                  <td id="descriptionBox" style="width: 1000px; text-align: center"></td>
+                </tr>
+              </table>
             </div>
-            <table>
-              <tr>
-                <td id="descriptionBox" style="width: 1000px; text-align: center"></td>
-              </tr>
-            </table>
           </div>
         </div>
-      </div>
-      <!-- Team Management -->
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
-              <h4 id="teamName" class="box-title">Team Management</h4>
-            </div>
-            <div class="row">
-              <div class="col-lg-4">
-                <div class="card-body">
-                  <button style="width: 100%; margin: auto" class="btn btn-success btn-lg btn-block add ti-plus" type="button"
-                    onclick="addMember()">
-                    &nbsp;Add Member
-                  </button>
-                </div>
+        <!-- Team Management -->
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <h4 id="teamName" class="box-title">Team Management</h4>
               </div>
               <div class="row">
-                <div class="col-lg-11" style="margin-left: 30px">
-                  <table class="table">
-                    <thead id="status">
-                      <tr>
-                        <th style="text-align: center">Name</th>
-                        <th style="text-align: center">Role</th>
-                        <th style="text-align: center">Change Role</th>
-                        <th style="text-align: center">Give Admin Status</th>
-                        <th style="text-align: center">Remove Member</th>
-                      </tr>
-                    </thead>
-                    <tbody id="allMem" style="text-align: center"></tbody>
-                  </table>
+                <div class="col-lg-4">
+                  <div class="card-body">
+                    <button style="width: 100%; margin: auto" class="btn btn-success btn-lg btn-block add ti-plus" type="button"
+                      onclick="addMember()">
+                      Add Member
+                    </button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-11" style="margin-left: 30px">
+                    <table class="table">
+                      <thead id="status">
+                        <tr>
+                          <th style="text-align: center">Name</th>
+                          <th style="text-align: center">Role</th>
+                          <th style="text-align: center">Change Role</th>
+                          <th style="text-align: center">Give Admin Status</th>
+                          <th style="text-align: center">Remove Member</th>
+                        </tr>
+                      </thead>
+                      <tbody id="allMem" style="text-align: center"></tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <!-- /# column -->
         </div>
-        <!-- /# column -->
+        <!--  Team Management  End -->
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="box-title">Events </h4>
+              </div>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="card-body">
+                    <div class="table">
+                      <table style="width:100%; margin: 5px" id="eventTable">
+                        <tr>
+                          <td>Date</td>
+                          <td>Time</td>
+                          <td>Event Name</td>
+                          <td>Event Description</td>
+                          <td></td>
+                        </tr>
+                      </table>
+                      <div id="eventContent"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-9">
+                  <div class="card-body">
+                    <button style="width: 40%; margin: auto" class="btn btn-success btn-lg btn-block add ti-plus" type="button"
+                      onclick="makeEvent()"> Create Event</button>
+                    <dialog id="dialog">
+                      <form method="dialog">
+                        <p style="color: black; font-weight: bold; font-size: large; text-align: center">Create Event</p>
+                        <pre><b>Event Name:</b> <input id="eventName" type="text" placeholder="Event Name" class="title" style="width:70%"></input></pre>
+                        <pre><b>Event Date:</b> <input id="eventDate" type="date" placeholder="Event Date" class="title" style="width:70%"></input></pre>
+                        <pre><b>Start Time:</b> <input id="eventStart" type="time" style="width: 70%"></pre>
+                        <pre><b>End Time:</b> <input id="eventEnd" type="time" style="width: 70%"></pre>
+                        <pre><b>Event Description: </b> <input id="eventDescription" type="text" placeholder="Description" style="width:100%; height: 70px; text-align: left"></input></pre>
+                        <button style="color: black" onclick="eventSave()">Save</button>&nbsp&nbsp&nbsp&nbsp&nbsp<button
+                          class="cancel" style="color: black">Cancel</button>
+                      </form>
+                    </dialog>
+                    <dialog id="editDialog">
+                      <form method="dialog">
+                        <p style="color: black; font-weight: bold; font-size: large; text-align: center">Edit Event</p>
+                        <pre><b>Event Name:</b> <input id="eventNameEdit" type="text" placeholder="Event Name" class="title" style="width:70%"></input></pre>
+                        <pre><b>Event Date:</b> <input id="eventDateEdit" type="date" placeholder="Event Date" class="title" style="width:70%"></input></pre>
+                        <pre><b>Start Time:</b> <input id="eventStartEdit" type="time" style="width: 70%"></pre>
+                        <pre><b>End Time:</b> <input id="eventEndEdit" type="time" style="width: 70%"></pre>
+                        <pre><b>Event Description: </b> <input id="eventDescriptionEdit" type="text" placeholder="Description" style="width:100%; height: 70px; text-align: left"></input></pre>
+                        <button style="color: black" onclick="eventEditSave()">Save</button>&nbsp&nbsp&nbsp&nbsp&nbsp<button
+                          class="cancel" style="color: black">Cancel</button>
+                      </form>
+                    </dialog>
+                  </div> <!-- /.card-body -->
+                </div>
+              </div> <!-- /.row -->
+              <div class="card-body"></div>
+            </div>
+          </div>
+        </div>
       </div>
-      <!--  Team Management  End -->
-                <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card">  
-                                <div class="card-body">
-                                    <h4 class="box-title">Events </h4>
-                                </div>
-                                <div class="row"> 
-                                    <div class="col-lg-12">
-                                        <div class="card-body"> 
-                                            <div class="table">
-                                                <table style="width:100%; margin: 5px" id="eventTable">
-                                                    <tr>
-                                                        <td>Date</td>
-                                                        <td>Time</td>
-                                                        <td>Event Name</td>
-                                                        <td>Event Description</td>
-                                                        <td></td>
-                                                    </tr>
-                                                </table>
-                                                <div id="eventContent"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="card-body">
-                                            <button style="width: 30%; padding: 5px" class="btn btn-success btn-lg btn-block add ti-plus" type="button" onclick="makeEvent()">Create Event</button>
-                                            <dialog id="dialog">
-                                                    <form method="dialog">
-                                                      <p style="color: black; font-weight: bold; font-size: large; text-align: center">Create Event</p>
-                                                      <pre><b>Event Name:</b> <input id="eventName" type="text" placeholder="Event Name" class="title" style="width:70%"></input></pre>
-                                                      <pre><b>Event Date:</b> <input id="eventDate" type="date" placeholder="Event Date" class="title" style="width:70%"></input></pre>
-                                                      <pre><b>Start Time:</b> <input id="eventStart" type="time" style="width: 70%"></pre>
-                                                      <pre><b>End Time:</b> <input id="eventEnd" type="time" style="width: 70%"></pre>
-                                                      <pre><b>Event Description: </b> <input id="eventDescription" type="text" placeholder="Description" style="width:100%; height: 70px; text-align: left"></input></pre>
-                                                      <button  style="color: black" onclick="eventSave()" >Save</button>&nbsp&nbsp&nbsp&nbsp&nbsp<button class="cancel" style="color: black">Cancel</button>
-                                                   </form>
-                                                  </dialog>
-                                                  <dialog id="editDialog">
-                                                        <form method="dialog">
-                                                          <p style="color: black; font-weight: bold; font-size: large; text-align: center">Edit Event</p>
-                                                          <pre><b>Event Name:</b> <input id="eventNameEdit" type="text" placeholder="Event Name" class="title" style="width:70%"></input></pre>
-                                                          <pre><b>Event Date:</b> <input id="eventDateEdit" type="date" placeholder="Event Date" class="title" style="width:70%"></input></pre>
-                                                          <pre><b>Start Time:</b> <input id="eventStartEdit" type="time" style="width: 70%"></pre>
-                                                          <pre><b>End Time:</b> <input id="eventEndEdit" type="time" style="width: 70%"></pre>
-                                                          <pre><b>Event Description: </b> <input id="eventDescriptionEdit" type="text" placeholder="Description" style="width:100%; height: 70px; text-align: left"></input></pre>
-                                                          <button  style="color: black" onclick="eventEditSave()" >Save</button>&nbsp&nbsp&nbsp&nbsp&nbsp<button class="cancel" style="color: black">Cancel</button>
-                                                       </form>
-                                                      </dialog>     
-                                     </div> <!-- /.card-body -->
-                                    </div>
-                                </div> <!-- /.row --> 
-                                <div class="card-body"></div>
-                            </div> 
-                        </div>
-                 </div>
-             </div><!--content End-->
-    </div><!--Right panel end-->
+      <!--content End-->
+    </div>
+    <!--Right panel end-->
 
 </body>
 <script src="team.js"></script>

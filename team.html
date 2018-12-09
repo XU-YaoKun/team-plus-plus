@@ -4,53 +4,54 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Choose Team</title>
+  <title>Teams</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
   <link rel="stylesheet" href="assets/css/themify-icons.css" />
   <link rel="stylesheet" href="assets/css/teamstyle.css" />
+  <link rel="icon" href="img/logo.png">
 
   <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
   <script>
     // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyCDwFS1dxv0WWEbgehMdtsIQ3F_WQlKDnE",
-        authDomain: "team-plus-plus.firebaseapp.com",
-        databaseURL: "https://team-plus-plus.firebaseio.com",
-        projectId: "team-plus-plus",
-        storageBucket: "team-plus-plus.appspot.com",
-        messagingSenderId: "836611996730"
-      };
-      firebase.initializeApp(config);
-    </script>
+    var config = {
+      apiKey: "AIzaSyCDwFS1dxv0WWEbgehMdtsIQ3F_WQlKDnE",
+      authDomain: "team-plus-plus.firebaseapp.com",
+      databaseURL: "https://team-plus-plus.firebaseio.com",
+      projectId: "team-plus-plus",
+      storageBucket: "team-plus-plus.appspot.com",
+      messagingSenderId: "836611996730"
+    };
+    firebase.initializeApp(config);
+  </script>
   <script>
-    window.onload = function() {
-        firebase.auth().onAuthStateChanged(function(user) {
-          // User is signed in: set userId and teamId
-          if (user) {
-            userID = user.uid;
-            updateAdminList();
-            updateMemList();
-          }
-          // No user is signed in.
-          else {
-            console.log("User is not logged in.");
-            window.location.href = "index.html";
-          }
-        });
-      };
-    </script>
+    window.onload = function () {
+      firebase.auth().onAuthStateChanged(function (user) {
+        // User is signed in: set userId and teamId
+        if (user) {
+          userID = user.uid;
+          updateAdminList();
+          updateMemList();
+        }
+        // No user is signed in.
+        else {
+          console.log("User is not logged in.");
+          window.location.href = "index.html";
+        }
+      });
+    };
+  </script>
   <script>
     function signOut() {
-        firebase.auth().onAuthStateChanged(function(user) {
-          if (user) {
-            console.log("Signing out");
-            firebase.auth().signOut();
-          }
-        });
-      }
-    </script>
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          console.log("Signing out");
+          firebase.auth().signOut();
+        }
+      });
+    }
+  </script>
 </head>
 
 <body>
@@ -62,7 +63,7 @@
     <header id="header" class="header">
       <div class="top-left">
         <div class="navbar-header">
-          <p>TEAM++</p>
+          <p>Team++</p>
         </div>
       </div>
       <div class="top-right">
@@ -118,7 +119,7 @@
                   <tr>
                     <th class="serial" style="text-align: center">#</th>
                     <th style="text-align: center">Name</th>
-                    <th style="padding-right: 30px">Navigate to Team</th>
+                    <th style="padding-right: 35px">Navigate to Team</th>
                   </tr>
                 </thead>
                 <tbody id="admin"></tbody>
@@ -138,7 +139,7 @@
                   <tr>
                     <th class="serial" style="text-align: center">#</th>
                     <th style="text-align: center">Name</th>
-                    <th style="padding-right: 30px">Navigate to Team</th>
+                    <th style="padding-right: 35px">Navigate to Team</th>
                   </tr>
                 </thead>
                 <tbody id="member"></tbody>

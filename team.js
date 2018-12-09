@@ -270,7 +270,7 @@ async function joinTeam() {
               .set({
                 mostRecent: "Send your messages here.",
                 name: snapshot.val()[0],
-                userId: userID
+                userId: snapshot.key
               });
             newPostRef = DMref.child(userID)
               .child(snapshot.key)
@@ -421,17 +421,12 @@ async function addMember() {
 
           // Iterate thtough list of members creating a direct message between them and the new member
           memref.on("child_added", snapshot => {
-            DMref.child(person)
-              .child(snapshot.key)
-              .set({
-                mostRecent: "Send your messages here.",
-                name: snapshot.val()[0],
-                userId: person
-              });
-            newPostRef = DMref.child(person)
-              .child(snapshot.key)
-              .child("msgArray")
-              .push();
+            DMref.child(person).child(snapshot.key).set({
+              mostRecent: "Send your messages here.",
+              name: snapshot.val()[0],
+              userId: snapshot.key
+            });
+            newPostRef = DMref.child(person).child(snapshot.key).child("msgArray").push();
             newPostRef.set({
               sender: "Admin",
               message: "Send your messages here.",
